@@ -1,0 +1,52 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+
+<body>
+	<h1>Who Are Ya?</h1>
+	<form action="/gameprocess" method="get">
+		<input class="search_input">
+		<container class="rel_search">
+		<ul class="pop_rel_keywords">
+		</ul>
+		</container>
+	</form>
+	
+	<!-- 게시글 -->
+	<div class="row mt-4">
+		<div class="col-md-10 offset-md-1">
+			<table class="table table-hover">
+				<thead class="bg-dark text-light text-center">
+					<tr>
+						<th>번호</th>
+						<th>해외상점</th>
+						<th>나라</th>
+						<th>결제방식</th>
+						<th>FTA여부</th>
+					</tr>
+				</thead>
+				<tbody class="text-center">
+					<c:forEach var="list" items="${list}">
+					
+					<tr>
+						<td>${list.id}</td>
+						<td><a href="shopDetail?s_id=${list.s_id}">
+								${list.sName}
+							</a></td>
+						<td>${list.s_contury}</td>
+						<td>${list.s_payment}</td>
+						<td>${list.s_fta}</td>
+						
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

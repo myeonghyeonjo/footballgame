@@ -1,0 +1,18 @@
+package com.zikgu.example.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.zikgu.example.domain.Board;
+import com.zikgu.example.mapper.PlayerMapper;
+@Service("PlayerServiceImpl")
+public class PlayerServiceImpl implements PlayerService{
+
+	@Autowired Playermapper playermapper;
+	@Override
+	public List<Board> selectBoardList() {
+		return boardmapper.selectBoardList();
+	}
+}

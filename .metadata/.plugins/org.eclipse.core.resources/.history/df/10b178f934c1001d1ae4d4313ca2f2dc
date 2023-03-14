@@ -1,0 +1,10 @@
+package com.zikgu.example.mapper;
+
+import java.util.List;
+
+import com.zikgu.example.domain.Player;
+
+@Mapper
+public interface PlayerMapper {
+	public List<Player> selectplayerList();
+}

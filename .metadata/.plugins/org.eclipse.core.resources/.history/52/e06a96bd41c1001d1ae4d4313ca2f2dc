@@ -1,0 +1,11 @@
+@Service
+public class AutoComServiceImpl implements AutoComService{
+
+	@Autowired
+	AutoComMapper autoComMapper;
+	
+	@Override
+	public List<Map<String, Object>>autocomplete(Map<String, Object> paramMap) throws Exception{
+		return autoComMapper.autocomplete(paramMap);
+	}
+}

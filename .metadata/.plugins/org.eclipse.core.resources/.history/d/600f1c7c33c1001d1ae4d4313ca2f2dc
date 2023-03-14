@@ -1,0 +1,8 @@
+package com.zikgu.example.service;
+
+import org.springframework.stereotype.Service;
+
+@Service("PlayerServiceImpl")
+public class PlayerServiceImpl {
+
+}
