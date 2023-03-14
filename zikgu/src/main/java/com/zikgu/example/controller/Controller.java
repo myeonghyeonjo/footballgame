@@ -23,6 +23,7 @@ import com.zikgu.example.domain.Player;
 import com.zikgu.example.domain.User;
 import com.zikgu.example.service.AutoComService;
 import com.zikgu.example.service.BoardService;
+import com.zikgu.example.service.CrawlingService;
 import com.zikgu.example.service.PlayerService;
 import com.zikgu.example.service.UserService;
 
@@ -38,6 +39,8 @@ public class Controller {
 	PlayerService playerservice;
 	@Autowired
 	AutoComService service;
+	@Autowired
+	CrawlingService crawlingservice;
 
 	Player insertPlayer = new Player();
 	List<Player> answer = new ArrayList<Player>();
@@ -123,6 +126,12 @@ public class Controller {
 		model.addAttribute("playCount",playCount);
 		return "/game";
 	}
+	
+	@RequestMapping("/k1crawling")
+	public class CrawlingController{
+		
+		
+	}
 
 	@org.springframework.stereotype.Controller
 	public class AutoComController {
@@ -197,5 +206,6 @@ public class Controller {
 			return "/solutionList";
 			
 		}
+		
 	}
 }

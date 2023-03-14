@@ -40,41 +40,13 @@
 </head>
 
 <body>
-	<h1>Who Are Ya?</h1>
-	
-	
-	
+	<h1>K1리그 선수 맞추기</h1>
 	<form>
 	검색<input type="text" id="autoComplete"	placeholder="GUESS ${playCount} OF 5"  autofocus>
 		<button type="submit">Submit</button>
 	</form>
-<div class="gameResult2">
-	</div>
-	
-	
-	
-	
-	
-	</table>
-	
-	
-		
-				
-				<tbody class="text-center">
-					
-					<th>${player.name}</th>
-					<tr>
-						<td>${player.shirt}</td>
-						<td>${player.pos}</td>
-						<td>${player.team}</td>
-						<td>${player.age}</td>
-						
-						
-					</tr>
-					
-				</tbody>
-		
-		
+<div class="gameResult2"></div>
+
 </body>
 <script>
 var team = '';
