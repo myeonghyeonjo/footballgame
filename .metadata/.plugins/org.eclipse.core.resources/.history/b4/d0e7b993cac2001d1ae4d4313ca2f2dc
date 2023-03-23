@@ -1,0 +1,6 @@
+package com.zikgu.example.domain;
+public class News {
+    private String image;
+    private String subject;
+    private String url;
+}

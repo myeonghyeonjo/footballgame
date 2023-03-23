@@ -1,0 +1,62 @@
+package com.zikgu.example.domain;
+
+
+public class News {
+    private String image;
+	private String subject;
+    private String url;
+    public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	
+	static public class Builder {
+		 private String image;
+			private String subject;
+		    private String url;
+
+	    public Builder() {
+	    }
+
+	    public Builder(News news) {
+	      this.image = News.image;
+	      this.subject = News.subject;
+	      this.url = News.url;
+	    }
+
+	    public Builder image(String image) {
+	      this.image = image;
+	      return this;
+	    }
+
+	    public Builder subject(String subject) {
+	      this.subject = subject;
+	      return this;
+	    }
+
+	    public Builder url(String url) {
+	      this.url = url;
+	      return this;
+	    }
+
+	    public User build() {
+	      return new User(image, subject, url);
+	    }
+	  }
+	}
+}

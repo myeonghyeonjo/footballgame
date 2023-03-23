@@ -1,0 +1,16 @@
+package com.zikgu.example.domain;
+
+
+
+public class K1Image {
+	private String image;
+	private String name;
+	private String url;
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+}

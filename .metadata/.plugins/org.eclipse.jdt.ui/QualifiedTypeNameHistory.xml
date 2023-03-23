@@ -1,4 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="org.springframework.security.access.annotation.Secured"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="com.zikgu.example.service.PlayerService"/>
+    <fullyQualifiedTypeName name="com.zikgu.example.mapper.PlayerMapper"/>
+    <fullyQualifiedTypeName name="com.zikgu.example.domain.Player"/>
+    <fullyQualifiedTypeName name="java.io.Console"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ResponseBody"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Mapper"/>
+    <fullyQualifiedTypeName name="com.zikgu.example.mapper.AutoComMapper"/>
+    <fullyQualifiedTypeName name="com.zikgu.example.service.AutoComService"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+    <fullyQualifiedTypeName name="com.zikgu.example.service.CrawlingService"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+    <fullyQualifiedTypeName name="com.zikgu.example.domain.K1Image"/>
+    <fullyQualifiedTypeName name="javax.lang.model.element.Element"/>
+    <fullyQualifiedTypeName name="javax.lang.model.util.Elements"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder"/>
+    <fullyQualifiedTypeName name="com.zikgu.example.domain.News.Builder"/>
+    <fullyQualifiedTypeName name="lombok.Builder"/>
+    <fullyQualifiedTypeName name="lombok.Getter"/>
+    <fullyQualifiedTypeName name="lombok.ToString"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="javax.annotation.PostConstruct"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="org.jsoup.Jsoup"/>
+    <fullyQualifiedTypeName name="javax.swing.text.Document"/>
+    <fullyQualifiedTypeName name="org.jsoup.nodes.Document"/>
+    <fullyQualifiedTypeName name="org.jsoup.select.Elements"/>
+    <fullyQualifiedTypeName name="org.jsoup.nodes.Element"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="com.zikgu.example.domain.News"/>
+    <fullyQualifiedTypeName name="com.zikgu.example.service.NewsService"/>
 </qualifiedTypeNameHistroy>

@@ -13,17 +13,20 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zikgu.example.domain.Board;
+import com.zikgu.example.domain.K1Image;
+import com.zikgu.example.domain.News;
 import com.zikgu.example.domain.Player;
 import com.zikgu.example.domain.User;
 import com.zikgu.example.service.AutoComService;
 import com.zikgu.example.service.BoardService;
-import com.zikgu.example.service.CrawlingService;
+import com.zikgu.example.service.NewsService;
 import com.zikgu.example.service.PlayerService;
 import com.zikgu.example.service.UserService;
 
@@ -40,8 +43,8 @@ public class Controller {
 	@Autowired
 	AutoComService service;
 	@Autowired
-	CrawlingService crawlingservice;
-
+	NewsService newsService;
+	
 	Player insertPlayer = new Player();
 	List<Player> answer = new ArrayList<Player>();
 	int random = 0;
@@ -127,11 +130,14 @@ public class Controller {
 		return "/game";
 	}
 	
-	@RequestMapping("/k1crawling")
-	public class CrawlingController{
-		
-		
-	}
+	@RequestMapping("/news")
+	    public String news(Model model) throws Exception{
+	        List<News> newsList = newsService.getNewsDatas();
+	        model.addAttribute("news", newsList);
+	        WebDriverUtil webDriverUtil = new WebDriverUtil();
+	        webDriverUtil.useDriver("https://www.youtube.com/c/youtubekorea/videos");
+	        return "/news";
+	    }
 
 	@org.springframework.stereotype.Controller
 	public class AutoComController {

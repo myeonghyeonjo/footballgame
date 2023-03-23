@@ -1,0 +1,10 @@
+package com.zikgu.example.domain;
+
+
+
+public class K1Image {
+	private String image;
+	private String name;
+	private String url;
+	
+}

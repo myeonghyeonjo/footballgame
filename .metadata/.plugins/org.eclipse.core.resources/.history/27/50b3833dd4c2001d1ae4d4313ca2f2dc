@@ -1,0 +1,18 @@
+package com.zikgu.example.service;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.stereotype.Service;
+
+import com.zikgu.example.domain.K1Image;
+
+@Service
+public interface CrawlingService {
+	 static String URL = "wwwdd";
+
+	    @PostConstruct
+	    public List<K1Image> getNewsDatas();
+	}

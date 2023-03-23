@@ -5,3 +5,12 @@
 1678685653260	Rename resource 'test1.jsp'
 1678756031812	Encapsulate field 'shirtcondition'
 1678756034520	Encapsulate field 'agecondition'
+1678839645790	Encapsulate field 'image'
+1678839648669	Encapsulate field 'name'
+1678839651042	Encapsulate field 'url'
+1678842628065	Delete element
+1678842643047	Rename compilation unit 'NewService.java'
+1678843238761	Delete element
+1678843254830	Delete element
+1678845233936	Delete element
+1678845236064	Delete element
