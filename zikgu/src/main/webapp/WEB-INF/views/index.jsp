@@ -18,7 +18,8 @@
            </sec:authorize>   
             <sec:authorize access="isAuthenticated()">
                <a href="/logout">로그아웃</a>
-                <a href="/game">게임하기</a>
+                <a href="/hidePhotogame">Hide Photo-게임하기</a>
+                <a href="/game">Show Photo-게임하기</a>
                <sec:authentication property="principal" var="principal"/>
                <h2>${principal }</h2>
             </sec:authorize>

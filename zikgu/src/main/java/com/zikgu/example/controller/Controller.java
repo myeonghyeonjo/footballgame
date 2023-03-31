@@ -117,7 +117,7 @@ public class Controller {
 
 	@RequestMapping("/game")
 	public String game(Player player, Model model, HttpServletRequest request) {
-		playCount = 0;
+		playCount = 1;
 		answerAll= new ArrayList();
 		List<Player> list = playerservice.selectPlayerList();
 		random = (int) (Math.random() * 912 + 1);
@@ -130,6 +130,21 @@ public class Controller {
 		return "/game";
 	}
 	
+	@RequestMapping("/hidePhotogame")
+	public String hidePhotogame(Player player, Model model, HttpServletRequest request) {
+		playCount = 1;
+		answerAll= new ArrayList();
+		List<Player> list = playerservice.selectPlayerList();
+		random = (int) (Math.random() * 912 + 1);
+		player = playerservice.selectPlayerListAnswer(random);
+		System.out.println(player.getName());
+		System.out.println("유저리스트 데이터 가져오기 성공" + list);
+		model.addAttribute("player", player);
+		model.addAttribute("list", list);
+		model.addAttribute("playCount",playCount);
+		return "/hidePhotogame";
+	}
+	
 	@RequestMapping("/news")
 	    public String news(Model model) throws Exception{
 	        List<News> newsList = newsService.getNewsDatas();
@@ -138,6 +153,12 @@ public class Controller {
 	        webDriverUtil.useDriver("https://www.youtube.com/c/youtubekorea/videos");
 	        return "/news";
 	    }
+	
+	@RequestMapping("/test")
+    public String test(Model model) throws Exception{
+       
+        return "/test";
+    }
 
 	@org.springframework.stereotype.Controller
 	public class AutoComController {
@@ -197,7 +218,7 @@ public class Controller {
 			} else if(insertageYear == randomageYear) {
 				insertPlayer.setAgecondition("같음");
 			}
-			if(playCount>3)
+			if(playCount>5)
 			{
 				System.out.println("playCount!" + playCount);
 				model.addAttribute("playCount", playCount); 
@@ -207,11 +228,88 @@ public class Controller {
 			} else {
 				answerAll.add(insertPlayer);
 			} 
-			playCount +=1;
 			
+			if(insertPlayer.getShirt() == player.getShirt() && insertPlayer.getPos().equals(player.getPos()) && insertageYear== randomageYear && insertageYear == randomageYear && insertPlayer.getTeam().equals(player.getTeam()))
+			{
+				playCount = 6;
+				System.out.println("playCount!" + playCount);
+				model.addAttribute("playCount", playCount); 
+				return "/solutionList";
+			}
+			playCount +=1;
+			model.addAttribute("playCount", playCount); 
 			return "/solutionList";
 			
 		}
+		
+		@RequestMapping("/hidePhoto-aj-gameProcess")
+		public String hidePhotogameProcess(Player player, Model model, HttpServletRequest request, @RequestParam("name") String name,@RequestParam("team") String team) {
+			
+			
+			System.out.println("선수명:"+name+"팀명:"+team);
+			player = new Player();
+			player.setName(name);
+			player.setTeam(team);
+			insertPlayer = playerservice.selectPlayerListOne(player);
+			model.addAttribute("listOne", insertPlayer); // 응답자가 입력한 플레이어
+			player = new Player();
+			player = playerservice.selectPlayerListAnswer(random);
+			model.addAttribute("answer", player);  //랜덤으로 뽑은 정답 플레이어
+			
+			if(insertPlayer.getTeam().equals(player.getTeam())) {
+				System.out.println("팀이 같습니다.");
+				checkTeam = 1;
+				teamColor = "Green";
+			} else{
+				System.out.println("팀이 다릅니다.");
+			}
+			
+			model.addAttribute("checkTeam", checkTeam); 
+			model.addAttribute("teamColor", teamColor); 
+			System.out.println("개인유저정보 가져오기 성공!" + insertPlayer);
+			System.out.println("전체입력유저정보!" + answerAll);
+			model.addAttribute("answerAll", answerAll); 
+			if(insertPlayer.getShirt()< player.getShirt())
+			{
+				insertPlayer.setShirtcondition("&#8593");
+			}else if(insertPlayer.getShirt()> player.getShirt()) {
+				insertPlayer.setShirtcondition("&#8595");
+			}
+			
+			insertageYear = Integer.parseInt(insertPlayer.getAge().substring(0, 4));
+			randomageYear = Integer.parseInt(player.getAge().substring(0,4));
+			if(insertageYear< randomageYear)
+			{
+				insertPlayer.setAgecondition("&#8595");
+			}else if(insertageYear> randomageYear) {
+				insertPlayer.setAgecondition("&#8593");
+			} else if(insertageYear == randomageYear) {
+				insertPlayer.setAgecondition("같음");
+			}
+			if(playCount>5)
+			{
+				System.out.println("playCount!" + playCount);
+				model.addAttribute("playCount", playCount); 
+				answerAll.add(insertPlayer);
+				return "/hidePhotosolutionList";
+				
+			} else {
+				answerAll.add(insertPlayer);
+			} 
+			
+			if(insertPlayer.getShirt() == player.getShirt() && insertPlayer.getPos().equals(player.getPos()) && insertageYear== randomageYear && insertageYear == randomageYear && insertPlayer.getTeam().equals(player.getTeam()))
+			{
+				playCount = 6;
+				System.out.println("playCount!" + playCount);
+				model.addAttribute("playCount", playCount); 
+				return "/hidePhotosolutionList";
+			}
+			playCount +=1;
+			model.addAttribute("playCount", playCount); 
+			return "/hidePhotosolutionList";
+			
+		}
+		
 		
 	}
 }
