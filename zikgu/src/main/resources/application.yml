@@ -26,6 +26,19 @@ spring:
       initialize-schema: always
       
       
+  mail:
+    host: smtp.naver.com
+    port: 465
+    username: 159@naver.com
+    password: jomang3002!
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.ssl.enable: true
+      mail.smtp.ssl.trust: smtp.naver.com
+      mail.smtp.starttls.enable: true
+      
+      
+      
 server:
  port: 8080
  tomcat:

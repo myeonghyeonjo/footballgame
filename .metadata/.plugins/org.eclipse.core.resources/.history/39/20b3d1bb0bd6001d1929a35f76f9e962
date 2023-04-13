@@ -1,0 +1,8 @@
+package com.zikgu.example.controller;
+
+
+
+@org.springframework.stereotype.Controller
+public class ProfileController {
+
+}

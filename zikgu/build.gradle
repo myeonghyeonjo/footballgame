@@ -38,7 +38,19 @@ dependencies {
    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
    implementation 'org.seleniumhq.selenium:selenium-java:4.1.2'
-
+	implementation 'org.jsoup:jsoup:1.15.4'
+	
+	//문자메세지 
+	implementation group: 'net.nurigo', name: 'javaSDK', version: '2.2'
+    
+    //이메일연동설정
+    implementation group: 'javax.mail', name: 'javax.mail-api', version: '1.5.5'
+    implementation group: 'javax.mail', name: 'mail', version: '1.4.7'
+    implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.5.3'
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+    implementation group: 'org.apache.commons', name: 'commons-email', version: '1.5'
+    implementation 'org.springframework.boot:spring-boot-starter-mail:2.7.1'
+    
 }
 
 test {

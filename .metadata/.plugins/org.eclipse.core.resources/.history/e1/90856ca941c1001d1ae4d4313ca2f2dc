@@ -1,3 +1,0 @@
-public interface AutoComService {
-	List<Map<String, Object>>autocomplete(Map<String, Object> paramMap) throws Exception;
-}

@@ -1,0 +1,13 @@
+package com.zikgu.example.domain;
+
+
+
+public class Profile {
+	private int f_id;
+	private String f_photo;
+	private String f_intro;
+	private String f_certificate;
+	private String f_schedule;
+	private String f_program;
+	private String f_price;
+}

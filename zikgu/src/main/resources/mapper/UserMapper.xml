@@ -17,7 +17,8 @@
 			                 u_isAccountNonExpired        as isAccountNonExpired,
 			                 u_isAccountNonLocked    	    as isAccountNonLocked,
 			                 u_isCredentialNonExpired    as isCredentialsNonExpired,
-			                 u_isEnabled          				    as isEnabled
+			                 u_isEnabled          				    as isEnabled,
+			                 u_key                                  as u_key
       FROM         lc_user
       WHERE         1=1
       AND            u_id   =   #{username}
@@ -32,7 +33,8 @@
          u_isAccountNonExpired,
          u_isAccountNonLocked,
          u_isCredentialNonExpired,
-         u_isEnabled
+         u_isEnabled,
+         u_phone
       ) VALUES (
          #{username},
          #{password},
@@ -40,7 +42,8 @@
          #{isAccountNonExpired},
          #{isAccountNonLocked},
          #{isCredentialsNonExpired},
-         #{isEnabled}
+         #{isEnabled},
+         #{phone}
       )
    </insert>   
    

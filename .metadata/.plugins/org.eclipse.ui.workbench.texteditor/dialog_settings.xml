@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="CrawlingService"/>
+		<item key="selection" value=""/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="CrawlingService"/>
-			<item value="gameResult2"/>
-			<item value="selectPlayerList"/>
-			<item value="selectplayerList"/>
-			<item value="&quot;selectplayerList&quot;"/>
-			<item value="selectPlayerListOne"/>
-			<item value="selectPlayerListAnswer"/>
-			<item value="aj-gameProcess"/>
-			<item value="text-output"/>
+			<item value="c_photo"/>
+			<item value="주소"/>
+			<item value="color"/>
+			<item value="센터 정보 등록"/>
+			<item value="운영 시간"/>
+			<item value="운영시간"/>
+			<item value="image-container"/>
+			<item value="originalfileName"/>
+			<item value="tf_photo"/>
+			<item value="formFile"/>
+			<item value="uploadfile"/>
+			<item value="/trainerInfoinsert"/>
+			<item value="hidden"/>
+			<item value="tf_programtitle"/>
+			<item value="tf_lessonoption"/>
 		</list>
 		<list key="replacehistory">
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="762"/>
-		<item key="DIALOG_Y_ORIGIN" value="173"/>
+		<item key="DIALOG_X_ORIGIN" value="136"/>
+		<item key="DIALOG_Y_ORIGIN" value="330"/>
 		<item key="DIALOG_WIDTH" value="418"/>
 		<item key="DIALOG_HEIGHT" value="523"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>

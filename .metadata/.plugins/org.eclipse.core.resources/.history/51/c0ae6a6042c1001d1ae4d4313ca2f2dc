@@ -1,7 +1,0 @@
-<select id="autocomplete" parameterType="map" resultType="map">
-	SELECT
-		 SEQ 
-		,SEARCH_WORD
-	FROM TEST
-	WHERE SEARCH_WORD LIKE  '%'|| #{value} || '%'
-</select>

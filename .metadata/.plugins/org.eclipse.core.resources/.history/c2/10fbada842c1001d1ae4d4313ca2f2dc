@@ -1,7 +1,0 @@
-<select id="autocomplete" parameterType="map" resultType="map">
-	SELECT
-		id,
-		name
-	FROM fbplayer
-	WHERE name LIKE  '%'|| #{value} || '%'
-</select>

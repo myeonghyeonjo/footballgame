@@ -1,4 +1,0 @@
-@Mapper
-public interface AutoComMapper {
-	List<Map<String, Object>>autocomplete(Map<String, Object> paramMap) throws Exception;
-}

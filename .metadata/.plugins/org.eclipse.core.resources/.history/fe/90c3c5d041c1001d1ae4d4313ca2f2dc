@@ -1,5 +1,0 @@
-package com.zikgu.example.mapper;
-
-public interface AutoComMapper {
-
-}

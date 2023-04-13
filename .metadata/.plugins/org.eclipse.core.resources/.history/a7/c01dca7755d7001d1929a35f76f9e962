@@ -1,0 +1,25 @@
+// BoardMapper.java
+package com.zikgu.example.mapper;
+
+import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
+import com.zikgu.example.domain.Board;
+import com.zikgu.example.domain.TrainerProfile;
+
+@Mapper
+public interface BoardMapper {
+	public List<Board> selectBoardList();
+
+	public int nameCheck(String sm_name);
+
+	public int idCheck(String sm_id);
+
+	public int phoneCheck(String phone);
+
+	public void trainerInfoinsert(TrainerProfile trainerprofile);
+
+	public void gettf_id(TrainerProfile trainerprofile);
+
+	
+}
+

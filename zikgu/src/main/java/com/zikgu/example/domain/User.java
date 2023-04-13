@@ -13,7 +13,8 @@ public class User implements UserDetails {
 	private String password;		//u_password
 	private String uName;			//u_name
 	private String uDateTime;	//u_datetime
-	
+	private String phone;
+	private int u_key;
 	//security 관련
 	private Collection<? extends GrantedAuthority> authorities;
 	
@@ -115,7 +116,24 @@ public class User implements UserDetails {
 				+ ", isAccountNonLocked=" + isAccountNonLocked + ", isCredentialsNonExpired=" + isCredentialsNonExpired
 				+ ", isEnabled=" + isEnabled + "]";
 	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public int getU_key() {
+		return u_key;
+	}
+
+	public void setU_key(int u_key) {
+		this.u_key = u_key;
+	}
 	
+
 
 }
 

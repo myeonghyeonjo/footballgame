@@ -1,28 +1,43 @@
 package com.zikgu.example.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.zikgu.example.domain.Board;
+import com.zikgu.example.domain.Center;
+import com.zikgu.example.domain.FileDto;
 import com.zikgu.example.domain.K1Image;
 import com.zikgu.example.domain.News;
 import com.zikgu.example.domain.Player;
+import com.zikgu.example.domain.TrainerProfile;
 import com.zikgu.example.domain.User;
 import com.zikgu.example.service.AutoComService;
 import com.zikgu.example.service.BoardService;
@@ -30,9 +45,16 @@ import com.zikgu.example.service.NewsService;
 import com.zikgu.example.service.PlayerService;
 import com.zikgu.example.service.UserService;
 
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 @org.springframework.stereotype.Controller
 public class Controller {
-
+	 private final JavaMailSender mailSender;
+	    private static final String ADMIN_ADDRESS = "ektour0914@naver.com";
+	
+	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	UserService userservice;
@@ -63,12 +85,27 @@ public class Controller {
 		logger.debug("debug");
 		logger.info("info");
 		logger.error("error");
-		return "/index";
+		return "/member/homepage2";
 	}
 
 	@RequestMapping("/beforeSignup")
 	public String beforeSignUp() {
+		return "/member/signup";
+	}
+	
+	@RequestMapping("/beforeSignup2")
+	public String beforeSignup2() {
 		return "/signup";
+	}
+	
+	@RequestMapping("/homepage")
+	public String bootstrap() {
+		return "/member/homepage2";
+	}
+	
+	@RequestMapping("/signin")
+	public String signin() {
+		return "/member/signin";
 	}
 
 	@RequestMapping("/signup")
@@ -105,9 +142,10 @@ public class Controller {
 
 	@Secured({ "ROLE_USER" })
 	@RequestMapping(value = "/user/info")
-	public String userInfo(Model model) {
-
-		return "/user_info";
+	public String userInfo(Model model,@RequestParam("u_id") String u_id) {
+		int u_key = boardservice.getu_key(u_id);
+		model.addAttribute("u_key", u_key);
+		return "/member/user_info";
 	}
 
 	@RequestMapping(value = "/denied")
@@ -309,6 +347,303 @@ public class Controller {
 			return "/hidePhotosolutionList";
 			
 		}
+		@RequestMapping(value = "/phoneCheck", method = RequestMethod.GET)
+		@ResponseBody
+		public String sendSMS(@RequestParam("phone") String userPhoneNumber) { // 휴대폰 문자보내기
+			int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성
+
+			boardservice.certifiedPhoneNumber(userPhoneNumber,randomNumber);
+			
+			return Integer.toString(randomNumber);
+		}
+		
+		
+		@RequestMapping(value = "/nameCheck", method = RequestMethod.POST)
+		@ResponseBody
+		public int nameCheck(@RequestParam("sm_name") String sm_name) {
+			return boardservice.nameCheck(sm_name);
+		}
+		
+		@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
+		@ResponseBody
+		public int idCheck(@RequestParam("sm_id") String sm_id) {
+			return boardservice.idCheck(sm_id);
+		}
+		
+		@RequestMapping(value = "/phoneCheck2", method = RequestMethod.POST)
+		@ResponseBody
+		public int phoneCheck2(@RequestParam("phone") String phone) {
+			return boardservice.phoneCheck(phone);
+		}
+		
+		
+		@RequestMapping("/phonelogin")
+	    public String phonelogin(Model model) {
+	     
+	        return "/phonelogin";
+	    }
+		
+		@RequestMapping("/registerformMember")
+	    public String registerformMember(Model model) {
+	     
+	        return "/registerformMember";
+	    }
+	
+		@RequestMapping(value = "/mailCheck", method = RequestMethod.GET)
+		@ResponseBody
+		public String mailCheck(@RequestParam("sm_email") String sm_email) throws Exception{
+		    int serti = (int)((Math.random()* (99999 - 10000 + 1)) + 10000);
+		   
+		    String from = "abcd@company.com";//보내는 이 메일주소
+		    String to = sm_email;
+		    System.out.println("이메일주소:"+to);
+		    String title = "회원가입시 필요한 인증번호 입니다.";
+		    String content = "[인증번호] "+ serti +" 입니다. <br/> 인증번호 확인란에 기입해주십시오.";
+		    String num = "";
+		    try {
+		    	MimeMessage mail = mailSender.createMimeMessage();
+		    	 System.out.println("mail:"+mail);
+		        MimeMessageHelper mailHelper = new MimeMessageHelper(mail, true, "UTF-8");
+		        
+		        mailHelper.setFrom(from);
+		        mailHelper.setTo(to);
+		        mailHelper.setSubject(title);
+		        mailHelper.setText(content, true);       
+		        
+		        mailSender.send(mail);
+		        num = Integer.toString(serti);
+		        
+		    } catch(Exception e) {	
+		        num = "error";
+		    }
+		    return num;
+		}
+		@RequestMapping("/trainerProfile")
+	    public String trainerProfile(Model model,@RequestParam("u_key")String u_key) {
+			
+			 model.addAttribute("u_key",u_key);
+	        return "/member/trainerProfile";
+	    }
+		
+		@RequestMapping("/trainerProfileinsert") 
+	    public String trainerProfileinsert(Model model,User user,MultipartHttpServletRequest mhsq,TrainerProfile trainerprofile) throws IllegalStateException, IOException {
+			boardservice.trainerProfileinsert(trainerprofile);
+			String tf_certificatetitle = trainerprofile.getTf_certificatetitle();
+			String[] tf_certificatetitle2 = tf_certificatetitle.split(",");
+			System.out.println("tf_certificatetitle2:"+tf_certificatetitle2[1]);
+		int tf_id = boardservice.gettf_id(trainerprofile);  
+		
+			System.out.println("tf_id"+tf_id);
+			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
+			 File dir = new File(realFolder);
+			   if (!dir.isDirectory()) {
+				   dir.mkdirs();
+			   }
+			   //1번째 파일업로드
+			   List<MultipartFile> mf = mhsq.getFiles("tf_photo1");
+			   if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
+			   } else {
+				   for (int i = 0; i < mf.size(); i++) {
+					   // 파일 중복명 처리                
+					   String genId = UUID.randomUUID().toString(); 
+					   // 본래 파일명                
+					   String originalfileName = mf.get(i).getOriginalFilename();
+					 
+					   
+					   String saveFileName = genId + "." + originalfileName.substring(originalfileName.lastIndexOf(".") + 1);
+					   // 저장되는 파일 이름                
+					   String savePath = realFolder + saveFileName; 
+					   // 저장 될 파일 경로                 
+					   long fileSize = mf.get(i).getSize(); 	
+					   // 파일 사이즈                
+					   mf.get(i).transferTo(new File(savePath)); 	// 파일 저장                 
+					   boardservice.fileUpload(originalfileName, saveFileName, fileSize,savePath,tf_id);
+				   		}
+			   	}
+			   
+			  
+			   List<MultipartFile> mf2_1 = mhsq.getFiles("tf_cer_photo2");
+			   System.out.println("testestest"+mhsq.getFiles("tf_cer_photo1"));
+			   System.out.println("testestest2222"+mhsq.getFiles("tf_cer_photo2"));
+			   int filecount = trainerprofile.getFilecount();     //자격항목 첨부사진 갯수
+			   filecount +=1;
+			   if(filecount == 1)
+			   {
+				   filecount =2;
+			   }
+			   System.out.println("파일갯수:"+filecount);
+			   
+			   for(int j=1; j<filecount;j++) { //2번째 파일업로드
+			   List<MultipartFile> mf2_j = mhsq.getFiles("tf_cer_photo"+j);
+			   if (mf2_j.size() == 1 && mf2_j.get(0).getOriginalFilename().equals("")) {
+			   } else {
+				   for (int i = 0; i < mf2_j.size(); i++) {
+					   // 파일 중복명 처리                
+					   String genId2 = UUID.randomUUID().toString(); 
+					   // 본래 파일명                
+					   String originalfileName = mf2_j.get(i).getOriginalFilename();
+					 
+					   
+					   String saveFileName = genId2 + "." + originalfileName.substring(originalfileName.lastIndexOf(".") + 1);
+					   // 저장되는 파일 이름                
+					   String savePath = realFolder + saveFileName; 
+					   // 저장 될 파일 경로                 
+					   long fileSize = mf2_j.get(i).getSize(); 	
+					   // 파일 사이즈                
+					   mf2_j.get(i).transferTo(new File(savePath)); 	// 파일 저장                 
+					   //boardservice.fileUpload2(originalfileName, saveFileName, fileSize,savePath,tf_id);
+					    boardservice.fileUpload2_1(originalfileName, saveFileName, fileSize,savePath,tf_id,tf_certificatetitle2[j-1]);
+				   		}
+			   	}
+			   }
+			   //3번째 파일업로드
+			   List<MultipartFile> mf3 = mhsq.getFiles("tf_photo3");
+			   if (mf3.size() == 1 && mf3.get(0).getOriginalFilename().equals("")) {
+			   } else {
+				   for (int i = 0; i < mf3.size(); i++) {
+					   // 파일 중복명 처리                
+					   String genId3 = UUID.randomUUID().toString(); 
+					   // 본래 파일명                
+					   String originalfileName = mf3.get(i).getOriginalFilename();
+					 
+					   
+					   String saveFileName = genId3 + "." + originalfileName.substring(originalfileName.lastIndexOf(".") + 1);
+					   // 저장되는 파일 이름                
+					   String savePath = realFolder + saveFileName; 
+					   // 저장 될 파일 경로                 
+					   long fileSize = mf3.get(i).getSize(); 	
+					   // 파일 사이즈                
+					   mf3.get(i).transferTo(new File(savePath)); 	// 파일 저장                 
+					   boardservice.fileUpload3(originalfileName, saveFileName, fileSize,savePath,tf_id);
+				   		}
+			   	}
+	    
+			   String u_id =  trainerprofile.getU_id();   // 회원로그인ID
+			   String u_name = boardservice.getU_name(u_id);
+			   System.out.println("이름: "+u_name);
+			   trainerprofile =  boardservice.trainerprofileDetail(tf_id);
+			   model.addAttribute("u_name",u_name);
+			   model.addAttribute("trainerprofile",trainerprofile);
+	        return "/member/trainerProfileDetail";
+	    }
+	
+		@RequestMapping("/trainerDetail")
+	    public String trainerDetail(Model model,@RequestParam("u_key")int u_key,TrainerProfile trainerprofile) {
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			String u_name = boardservice.getU_name2(u_key);
+			
+			String programsub = trainerprofile.getTf_programsub();
+			String[] programsub2 = programsub.split(",");
+			
+			
+			int tf_id = trainerprofile.getTf_id();
+			List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+			List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
+			List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
+			model.addAttribute("programsub",programsub2);
+		
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("u_name",u_name);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("filelist_2",filelist_2);
+			model.addAttribute("filelist_3",filelist_3);
+	        return "/member/trainerProfileDetail";
+	    }
+		
+		@RequestMapping("/centerinsert")
+	    public String trainerDetail(Model model,@RequestParam("u_key") int u_key) {
+			model.addAttribute("u_key",u_key);
+	        return "/center/centerinsert";
+	    }
+		
+		
+		@RequestMapping("/centerinsertprocess")
+	    public String centerinsertprocess(Center center,MultipartHttpServletRequest mhsq) throws IllegalStateException, IOException {
+			boardservice.centerinsertprocess(center);
+			
+			int c_id = boardservice.getc_id();	
+			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
+				 File dir = new File(realFolder);
+				   if (!dir.isDirectory()) {
+					   dir.mkdirs();
+				   }
+				   List<MultipartFile> mf = mhsq.getFiles("uploadfile");
+				   if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
+				   } else {
+					   for (int i = 0; i < mf.size(); i++) {
+						   // 파일 중복명 처리                
+						   String genId = UUID.randomUUID().toString(); 
+						   // 본래 파일명                
+						   String originalfileName = mf.get(i).getOriginalFilename();
+						   String saveFileName = genId + "." + originalfileName.substring(originalfileName.lastIndexOf(".") + 1);
+						   // 저장되는 파일 이름                
+						   String savePath = realFolder + saveFileName; 
+						   // 저장 될 파일 경로                 
+						   long fileSize = mf.get(i).getSize(); 	
+						   // 파일 사이즈                
+						   mf.get(i).transferTo(new File(savePath)); 	// 파일 저장                 
+						   boardservice.centerfileUpload(originalfileName, saveFileName, fileSize,savePath,c_id);
+					   		}
+				   	}
+	        return "/center/centerDetail";
+	    }
+		
+		@RequestMapping("/centerDetail")
+	    public String centerDetail(Center center,Model model,@RequestParam("c_id") int c_id) {
+			
+			List<Center> list = boardservice.getcenterDetail(c_id);
+			model.addAttribute("list",list);
+			
+			List<FileDto> filelist = boardservice.getcenterFileList(c_id);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("c_id",c_id);
+			return "/center/centerDetail";
+	    }
+		
+		@RequestMapping("/centerlist")
+	    public String centerlist(Center center,Model model) {
+			List<Center> list = boardservice.getcenterListALL();
+			model.addAttribute("list",list);
+			return "/center/centerlist";
+	    }
+		
+		@RequestMapping("/centerConfirm")
+	    public String centerConfirm(Center center,Model model) {
+			int c_id = center.getC_id();
+			model.addAttribute("c_id",c_id);
+			boardservice.centerConfirm(c_id);
+			
+			
+			List<Center> list = boardservice.getcenterDetail(c_id);
+			model.addAttribute("list",list);
+			
+			List<FileDto> filelist = boardservice.getcenterFileList(c_id);
+			model.addAttribute("filelist",filelist);
+			return "/center/centerDetail";
+	    }
+		
+		@RequestMapping("/centerConfirmCancel")
+	    public String centerConfirmCancel(Center center,Model model) {
+			int c_id = center.getC_id();
+			model.addAttribute("c_id",c_id);
+			boardservice.centerConfirmCancel(c_id);
+			
+			List<Center> list = boardservice.getcenterDetail(c_id);
+			model.addAttribute("list",list);
+			
+			List<FileDto> filelist = boardservice.getcenterFileList(c_id);
+			model.addAttribute("filelist",filelist);
+			
+			return "/center/centerDetail";
+	    }
+		
+		@RequestMapping("/search_All")
+	    public String search_All(Model model, @RequestParam("keyWord") String keyWord) {
+			
+			return "/center/centerDetail";
+	    }
+		
+		
 		
 		
 	}
