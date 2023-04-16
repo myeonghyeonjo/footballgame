@@ -1,0 +1,22 @@
+package com.zikgu.example.domain;
+
+public class MemberProfile {
+	private int m_id;
+	private String m_name;
+	private String m_program;
+	private String m_oldaddress;
+	private String m_detailaddress;
+	private String m_optionaddress;
+	private String m_gender;
+	private String m_intro;
+	private int m_postcode;
+	private String m_loadaddress;
+	private int u_key;
+	public String getM_detailaddress() {
+		return m_detailaddress;
+	}
+	public void setM_detailaddress(String m_detailaddress) {
+		this.m_detailaddress = m_detailaddress;
+	}
+
+}

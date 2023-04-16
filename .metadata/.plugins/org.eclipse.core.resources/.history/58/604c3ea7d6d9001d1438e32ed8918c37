@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zikgu.example.mapper.BoardMapper">
+	<select id="selectBoardList" resultType="Board">
+		SELECT b_id as bId,
+		b_title as bTitle,
+		b_content as bContent,
+		b_writer as bWriter
+		FROM lc_board
+	</select>
+
+	<select id="nameCheck" resultType="integer">
+		select count(*) from lc_user
+		where u_name =#{sm_name}
+	</select>
+
+	<select id="idCheck" resultType="integer">
+		select count(*) from lc_user
+		where u_id =#{sm_id}
+	</select>
+
+	<select id="phoneCheck" resultType="integer">
+		select count(*) from lc_user where u_Phone =#{Phone}
+	</select>
+
+	<select id="idPhone" resultType="integer">
+		select count(*) from lc_user
+		where Phone =#{Phone}
+	</select>
+
+	<!-- 트레이너프로필 등록 -->
+	<insert id="trainerProfileinsert" parameterType="trainerprofile">
+		INSERT INTO trainerprofile (	
+		tf_lessonoption,
+		tf_schedureintro,
+		tf_certificate,
+		tf_sunday,
+		tf_saterday,
+		tf_intro,
+		tf_day,
+		tf_daymorning,
+		tf_dayafter,
+		tf_saterdaymorning,
+		tf_saterafter,
+		tf_sundaymorning,
+		tf_sundayafter,
+		tf_certificatetitle,
+		tf_programtitle,
+		tf_programsub,
+		tf_programintro,
+		tf_lessontitle,
+		tf_lessonnumber,
+		tf_lessonnumber2,
+		tf_lessonnumber3,
+		tf_lessonnumber4,
+		tf_lessonprice,
+		tf_lessonunit,
+		tf_lessontime,
+		tf_lessonintro,
+		tf_hanjulintro,
+		tf_dayoff,
+		u_key,
+		tf_loadaddress,
+		tf_lessonprice2,
+		tf_lessonprice3,
+		tf_lessonprice4
+		
+		) VALUES (
+		#{tf_lessonoption},
+		#{tf_schedureintro},
+		#{tf_certificate},
+		#{tf_sunday},
+		#{tf_saterday},
+		#{tf_intro},
+		#{tf_day},
+		#{tf_daymorning},
+		#{tf_dayafter},
+		#{tf_saterdaymorning},
+		#{tf_saterafter},
+		#{tf_sundaymorning},
+		#{tf_sundayafter},
+		#{tf_certificatetitle},
+		#{tf_programtitle},
+		#{tf_programsub},
+		#{tf_programintro},
+		#{tf_lessontitle},
+		#{tf_lessonnumber},
+		#{tf_lessonnumber2},
+		#{tf_lessonnumber3},
+		#{tf_lessonnumber4},
+		#{tf_lessonprice},
+		#{tf_lessonunit},
+		#{tf_lessontime},
+		#{tf_lessonintro},
+		#{tf_hanjulintro},
+		#{tf_dayoff},
+		#{u_key},
+		#{tf_loadaddress},
+		#{tf_lessonprice2},
+		#{tf_lessonprice3},
+		#{tf_lessonprice4}
+		)
+	</insert>
+
+	<!-- 트레이너프로필 Id가져오기 -->
+	<select id="gettf_id" resultType="int">
+
+		select MAX(tf_id) as tf_id
+		from trainerprofile  
+		
+	</select>
+	
+		<!-- 트레이너프로필 Id가져오기 2 -->
+	<select id="gettf_id2" resultType="int">
+
+		select tf_id as tf_id
+		from trainerprofile  
+		where u_id = #{u_id}
+		
+	</select>
+	
+	<!-- 로그인 회원 key가져오기  -->
+	<select id="getu_key" resultType="int">
+
+		select u_key as u_key
+		from lc_user  
+		where u_id = #{u_id}
+		
+	</select>
+	
+	<!-- 센터 Id가져오기 -->
+	<select id="getc_id" resultType="int">
+
+		select MAX(c_id) as c_id
+		from center  
+		
+	</select>
+
+	<!-- 유저 이름 가져오기 -->
+	<select id="getU_name" resultType="String">
+
+		select u_name as u_name
+		from lc_user
+		where u_id = #{u_id}
+	</select>
+	
+	<!-- 유저 이름 가져오기2 -->
+	<select id="getU_name2" resultType="String">
+
+		select u_name as u_name
+		from lc_user
+		where u_key = #{u_key}
+	</select>
+
+	<!-- 파일업로드 -->
+	<insert id="fileUpload" parameterType="HashMap">
+		INSERT INTO tf_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		tf_id,
+		FILE_GROUP
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{tf_id},
+		1
+		)
+	</insert>
+	
+		<!-- 파일업로드 -->
+	<insert id="fileUpload2" parameterType="HashMap">
+		INSERT INTO tf_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		tf_id,
+		FILE_GROUP
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{tf_id},
+		2
+		)
+	</insert>
+	
+	<!-- 파일업로드 -->
+	<insert id="fileUpload2_1" parameterType="HashMap">
+		INSERT INTO tf_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		tf_id,
+		FILE_GROUP,
+		tf_certificatetitle
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{tf_id},
+		2,
+		#{tf_certificatetitle2}
+		)
+	</insert>
+	
+		<!-- 파일업로드 -->
+	<insert id="fileUpload3" parameterType="HashMap">
+		INSERT INTO tf_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		tf_id,
+		FILE_GROUP
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{tf_id},
+		3
+		)
+	</insert>
+	
+	
+	
+	<!--센터 파일업로드 -->
+	<insert id="centerfileUpload" parameterType="HashMap">
+		INSERT INTO center_file(
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		c_id
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{c_id}
+		)
+	</insert>
+	
+	  <!--  트레이너 프로필 상세정보 --> 
+	  <select id="trainerprofileDetail" resultType="trainerprofile">
+        select  				 tf_lessonoption as tf_lessonoption,
+				                 tf_schedureintro as tf_schedureintro,
+				                 tf_certificate as tf_certificate,
+				                 tf_sunday as tf_sunday,
+				                 tf_saterday as tf_saterday,
+				                 tf_intro as tf_intro,
+				                 tf_day as tf_day,
+				                 tf_daymorning as tf_daymorning,
+				                 tf_dayafter as tf_dayafter,
+				                 tf_saterdaymorning as tf_saterdaymorning,
+				                 tf_saterafter as tf_saterafter,
+				                 tf_sundaymorning as tf_sundaymorning,
+				                 tf_sundayafter as tf_sundayafter,
+				                 tf_dayoff as tf_dayoff,
+				                 tf_certificatetitle as tf_certificatetitle,
+				                 tf_programtitle as tf_programtitle,
+				                 u_key as u_key,
+				                 tf_programsub as tf_programsub,
+				                 tf_programintro as tf_programintro,
+				                 tf_lessontitle as tf_lessontitle,
+				                 tf_lessonnumber as tf_lessonnumber,
+				                  tf_lessonnumber2 as tf_lessonnumber2,
+				                   tf_lessonnumber3 as tf_lessonnumber3,
+				                    tf_lessonnumber4 as tf_lessonnumber4,
+				                 tf_lessonprice as tf_lessonprice,
+				                 tf_lessonunit as tf_lessonunit,
+				                 tf_lessontime as tf_lessontime,
+				                 tf_lessonintro as tf_lessonintro,
+				                 tf_hanjulintro as tf_hanjulintro,
+				                 tf_id as tf_id,
+				                  tf_lessonprice2 as  tf_lessonprice2,
+				                   tf_lessonprice3 as  tf_lessonprice3,
+				                    tf_lessonprice4 as  tf_lessonprice4
+     
+        from trainerprofile where u_key = #{u_key}
+    </select>
+	
+	<!-- 센터 등록 -->
+	<insert id="centerinsertprocess" parameterType="trainerprofile">
+		INSERT INTO center (
+				 c_name,
+				c_postcode,
+				c_loadaddress,
+				c_oldaddress,
+				c_detailaddress,
+				 c_option,
+				c_inform,
+				c_daymorning,
+				c_dayafter,
+				c_satermorning,
+				c_saterafter,
+				c_sunmorning,
+				c_sunafter,
+				c_dayoff,
+				u_key
+		) VALUES (
+		#{c_name},
+		#{c_postcode},
+		#{c_loadaddress},
+		#{c_oldaddress},
+		#{c_detailaddress},
+		#{c_option},
+		#{c_inform},
+		#{c_daymorning},
+		#{c_dayafter},
+		#{c_satermorning},
+		#{c_saterafter},
+		#{c_sunmorning},
+		#{c_sunafter},
+		#{c_dayoff},
+		#{u_key}
+
+		)
+	</insert>
+	
+	<!-- 센터 디테일 -->
+	<select id="getcenterDetail" resultType="center">
+
+		select  c_name,
+				c_postcode,
+				c_loadaddress,
+				c_oldaddress,
+				c_detailaddress,
+				 c_option,
+				c_inform,
+				c_daymorning,
+				c_dayafter,
+				c_satermorning,
+				c_saterafter,
+				c_sunmorning,
+				c_sunafter,
+				c_dayoff,
+				c_confirm
+				 
+		from center  
+		where c_id = #{c_id}
+		
+	</select>
+	
+	
+	  <!-- 센터별 파일정보 가져오기 -->
+	<select id="getcenterFileList" resultType="FileDto">
+		 SELECT         O_NAME as o_name,
+				        FILE_PATH as file_path,               
+				        FILE_NAME as file_name,
+				      	c_file_id as c_file_id
+	      FROM            center_file
+	      	WHERE 		c_id = #{c_id}
+	</select>
+	
+		  <!-- 트레이너별 파일정보 가져오기 -->
+	<select id="gettf_FileList" resultType="FileDto">
+		 SELECT         O_NAME as o_name,
+				        FILE_PATH as file_path,               
+				        FILE_NAME as file_name,
+				      	FILE_GROUP as FILE_GROUP,
+				      	tf_file_id as tf_file_id,
+				      	tf_id as tf_id,
+				      	tf_certificatetitle as tf_certificatetitle
+	      FROM            tf_file
+	      	WHERE 		tf_id = #{tf_id} and FILE_GROUP = #{FILE_GROUP}
+	</select>
+	
+	
+	   <!-- 센터 리스트(모든) -->
+ 	  <select id="getcenterListALL" resultType="center">
+	      SELECT         
+				              c_id as c_id,
+				         	  c_name as c_name,
+				         	  c_postcode as c_postcode,
+				         	   c_loadaddress as c_loadaddress,
+				         	   c_confirm as c_confirm
+		 FROM           center
+			
+	   </select>
+	   
+	      <!-- 센터 승인확정 -->
+	        <update id="centerConfirm" parameterType="center">
+			    UPDATE center SET  
+			    c_confirm = 1
+			    WHERE c_id = #{c_id}
+    		</update>
+    		
+    		<!-- 센터 승인취소 -->
+	        <update id="centerConfirmCancel" parameterType="center">
+			    UPDATE center SET  
+			    c_confirm = 0
+			    WHERE c_id = #{c_id}
+    		</update>
+    		
+    		
+    		
+    		
+    		<!--  모든 검색 -->
+ 	<select id="search_All" resultType="">
+   		
+   	
+   			
+	    		  SELECT           tf_id as tf_id,
+				                 tf_hanjulintro as tf_hanjulintro,
+				                 tf_lessonnumber as tf_lessonnumber,
+				                 tf_lessonprice as tf_lessonprice,
+				                 tf_lessonunit as tf_lessonunit,
+				                 tf_loadaddress as tf_loadaddress,
+				               
+				                
+	    			FROM            lc_center						
+	      
+	   	  	   WHERE tf_loadaddress like  concat('%',#{keyword},'%')
+				
+	</select>
+</mapper>

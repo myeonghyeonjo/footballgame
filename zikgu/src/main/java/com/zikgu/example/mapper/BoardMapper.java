@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.zikgu.example.domain.Board;
 import com.zikgu.example.domain.Center;
 import com.zikgu.example.domain.FileDto;
+import com.zikgu.example.domain.MemberProfile;
 import com.zikgu.example.domain.TrainerProfile;
 
 @Mapper
@@ -57,9 +58,30 @@ public interface BoardMapper {
 
 	public List<Center> getcenterListALL();
 
-	public void centerConfirm(int c_id);
+	public void centerConfirm(Center center);
 
 	public void centerConfirmCancel(int c_id);
+
+	public List<TrainerProfile> search_All(String keyword);
+
+	public Center getcenterDetail2(String tf_loadaddress);
+
+	public void memberProfileinsert(MemberProfile memberprofile);
+
+	public List<Center> getcenterListOne(int u_key);
+
+	public List<FileDto> getcenterSearchFileList(String tfIdString);
+
+	public List<FileDto> getcenterFileList2(String tf_loadaddress);
+
+	public List<FileDto> getprofileFileList2(int tf_id);
+
+	public List<TrainerProfile> trainerList();
+
+	
+
+
+
 
 	
 }

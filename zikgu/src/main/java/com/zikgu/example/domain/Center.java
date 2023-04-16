@@ -18,6 +18,10 @@ public class Center {
 	private int c_id;
 	private int c_confirm;
 	private int u_key;
+	private String c_hardness;
+	private String c_latitude;
+	private String c_intro;
+	
 
 	public String getC_name() {
 		return c_name;
@@ -153,6 +157,30 @@ public class Center {
 
 	public void setU_key(int u_key) {
 		this.u_key = u_key;
+	}
+
+	public String getC_hardness() {
+		return c_hardness;
+	}
+
+	public void setC_hardness(String c_hardness) {
+		this.c_hardness = c_hardness;
+	}
+
+	public String getC_latitude() {
+		return c_latitude;
+	}
+
+	public void setC_latitude(String c_latitude) {
+		this.c_latitude = c_latitude;
+	}
+
+	public String getC_intro() {
+		return c_intro;
+	}
+
+	public void setC_intro(String c_intro) {
+		this.c_intro = c_intro;
 	}
 
 }

@@ -3,13 +3,16 @@ package com.zikgu.example.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 import java.util.UUID;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.maven.shared.invoker.SystemOutHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +38,7 @@ import com.zikgu.example.domain.Board;
 import com.zikgu.example.domain.Center;
 import com.zikgu.example.domain.FileDto;
 import com.zikgu.example.domain.K1Image;
+import com.zikgu.example.domain.MemberProfile;
 import com.zikgu.example.domain.News;
 import com.zikgu.example.domain.Player;
 import com.zikgu.example.domain.TrainerProfile;
@@ -85,12 +89,37 @@ public class Controller {
 		logger.debug("debug");
 		logger.info("info");
 		logger.error("error");
+		List<TrainerProfile> list = boardservice.trainerList();
+		System.out.println("list:"+list);
+		List<FileDto> filelistAll = new ArrayList<>();
+		List<FileDto> centerfilelistAll = new ArrayList<>();
+		for (TrainerProfile profile : list) {
+			  int tfId = profile.getTf_id();
+			 
+			  List<FileDto> filelist  = boardservice.getprofileFileList2(profile.getTf_id());
+			  List<FileDto> centerfilelist  = boardservice.getcenterFileList2(profile.getTf_loadaddress());
+			  filelistAll.addAll(filelist);
+			  centerfilelistAll.addAll(centerfilelist);
+			  //centerfilelistAll.addAll(centerfilelist);
+			  //fileListMap2.put("filelistAll", filelistAll);
+			  //fileListMap2.put("filelist", centerfilelist);
+			  
+			  model.addAttribute("list", list);
+			  model.addAttribute("filelistAll", filelistAll);
+			  model.addAttribute("centerfilelistAll", centerfilelistAll);
+		}
+		
+		
 		return "/member/homepage2";
 	}
 
 	@RequestMapping("/beforeSignup")
 	public String beforeSignUp() {
 		return "/member/signup";
+	}
+	@RequestMapping("/beforeSignuptrainer")
+	public String beforeSignuptrainer() {
+		return "/member/trainersignup";
 	}
 	
 	@RequestMapping("/beforeSignup2")
@@ -128,6 +157,27 @@ public class Controller {
 
 		return "/login";
 	}
+	
+	@RequestMapping("/trainersignup")
+	public String trainersignup(User user) {
+		// 비밀번호 암호화
+		String encodedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
+
+		// 유저 데이터 세팅
+		user.setPassword(encodedPassword);
+		user.setAccountNonExpired(true);
+		user.setEnabled(true);
+		user.setAccountNonLocked(true);
+		user.setCredentialsNonExpired(true);
+		user.setAuthorities(AuthorityUtils.createAuthorityList("ROLE_USER"));
+
+		// 유저 생성
+		userservice.createUserTrainer(user);
+		// 유저 권한 생성
+		userservice.createAuthorities(user);
+
+		return "/login";
+	}
 
 	@RequestMapping(value = "/login")
 	public String beforeLogin(Model model) {
@@ -142,8 +192,8 @@ public class Controller {
 
 	@Secured({ "ROLE_USER" })
 	@RequestMapping(value = "/user/info")
-	public String userInfo(Model model,@RequestParam("u_id") String u_id) {
-		int u_key = boardservice.getu_key(u_id);
+	public String userInfo(Model model,@RequestParam("u_key") String u_key,MemberProfile memberprofile) {
+		//memberprofile = boardservice.memberprofileDetail(u_key);
 		model.addAttribute("u_key", u_key);
 		return "/member/user_info";
 	}
@@ -428,9 +478,12 @@ public class Controller {
 		@RequestMapping("/trainerProfileinsert") 
 	    public String trainerProfileinsert(Model model,User user,MultipartHttpServletRequest mhsq,TrainerProfile trainerprofile) throws IllegalStateException, IOException {
 			boardservice.trainerProfileinsert(trainerprofile);
+			
 			String tf_certificatetitle = trainerprofile.getTf_certificatetitle();
+			System.out.println("2"+2);
 			String[] tf_certificatetitle2 = tf_certificatetitle.split(",");
-			System.out.println("tf_certificatetitle2:"+tf_certificatetitle2[1]);
+			System.out.println("3"+3);
+			
 		int tf_id = boardservice.gettf_id(trainerprofile);  
 		
 			System.out.println("tf_id"+tf_id);
@@ -558,10 +611,11 @@ public class Controller {
 		
 		
 		@RequestMapping("/centerinsertprocess")
-	    public String centerinsertprocess(Center center,MultipartHttpServletRequest mhsq) throws IllegalStateException, IOException {
+	    public String centerinsertprocess(Center center,MultipartHttpServletRequest mhsq,@RequestParam("u_key") int u_key) throws IllegalStateException, IOException {
 			boardservice.centerinsertprocess(center);
+			String c_loadaddress =center.getC_loadaddress();
+			int c_id = boardservice.getc_id();
 			
-			int c_id = boardservice.getc_id();	
 			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
 				 File dir = new File(realFolder);
 				   if (!dir.isDirectory()) {
@@ -582,7 +636,7 @@ public class Controller {
 						   long fileSize = mf.get(i).getSize(); 	
 						   // 파일 사이즈                
 						   mf.get(i).transferTo(new File(savePath)); 	// 파일 저장                 
-						   boardservice.centerfileUpload(originalfileName, saveFileName, fileSize,savePath,c_id);
+						   boardservice.centerfileUpload(originalfileName, saveFileName, fileSize,savePath,c_id,u_key,c_loadaddress);
 					   		}
 				   	}
 	        return "/center/centerDetail";
@@ -606,12 +660,19 @@ public class Controller {
 			model.addAttribute("list",list);
 			return "/center/centerlist";
 	    }
+		@RequestMapping("/centerconfirmlist")
+	    public String centerconfirmlist(Center center,Model model,@RequestParam("u_key") int u_key) {
+			List<Center> list = boardservice.getcenterListOne(u_key);
+			model.addAttribute("list",list);
+			return "/center/centerlist";
+	    }
+		
 		
 		@RequestMapping("/centerConfirm")
 	    public String centerConfirm(Center center,Model model) {
 			int c_id = center.getC_id();
-			model.addAttribute("c_id",c_id);
-			boardservice.centerConfirm(c_id);
+			
+			boardservice.centerConfirm(center);
 			
 			
 			List<Center> list = boardservice.getcenterDetail(c_id);
@@ -619,6 +680,7 @@ public class Controller {
 			
 			List<FileDto> filelist = boardservice.getcenterFileList(c_id);
 			model.addAttribute("filelist",filelist);
+			model.addAttribute("c_id",c_id);
 			return "/center/centerDetail";
 	    }
 		
@@ -637,14 +699,76 @@ public class Controller {
 			return "/center/centerDetail";
 	    }
 		
-		@RequestMapping("/search_All")
-	    public String search_All(Model model, @RequestParam("keyWord") String keyWord) {
+		@RequestMapping("/center/test")
+	    public String test(Model model) {
 			
-			return "/center/centerDetail";
+			return "/center/test";
+	    }
+		@RequestMapping("/search_All")
+	    public String search_All(Model model,@RequestParam("keyword") String keyword,TrainerProfile trainerprofile,FileDto filedto) {
+			List<TrainerProfile> list = boardservice.search_All(keyword);
+			model.addAttribute("list",list);
+			
+			Map<String, List<FileDto>> fileListMap2 = new HashMap<>();
+			List<Integer> tfIdList = new ArrayList<>();
+			List<FileDto> filelistAll = new ArrayList<>();
+			List<FileDto> centerfilelistAll = new ArrayList<>();
+			for (TrainerProfile profile : list) {
+				  int tfId = profile.getTf_id();
+				  tfIdList.add(tfId);
+				  List<FileDto> filelist  = boardservice.getprofileFileList2(profile.getTf_id());
+				  List<FileDto> centerfilelist  = boardservice.getcenterFileList2(profile.getTf_loadaddress());
+				  filelistAll.addAll(filelist);
+				  centerfilelistAll.addAll(centerfilelist);
+				  //centerfilelistAll.addAll(centerfilelist);
+				  fileListMap2.put("filelistAll", filelistAll);
+				  //fileListMap2.put("filelist", centerfilelist);
+			}	
+			System.out.println("list:"+list);
+			System.out.println("filelistAll:"+filelistAll);
+			
+			Map<String, List<FileDto>> fileListMap = new HashMap<>();
+			
+			fileListMap.put("filelistAll", filelistAll);
+			//fileListMap.put("centerfilelistAll", centerfilelistAll);
+			
+			model.addAttribute("filelistAll",filelistAll);
+			model.addAttribute("fileListMap",fileListMap);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("centerfilelistAll",centerfilelistAll);
+			System.out.println("centerfilelistAll:"+centerfilelistAll);
+			
+			return "/member/searchList";
 	    }
 		
+		@RequestMapping("/aj-centerview")
+	    public String centerview( Model model,Center center,@RequestParam("tf_loadaddress") String tf_loadaddress) {
+			System.out.println("tf_loadaddress:"+tf_loadaddress);
+			center = boardservice.getcenterDetail2(tf_loadaddress);
+			int c_id = center.getC_id();
+			String c_name = center.getC_name();
+			List<FileDto> filelist = boardservice.getcenterFileList(c_id);
+			model.addAttribute("center",center);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("c_id",c_id);
+			model.addAttribute("c_name",c_name);
+			model.addAttribute("tf_loadaddress",tf_loadaddress);
+			List<Center> list = boardservice.getcenterDetail(c_id);
+			model.addAttribute("list",list);
+			return "/member/centerDetailmap";
+	    }
 		
+		@RequestMapping("/memberProfile")
+	    public String centerview( Model model,@RequestParam("u_key") String u_key) {
+			model.addAttribute("u_key",u_key);
+			return "/member/memberProfile";
+	    }
+	
 		
-		
-	}
+		@RequestMapping("/memberProfileinsert")
+	    public String memberProfileinsert( Model model,MemberProfile memberprofile) {
+			boardservice.memberProfileinsert(memberprofile);
+			return "/member/memberProfile";
+	    }
+		}
 }

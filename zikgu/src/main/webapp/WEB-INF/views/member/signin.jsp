@@ -117,18 +117,19 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
     </style>
 
-    
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
   </head>
+
   <body class="text-center">
     
 <main class="form-signin w-100 m-auto">
   <form  action="/loginPro" method="post">
    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-    <img class="mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <a href="/"><img class="mb-4" src="../../../Img/덤벨.JPG" alt="" width="72" height="57" ></a>
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
     <div class="form-floating">

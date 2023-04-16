@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.zikgu.example.domain.Board;
 import com.zikgu.example.domain.Center;
 import com.zikgu.example.domain.FileDto;
+import com.zikgu.example.domain.MemberProfile;
 import com.zikgu.example.domain.TrainerProfile;
 import com.zikgu.example.mapper.BoardMapper;
 
@@ -130,7 +131,7 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public void centerfileUpload(String originalfileName, String saveFileName, long fileSize, String savePath,
-			int c_id) {
+			int c_id,int u_key,String c_loadaddress) {
 
 		HashMap<String, Object> hm = new HashMap<>();
 		hm.put("originalfileName", originalfileName);
@@ -138,6 +139,8 @@ public class BoardServiceImpl implements BoardService {
 		hm.put("fileSize", fileSize);
 		hm.put("savePath", savePath);
 		hm.put("c_id", c_id);
+		hm.put("u_key", u_key);
+		hm.put("c_loadaddress", c_loadaddress);
 		boardmapper.centerfileUpload(hm);
 	}
 	
@@ -192,14 +195,56 @@ public class BoardServiceImpl implements BoardService {
 		return boardmapper.getcenterListALL();
 	}
 
-	@Override
-	public void centerConfirm(int c_id) {
-		boardmapper.centerConfirm(c_id);
-	}
+	
 	
 	@Override
 	public void centerConfirmCancel(int c_id) {
 		boardmapper.centerConfirmCancel(c_id);
+	}
+	
+	@Override
+	public List<TrainerProfile> search_All(String keyword){
+		return boardmapper.search_All(keyword);
+	}
+	
+	@Override
+	public Center getcenterDetail2(String tf_loadaddress){
+		return boardmapper.getcenterDetail2(tf_loadaddress);
+	}
+	
+	@Override
+	public void centerConfirm(Center center) {
+		boardmapper.centerConfirm(center);
+	}
+	
+	@Override
+	public void memberProfileinsert(MemberProfile memberprofile) {
+		boardmapper.memberProfileinsert(memberprofile);
+	}
+	
+	@Override
+	public List<Center> getcenterListOne(int u_key){
+		return boardmapper.getcenterListOne(u_key);
+	}
+	
+	@Override
+	public List<FileDto> getcenterSearchFileList(String tfIdString){
+		return boardmapper.getcenterSearchFileList(tfIdString);
+	}
+	
+	@Override
+	public List<FileDto> getcenterFileList2(String tf_loadaddress) {
+		return boardmapper.getcenterFileList2(tf_loadaddress);
+	}
+	
+	@Override
+	public List<FileDto> getprofileFileList2(int tf_id){
+		return boardmapper.getprofileFileList2(tf_id);
+	}
+	
+	@Override
+	public List<TrainerProfile> trainerList(){
+		return boardmapper.trainerList();
 	}
 }
 

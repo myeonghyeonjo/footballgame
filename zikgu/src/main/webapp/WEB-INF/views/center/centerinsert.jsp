@@ -188,6 +188,18 @@ style>.image-container2 {
 										class="form-control" placeholder="이용정보를입력해주세요">
 								</div>
 							<br>
+							
+							
+							
+						<div class="col-12">
+							<label for="email" style="font-size: 20px;" form-labelmt-4" ><strong>센터 소개</label>
+							<div class="input-group has-validation">
+								<textarea cols="50" rows="10" class="form-control" id="c_intro" name="c_intro"
+									placeholder="소개글을 입력해주세요"></textarea>
+							</div>
+						</div>
+							
+							
 							<label for="email" style="font-size: 20px; padding: 10px;"
 								form-labelmt-4" ><strong>운영 시간</label>
 							<div id="sectionbox" class="form-control"

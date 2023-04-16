@@ -30,7 +30,7 @@
 	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 	crossorigin="anonymous"></script>
 
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=272bc96032396df76a8c8d79f886c824&libraries=services"></script>
 <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
@@ -156,7 +156,7 @@
 
 
 			<div class="py-5 text-center">
-				<h2>트레이너 정보 등록</h2>
+				<h2 style="color:black;">트레이너 프로필 등록</h2>
 			</div>
 <form  action="/trainerProfileinsert" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
 	
@@ -164,7 +164,26 @@
 	<p><input type="hidden" name="u_key" value="${u_key }"></p>
 			<div class="row g-5">
 				<div class="col-md-7 col-lg-8">
-					<label for="email" style="font-size: 20px;" form-labelmt-4" ><strong>사진</label><br>
+					
+					<label for="email" style="font-size: 20px; padding:5px; form-labelmt-4" ><strong>트레이너명</label>
+							<div id="sectionbox" class="form-control"
+								style="padding: 10px; background-color: white;"">
+
+
+								<div style="display: flex;">
+								
+
+									<div class="col-md-10">
+										<input type="text" class="form-control" style="flex: 0.5;" name="tf_name"
+											id="address2" placeholder="내용을 입력해주세요">
+									</div>
+								</div>
+							</div>
+					
+				
+				
+				
+					<label for="email" style="font-size: 20px; margin-top:20px;" form-labelmt-4" ><strong>사진</label><br>
 					<label for="formFile2" class="form-label mt-4">코치님 및 레슨 방식을
 						잘 보여주는 사진을 올려주세요.</label> 
 						<input class="form-control" type="file"

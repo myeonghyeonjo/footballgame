@@ -4,6 +4,7 @@ import java.util.List;
 import com.zikgu.example.domain.Board;
 import com.zikgu.example.domain.Center;
 import com.zikgu.example.domain.FileDto;
+import com.zikgu.example.domain.MemberProfile;
 import com.zikgu.example.domain.TrainerProfile;
 
 public interface BoardService {
@@ -32,7 +33,7 @@ public interface BoardService {
 	public int getc_id();
 
 	public void centerfileUpload(String originalfileName, String saveFileName, long fileSize, String savePath,
-			int c_id);
+			int c_id,int u_key, String c_loadaddress);
 
 	public List<Center> getcenterDetail(int c_id);
 
@@ -56,9 +57,32 @@ public interface BoardService {
 
 	public List<Center> getcenterListALL();
 
-	public void centerConfirm(int c_id);
+	
 
 	public void centerConfirmCancel(int c_id);
+
+	public List<TrainerProfile> search_All(String string);
+
+	public Center getcenterDetail2(String tf_loadaddress);
+
+	public void centerConfirm(Center center);
+
+	public void memberProfileinsert(MemberProfile memberprofile);
+
+	public List<Center> getcenterListOne(int u_key);
+
+	
+
+	public List<FileDto> getcenterSearchFileList(String tfIdString);
+
+	public List<FileDto> getcenterFileList2(String tf_loadaddress);
+
+	public List<FileDto> getprofileFileList2(int tf_id);
+
+	public List<TrainerProfile> trainerList();
+
+	
+	
 
 
 

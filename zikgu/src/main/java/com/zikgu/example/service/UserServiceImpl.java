@@ -44,5 +44,11 @@ public class UserServiceImpl implements UserService {
    public User readUser(String username) {
       return userMapper.readUser(username);
    }
+   
+   @Override
+   public void createUserTrainer(User user)
+   {
+	   userMapper.createUserTrainer(user);
+   }
 
 }

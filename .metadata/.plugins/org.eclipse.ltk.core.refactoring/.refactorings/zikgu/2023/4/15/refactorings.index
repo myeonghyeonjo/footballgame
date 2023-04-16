@@ -40,3 +40,16 @@
 1681361908399	Encapsulate field 'c_id'
 1681362616599	Encapsulate field 'c_confirm'
 1681363069853	Encapsulate field 'u_key'
+1681375403611	Move file
+1681431549600	Encapsulate field 'tf_name'
+1681437643102	Delete element
+1681437644279	Copy file
+1681437652780	Rename resource 'centerDetail.jsp'
+1681447369779	Encapsulate field 'c_hardness'
+1681447372735	Encapsulate field 'c_latitude'
+1681458695421	Rename resource 'userProfile.jsp'
+1681459171054	Encapsulate field 'm_programsub'
+1681461767721	Copy file
+1681522006370	Encapsulate field 'u_trainercheck'
+1681534039161	Encapsulate field 'm_likegender'
+1681542675943	Encapsulate field 'c_intro'

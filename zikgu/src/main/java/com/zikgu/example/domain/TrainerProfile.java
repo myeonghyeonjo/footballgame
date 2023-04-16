@@ -44,6 +44,7 @@ public class TrainerProfile {
 	private int tf_id;
 	private int f_group;
 	private int filecount;
+	private String tf_name;
 	
 	public String getTf_lessonpotion() {
 		return tf_lessonpotion;
@@ -279,6 +280,12 @@ public class TrainerProfile {
 	}
 	public void setFilecount(int filecount) {
 		this.filecount = filecount;
+	}
+	public String getTf_name() {
+		return tf_name;
+	}
+	public void setTf_name(String tf_name) {
+		this.tf_name = tf_name;
 	}
 	
 	

@@ -18,7 +18,8 @@
 			                 u_isAccountNonLocked    	    as isAccountNonLocked,
 			                 u_isCredentialNonExpired    as isCredentialsNonExpired,
 			                 u_isEnabled          				    as isEnabled,
-			                 u_key                                  as u_key
+			                 u_key                                  as u_key,
+			                 u_trainercheck                         as u_trainercheck
       FROM         lc_user
       WHERE         1=1
       AND            u_id   =   #{username}
@@ -46,6 +47,31 @@
          #{phone}
       )
    </insert>   
+   
+   <!-- 트레이너 회원 등록 -->
+   <insert id="createUserTrainer" parameterType="User">
+      INSERT INTO lc_user (
+         u_id,
+         u_password,
+         u_name,
+         u_isAccountNonExpired,
+         u_isAccountNonLocked,
+         u_isCredentialNonExpired,
+         u_isEnabled,
+         u_phone,
+         u_trainercheck
+      ) VALUES (
+         #{username},
+         #{password},
+         #{uName},
+         #{isAccountNonExpired},
+         #{isAccountNonLocked},
+         #{isCredentialsNonExpired},
+         #{isEnabled},
+         #{phone},
+         #1
+      )
+   </insert> 
    
     <!-- 유저 권한 추가 -->
     <insert id="createAuthority" parameterType="org.springframework.security.core.GrantedAuthority">

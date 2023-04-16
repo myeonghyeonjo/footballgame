@@ -19,7 +19,7 @@
 <link rel="canonical"
 	href="https://getbootstrap.kr/docs/5.2/examples/checkout/">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=272bc96032396df76a8c8d79f886c824&libraries=services"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
@@ -145,8 +145,80 @@ style>.image-container2 {
 	-webkit-overflow-scrolling: touch;
 }
 
+반응형 메뉴바 */
+.sticky_container {
+  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 4;
+}
+
+.sticky_menu {
+  margin: 0;
+  max-width: auto;
+  padding: 12px 0px 6px 0px;
+  opacity: 0.9;
+  border-bottom: 0.5px solid gray;
+  background-color: white;
+  backdrop-filter: blur(60px);
+}
+
+.sticky_text {
+  font-size: calc(var(--menu_font_size) * 2.2);
+  margin-right: 50%;
+  font-weight: 600;
+}
+
+.sticky_btn {
+  border: 0;
+  background-color: transparent;
+  transition: var(--btn_transition);
+  margin:10px;
+}
+
+/* 패딩 마진 한줄에 기입시 상우하좌, 시계방향 */
+.sticky_buy {
+  color: white;
+  background-color: #127ce5;
+  border-radius: 20px;
+  padding: 5px 10px 5px 10px;
+}
+
+.sticky_btn:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
 
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- Custom styles for this template -->
@@ -163,24 +235,30 @@ style>.image-container2 {
       </a>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" >
-        <li><a href="/trainerDetail?u_key=${trainerprofile.u_key}" class="nav-link px-2 link-secondary">Profile</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Center</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Review</a></li>
+        <li class="sticky_btn"><a href="/trainerDetail?u_key=${trainerprofile.u_key}" class="sticky_btn" style="color:black; text-decoration:none;" >Profile</a></li>
+      
+    
+       <li onclick="Centerview(1);" class="sticky_btn" style="color:black;">Center</li>
+      <p><input type="hidden" name="tf_loadaddress" class="sticky_btn"  value="${trainerprofile.tf_loadaddress}" id="tf_loadaddress"></p>
+      
+    
+       
+        <li class="sticky_btn" ><a href="#" class="sticky_btn" style="color:black; text-decoration:none;">Review</a></li>
       
       </ul>
 
-      
+       
     </header>
   </div>
 	<div class="container">
 		<main>
 
 
-
+<div id="centerview">
 <div class="row g-5">
 				<div class="col-md-7 col-lg-8">
 			
-				<h2 style="color: black; margin-top:15px;"><Strong>트레이너 ${u_name}님의 프로필</Strong></h2>
+				<h2 style="color: black; margin-top:15px;"><Strong>트레이너 ${trainerprofile.tf_name}님의 프로필</Strong></h2>
 			</div>
 <form  action="/trainerProfileinsert" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
 	
@@ -464,7 +542,7 @@ style>.image-container2 {
 					</div>
 					</form>
 		</main>
-
+</div>
 		<footer class="my-5 pt-5 text-muted text-center text-small">
 			<p class="mb-1">&copy; 2017–2023 Company Name</p>
 			<ul class="list-inline">
@@ -553,6 +631,33 @@ style>.image-container2 {
     	    fitImagesInViewport:false
     	})
     	
+    	
+
+function Centerview(test) {
+    	
+    	  let tf_loadaddress = $('#tf_loadaddress').val();
+    	  
+    		console.log('tf_loadaddress:'+tf_loadaddress);
+    		
+    		$.ajax({
+    			method: "POST",
+    			url: "aj-centerview",
+    			data: { tf_loadaddress: tf_loadaddress }
+    		})
+    		.done(function( html ) {
+    			//console.log(html);
+    			$('#centerview').html(html);
+    		});
+    		
+}
+     
+
+
+
+
+
+
+
 </script>
 </body>
 </html>
