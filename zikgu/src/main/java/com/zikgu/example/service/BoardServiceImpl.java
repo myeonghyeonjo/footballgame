@@ -246,6 +246,16 @@ public class BoardServiceImpl implements BoardService {
 	public List<TrainerProfile> trainerList(){
 		return boardmapper.trainerList();
 	}
+	
+	@Override
+	public List<MemberProfile> getmemberprofileListALL(){
+		return boardmapper.getmemberprofileListALL();
+	}
+	
+	@Override
+	public MemberProfile getmemberprofiledetail(String m_id) {
+		return boardmapper.getmemberprofiledetail(m_id);
+	}
 }
 
 

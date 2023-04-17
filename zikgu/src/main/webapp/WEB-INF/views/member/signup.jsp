@@ -506,13 +506,7 @@ $("#phone").blur(function(){
 	    $("#button1").click(function(){
 		    if($("#agreement1").prop("checked") && $("#agreement2").prop("checked") && $("#nameDoubleChk").val() == "true" && $("#idDoubleChk").val() == "true" && $("#pwDoubleChk").val() == "true"  && $("#phoneDoubleChk").val() == "true"){
 		    	//alert($('#sm_id').val()+"님 환영합니다. 선택해주셔서 감사합니다 :)");
-	   
-	   
-	   
-	   
-	   
-	   
-		    	// Prevent the page from reloading
+	   		// Prevent the page from reloading
 		        event.preventDefault();
 		        
 		        // Set the text-output span to the value of the first input
@@ -533,18 +527,7 @@ $("#phone").blur(function(){
 		    		 $('.signupComplete').html(html);
 		    	});
 	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-		    }else{
-		    	alert("회원가입을 완료할 수 없습니다. 다시한번 확인해주십시오.");
+	       	alert("회원가입을 완료할 수 없습니다. 다시한번 확인해주십시오.");
 		    	if(!$("#agreement1").prop("checked")){
 		    		$("label[for=agreement1]").text("동의 해주시기 바랍니다.");
 		    		$("label[for=agreement1]").css("color","red");

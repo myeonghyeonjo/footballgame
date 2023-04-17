@@ -6,27 +6,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringJoiner;
+
 import java.util.UUID;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.maven.shared.invoker.SystemOutHandler;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,10 +35,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.zikgu.example.domain.Board;
+
 import com.zikgu.example.domain.Center;
 import com.zikgu.example.domain.FileDto;
-import com.zikgu.example.domain.K1Image;
+
 import com.zikgu.example.domain.MemberProfile;
 import com.zikgu.example.domain.News;
 import com.zikgu.example.domain.Player;
@@ -70,6 +71,9 @@ public class Controller {
 	AutoComService service;
 	@Autowired
 	NewsService newsService;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	Player insertPlayer = new Player();
 	List<Player> answer = new ArrayList<Player>();
@@ -192,9 +196,11 @@ public class Controller {
 
 	@Secured({ "ROLE_USER" })
 	@RequestMapping(value = "/user/info")
-	public String userInfo(Model model,@RequestParam("u_key") String u_key,MemberProfile memberprofile) {
-		//memberprofile = boardservice.memberprofileDetail(u_key);
+	public String userInfo(Model model,User user,@RequestParam("u_key") String u_key,MemberProfile memberprofile) {
+		
 		model.addAttribute("u_key", u_key);
+		user = userservice.getUserdetail(u_key);
+		model.addAttribute("user",user);
 		return "/member/user_info";
 	}
 
@@ -418,6 +424,24 @@ public class Controller {
 		@ResponseBody
 		public int idCheck(@RequestParam("sm_id") String sm_id) {
 			return boardservice.idCheck(sm_id);
+		}
+		
+		@RequestMapping(value = "/password1Check", method = RequestMethod.POST)
+		@ResponseBody
+		public int password1Check(User user,@RequestParam("password1") String password1,@RequestParam("u_key") String u_key) {
+			System.out.println("u_key:"+u_key);
+			System.out.println("password1:"+password1);
+			
+			user = userservice.getUserdetail(u_key);   
+			
+			//입력한 현재비밀번호와 데이터베이스 현재비밀번호가 같다면
+			if(passwordEncoder.matches(password1, user.getPassword())) {
+				return 1;
+			} else 
+				return 0;
+			
+			
+			
 		}
 		
 		@RequestMapping(value = "/phoneCheck2", method = RequestMethod.POST)
@@ -770,5 +794,83 @@ public class Controller {
 			boardservice.memberProfileinsert(memberprofile);
 			return "/member/memberProfile";
 	    }
+		
+		@RequestMapping("/userpasswordmodify")
+	    public String userpasswordmodify( Model model,User user,@RequestParam("newpassword1_1") String newpassword1_1,@RequestParam("newpassword2_1") String newpassword2_1,@RequestParam("password1_1") String password1_1,@RequestParam("u_key") String u_key) {
+			System.out.println("newpassword1_1:" +newpassword1_1);
+			System.out.println("newpassword2_1:" +newpassword2_1);
+			System.out.println("password1_1:" +password1_1);
+			System.out.println("u_key:" +u_key);
+			user = userservice.getUserdetail(u_key);
+			//현재비밀번호랑 변경할 비밀번호랑 비교
+			if(passwordEncoder.matches(password1_1, user.getPassword())) {
+				
+				 String encodedPassword = new BCryptPasswordEncoder().encode(newpassword1_1);
+				 System.out.println("encodedPassword:"+encodedPassword);
+				user.setPassword(encodedPassword);
+				userservice.updateUser(user);
+			}
+			user = userservice.getUserdetail(u_key);
+			model.addAttribute("user",user);
+			model.addAttribute("u_key",u_key);
+			return "/member/user_info";
+	    }
+		
+		@RequestMapping("/usernameModify")
+	    public String usernameModify( Model model,User user,@RequestParam("username_1") String username_1, @RequestParam("u_key") String u_key) {
+			
+			System.out.println("u_key:" +u_key);
+			System.out.println("username_1:" +username_1);
+			user = userservice.getUserdetail(u_key);
+			user.setuName(username_1);
+			userservice.usernameModify(user);
+			model.addAttribute("user",user);
+			model.addAttribute("u_key",u_key);
+			return "/member/user_info";
+	    }
+		
+		@RequestMapping("/Withdrawal")
+	    public String Withdrawal( Model model,User user,@RequestParam("Withdrawalpassword1_1") String Withdrawalpassword1_1, @RequestParam("u_key") String u_key) {
+			
+			System.out.println("u_key:22222" +u_key);
+			
+			
+			
+			user = userservice.getUserdetail(u_key);
+			
+			String u_id = user.getUsername();
+			int u_key2 = Integer.parseInt(u_key);
+			System.out.println("u_id:"+u_id);
+			
+			userservice.getUserdeleteAuth(u_id);
+			userservice.getUserdelete(u_key2);
+			
+			
+			model.addAttribute("user",user);
+			model.addAttribute("u_key",u_key);
+			SecurityContextHolder.clearContext();   //세션 강제 삭제 // 회원탈퇴후 로그아웃
+			return "/member/deleteResult";
+	    }
+		
+		@RequestMapping("/memberprofilelist")
+	    public String memberprofilelist( Model model,MemberProfile memberprofile) {
+			
+			List<MemberProfile> list = boardservice.getmemberprofileListALL();
+			
+			model.addAttribute("list",list);
+			
+			return "/member/memberprofilelist";
+	    }
+		
+		@RequestMapping("/memberprofiledetail")
+	    public String memberprofiledetail( Model model,MemberProfile memberprofile,@RequestParam("m_id") String m_id) {
+			System.out.println("111");
+			memberprofile = boardservice.getmemberprofiledetail(m_id);
+			System.out.println("111");
+			model.addAttribute("memberprofile",memberprofile);
+			
+			return "/member/memberprofiledetail";
+	    }
+		
 		}
 }

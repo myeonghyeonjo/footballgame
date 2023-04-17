@@ -20,5 +20,17 @@ public interface UserMapper {
 	   public void createAuthority(User user);
 
     	public void createUserTrainer(User user);
+
+		public User getUserdetail(String u_key);
+
+		public void updateUser(User user);
+
+		public void usernameModify(User user);
+
+		public void getUserdelete(int u_key);
+
+		public void getUserdeleteAuth(String u_id);
+
+	
 }
 

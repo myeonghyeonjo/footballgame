@@ -21,4 +21,16 @@ public interface UserService extends UserDetailsService{
 
 	   
 	   public void createUserTrainer(User user);
+
+	public User getUserdetail(String u_key);
+
+	public void updateUser(User user);
+
+	public void usernameModify(User user);
+
+	public void getUserdelete(int u_key2);
+
+	public void getUserdeleteAuth(String u_id);
+
+	
 	}

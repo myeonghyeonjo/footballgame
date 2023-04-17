@@ -387,18 +387,7 @@ $("#phone").blur(function(){
 		    		console.log(html);
 		    		 $('.signupComplete').html(html);
 		    	});
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-		    }else{
+		        }else{
 		    	alert("회원가입을 완료할 수 없습니다. 다시한번 확인해주십시오.");
 		    	if(!$("#agreement1").prop("checked")){
 		    		$("label[for=agreement1]").text("동의 해주시기 바랍니다.");

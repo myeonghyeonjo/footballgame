@@ -419,6 +419,29 @@
 		)
 	</insert>
 	
+	
+	<!-- 회원 디테일 -->
+	<select id="getmemberprofiledetail" resultType="memberprofile">
+
+		select  m_id,
+				m_name,
+				m_programsub,
+				m_oldaddress,
+				m_detailaddress,
+				 m_optionaddress,
+				m_gender,
+				m_intro,
+				m_postcode,
+				m_loadaddress,
+				u_key,
+				m_likegender
+			 
+		from memberprofile  
+		where m_id = #{m_id}
+		
+	</select>
+	
+	
 	<!-- 센터 디테일 -->
 	<select id="getcenterDetail" resultType="center">
 
@@ -553,6 +576,27 @@
 		 FROM           center
 			
 	   </select>
+	   
+	    <!-- 일반회원 프로필 리스트(모든) -->
+ 	  <select id="getmemberprofileListALL" resultType="memberprofile">
+	      SELECT         
+				              m_id as m_id,
+				         	  m_name as m_name,
+				         	  m_programsub as m_programsub,
+				         	   m_oldaddress as m_oldaddress,
+				         	   m_detailaddress as m_detailaddress,
+				         	   m_optionaddress as m_optionaddress,
+				         	   m_gender as m_gender,
+				         	   m_intro as m_intro,
+				         	   m_postcode as m_postcode,
+				         	   m_loadaddress as m_loadaddress,
+				         	   u_key as u_key,
+				         	   m_likegender as m_likegender
+		 FROM          memberprofile
+			
+	   </select>
+	   
+	  
 	   
 	    <!-- 센터 리스트 u_key별 -->
  	  <select id="getcenterListOne" resultType="center">

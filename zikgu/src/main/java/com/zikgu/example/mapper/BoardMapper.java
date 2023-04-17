@@ -78,6 +78,10 @@ public interface BoardMapper {
 
 	public List<TrainerProfile> trainerList();
 
+	public List<MemberProfile> getmemberprofileListALL();
+
+	public MemberProfile getmemberprofiledetail(String m_id);
+
 	
 
 

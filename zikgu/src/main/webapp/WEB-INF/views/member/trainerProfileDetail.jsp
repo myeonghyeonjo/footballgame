@@ -226,13 +226,13 @@ style>.image-container2 {
 </head>
 <jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>
 <body class="bg-light">
- <div class="b-example-divider"></div>
+
 
   <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+      <p class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-      </a>
+      </p>
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" >
         <li class="sticky_btn"><a href="/trainerDetail?u_key=${trainerprofile.u_key}" class="sticky_btn" style="color:black; text-decoration:none;" >Profile</a></li>
@@ -265,9 +265,9 @@ style>.image-container2 {
 	<p><input type="hidden" name="u_id" value="${u_id }"></p>
 			<div class="row g-5">
 				<div class="col-md-7 col-lg-8">
-					<label for="email" style="font-size: 20px;" form-labelmt-4" ><strong>사진</label><br>
-					<label for="11" class="form-label mt-4">코치님 및 레슨 방식을
-						잘 보여주는 사진</label> 
+					<h4 style="color:black;"><strong>사진</strong></h4>
+					<h7 style="color:black;" class="form-label mt-4"><Strong>코치님 및 레슨 방식을
+						잘 보여주는 사진</Strong></h7> 
 							<div id="sectionbox" class="form-control"
 								style="padding: 10px; background-color: white; width:930px; margin-bottom:10px">
 						
@@ -282,8 +282,8 @@ style>.image-container2 {
 
 
 						<div class="col-12">
-							<label for="email" style="font-size: 20px; padding: 10px" form-labelmt-4" ><strong>선생님소개</label>
-							<div class="input-group has-validation">
+							<h4 style="color:black;"><strong>선생님 소개</strong></h4>
+											<div class="input-group has-validation">
 								<textarea cols="50" rows="10" class="form-control" id="username" name="tf_intro"
 						readonly >${trainerprofile.tf_intro }</textarea>
 									
@@ -291,64 +291,33 @@ style>.image-container2 {
 						</div>
 
 						<div class="col-12">
-							<label for="email" style="font-size: 20px;" form-labelmt-4" ><strong>레슨스케쥴
-									(코치님의 레슨 가능한 스케줄)</label>
+							
+							<h4 style="color:black;"><strong>레슨스케쥴</strong></h4>
+					<h7 style="color:black;" class="form-label mt-4"><Strong>코치님의 레슨 가능한 스케줄</Strong></h7> 		
 							<div id="sectionbox" class="form-control"
 								style="padding: 10px; background-color: white;"">
 
 								<div style="display: flex;">
+								<p style="text-align: left; "><strong>평일</strong>&nbsp;&nbsp;&nbsp;&nbsp;${trainerprofile.tf_daymorning}~${trainerprofile.tf_dayafter}</p>
+									
+								</div>
+								<div style="display: flex;">
+									<p style="text-align: left; "><strong>토요일</strong> ${trainerprofile.tf_saterdaymorning}~${trainerprofile.tf_saterafter}</p>
+								</div>
+								<div style="display: flex;">
+										<p style="text-align: left; "><strong>토요일</strong> ${trainerprofile.tf_sundaymorning}~${trainerprofile.tf_sundayafter}</p>
+								</div>
+								<div style="display: flex;">
+										<p style="text-align: left;"><strong>휴무일</strong> ${trainerprofile.tf_dayoff}</p>
+					
+								</div>
+						<h7><Strong>스케줄 참고 사항</Strong>  ${trainerprofile.tf_lessonintro }</h7> 		
 								
-									<p style="text-align: left; padding-top: 10px;">평일</p>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-									<input type="text" name="tf_daymorning"
-										id="timeInput" style="width: 140px; flex: 0.2; height: 40px;"
-										class="form-control" oninput="formatTime(this)" maxlength="4" readonly
-										value="${trainerprofile.tf_daymorning}">~
-									<input type="text" id="timeInput" name="tf_dayafter"
-										style="width: 140px; flex: 0.2; height: 40px;"
-										class="form-control" oninput="formatTime(this)" maxlength="4" readonly
-										value="${trainerprofile.tf_dayafter}">
-								</div>
-								<div style="display: flex;">
-									
-									<p style="text-align: left; padding-top: 10px;">토요일</p>
-									&nbsp;&nbsp;&nbsp; <input type="text" id="timeInput" name="tf_saterdaymorning"
-										style="width: 140px; flex: 0.2; height: 40px;"
-										class="form-control" oninput="formatTime(this)" maxlength="4" readonly
-										value="${trainerprofile.tf_saterdaymorning}">~
-									<input type="text" id="timeInput" name="tf_saterafter"
-										style="width: 140px; flex: 0.2; height: 40px;"
-										class="form-control" oninput="formatTime(this)" maxlength="4" readonly
-										value="${trainerprofile.tf_saterafter}"> 
-								</div>
-								<div style="display: flex;">
-									
-									<p style="text-align: left; padding-top: 10px;">일요일</p>
-									&nbsp;&nbsp;&nbsp; <input type="text" id="timeInput" name="tf_sundaymorning"
-										style="width: 140px; flex: 0.2; height: 40px;"
-										class="form-control" oninput="formatTime(this)" maxlength="4"
-										value="${trainerprofile.tf_sundaymorning}" readonly
-										>~
-									<input type="text" id="timeInput"
-										style="width: 140px; flex: 0.2; height: 40px;" name="tf_sundayafter"
-										class="form-control" oninput="formatTime(this)" maxlength="4" readonly
-										value="${trainerprofile.tf_sundayafter}">
-
-								</div>
-								<div style="display: flex;">
-									<p style="text-align: left; padding-top: 10px;">휴무일</p>
-									&nbsp;&nbsp;&nbsp; <input type="text" name="tf_dayoff"
-										style="width: 140px; flex: 0.45; height: 40px;" readonly
-										class="form-control" value="${trainerprofile.tf_dayoff}">
-								</div>
-								<label for="username" class="form-label"
-									style="font-size: 15px;">스케줄 참고 사항을 알려주세요 (40자 이내)</label> <input
-									type="text" style="flex: 1; height: 40px;" class="form-control" name="tf_schedureintro" readonly
-									value="${trainerprofile.tf_lessonintro }">
+								
 							</div>
 
 							<br>
-							<label for="email" style="font-size: 20px;" form-labelmt-4" ><strong>검증된자격사항</label>
+							<h4 style="color:black;"><strong>검증된자격사항</strong></h4>
 							<div id="sectionbox" class="form-control" 
 								style="padding: 10px; background-color: white;">
 
@@ -368,27 +337,22 @@ style>.image-container2 {
 								</c:forEach>
 								</div>
 							<br>
-							<label for="email" style="font-size: 20px;" form-labelmt-4" ><strong>프로그램</label>
+							<h4 style="color:black;"><strong>프로그램</strong></h4>
 							<div id="sectionbox" class="form-control"
 								style="padding: 10px; background-color: white;"">
 
 
 								<div style="display: flex;"></div>
 								<div>
-									<label for="username2" class="form-label" 
-										style="font-size: 15px;">프로그램 제목</label> <input
-										type="text" id="username2" style="flex: 1; height: 40px;" name="tf_programtitle"
-										class="form-control" value="${trainerprofile.tf_programtitle }" readonly>
+				 					<p style="text-align: left; "><strong>프로그램 제목</strong> ${trainerprofile.tf_programtitle }</p>
 								</div>
 								<div>
 
-									<label for="username2" class="form-label"
-										style="font-size: 15px;">프로그램의 전문 분야</label><br>
+					<p style="text-align: left; "><strong>프로그램 전문 분야</strong></p>
+
 									<div style="display: flex;">
 									<c:forEach var="programsub" items="${programsub}">
-										<input type="checkbox" style="flex: 0.3;  margin-right:10px;" name="tf_programsub" checked
-											class="btn-check" id="btn-check-outlined" autocomplete="off" disabled>
-										<label class="btn btn-outline-dark" for="btn-check-outlined">${programsub }</label><br>
+									<label class="btn btn-outline-dark" for="btn-check-outlined">${programsub }</label><br>
 								</c:forEach>
 									
 									
@@ -399,7 +363,7 @@ style>.image-container2 {
 										
 									</div>
 								</div>
-								<label for="state" class="form-label">참고 사진</label> 
+					<p style="text-align:left; margin-top:10px;"><strong>참고 사진</strong></p>
 									<div>
 									<c:forEach var="filelist" items="${filelist_3}">
 							<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set3"><img src="../../../Img/${filelist.file_name}" width="160" height="160"   alt=""
@@ -410,8 +374,8 @@ style>.image-container2 {
 								
 
 								<div>
-									<label for="myTextarea" class="form-label"
-										style="font-size: 15px;">내용</label>
+						<p style="text-align: left; margin-top:10px; margin-bottom:0.5px"><strong>내용</strong></p>
+
 									<div class="input-group has-validation"> 
 										<textarea cols="50" rows="10" class="form-control" name="tf_programintro" readonly
 											id="myTextarea" 
@@ -422,111 +386,44 @@ style>.image-container2 {
 
 
 							<br>
-							<label for="email" style="font-size: 20px; padding: 10px;"
-								form-labelmt-4" ><strong>레슨 이용 가격</label>
+						<h4 style="color:black;"><strong>레슨 이용 가격</strong></h4>
+
 							<div id="sectionbox" class="form-control"
-								style="padding: 10px; background-color: white;"">
-								<label for="email" style="font-size: 15px; margin: 10px;"
-									form-labelmt-4" ><strong>이용가격 구분</label><br> <input
-									type="text" style="flex: 1; height: 40px;" class="form-control" name="tf_lessontitle"
-									value="${trainerprofile.tf_lessontitle }" readonly><br>
-								<div id="sectionbox" class="form-control"
-									style="padding: 10px; background-color: white;"">
-						
-									
-					
-									<div style="display: flex;">
-										<P style="flex: 0.15;"></P>
-										<P style="flex: 0.415;">횟수/개월</P>
-										<P style="flex: 0.35;">단위</P>
-										<P style="flex: 0.8;">가격</P>
-									</div>
-									<hr style="margin: 1px;">
-									<div style="display: flex;">
-
-										<input type="text" id="timeInput" name="tf_lessonnumber"
-											style="margin: 10px; width: 160px; flex: 0.2; height: 40px;"
-											class="form-control" oninput="formatTime(this)" maxlength="4"
-											value="${trainerprofile.tf_lessonnumber }" readonly>
-
-										<input class="form-control" id="country" name="tf_lessonunit"
-											style="margin: 10px; width: 90px; flex: 0.1; height: 40px;"
-											value="${trainerprofile.tf_lessonunit }" readonly
-											>
-										
-									 <input type="text" id="rcvordAm" name="tf_lessonprice"
-											style="margin: 10px; width: 160px; flex: 0.3; height: 40px;"
-											class="form-control" value="${trainerprofile.tf_lessonprice }원" readonly>
-
-									</div>
-									<div style="display: flex;">
-										<input type="text" id="timeInput"
-											style="margin: 10px; margin-right: 123px; padding: 100; width: 160px; flex: 0.2; height: 40px;"
-											class="form-control" name="tf_lessonnumber" oninput="formatTime(this)" maxlength="4"
-											value="${trainerprofile.tf_lessonnumber2 }" readonly>
-										<input type="text" id="rcvordAm" name="tf_lessonprice"
-											style="margin: 10px; width: 160px; flex: 0.3; height: 40px;"
-											class="form-control" value="${trainerprofile.tf_lessonprice2 }원" readonly>
-									</div>
-									<div style="display: flex;">
-										<input type="text" id="timeInput"
-											style="margin: 10px; margin-right: 123px; padding: 100; width: 160px; flex: 0.2; height: 40px;"
-											class="form-control" name="tf_lessonnumber" oninput="formatTime(this)" maxlength="4"
-											value="${trainerprofile.tf_lessonnumber3 }" readonly>
-										<input type="text" id="rcvordAm" name="tf_lessonprice"
-											style="margin: 10px; width: 160px; flex: 0.3; height: 40px;"
-											class="form-control" value="${trainerprofile.tf_lessonprice3 }원" readonly>
-									</div>
-									<div style="display: flex;">
-										<input type="text" id="timeInput"
-											style="margin: 10px; margin-right: 123px; padding: 100; width: 160px; flex: 0.2; height: 40px;"
-											class="form-control" name="tf_lessonnumber" oninput="formatTime(this)" maxlength="4"
-											value="${trainerprofile.tf_lessonnumber4 }" readonly>
-										<input type="text" id="rcvordAm" name="tf_lessonprice"
-											style="margin: 10px; width: 160px; flex: 0.3; height: 40px;"
-											class="form-control"value="${trainerprofile.tf_lessonprice4 }원" readonly>
-									</div>
-									
-								<label for="email" style="font-size: 15px; margin: 10px;"
-									form-labelmt-4" ><strong>레슨 1회 진행 시간이 어떻게 되나요?</label><br> 
-							
-													<input class="form-control" id="country" name="tf_lessontime"
-											style="margin: 10px; width: 100px; flex: 0.1; height: 40px;"
-											value="${ trainerprofile.tf_lessontime}" readonly>
-											
-										</input>
-										<label for="email" style="font-size: 15px; margin: 10px;"
-									form-labelmt-4" ><strong>센터 회원권을 별도로 결제해야 하나요?</label><br> 
-							
-													<input class="form-control" id="country" name="tf_lessonoption"
-											style="margin: 10px; width: 600px; flex: 0.1; height: 40px;"
-												value="${ trainerprofile.tf_lessonoption}" readonly>
-											
-											
-										</input>
-										<label for="myTextarea" class="form-label"
-										style="font-size: 15px;">가격 참고 사항</label>
-									<div class="input-group has-validation">
-										<textarea cols="50" rows="10" class="form-control"
-											id="myTextarea"  readonly name="tf_lessonintro"
-											oninput="maxLengthCheck(this)" maxlength="10">${ trainerprofile.tf_lessonintro}</textarea>
-									</div>
-								</div>
-
-							</div>
-<label for="email" style="font-size: 20px; padding:10px; form-labelmt-4" ><strong>한줄 인사말</label>
-<p  style="font-size: 10px; margin-left:10px;"></p>
-							<div id="sectionbox" class="form-control"
-								style="padding: 10px; background-color: white;"">
-
-
-								<div style="display: flex;">
+								style="padding: 10px; background-color: white; width:450px;">
+					<p style="text-align: left; margin-top:10px; margin-bottom:0.5px"><strong>&nbsp;&nbsp;· ${trainerprofile.tf_lessontitle }</strong></p>
+								<hr style="margin: 12px;">
+								<p style=" margin-left:30px; margin-top:20px;">${trainerprofile.tf_lessonnumber }${trainerprofile.tf_lessonunit }</p>                    
+								<p style=" margin-left:330px; margin-top:-50px;"> ${trainerprofile.tf_lessonunit }당 <Strong>${trainerprofile.tf_lessonprice }원</Strong></p>
+								<p style=" margin-left:330px; margin-top:-19px; margin-bottom:6px; font-size:12px;"> ${trainerprofile.tf_lessonnumber*trainerprofile.tf_lessonprice }원</p>
+								<hr style="margin: 12px;">
+								<p style=" margin-left:30px; margin-top:20px;">${trainerprofile.tf_lessonnumber2 }${trainerprofile.tf_lessonunit }</p>                    
+								<p style=" margin-left:330px; margin-top:-50px;"> ${trainerprofile.tf_lessonunit }당 <Strong>${trainerprofile.tf_lessonprice2 }원</Strong></p>
+								<p style=" margin-left:330px; margin-top:-19px; margin-bottom:6px; font-size:12px;"> ${trainerprofile.tf_lessonnumber2*trainerprofile.tf_lessonprice2 }원</p>
+								<hr style="margin: 12px;">
+								<p style=" margin-left:30px; margin-top:20px;">${trainerprofile.tf_lessonnumber3 }${trainerprofile.tf_lessonunit }</p>                    
+								<p style=" margin-left:330px; margin-top:-50px;"> ${trainerprofile.tf_lessonunit }당 <Strong>${trainerprofile.tf_lessonprice3 }원</Strong></p>
+								<p style=" margin-left:330px; margin-top:-19px; margin-bottom:6px; font-size:12px;"> ${trainerprofile.tf_lessonnumber3*trainerprofile.tf_lessonprice3 }원</p>
+								<hr style="margin: 12px;">
+								<p style=" margin-left:30px; margin-top:20px;">${trainerprofile.tf_lessonnumber4 }${trainerprofile.tf_lessonunit }</p>                    
+								<p style=" margin-left:330px; margin-top:-50px;"> ${trainerprofile.tf_lessonunit }당 <Strong>${trainerprofile.tf_lessonprice4 }원</Strong></p>
+								<p style=" margin-left:330px; margin-top:-19px; margin-bottom:6px; font-size:12px;"> ${trainerprofile.tf_lessonnumber4*trainerprofile.tf_lessonprice4 }원</p>
+								<hr style="margin: 12px;">
 								
-
-									<div class="col-md-10">
-										<input type="text" class="form-control" style="flex: 0.5;" name="tf_hanjulintro"
-											id="address2" value="${ trainerprofile.tf_hanjulintro}" readonly>
+									
+								
+								</div>
+									<P>ㆍ 레슨 1회에 ${ trainerprofile.tf_lessontime} 진행됩니다.</P> 
+									<P style="margin-top:-20px;">ㆍ ${ trainerprofile.tf_lessonoption}</P>
+									<P style="margin-top:-20px;">ㆍ 가격참고사항:${ trainerprofile.tf_lessonintro}</P>  
+								
 									</div>
+							</div>
+<h4 style="color:black;"><strong>한줄 인사말</strong></h4>
+<P style="margin-top:-10px;"> ${ trainerprofile.tf_hanjulintro}</P>
+
+
+
+									
 								</div>
 							</div>
 

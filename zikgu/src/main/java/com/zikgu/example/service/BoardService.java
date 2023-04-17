@@ -6,6 +6,7 @@ import com.zikgu.example.domain.Center;
 import com.zikgu.example.domain.FileDto;
 import com.zikgu.example.domain.MemberProfile;
 import com.zikgu.example.domain.TrainerProfile;
+import com.zikgu.example.domain.User;
 
 public interface BoardService {
 	public List<Board> selectBoardList();
@@ -80,6 +81,12 @@ public interface BoardService {
 	public List<FileDto> getprofileFileList2(int tf_id);
 
 	public List<TrainerProfile> trainerList();
+
+	public List<MemberProfile> getmemberprofileListALL();
+
+	public MemberProfile getmemberprofiledetail(String m_id);
+
+	
 
 	
 	

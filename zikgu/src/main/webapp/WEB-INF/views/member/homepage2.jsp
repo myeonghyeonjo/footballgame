@@ -216,7 +216,7 @@
   <h4 class="fw-light mb-0" style="color:black;"><strong>Health Catch 트레이너.</strong></h4>
   <h4 class="lead text-muted mb-0" style="color:black;">언제든, 당신에게 맞는 방식으로.</h4>
 </div>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
        
         
        

@@ -25,6 +25,28 @@
       AND            u_id   =   #{username}
    </select>
    
+ 
+   
+
+   
+     <!-- 회원 불러오기 -->
+   <select id="getUserdetail" parameterType="String" resultType="User">
+      SELECT         u_id                 						    as   username,
+			                 u_password             					as password,
+			                 u_name                						as   uName,
+			                 u_isAccountNonExpired        as isAccountNonExpired,
+			                 u_isAccountNonLocked    	    as isAccountNonLocked,
+			                 u_isCredentialNonExpired    as isCredentialsNonExpired,
+			                 u_isEnabled          				    as isEnabled,
+			                 u_key                                  as u_key,
+			                 u_trainercheck                         as u_trainercheck,
+			                 u_phone                                 as phone
+      FROM         lc_user
+     
+      WHERE            u_key   =   #{u_key}
+   </select>
+   
+   
    <!-- 회원 등록 -->
    <insert id="createUser" parameterType="User">
       INSERT INTO lc_user (
@@ -86,4 +108,40 @@
          UPDATE
             u_id = #{username}
     </insert>
+    
+    
+      <!-- 유저 비밀번호 수정 -->
+	        <update id="updateUser" parameterType="center">
+			    UPDATE lc_user  SET
+			    u_password =  #{password}
+			    
+			    WHERE u_key = #{u_key}
+    		</update>
+    		
+    		
+      <!-- 유저 이름 수정 -->
+	        <update id="usernameModify" parameterType="center">
+			    UPDATE lc_user  SET
+			    u_name =  #{uName}
+			    
+			    WHERE u_key = #{u_key} 
+    		</update>		
+    		
+    		
+    		<!-- 유저 삭제 -->
+    		<delete id="getUserdelete" parameterType="center">
+    			DELETE FROM lc_user WHERE u_key = #{u_key} 
+    		
+    		</delete>
+    		
+    		
+    		
+    		<!-- 유저AUTH 삭제 -->
+    		<delete id="getUserdeleteAuth" parameterType="center">
+    			DELETE FROM lc_auth WHERE u_id = #{u_id} 
+    		
+    		</delete>
+    		
+    		
+    		
 </mapper>

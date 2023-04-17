@@ -50,5 +50,32 @@ public class UserServiceImpl implements UserService {
    {
 	   userMapper.createUserTrainer(user);
    }
+   
+   @Override
+   public User getUserdetail(String u_key) {
+	   return userMapper.getUserdetail(u_key);
+   }
+   
+   @Override
+   public void updateUser(User user) {
+	   userMapper.updateUser(user);
+   }
+   
+   @Override
+   public void usernameModify(User user) {
+	   userMapper.usernameModify(user);
+   }
+   
+   @Override
+   public void getUserdelete(int u_key) {
+	   userMapper.getUserdelete(u_key);
+   }
+   
+   @Override
+   public void getUserdeleteAuth(String u_id) {
+	   userMapper.getUserdeleteAuth(u_id);
+   }
+   
+  
 
 }
