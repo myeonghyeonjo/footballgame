@@ -256,6 +256,71 @@ public class BoardServiceImpl implements BoardService {
 	public MemberProfile getmemberprofiledetail(String m_id) {
 		return boardmapper.getmemberprofiledetail(m_id);
 	}
+	
+	@Override
+	public List<TrainerProfile> gettrainerprofileListALL(){
+		return boardmapper.gettrainerprofileListALL();
+	}
+	
+	@Override
+	public void trainerprofilecheck(int u_key) {
+		boardmapper.trainerprofilecheck(u_key);
+	}
+	
+	@Override
+	public void trainerprofilecheckcancel(int u_key) {
+		boardmapper.trainerprofilecheckcancel(u_key);
+	}
+	
+	@Override
+	public String getphone(int u_key) {
+		return boardmapper.getphone(u_key);
+	}
+	
+	@Override
+	public int getm_id(MemberProfile memberprofile) {
+		return boardmapper.getm_id(memberprofile);
+	}
+	
+	@Override
+	public int getm_id2(int u_key) {
+		return boardmapper.getm_id2(u_key);
+	}
+	
+	@Override
+	public void updateTf_consulting(TrainerProfile trainerprofile) {
+		boardmapper.updateTf_consulting(trainerprofile);
+	}
+	
+	@Override
+	public MemberProfile getmemberprofiledetail2(int member_u_key) {
+		return boardmapper.getmemberprofiledetail2(member_u_key);
+	}
+	
+	@Override
+	public void updateM_consulting(MemberProfile memberprofile) {
+		boardmapper.updateM_consulting(memberprofile);
+	}
+	
+	@Override
+	public List<TrainerProfile> trainerprofileconsulting(int u_key){
+		return boardmapper.trainerprofileconsulting(u_key);
+	}
+	
+	@Override
+	public void updateTf_consulting2(TrainerProfile trainerprofile) {
+		boardmapper.updateTf_consulting2(trainerprofile);
+	}
+	
+	@Override
+	public void updateM_consulting2(MemberProfile memberprofile) {
+		boardmapper.updateM_consulting2(memberprofile);
+	}
+	
+	@Override
+	public List<MemberProfile> memberprofileconsulting(int tf_id){
+		return boardmapper.memberprofileconsulting(tf_id);
+	}
 }
 
 

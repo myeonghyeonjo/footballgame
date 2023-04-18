@@ -244,31 +244,21 @@
 									<label for="username2" class="form-label"
 										style="font-size: 15px;">성별을 선택해주세요</label><br>
 										<div style="display: flex;">
-										<input type="checkbox" style="flex: 0.3;" name="m_gender"
-											class="btn-check" id="btn-check-outlined12" autocomplete="off" value="남성">
-										<label class="btn btn-outline-dark" for="btn-check-outlined12">남성</label><br>
-										<input type="checkbox" style="flex: 0.3; " name="m_gender"
-											class="btn-check" id="btn-check-outlined13" value="여성"
-											autocomplete="off" > <label
-											class="btn btn-outline-dark" for="btn-check-outlined13">여성</label><br>
-										
-									</div>
+										    <input type="checkbox" style="flex: 0.3;" name="m_gender" class="btn-check" id="btn-check-outlined12" autocomplete="off" value="남성" onchange="handleCheckboxChange(this)" checked>
+										    <label class="btn btn-outline-dark" for="btn-check-outlined12">남성</label><br>
+										    <input type="checkbox" style="flex: 0.3; " name="m_gender" class="btn-check" id="btn-check-outlined13" value="여성" autocomplete="off" onchange="handleCheckboxChange(this)">
+										    <label class="btn btn-outline-dark" for="btn-check-outlined13">여성</label><br>
+										</div>
 									
 									<label for="username2" class="form-label"
 										style="font-size: 15px;">선호하시는 트레이너분의 성별을 선택해주세요</label><br>
 										<div style="display: flex;">
-										<input type="checkbox" style="flex: 0.3;" name="m_likegender"
-											class="btn-check" id="btn-check-outlined12" autocomplete="off" value="남성">
-										<label class="btn btn-outline-dark" for="btn-check-outlined12">남성</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="m_likegender"
-											class="btn-check" id="btn-check-outlined13" value="여성"
-											autocomplete="off"> <label
-											class="btn btn-outline-dark" for="btn-check-outlined13">여성</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="m_likegender"
-											class="btn-check" id="btn-check-outlined13" value="상관없음"
-											autocomplete="off"> <label
-											class="btn btn-outline-dark" for="btn-check-outlined13">상관없음</label><br>	
-										
+									    <input type="checkbox" style="flex: 0.3;" name="m_likegender" class="btn-check" id="btn-check-outlined14" autocomplete="off" value="남성" onchange="handleCheckboxChange2(this)" checked>
+									    <label class="btn btn-outline-dark" for="btn-check-outlined14">남성</label><br>
+									    <input type="checkbox" style="flex: 0.3;" name="m_likegender" class="btn-check" id="btn-check-outlined15" value="여성" autocomplete="off" onchange="handleCheckboxChange2(this)">
+									    <label class="btn btn-outline-dark" for="btn-check-outlined15">여성</label><br>
+									    <input type="checkbox" style="flex: 0.3;" name="m_likegender" class="btn-check" id="btn-check-outlined16" value="상관없음" autocomplete="off" onchange="handleCheckboxChange2(this)">
+									    <label class="btn btn-outline-dark" for="btn-check-outlined16">상관없음</label><br>
 									</div>
 										
 								</div>
@@ -295,6 +285,80 @@
 									</div>
 								
 
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+								<label for="email" style="font-size: 20px;" form-labelmt-4" ><strong>레슨스케쥴
+									(회원님의 레슨 가능한 스케줄을 알려주세요.)</label>
+							<div id="sectionbox" class="form-control"
+								style="padding: 10px; background-color: white;">
+
+								<div style="display: flex;">
+									<input type="checkbox" id="scales" name="m_day" unchecked>&nbsp;
+									<p style="text-align: left; padding-top: 10px;">평일</p>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+									<input type="text" name="m_daymorning"
+										id="timeInput" style="width: 140px; flex: 0.2; height: 40px;"
+										class="form-control" oninput="formatTime(this)" maxlength="4">~
+									<input type="text" id="timeInput" name="m_dayafter"
+										style="width: 140px; flex: 0.2; height: 40px;"
+										class="form-control" oninput="formatTime(this)" maxlength="4">
+								</div>
+								<div style="display: flex;">
+									<input type="checkbox" id="scales" name="m_saterday" unchecked>&nbsp;
+									<p style="text-align: left; padding-top: 10px;">토요일</p>
+									&nbsp;&nbsp;&nbsp; <input type="text" id="timeInput" name="m_saterdaymorning"
+										style="width: 140px; flex: 0.2; height: 40px;"
+										class="form-control" oninput="formatTime(this)" maxlength="4">~
+									<input type="text" id="timeInput" name="m_saterafter"
+										style="width: 140px; flex: 0.2; height: 40px;"
+										class="form-control" oninput="formatTime(this)" maxlength="4">
+								</div>
+								<div style="display: flex;">
+									<input type="checkbox" id="scales" name="m_sunday" unchecked>&nbsp;
+									<p style="text-align: left; padding-top: 10px;">일요일</p>
+									&nbsp;&nbsp;&nbsp; <input type="text" id="timeInput" name="m_sundaymorning"
+										style="width: 140px; flex: 0.2; height: 40px;"
+										class="form-control" oninput="formatTime(this)" maxlength="4">~
+									<input type="text" id="timeInput"
+										style="width: 140px; flex: 0.2; height: 40px;" name="m_sundayafter"
+										class="form-control" oninput="formatTime(this)" maxlength="4">
+
+								</div>
+							
+								<label for="username" class="form-label"
+									style="font-size: 15px;">스케줄 참고 사항을 알려주세요 (40자 이내)</label> <input
+									type="text" style="flex: 1; height: 40px;" class="form-control" name="m_schedureintro"
+									placeholder="내용을입력해주세요">
+							</div>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
 							
 							
 
@@ -583,6 +647,28 @@
     	console.log(filecount);
     	$(this).parent().parent().remove();
 });
+    //체크박스 성별중복선택 불가
+
+    function handleCheckboxChange(checkbox) {
+        var checkboxes = document.getElementsByName("m_gender");
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] !== checkbox) {
+                checkboxes[i].checked = false;
+            }
+        }
+    }
+    
+    //체크박스 성별선호도 중복선택불가
+    
+    function handleCheckboxChange2(checkbox) {
+        var checkboxes2 = document.getElementsByName("m_likegender");
+        for (var i = 0; i < checkboxes2.length; i++) {
+            if (checkboxes2[i] !== checkbox) {
+                checkboxes2[i].checked = false;
+            }
+        }
+    }
+
     	
 </script>
 </body>

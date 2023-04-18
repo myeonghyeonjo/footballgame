@@ -86,6 +86,11 @@ style>.image-container2 {
 	height: 100px; /* 원하는 세로 크기로 지정 */
 	text-align: left;
 }
+p {
+	color: black;
+}
+
+
 
 .image-container3 img {
 	width: 100px;
@@ -257,12 +262,11 @@ style>.image-container2 {
 <div id="centerview">
 <div class="row g-5">
 				<div class="col-md-7 col-lg-8">
-			
-				<h2 style="color: black; margin-top:15px;"><Strong>트레이너 ${trainerprofile.tf_name}님의 프로필</Strong></h2>
+			<p><input type="hidden" name="u_id" value="${u_id }"></p>
+				<h2 style="color: black; margin-top:15px; margin-bottom:-60px;"><Strong>트레이너 ${trainerprofile.tf_name}님의 프로필</Strong></h2>
+				
 			</div>
-<form  action="/trainerProfileinsert" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
 	
-	<p><input type="hidden" name="u_id" value="${u_id }"></p>
 			<div class="row g-5">
 				<div class="col-md-7 col-lg-8">
 					<h4 style="color:black;"><strong>사진</strong></h4>
@@ -284,7 +288,7 @@ style>.image-container2 {
 						<div class="col-12">
 							<h4 style="color:black;"><strong>선생님 소개</strong></h4>
 											<div class="input-group has-validation">
-								<textarea cols="50" rows="10" class="form-control" id="username" name="tf_intro"
+								<textarea  style="color:black;"cols="50" rows="10" class="form-control" id="username" name="tf_intro"
 						readonly >${trainerprofile.tf_intro }</textarea>
 									
 							</div>
@@ -311,7 +315,7 @@ style>.image-container2 {
 										<p style="text-align: left;"><strong>휴무일</strong> ${trainerprofile.tf_dayoff}</p>
 					
 								</div>
-						<h7><Strong>스케줄 참고 사항</Strong>  ${trainerprofile.tf_lessonintro }</h7> 		
+						<p><Strong>스케줄 참고 사항</Strong>  ${trainerprofile.tf_lessonintro }</p> 		
 								
 								
 							</div>
@@ -344,26 +348,27 @@ style>.image-container2 {
 
 								<div style="display: flex;"></div>
 								<div>
-				 					<p style="text-align: left; "><strong>프로그램 제목</strong> ${trainerprofile.tf_programtitle }</p>
+				 					<h5 style="text-align: left; color:black;"><strong>${trainerprofile.tf_programtitle }</strong> </h5>
 								</div>
-								<div>
+								
 
-					<p style="text-align: left; "><strong>프로그램 전문 분야</strong></p>
+					<p style="text-align: left; "><strong>프로그램 전문 분야</strong> ${trainerprofile.tf_programsub }</p>
+	
+								
+					
+								
 
-									<div style="display: flex;">
-									<c:forEach var="programsub" items="${programsub}">
-									<label class="btn btn-outline-dark" for="btn-check-outlined">${programsub }</label><br>
-								</c:forEach>
-									
-									
-									
-										
+								
+						<p style="text-align: left; margin-top:10px; margin-bottom:0.5px"><strong>내용</strong></p>
+
+									<div class="input-group has-validation"> 
+										<textarea style="color:black;" cols="50" rows="10" class="form-control" name="tf_programintro" readonly
+											id="myTextarea" 
+											oninput="maxLengthCheck(this)" maxlength="10">${trainerprofile.tf_programintro }</textarea>
 									</div>
-									<div style="display: flex;">
-										
-									</div>
-								</div>
-					<p style="text-align:left; margin-top:10px;"><strong>참고 사진</strong></p>
+								
+								
+								<p style="text-align:left; margin-top:10px;"><strong>참고 사진</strong></p>
 									<div>
 									<c:forEach var="filelist" items="${filelist_3}">
 							<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set3"><img src="../../../Img/${filelist.file_name}" width="160" height="160"   alt=""
@@ -371,25 +376,14 @@ style>.image-container2 {
 							
 						</c:forEach>
 						</div>
-								
-
-								<div>
-						<p style="text-align: left; margin-top:10px; margin-bottom:0.5px"><strong>내용</strong></p>
-
-									<div class="input-group has-validation"> 
-										<textarea cols="50" rows="10" class="form-control" name="tf_programintro" readonly
-											id="myTextarea" 
-											oninput="maxLengthCheck(this)" maxlength="10">${trainerprofile.tf_programintro }</textarea>
-									</div>
-								</div>
 							</div>
+	</div>
+								</div>
 
-
-							<br>
 						<h4 style="color:black;"><strong>레슨 이용 가격</strong></h4>
 
 							<div id="sectionbox" class="form-control"
-								style="padding: 10px; background-color: white; width:450px;">
+								style="padding: 10px; margin-top:10px; margin-left:20px; background-color: white; width:500px;">
 					<p style="text-align: left; margin-top:10px; margin-bottom:0.5px"><strong>&nbsp;&nbsp;· ${trainerprofile.tf_lessontitle }</strong></p>
 								<hr style="margin: 12px;">
 								<p style=" margin-left:30px; margin-top:20px;">${trainerprofile.tf_lessonnumber }${trainerprofile.tf_lessonunit }</p>                    
@@ -409,37 +403,176 @@ style>.image-container2 {
 								<p style=" margin-left:330px; margin-top:-19px; margin-bottom:6px; font-size:12px;"> ${trainerprofile.tf_lessonnumber4*trainerprofile.tf_lessonprice4 }원</p>
 								<hr style="margin: 12px;">
 								
-									
-								
-								</div>
 									<P>ㆍ 레슨 1회에 ${ trainerprofile.tf_lessontime} 진행됩니다.</P> 
 									<P style="margin-top:-20px;">ㆍ ${ trainerprofile.tf_lessonoption}</P>
 									<P style="margin-top:-20px;">ㆍ 가격참고사항:${ trainerprofile.tf_lessonintro}</P>  
-								
-									</div>
+								</div>
 							</div>
-<h4 style="color:black;"><strong>한줄 인사말</strong></h4>
-<P style="margin-top:-10px;"> ${ trainerprofile.tf_hanjulintro}</P>
 
 
 
-									
+
+
 								</div>
 							</div>
 
 							<hr class="my-4">
-
+							
+							
+							
+							
 	
-					
+	
+	
+	<sec:authentication property="principal" var="principal"/>  
+	<c:if test="${(principal.u_trainercheck=='0')}">>
+		<sec:authorize access="hasRole('ROLE_USER')">
+		<c:if test="${fn:contains(trainerprofile.tf_consulting, principal.u_key)}">
+			<button type="button" class="btn btn-success" disabled >
+	  			상담신청완료
+			</button>
+			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelconsultingModal">
+	  			상담신청취소
+			</button>
+		</c:if>
+		
+		<c:if test="${!(fn:contains(trainerprofile.tf_consulting, principal.u_key))}">
+			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#consultingModal">
+	  			상담신청
+			</button>
+			
+		</c:if>
+	</sec:authorize>
+	</c:if>
+	
+	
+	
+	
+	
+	
+	
+	
+							
+							
+							
+							
+							
+							
+							
+							
+						
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+	<c:if test="${(trainerprofile.tf_check=='완료')}">
+		<button type="button" class="btn btn-success" disabled >
+  			검토완료
+		</button>
+		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelModal">
+  			검토취소
+		</button>
+	</c:if>
+	
+	<c:if test="${(trainerprofile.tf_check=='대기')}">
+		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  			검토완료
+		</button>
+		
+	</c:if>
+</sec:authorize>
+
+<!-- 검토완료 Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        정말 검토완료 하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark"" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickConfirm(centerInfo)">확인</button>
+      </div>
+    </div>
+  </div>
+</div>	
+<!-- 상담신청 Modal -->
+<div class="modal fade" id="consultingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        정말 상담을 신청하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark"" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickConfirmconsulting(memberInfo)">확인</button>
+      </div>
+    </div>
+  </div>
+</div>	
+<!-- 검토취소 Modal -->
+<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        정말 검토를 취소하시겠습니까? 확인을 누르면 검토대기상태로 변경됩니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark"" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickConfirmCancel(centerInfo)">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 상담요청취소 Modal -->
+<div class="modal fade" id="cancelconsultingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        정말 상담신청을 취소하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark"" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickConfirmCancelconsulting(memberInfo)">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 검토완료하기 누르면 넘어갈 데이타 -->
+<form name="centerInfo">
+	<input type="hidden" name="u_key" value="${trainerprofile.u_key}">
+</form>
+
+<!-- 상담완료하기 누르면 넘어갈 데이타 -->
+
+<form name="memberInfo">
+<sec:authentication property="principal" var="principal"/>
+	<input type="hidden" name="member_u_key" value="${principal.u_key}">
+	<input type="hidden" name="trainer_u_key" value="${trainerprofile.u_key}">
+	<input type="hidden" name="tf_id" value="${trainerprofile.tf_id}">
+</form>						
 						</div>
 						
 						
 					</div>
 					</div>
-					</div>
-					</form>
-		</main>
-</div>
+					
+
+
+
 		<footer class="my-5 pt-5 text-muted text-center text-small">
 			<p class="mb-1">&copy; 2017–2023 Company Name</p>
 			<ul class="list-inline">
@@ -450,7 +583,39 @@ style>.image-container2 {
 		</footer>
 	</div>
 
+<!-- 검토완료하기 누르면 발생 -->
+<script>
+	function clickConfirm(formName) {
+		formName.action = "/trainerprofilecheck";
+		formName.method = "post";
+		formName.submit();
+	}
+</script>
+<!-- 상담신청 완료하기 누르면 발생 -->
+<script>
+	function clickConfirmconsulting(formName) {
+		formName.action = "/profileconsultingcheck";
+		formName.method = "post";
+		formName.submit();
+	}
+</script>
 
+
+<!-- 검토취소하기 누르면 발생 -->
+<script>
+	function clickConfirmCancel(formName) {
+		formName.action = "/trainerprofilecheckcancel";
+		formName.method = "post";
+		formName.submit();
+	}
+	
+<!-- 상담요청 취소하기 누르면 발생 -->
+function clickConfirmCancelconsulting(formName) {
+		formName.action = "/profileconsultingcancel";
+		formName.method = "post";
+		formName.submit();
+	}
+</script>
 	<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 		crossorigin="anonymous"></script>

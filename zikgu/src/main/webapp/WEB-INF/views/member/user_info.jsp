@@ -208,36 +208,45 @@ style>.image-container2 {
 		<div class="container">
 	
 	
-        <div>
-           <sec:authorize access="isAuthenticated()">
-           
-           <a href="/centerlist">센터 리스트</a>
-        
-         
-            
-         </sec:authorize>
-        </div>
+       
         
         
         
         
 <c:if test="${(principal.u_trainercheck=='1')}">
 		<div class="container"  >
-			<div class="wrapper">
-				<div id="rounded-rectangle1" class="bg-light" >
-	 				<h3 style="color:black; padding:30px;"><Strong>트레이너 프로필</Strong></h3>
+			<div class="wrapper" >
+				<div id="rounded-rectangle1" class="bg-light"  style="margin-top:30px;">
+	 				<h3 style="color:black; padding:30px;"><Strong>트레이너 프로필 관리</Strong></h3>
 					<p style="margin-left: 30px; margin-top:-10px; margin-right:50px">프로필을 등록하고, 조회하거나 수정하세요.</p>
 	 			    <a href="/trainerProfile?u_key=${u_key}"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-10px; margin-right:50px">프로필 등록 ></a>
 	 			    <a href="/trainerDetail?u_key=${u_key}"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-10px; margin-right:50px">프로필 조회 ></a>
 	 			 </div>
 	 			   
-	 			 <div id="rounded-rectangle2" class="bg-light" >
-	 				<h3 style="color:black; padding:30px;"><Strong>센터 등록</Strong></h3>
+	 			 <div id="rounded-rectangle2" class="bg-light" style="margin-top:30px;">
+	 				<h3 style="color:black; padding:30px;"><Strong>센터 관리</Strong></h3>
 					<p style="margin-left: 30px; margin-top:-10px; margin-right:50px">근무중인 센터가 없으신가요? 센터 등록을 요청하세요</p>
 	 			    <a href="/centerinsert?u_key=${u_key}" class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-20px; margin-right:50px">센터 등록 요청 ></a>  
 	 			    <a href="/centerconfirmlist?u_key=${u_key}" class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-20px; margin-right:50px">요청 조회 ></a>  
 				</div>
 			</div>
+			
+			<div class="wrapper" >
+				<div id="rounded-rectangle1" class="bg-light"  style="margin-top:30px;">
+	 				<h3 style="color:black; padding:30px;"><Strong>상담 요청 관리</Strong></h3>
+					<p style="margin-left: 30px; margin-top:-10px; margin-right:50px">요청 현황을 조회하고, 관리하세요.</p>
+	 			    <a href="/trainerconsultinglist?u_key=${u_key}"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-10px; margin-right:50px">상담요청 조회 ></a>
+	 			 </div>
+	 			   
+	 			 <div id="rounded-rectangle2" class="bg-light" style="margin-top:30px;">
+	 				<h3 style="color:black; padding:30px;"><Strong>?????</Strong></h3>
+					<p style="margin-left: 30px; margin-top:-10px; margin-right:50px">근무중인 센터가 없으신가요? 센터 등록을 요청하세요</p>
+	 			    <a href="/centerinsert?u_key=${u_key}" class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-20px; margin-right:50px">센터 등록 요청 ></a>  
+	 			    <a href="/centerconfirmlist?u_key=${u_key}" class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-20px; margin-right:50px">요청 조회 ></a>  
+				</div>
+			</div>
+			
+			
 		</div>
 </c:if>        
         
@@ -252,15 +261,31 @@ style>.image-container2 {
  <sec:authorize access="hasRole('ROLE_ADMIN')">
 	 <div class="container"  >
 				<div class="wrapper">
-					<div id="rounded-rectangle1" class="bg-light" >
+					<div id="rounded-rectangle1" class="bg-light" style="margin-top:30px;" >
 		 				<h3 style="color:black; padding:30px;"><Strong>회원 프로필 관리</Strong></h3>
 						<p style="margin-left: 30px; margin-top:-10px; margin-right:50px; margin-bottom:30px;">프로필을 조회하거나 수정하세요.</p>
 		 			   
 		 			    <a href="/memberprofilelist"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:190px; margin-right:50px">프로필 조회 ></a>
 		 			 </div>
 		 			 
-		 			 <div id="rounded-rectangle1" class="bg-light" >
+		 			 <div id="rounded-rectangle1" class="bg-light" style="margin-top:30px;">
 		 				<h3 style="color:black; padding:30px;"><Strong>트레이너 프로필 관리</Strong></h3>
+						<p style="margin-left: 30px; margin-top:-10px; margin-right:50px; margin-bottom:30px;">프로필을 조회하거나 수정하세요.</p>
+		 			   
+		 			    <a href="/trainerprofilelist"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:190px; margin-right:50px">프로필 조회 ></a>
+		 			 </div>
+				</div>
+				
+				<div class="wrapper" style="margin-top:30px;">
+					<div id="rounded-rectangle1" class="bg-light" >
+		 				<h3 style="color:black; padding:30px;"><Strong>센터 관리</Strong></h3>
+						<p style="margin-left: 30px; margin-top:-10px; margin-right:50px; margin-bottom:30px;">센터를 조회하거나 수정하세요.</p>
+		 			   
+		 			    <a href="/centerlist"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:190px; margin-right:50px">센터 조회 ></a>
+		 			 </div>
+		 			 
+		 			 <div id="rounded-rectangle1" class="bg-light" >
+		 				<h3 style="color:black; padding:30px;"><Strong>???관리</Strong></h3>
 						<p style="margin-left: 30px; margin-top:-10px; margin-right:50px; margin-bottom:30px;">프로필을 조회하거나 수정하세요.</p>
 		 			   
 		 			    <a href="/trainerprofilelist"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:190px; margin-right:50px">프로필 조회 ></a>
@@ -268,20 +293,31 @@ style>.image-container2 {
 				</div>
 			</div>
 			
+			
 	
  </sec:authorize>
- <sec:authorize access="isAnonymous()">
+ <c:if test="${(principal.u_trainercheck=='0')}">
+ <sec:authorize access="hasRole('ROLE_USER')">
 	<div class="container"  >
 			<div class="wrapper">
-				<div id="rounded-rectangle1" class="bg-light" >
-	 				<h3 style="color:black; padding:30px;"><Strong>회원 프로필</Strong></h3>
+				<div id="rounded-rectangle1" class="bg-light" style="margin-top:30px;">
+	 				<h3 style="color:black; padding:30px; "><Strong>회원 프로필</Strong></h3>
 					<p style="margin-left: 30px; margin-top:-10px; margin-right:50px">프로필을 등록하고, 조회하거나 수정하세요.</p>
 	 			    
-	 			    <a href="/trainerDetail?u_key=${u_key}"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-10px; margin-right:50px">프로필 조회 ></a>
+	 			     <a href="/memberProfile?u_key=${u_key}"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-10px; margin-right:50px">프로필 등록 ></a>
+	 			    <a href="/memberDetail?u_key=${u_key}"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-10px; margin-right:50px">프로필 조회 ></a>
+	 			 </div>
+	 			 
+	 			 <div id="rounded-rectangle1" class="bg-light" style="margin-top:30px;">
+	 				<h3 style="color:black; padding:30px; "><Strong>상담 관리</Strong></h3>
+					<p style="margin-left: 30px; margin-top:-10px; margin-right:50px">신청한 상담을 확인하고, 수정하세요.</p>
+	 			    
+	 			     <a href="/memberconsulting?u_key=${u_key}"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-10px; margin-right:50px">상담 조회 ></a>
 	 			 </div>
 			</div>
 		</div>
 	</sec:authorize>
+	</c:if>
 		<main>
 		</main>
 		</c:if>

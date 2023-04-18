@@ -605,7 +605,7 @@ public class Controller {
 	    }
 	
 		@RequestMapping("/trainerDetail")
-	    public String trainerDetail(Model model,@RequestParam("u_key")int u_key,TrainerProfile trainerprofile) {
+	    public String trainerDetail(Model model,@RequestParam("u_key") int u_key,TrainerProfile trainerprofile) {
 			trainerprofile = boardservice.trainerprofileDetail(u_key);
 			String u_name = boardservice.getU_name2(u_key);
 			
@@ -790,9 +790,16 @@ public class Controller {
 	
 		
 		@RequestMapping("/memberProfileinsert")
-	    public String memberProfileinsert( Model model,MemberProfile memberprofile) {
+	    public String memberProfileinsert( Model model,User user,MemberProfile memberprofile) {
 			boardservice.memberProfileinsert(memberprofile);
-			return "/member/memberProfile";
+			int m_id = boardservice.getm_id(memberprofile); 
+			memberprofile = boardservice.getmemberprofiledetail(String.valueOf(m_id));
+			int u_key=memberprofile.getU_key();
+			user =  userservice.getUserdetail(String.valueOf(u_key));
+			String phone =  user.getPhone();
+			model.addAttribute("phone",phone);
+			model.addAttribute("memberprofile",memberprofile);
+			return "/member/memberprofiledetail";
 	    }
 		
 		@RequestMapping("/userpasswordmodify")
@@ -863,14 +870,212 @@ public class Controller {
 	    }
 		
 		@RequestMapping("/memberprofiledetail")
-	    public String memberprofiledetail( Model model,MemberProfile memberprofile,@RequestParam("m_id") String m_id) {
-			System.out.println("111");
+	    public String memberprofiledetail(User user, Model model,MemberProfile memberprofile,@RequestParam("m_id") String m_id) {
+			
 			memberprofile = boardservice.getmemberprofiledetail(m_id);
-			System.out.println("111");
+			int u_key=memberprofile.getU_key();
+			user =  userservice.getUserdetail(String.valueOf(u_key));
+			String phone =  user.getPhone();
+			
+			model.addAttribute("memberprofile",memberprofile);
+			model.addAttribute("phone",phone);
+			
+			
+			
+			return "/member/memberprofiledetail";
+	    }
+		
+		@RequestMapping("/trainerprofilelist")
+	    public String trainerprofilelist( Model model,TrainerProfile trainerprofile) {
+			
+			List<TrainerProfile> list = boardservice.gettrainerprofileListALL();
+			
+			model.addAttribute("list",list);
+			
+			return "/member/trainerprofilelist";
+	    }
+		
+		
+		@RequestMapping("/memberDetail")
+	    public String memberDetail(User user, Model model,@RequestParam("u_key") int u_key,MemberProfile memberprofile) {
+			
+			int m_id = boardservice.getm_id2(u_key); 
+			
+			memberprofile = boardservice.getmemberprofiledetail(String.valueOf(m_id));
+			
+			user =  userservice.getUserdetail(String.valueOf(u_key));
+			String phone =  user.getPhone();
+			model.addAttribute("phone",phone);
 			model.addAttribute("memberprofile",memberprofile);
 			
 			return "/member/memberprofiledetail";
 	    }
+		
+		
+		@RequestMapping("/trainerprofilecheck")
+	    public String trainerprofilecheck( Model model,TrainerProfile trainerprofile,@RequestParam("u_key") int u_key) {
+			
+			boardservice.trainerprofilecheck(u_key);
+			
+			
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			String u_name = boardservice.getU_name2(u_key);
+			
+			String programsub = trainerprofile.getTf_programsub();
+			String[] programsub2 = programsub.split(",");
+			
+			
+			int tf_id = trainerprofile.getTf_id();
+			List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+			List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
+			List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
+			model.addAttribute("programsub",programsub2);
+		
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("u_name",u_name);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("filelist_2",filelist_2);
+			model.addAttribute("filelist_3",filelist_3);
+			
+			return "/member/trainerProfileDetail";
+	    }
+		
+		@RequestMapping("/trainerprofilecheckcancel")
+	    public String trainerprofilecheckcancel( Model model,TrainerProfile trainerprofile,@RequestParam("u_key") int u_key) {
+			
+			boardservice.trainerprofilecheckcancel(u_key);
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			String u_name = boardservice.getU_name2(u_key);
+			
+			String programsub = trainerprofile.getTf_programsub();
+			String[] programsub2 = programsub.split(",");
+			
+			
+			int tf_id = trainerprofile.getTf_id();
+			List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+			List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
+			List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
+			model.addAttribute("programsub",programsub2);
+		
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("u_name",u_name);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("filelist_2",filelist_2);
+			model.addAttribute("filelist_3",filelist_3);
+			
+			return "/member/trainerProfileDetail";
+	    }
+		
+		@RequestMapping("/profileconsultingcancel")
+	    public String profileconsultingcancel(User user, Model model,@RequestParam("member_u_key") int member_u_key,@RequestParam("tf_id") int tf_id, @RequestParam("trainer_u_key") int trainer_u_key, MemberProfile memberprofile,TrainerProfile trainerprofile) {
+			
+			
+			System.out.println("trainer_u_key: "+trainer_u_key);    //트레이너의 u_key
+			System.out.println("member_u_key: "+member_u_key);    //상담요청자의 u_key
+			System.out.println("tf_id:" +tf_id);   //트레이너프로필 tf_id
+			trainerprofile = boardservice.trainerprofileDetail(trainer_u_key);
+			
+			memberprofile = boardservice.getmemberprofiledetail2(member_u_key);
+			System.out.println("memberprofile.getM_consulting():"+memberprofile.getM_consulting());
+			
+			String tf_consulting = trainerprofile.getTf_consulting();
+			String m_consulting = memberprofile.getM_consulting();
+		
+			String delete_tf_consulting = tf_consulting.replace(Integer.toString(member_u_key)+"," ,"");
+			System.out.println("delete_tf_consulting: "+delete_tf_consulting);   
+			trainerprofile.setTf_consulting(delete_tf_consulting);
+			boardservice.updateTf_consulting(trainerprofile);   
+			
+			
+			String delete_m_consulting = m_consulting.replace(Integer.toString(tf_id)+"," ,"");
+			System.out.println("delete_m_consulting: "+delete_m_consulting);   
+			memberprofile.setM_consulting(delete_m_consulting);
+			boardservice.updateM_consulting(memberprofile);   
+			
+			
+			
+			//int m_id = boardservice.getm_id2(u_key); 
+			
+			//memberprofile = boardservice.getmemberprofiledetail(String.valueOf(m_id));
+			
+			//user =  userservice.getUserdetail(String.valueOf(u_key));
+			String phone =  user.getPhone();
+			model.addAttribute("phone",phone);
+			model.addAttribute("memberprofile",memberprofile);
+			
+			
+			List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+			List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
+			List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
+			
+			
+			model.addAttribute("trainerprofile",trainerprofile);
+			
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("filelist_2",filelist_2);
+			model.addAttribute("filelist_3",filelist_3);
+			
+			return "/member/trainerProfileDetail";
+	    }
+		
+		
+		@RequestMapping("/profileconsultingcheck")
+	    public String profileconsultingcheck(User user, Model model,@RequestParam("member_u_key") int member_u_key,@RequestParam("tf_id") int tf_id, @RequestParam("trainer_u_key") int trainer_u_key,MemberProfile memberprofile, TrainerProfile trainerprofile) {
+			
+			
+			System.out.println("member_u_key:"+member_u_key);
+			System.out.println("tf_id:"+tf_id);
+			System.out.println("trainer_u_key:"+trainer_u_key);
+			trainerprofile = boardservice.trainerprofileDetail(trainer_u_key);
+			String tf_consulting = trainerprofile.getTf_consulting();
+			System.out.println("tf_consulting:"+tf_consulting);
+			
+			trainerprofile.setTf_consulting(tf_consulting+member_u_key+",");
+			boardservice.updateTf_consulting2(trainerprofile);
+			memberprofile = boardservice.getmemberprofiledetail2(member_u_key);
+			
+			String m_consulting = memberprofile.getM_consulting();
+			memberprofile.setM_consulting(m_consulting+tf_id+",");
+			boardservice.updateM_consulting2(memberprofile);
+			
+			List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+			List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
+			List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
+			
+			model.addAttribute("trainerprofile",trainerprofile);
+		
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("filelist_2",filelist_2);
+			model.addAttribute("filelist_3",filelist_3);
+			return "/member/trainerProfileDetail";
+	    }
+		
+		
+		@RequestMapping("/memberconsulting")
+	    public String memberconsulting(User user, Model model,@RequestParam("u_key") int u_key,MemberProfile memberprofile,TrainerProfile trainerprofile) {
+			
+			memberprofile = boardservice.getmemberprofiledetail2(u_key);
+			List<TrainerProfile> list = boardservice.trainerprofileconsulting(u_key);
+			
+			model.addAttribute("list",list);
+			return "/member/memberconsultinglist";
+	    }
+		
+		@RequestMapping("/trainerconsultinglist")
+	    public String trainerconsultinglist(User user, Model model,@RequestParam("u_key") int u_key,MemberProfile memberprofile,TrainerProfile trainerprofile) {
+			
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			
+			
+			List<MemberProfile> list = boardservice.memberprofileconsulting(trainerprofile.getTf_id());
+			
+			model.addAttribute("list",list);
+			return "/member/trainerconsultinglist";
+	    }
+		
+		
+		
+		
 		
 		}
 }

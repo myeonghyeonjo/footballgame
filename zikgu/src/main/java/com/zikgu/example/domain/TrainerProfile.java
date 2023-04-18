@@ -45,6 +45,11 @@ public class TrainerProfile {
 	private int f_group;
 	private int filecount;
 	private String tf_name;
+	private String tf_check;
+	private String tf_postcode;
+	private String tf_gender;
+	private String tf_consulting;
+	
 	
 	public String getTf_lessonpotion() {
 		return tf_lessonpotion;
@@ -286,6 +291,30 @@ public class TrainerProfile {
 	}
 	public void setTf_name(String tf_name) {
 		this.tf_name = tf_name;
+	}
+	public String getTf_check() {
+		return tf_check;
+	}
+	public void setTf_check(String tf_check) {
+		this.tf_check = tf_check;
+	}
+	public String getTf_postcode() {
+		return tf_postcode;
+	}
+	public void setTf_postcode(String tf_postcode) {
+		this.tf_postcode = tf_postcode;
+	}
+	public String getTf_gender() {
+		return tf_gender;
+	}
+	public void setTf_gender(String tf_gender) {
+		this.tf_gender = tf_gender;
+	}
+	public String getTf_consulting() {
+		return tf_consulting;
+	}
+	public void setTf_consulting(String tf_consulting) {
+		this.tf_consulting = tf_consulting;
 	}
 	
 	

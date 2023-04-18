@@ -179,7 +179,18 @@
 									</div>
 								</div>
 							</div>
-					
+					<label for="tf_gender" class="form-label"
+							
+										style="font-size: 15px;">성별을 선택해주세요.</label><br>
+										<div style="display: flex;">
+										  <input type="checkbox" style="flex: 0.3;" name="tf_gender"
+										    class="btn-check" id="btn-check-outlined12" autocomplete="off" value="남성" checked>
+										  <label class="btn btn-outline-dark" for="btn-check-outlined12">남성</label><br>
+										  <input type="checkbox" style="flex: 0.3; " name="tf_gender"
+										    class="btn-check" id="btn-check-outlined13" value="여성"
+										    autocomplete="off" > 
+										  <label class="btn btn-outline-dark" for="btn-check-outlined13">여성</label><br>
+										</div>
 				
 				
 				
@@ -200,6 +211,8 @@
 
 						<div class="col-12">
 							<label for="email" style="font-size: 20px;" form-labelmt-4" ><strong>선생님소개</label>
+							
+							
 							<div class="input-group has-validation">
 								<textarea cols="50" rows="10" class="form-control" id="username" name="tf_intro"
 									placeholder="소개글을 입력해주세요"></textarea>
@@ -493,7 +506,7 @@
 							<div id="sectionbox" class="form-control" 
 								style="padding: 10px; background-color: white;">
 									<div style="display: flex;">
-										<input type="text" style= "flex: 0.5; margin:2px;" class="form-control"  name="c_postcode" id="sample4_postcode" placeholder="우편번호" readonly>
+										<input type="text" style= "flex: 0.5; margin:2px;" class="form-control"  name="tf_postcode" id="sample4_postcode" placeholder="우편번호" readonly>
 										<input type="button"  style= "flex: 0.5; margin:2px;" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"  class="form-control" ><br>
 									</div>
 										<input type="text" class="form-control" style="margin: 2px;" id="sample4_roadAddress" name="tf_loadaddress" placeholder="도로명주소" readonly>
@@ -777,6 +790,29 @@
     	console.log(filecount);
     	$(this).parent().parent().remove();
 });
+    
+    //체크박스 성별 1개만선택
+   const checkboxes = document.getElementsByName("tf_gender");
+
+for (let i = 0; i < checkboxes.length; i++) {
+  checkboxes[i].addEventListener("click", function() {
+    if (this.checked) {
+      for (let j = 0; j < checkboxes.length; j++) {
+        if (i !== j) {
+          checkboxes[j].checked = false;
+        }
+      }
+    } else if (!this.checked) {
+      // 현재 선택된 체크박스가 없으면 첫 번째 체크박스를 선택 상태로 만듦
+      checkboxes[0].checked = true;
+    }
+  });
+}
+
+
+
+
+
     	
 </script>
 </body>

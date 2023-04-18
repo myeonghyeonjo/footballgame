@@ -13,8 +13,62 @@ public class MemberProfile {
 	private String m_loadaddress;
 	private int u_key;
 	private String m_likegender;
+	private String m_day;
+	private String m_daymorning;
+	private String m_dayafter;
+	private String m_saterafter;
+	private String m_saterdaymorning;
+	private String m_saterday;
+	private String m_schedureintro;
+	private String m_sunday;
+	private String m_sundaymorning;
+	private String m_sundayafter;
+	private String m_saterdayafter;
+	private String m_consulting;
 	
 	
+	public String getM_day() {
+		return m_day;
+	}
+	public void setM_day(String m_day) {
+		this.m_day = m_day;
+	}
+	public String getM_daymorning() {
+		return m_daymorning;
+	}
+	public void setM_daymorning(String m_daymorning) {
+		this.m_daymorning = m_daymorning;
+	}
+	public String getM_dayafter() {
+		return m_dayafter;
+	}
+	public void setM_dayafter(String m_dayafter) {
+		this.m_dayafter = m_dayafter;
+	}
+	public String getM_saterafter() {
+		return m_saterafter;
+	}
+	public void setM_saterafter(String m_saterafter) {
+		this.m_saterafter = m_saterafter;
+	}
+	public String getM_saterdaymorning() {
+		return m_saterdaymorning;
+	}
+	public void setM_saterdaymorning(String m_saterdaymorning) {
+		this.m_saterdaymorning = m_saterdaymorning;
+	}
+	public String getM_saterday() {
+		return m_saterday;
+	}
+	public void setM_saterday(String m_saterday) {
+		this.m_saterday = m_saterday;
+	}
+	public String getM_schedureintro() {
+		return m_schedureintro;
+	}
+	public void setM_schedureintro(String m_schedureintro) {
+		this.m_schedureintro = m_schedureintro;
+	}
 	public int getM_id() {
 		return m_id;
 	}
@@ -86,6 +140,36 @@ public class MemberProfile {
 	}
 	public void setM_likegender(String m_likegender) {
 		this.m_likegender = m_likegender;
+	}
+	public String getM_sunday() {
+		return m_sunday;
+	}
+	public void setM_sunday(String m_sunday) {
+		this.m_sunday = m_sunday;
+	}
+	public String getM_sundaymorning() {
+		return m_sundaymorning;
+	}
+	public void setM_sundaymorning(String m_sundaymorning) {
+		this.m_sundaymorning = m_sundaymorning;
+	}
+	public String getM_sundayafter() {
+		return m_sundayafter;
+	}
+	public void setM_sundayafter(String m_sundayafter) {
+		this.m_sundayafter = m_sundayafter;
+	}
+	public String getM_saterdayafter() {
+		return m_saterdayafter;
+	}
+	public void setM_saterdayafter(String m_saterdayafter) {
+		this.m_saterdayafter = m_saterdayafter;
+	}
+	public String getM_consulting() {
+		return m_consulting;
+	}
+	public void setM_consulting(String m_consulting) {
+		this.m_consulting = m_consulting;
 	}
 
 

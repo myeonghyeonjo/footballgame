@@ -141,6 +141,10 @@ public class User implements UserDetails {
 	public void setU_trainercheck(int u_trainercheck) {
 		this.u_trainercheck = u_trainercheck;
 	}
+
+	
+
+
 	
 
 

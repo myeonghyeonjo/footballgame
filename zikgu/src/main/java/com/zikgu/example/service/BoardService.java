@@ -86,6 +86,32 @@ public interface BoardService {
 
 	public MemberProfile getmemberprofiledetail(String m_id);
 
+	public List<TrainerProfile> gettrainerprofileListALL();
+
+	public void trainerprofilecheck(int u_key);
+
+	public void trainerprofilecheckcancel(int u_key);
+
+	public String getphone(int u_key);
+
+	public int getm_id(MemberProfile memberprofile);
+
+	public int getm_id2(int u_key);
+
+	public void updateTf_consulting(TrainerProfile trainerprofile);
+
+	public MemberProfile getmemberprofiledetail2(int member_u_key);
+
+	public void updateM_consulting(MemberProfile memberprofile);
+
+	public List<TrainerProfile> trainerprofileconsulting(int u_key);
+
+	public void updateTf_consulting2(TrainerProfile trainerprofile);
+
+	public void updateM_consulting2(MemberProfile memberprofile);
+
+	public List<MemberProfile> memberprofileconsulting(int tf_id);
+
 	
 
 	
