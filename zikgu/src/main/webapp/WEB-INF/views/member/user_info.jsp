@@ -5,16 +5,19 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-    
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 
 <link rel="canonical"
 	href="https://getbootstrap.kr/docs/5.2/examples/checkout/">
@@ -30,7 +33,8 @@
 	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 	crossorigin="anonymous"></script>
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
@@ -49,40 +53,44 @@
 	color="#712cf9">
 <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
 <meta name="theme-color" content="#712cf9">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 </head>
 <style>
 #rounded-rectangle1, #rounded-rectangle2 {
-  border-radius: 20px; /* 모서리 둥글기 값 지정 */
-  width: 470px; /* 너비 지정 */
-  height: 210px; /* 높이 지정 */
-  background-color: #f0f0f0; /* 배경색 지정 */
-    width: 47%;
-  
+	border-radius: 20px; /* 모서리 둥글기 값 지정 */
+	width: 470px; /* 너비 지정 */
+	height: 210px; /* 높이 지정 */
+	background-color: #f0f0f0; /* 배경색 지정 */
+	width: 47%;
 }
-.aa { text-decoration:none }
 
-.aa:hover{ text-decoration: underline }
+.aa {
+	text-decoration: none
+}
+
+.aa:hover {
+	text-decoration: underline
+}
 
 .wrapper {
- display: flex;
-  justify-content: space-between;;
-  }
-  button {
-  background-color: transparent;
-  border: none;
-  color: #4169e1;
-  cursor: pointer;
-  padding: 0;
-  font-size: inherit;
-  text-decoration: none; /* 밑줄 제거 */
+	display: flex;
+	justify-content: space-between;;
+}
+
+button {
+	background-color: transparent;
+	border: none;
+	color: #4169e1;
+	cursor: pointer;
+	padding: 0;
+	font-size: inherit;
+	text-decoration: none; /* 밑줄 제거 */
 }
 
 button:hover {
-  text-decoration: underline; /* 마우스 올리면 밑줄 추가 */
+	text-decoration: underline; /* 마우스 올리면 밑줄 추가 */
 }
-
-
 
 .image-container {
 	width: 200px; /* 원하는 가로 크기로 지정 */
@@ -173,338 +181,468 @@ style>.image-container2 {
 	-webkit-overflow-scrolling: touch;
 }
 }
-
-
-
-
 </style>
 <body>
-  <jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>	
-       <sec:authentication property="principal" var="principal"/>
-     
-       <body class="bg-light">
-		<div style="background-color: light;">
-	<div class="container"  >
-		
-         <h5 style="color:black; margin-top:10px;" ><Strong>계정</Strong></h5> 
-       
-     
+	<jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>
+	<sec:authentication property="principal" var="principal" />
+<body class="bg-light">
+	<div style="background-color: light;">
+		<div class="container">
 
-	<hr>
-	<c:if test="${(principal.u_trainercheck=='1')}">
-	<h2 style="color:black; margin-top:50px; margin-bottom:20px;"><Strong>${principal.uName } 트레이너님, 안녕하세요.</Strong></h2>
-	</c:if>
-	<c:if test="${(principal.u_trainercheck=='0')}">
-			 <sec:authorize access="hasRole('ROLE_ADMIN')">
-				<h2 style="color:black; margin-top:50px; margin-bottom:20px;"><Strong>관리자님, 안녕하세요.</Strong></h2>
-			 </sec:authorize>
-			 	 <sec:authorize access="isAnonymous()">
-	<h2 style="color:black; margin-top:50px; margin-bottom:20px;"><Strong>${principal.uName } 회원님, 안녕하세요.</Strong></h2>
-	</sec:authorize>
-	</c:if>
-	</div>
+			<h5 style="color: black; margin-top: 10px;">
+				<Strong>계정</Strong>
+			</h5>
+
+
+
+			<hr>
+			<c:if test="${(principal.u_trainercheck=='1')}">
+				<h2 style="color: black; margin-top: 50px; margin-bottom: 20px;">
+					<Strong>${principal.uName } 트레이너님, 안녕하세요.</Strong>
+				</h2>
+			</c:if>
+			<c:if test="${(principal.u_trainercheck=='0')}">
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<h2 style="color: black; margin-top: 50px; margin-bottom: 20px;">
+						<Strong>관리자님, 안녕하세요.</Strong>
+					</h2>
+				</sec:authorize>
+				<sec:authorize access="isAnonymous()">
+					<h2 style="color: black; margin-top: 50px; margin-bottom: 20px;">
+						<Strong>${principal.uName } 회원님, 안녕하세요.</Strong>
+					</h2>
+				</sec:authorize>
+			</c:if>
+		</div>
 	</div>
 	<div style="background-color: white;">
 		<div class="container">
-	
-	
-       
-        
-        
-        
-        
-<c:if test="${(principal.u_trainercheck=='1')}">
-		<div class="container"  >
-			<div class="wrapper" >
-				<div id="rounded-rectangle1" class="bg-light"  style="margin-top:30px;">
-	 				<h3 style="color:black; padding:30px;"><Strong>트레이너 프로필 관리</Strong></h3>
-					<p style="margin-left: 30px; margin-top:-10px; margin-right:50px">프로필을 등록하고, 조회하거나 수정하세요.</p>
-	 			    <a href="/trainerProfile?u_key=${u_key}"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-10px; margin-right:50px">프로필 등록 ></a>
-	 			    <a href="/trainerDetail?u_key=${u_key}"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-10px; margin-right:50px">프로필 조회 ></a>
-	 			 </div>
-	 			   
-	 			 <div id="rounded-rectangle2" class="bg-light" style="margin-top:30px;">
-	 				<h3 style="color:black; padding:30px;"><Strong>센터 관리</Strong></h3>
-					<p style="margin-left: 30px; margin-top:-10px; margin-right:50px">근무중인 센터가 없으신가요? 센터 등록을 요청하세요</p>
-	 			    <a href="/centerinsert?u_key=${u_key}" class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-20px; margin-right:50px">센터 등록 요청 ></a>  
-	 			    <a href="/centerconfirmlist?u_key=${u_key}" class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-20px; margin-right:50px">요청 조회 ></a>  
+
+
+
+
+
+
+
+			<c:if test="${(principal.u_trainercheck=='1')}">
+				<div class="container">
+					<div class="wrapper">
+						<div id="rounded-rectangle1" class="bg-light"
+							style="margin-top: 30px;">
+							<h3 style="color: black; padding: 30px;">
+								<Strong>트레이너 프로필 관리</Strong>
+							</h3>
+							<p
+								style="margin-left: 30px; margin-top: -10px; margin-right: 50px">프로필을
+								등록하고, 조회하거나 수정하세요.</p>
+							<a href="/trainerProfile?u_key=${u_key}" class="aa"
+								style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">프로필
+								등록 ></a> 
+								<a href="/trainerProfileDetail?u_key=${u_key}" class="aa"
+								style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">프로필
+								조회 ></a>
+						</div>
+
+						<div id="rounded-rectangle2" class="bg-light"
+							style="margin-top: 30px;">
+							<h3 style="color: black; padding: 30px;">
+								<Strong>센터 관리</Strong>
+							</h3>
+							<p
+								style="margin-left: 30px; margin-top: -10px; margin-right: 50px">근무중인
+								센터가 없으신가요? 센터 등록을 요청하세요</p>
+							<a href="/centerinsert?u_key=${u_key}" class="aa"
+								style="color: #4169e1; margin-left: 30px; margin-top: -20px; margin-right: 50px">센터
+								등록 요청 ></a> <a href="/centerconfirmlist?u_key=${u_key}" class="aa"
+								style="color: #4169e1; margin-left: 30px; margin-top: -20px; margin-right: 50px">요청
+								조회 ></a>
+						</div>
+					</div>
+
+					<div class="wrapper">
+						<div id="rounded-rectangle1" class="bg-light"
+							style="margin-top: 30px;">
+							<h3 style="color: black; padding: 30px;">
+								<Strong>상담 요청 관리</Strong>
+							</h3>
+							<p
+								style="margin-left: 30px; margin-top: -10px; margin-right: 50px">요청
+								현황을 조회하고, 관리하세요.</p>
+							<a href="/trainerconsultinglist?u_key=${u_key}" class="aa"
+								style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">상담요청
+								조회 ></a>
+						</div>
+
+						<div id="rounded-rectangle2" class="bg-light"
+							style="margin-top: 30px;">
+							<h3 style="color: black; padding: 30px;">
+								<Strong>?????</Strong>
+							</h3>
+							<p
+								style="margin-left: 30px; margin-top: -10px; margin-right: 50px">근무중인
+								센터가 없으신가요? 센터 등록을 요청하세요</p>
+							<a href="/centerinsert?u_key=${u_key}" class="aa"
+								style="color: #4169e1; margin-left: 30px; margin-top: -20px; margin-right: 50px">센터
+								등록 요청 ></a> <a href="/centerconfirmlist?u_key=${u_key}" class="aa"
+								style="color: #4169e1; margin-left: 30px; margin-top: -20px; margin-right: 50px">요청
+								조회 ></a>
+						</div>
+					</div>
+
+
+				</div>
+			</c:if>
+
+
+
+
+
+
+
+
+			<c:if test="${(principal.u_trainercheck=='0')}">
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<div class="container">
+						<div class="wrapper">
+							<div id="rounded-rectangle1" class="bg-light"
+								style="margin-top: 30px;">
+								<h3 style="color: black; padding: 30px;">
+									<Strong>회원 프로필 관리</Strong>
+								</h3>
+								<p
+									style="margin-left: 30px; margin-top: -10px; margin-right: 50px; margin-bottom: 30px;">프로필을
+									조회하거나 수정하세요.</p>
+
+								<a href="/memberprofilelist" class="aa"
+									style="color: #4169e1; margin-left: 30px; margin-top: 190px; margin-right: 50px">프로필
+									조회 ></a>
+							</div>
+
+							<div id="rounded-rectangle1" class="bg-light"
+								style="margin-top: 30px;">
+								<h3 style="color: black; padding: 30px;">
+									<Strong>트레이너 프로필 관리</Strong>
+								</h3>
+								<p
+									style="margin-left: 30px; margin-top: -10px; margin-right: 50px; margin-bottom: 30px;">프로필을
+									조회하거나 수정하세요.</p>
+
+								<a href="/trainerprofilelist" class="aa"
+									style="color: #4169e1; margin-left: 30px; margin-top: 190px; margin-right: 50px">프로필
+									조회 ></a>
+							</div>
+						</div>
+
+						<div class="wrapper" style="margin-top: 30px;">
+							<div id="rounded-rectangle1" class="bg-light">
+								<h3 style="color: black; padding: 30px;">
+									<Strong>센터 관리</Strong>
+								</h3>
+								<p
+									style="margin-left: 30px; margin-top: -10px; margin-right: 50px; margin-bottom: 30px;">센터를
+									조회하거나 수정하세요.</p>
+
+								<a href="/centerlist" class="aa"
+									style="color: #4169e1; margin-left: 30px; margin-top: 190px; margin-right: 50px">센터
+									조회 ></a>
+							</div>
+
+							<div id="rounded-rectangle1" class="bg-light">
+								<h3 style="color: black; padding: 30px;">
+									<Strong>???관리</Strong>
+								</h3>
+								<p
+									style="margin-left: 30px; margin-top: -10px; margin-right: 50px; margin-bottom: 30px;">프로필을
+									조회하거나 수정하세요.</p>
+
+								<a href="/trainerprofilelist" class="aa"
+									style="color: #4169e1; margin-left: 30px; margin-top: 190px; margin-right: 50px">프로필
+									조회 ></a>
+							</div>
+						</div>
+					</div>
+
+
+
+				</sec:authorize>
+				<c:if test="${(principal.u_trainercheck=='0')}">
+					<sec:authorize access="hasRole('ROLE_USER')">
+						<div class="container">
+							<div class="wrapper">
+								<div id="rounded-rectangle1" class="bg-light"
+									style="margin-top: 30px;">
+									<h3 style="color: black; padding: 30px;">
+										<Strong>회원 프로필</Strong>
+									</h3>
+									<p
+										style="margin-left: 30px; margin-top: -10px; margin-right: 50px">프로필을
+										등록하고, 조회하거나 수정하세요.</p>
+
+									<a href="/memberProfile?u_key=${u_key}" class="aa"
+										style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">프로필
+										등록 ></a> <a
+										href="/memberDetail?memberprofile_u_key=${u_key}&trainerprofile_u_key=0"
+										class="aa"
+										style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">프로필
+										조회 ></a>
+								</div>
+
+								<div id="rounded-rectangle1" class="bg-light"
+									style="margin-top: 30px;">
+									<h3 style="color: black; padding: 30px;">
+										<Strong>상담 관리</Strong>
+									</h3>
+									<p
+										style="margin-left: 30px; margin-top: -10px; margin-right: 50px">신청한
+										상담을 확인하고, 수정하세요.</p>
+
+									<a href="/memberconsulting?u_key=${u_key}" class="aa"
+										style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">상담
+										조회 ></a>
+								</div>
+							</div>
+						</div>
+					</sec:authorize>
+				</c:if>
+				<main></main>
+			</c:if>
+
+			<div style="background-color: light;">
+				<div class="container">
+
+					<h5 style="color: black; margin-top: 50px;">
+						<Strong>계정설정</Strong>
+					</h5>
+
+
+
+					<hr>
+					<p>
+						<Strong>ID </Strong>${user.username }</p>
+
+
+
+
+					<p>
+						<Strong>비밀번호 </Strong>
+						<button data-bs-toggle="modal" data-bs-target="#exampleModal">
+							편집</button>
+					</p>
+
+					<p>
+						<Strong>이름 </Strong>${user.uName }
+						<button data-bs-toggle="modal" data-bs-target="#exampleModal2">
+							편집</button>
+					</p>
+					<p>
+						<Strong>전화번호 </Strong>${user.phone}</p>
+
+					<p>
+						<Strong></Strong>
+						<button data-bs-toggle="modal" data-bs-target="#exampleModal3">
+							회원탈퇴</button>
+					</p>
 				</div>
 			</div>
-			
-			<div class="wrapper" >
-				<div id="rounded-rectangle1" class="bg-light"  style="margin-top:30px;">
-	 				<h3 style="color:black; padding:30px;"><Strong>상담 요청 관리</Strong></h3>
-					<p style="margin-left: 30px; margin-top:-10px; margin-right:50px">요청 현황을 조회하고, 관리하세요.</p>
-	 			    <a href="/trainerconsultinglist?u_key=${u_key}"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-10px; margin-right:50px">상담요청 조회 ></a>
-	 			 </div>
-	 			   
-	 			 <div id="rounded-rectangle2" class="bg-light" style="margin-top:30px;">
-	 				<h3 style="color:black; padding:30px;"><Strong>?????</Strong></h3>
-					<p style="margin-left: 30px; margin-top:-10px; margin-right:50px">근무중인 센터가 없으신가요? 센터 등록을 요청하세요</p>
-	 			    <a href="/centerinsert?u_key=${u_key}" class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-20px; margin-right:50px">센터 등록 요청 ></a>  
-	 			    <a href="/centerconfirmlist?u_key=${u_key}" class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-20px; margin-right:50px">요청 조회 ></a>  
+
+
+
+
+
+
+			<!-- Button trigger modal -->
+
+
+
+
+
+
+
+
+			<!-- 비밀번호 편집 Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="exampleModalLabel"
+								style="color: black; margin-left: 130px; padding: 5px">
+								<Strong>비밀번호를 수정하세요.</Strong>
+							</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="form-floating">
+								<input id="password1" type="password" class="form-control"
+									name="sm_pw" placeholder="동일하게 입력해주세요." required maxlength="20"
+									autocomplete="off" /> <label for="floatingInput">현재비밀번호</label>
+								<span class="point">※ 비밀번호는 총 16자 까지 입력가능</span>
+							</div>
+							<span class="point successOldPwChk"></span> <input type="hidden"
+								id="oldpwDoubleChk" />
+							<div class="form-floating">
+								<input id="newpassword1" type="password" class="form-control"
+									name="sm_pw" placeholder="동일하게 입력해주세요." required maxlength="20"
+									autocomplete="off" /> <label for="floatingInput">변경비밀번호</label>
+							</div>
+
+							<div class="form-floating">
+
+								<input id="newpassword2" type="password" class="form-control"
+									name="sm_pw_chk" placeholder="동일하게 입력해주세요." required
+									maxlength="20" autocomplete="off" /> <label for="floatingInput">변경비밀번호확인</label>
+								<span class="point successPwChk"></span> <input type="hidden"
+									id="pwDoubleChk" />
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-dark"
+								" data-bs-dismiss="modal">취소</button>
+							<button type="button" id="clickConfirm"
+								class="btn btn-outline-primary"
+								onclick="clickConfirm(passwordInfo)">저장</button>
+						</div>
+					</div>
 				</div>
 			</div>
-			
-			
-		</div>
-</c:if>        
-        
-        
-        
-        
-        
-        
-        
-        
-<c:if test="${(principal.u_trainercheck=='0')}">
- <sec:authorize access="hasRole('ROLE_ADMIN')">
-	 <div class="container"  >
-				<div class="wrapper">
-					<div id="rounded-rectangle1" class="bg-light" style="margin-top:30px;" >
-		 				<h3 style="color:black; padding:30px;"><Strong>회원 프로필 관리</Strong></h3>
-						<p style="margin-left: 30px; margin-top:-10px; margin-right:50px; margin-bottom:30px;">프로필을 조회하거나 수정하세요.</p>
-		 			   
-		 			    <a href="/memberprofilelist"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:190px; margin-right:50px">프로필 조회 ></a>
-		 			 </div>
-		 			 
-		 			 <div id="rounded-rectangle1" class="bg-light" style="margin-top:30px;">
-		 				<h3 style="color:black; padding:30px;"><Strong>트레이너 프로필 관리</Strong></h3>
-						<p style="margin-left: 30px; margin-top:-10px; margin-right:50px; margin-bottom:30px;">프로필을 조회하거나 수정하세요.</p>
-		 			   
-		 			    <a href="/trainerprofilelist"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:190px; margin-right:50px">프로필 조회 ></a>
-		 			 </div>
-				</div>
-				
-				<div class="wrapper" style="margin-top:30px;">
-					<div id="rounded-rectangle1" class="bg-light" >
-		 				<h3 style="color:black; padding:30px;"><Strong>센터 관리</Strong></h3>
-						<p style="margin-left: 30px; margin-top:-10px; margin-right:50px; margin-bottom:30px;">센터를 조회하거나 수정하세요.</p>
-		 			   
-		 			    <a href="/centerlist"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:190px; margin-right:50px">센터 조회 ></a>
-		 			 </div>
-		 			 
-		 			 <div id="rounded-rectangle1" class="bg-light" >
-		 				<h3 style="color:black; padding:30px;"><Strong>???관리</Strong></h3>
-						<p style="margin-left: 30px; margin-top:-10px; margin-right:50px; margin-bottom:30px;">프로필을 조회하거나 수정하세요.</p>
-		 			   
-		 			    <a href="/trainerprofilelist"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:190px; margin-right:50px">프로필 조회 ></a>
-		 			 </div>
+			<!-- 이름편집 Modal -->
+			<div class="modal fade" id="exampleModal2" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="exampleModalLabel"
+								style="color: black; margin-left: 135px; padding: 5px;">
+								<Strong>이름을 수정하세요.</Strong>
+							</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="form-floating">
+								<input id="username" type="text" class="form-control"
+									placeholder="동일하게 입력해주세요." value="${user.uName }" required
+									maxlength="20" autocomplete="off" /> <label for="floatingInput">이름</label>
+							</div>
+
+
+
+
+
+							<div class="modal-footer">
+								<button type="button" class="btn btn-outline-dark"
+									data-bs-dismiss="modal">취소</button>
+								<button type="button" class="btn btn-outline-primary"
+									onclick="clickUsernameModify(usernameInfo)">저장</button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-			
-			
-	
- </sec:authorize>
- <c:if test="${(principal.u_trainercheck=='0')}">
- <sec:authorize access="hasRole('ROLE_USER')">
-	<div class="container"  >
-			<div class="wrapper">
-				<div id="rounded-rectangle1" class="bg-light" style="margin-top:30px;">
-	 				<h3 style="color:black; padding:30px; "><Strong>회원 프로필</Strong></h3>
-					<p style="margin-left: 30px; margin-top:-10px; margin-right:50px">프로필을 등록하고, 조회하거나 수정하세요.</p>
-	 			    
-	 			     <a href="/memberProfile?u_key=${u_key}"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-10px; margin-right:50px">프로필 등록 ></a>
-	 			    <a href="/memberDetail?u_key=${u_key}"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-10px; margin-right:50px">프로필 조회 ></a>
-	 			 </div>
-	 			 
-	 			 <div id="rounded-rectangle1" class="bg-light" style="margin-top:30px;">
-	 				<h3 style="color:black; padding:30px; "><Strong>상담 관리</Strong></h3>
-					<p style="margin-left: 30px; margin-top:-10px; margin-right:50px">신청한 상담을 확인하고, 수정하세요.</p>
-	 			    
-	 			     <a href="/memberconsulting?u_key=${u_key}"  class="aa" style="color:#4169e1; margin-left: 30px; margin-top:-10px; margin-right:50px">상담 조회 ></a>
-	 			 </div>
-			</div>
-		</div>
-	</sec:authorize>
-	</c:if>
-		<main>
-		</main>
-		</c:if>
-		
-<div style="background-color: light;">
-	<div class="container"  >
-		
-         <h5 style="color:black; margin-top:50px;" ><Strong>계정설정</Strong></h5> 
-       
-     
 
-	<hr>
-	<p><Strong>ID </Strong>${user.username }</p>  
-	
-		
-		
-		
-	<p><Strong>비밀번호 </Strong><button data-bs-toggle="modal" data-bs-target="#exampleModal">
-  			편집
-		</button></p>
-		
-	<p><Strong>이름 </Strong>${user.uName } <button data-bs-toggle="modal" data-bs-target="#exampleModal2">
-  			편집
-		</button></p>
-	<p><Strong>전화번호 </Strong>${user.phone}</p>
-	
-	<p><Strong></Strong><button data-bs-toggle="modal" data-bs-target="#exampleModal3">
-  			회원탈퇴
-		</button></p>  
-	</div>
-	</div>
-	
-	
-	
-	
-	
-	
-<!-- Button trigger modal -->
+			<!-- 회원탈퇴 Modal -->
+			<div class="modal fade" id="exampleModal3" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="exampleModalLabel"
+								style="color: black; margin-left: 110px; padding: 5px">
+								<Strong>회원탈퇴를 하시겠습니까?</Strong>
+							</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p>
+								<Strong>회원탈퇴를 하시려면 비밀번호 입력 후 약관에 동의하세요.</Strong>
+							</p>
+							<div class="form-floating">
+								<input id="Withdrawalpassword1" type="password"
+									class="form-control" name="sm_pw" placeholder="동일하게 입력해주세요."
+									required maxlength="20" autocomplete="off" /> <label
+									for="floatingInput">비밀번호</label>
+							</div>
+							<span class="point">※ 비밀번호는 총 16자 까지 입력가능</span>
+							<div class="form-floating">
 
-
-
-		
-		
-	
-
-
-<!-- 비밀번호 편집 Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black; margin-left:130px; padding:5px"><Strong>비밀번호를 수정하세요.</Strong></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-       <div class="form-floating">
-	   		  <input id="password1" type="password"  class="form-control" name="sm_pw" placeholder="동일하게 입력해주세요." required maxlength="20" autocomplete="off"/>
-		 		<label for="floatingInput">현재비밀번호</label>
-		 		 <span class="point">※ 비밀번호는 총 16자 까지 입력가능</span>
-		 	</div>
-		 	<span class="point successOldPwChk"></span>
-              	<input type="hidden" id="oldpwDoubleChk"/>
-	   		 <div class="form-floating">
-              <input id="newpassword1" type="password"  class="form-control" name="sm_pw" placeholder="동일하게 입력해주세요." required maxlength="20" autocomplete="off"/>
-		 <label for="floatingInput">변경비밀번호</label>
-              </div>
-             
-                 <div class="form-floating">
-             
-             <input id="newpassword2" type="password" class="form-control"  name="sm_pw_chk" placeholder="동일하게 입력해주세요." required maxlength="20" autocomplete="off"/>
-			<label for="floatingInput">변경비밀번호확인</label>
-		<span class="point successPwChk"></span>
-		<input type="hidden" id="pwDoubleChk"/>
-              </div>
-	   		   		 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark"" data-bs-dismiss="modal">취소</button>
-        <button type="button" id="clickConfirm" class="btn btn-outline-primary" onclick="clickConfirm(passwordInfo)">저장</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- 이름편집 Modal -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black; margin-left:135px; padding:5px;"><Strong>이름을 수정하세요.</Strong></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-       <div class="form-floating">
-	   		  <input id="username" type="text"  class="form-control"  placeholder="동일하게 입력해주세요."  value="${user.uName }" required maxlength="20" autocomplete="off"/>
-		 		<label for="floatingInput">이름</label>
-		 	</div>
-		 	
-		 	
-		 	
-		 	
-		 	
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-outline-primary" onclick="clickUsernameModify(usernameInfo)">저장</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- 회원탈퇴 Modal -->
-<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black; margin-left:110px; padding:5px"><Strong>회원탈퇴를 하시겠습니까?</Strong></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <p><Strong>회원탈퇴를 하시려면 비밀번호 입력 후 약관에 동의하세요.</Strong></p>
-	   		 <div class="form-floating">
-              <input id="Withdrawalpassword1" type="password"  class="form-control" name="sm_pw" placeholder="동일하게 입력해주세요." required maxlength="20" autocomplete="off"/>
-		 <label for="floatingInput">비밀번호</label>
-              </div>
-              <span class="point">※ 비밀번호는 총 16자 까지 입력가능</span>
-                 <div class="form-floating">
-             
-             <input id="Withdrawalpassword2" type="password" class="form-control"  name="sm_pw_chk" placeholder="동일하게 입력해주세요." required maxlength="20" autocomplete="off"/>
-			<label for="floatingInput">비밀번호확인</label>
-		<span class="point successPwChk"></span>
-		<input type="hidden" id="pwDoubleChk"/>
-              </div>
-	   	<fieldset class="fieldarea f2">
-	<legend><span>이용</span>약관</legend>
-	<p class="agreeText">
-		<label for="agreement1">아래 사항에 동의 합니다.</label>
-		<input id="agreement1" type="checkbox" name="agreement1"/>
-		<textarea id="text1" readonly>
+								<input id="Withdrawalpassword2" type="password"
+									class="form-control" name="sm_pw_chk"
+									placeholder="동일하게 입력해주세요." required maxlength="20"
+									autocomplete="off" /> <label for="floatingInput">비밀번호확인</label>
+								<span class="point successPwChk"></span> <input type="hidden"
+									id="pwDoubleChk" />
+							</div>
+							<fieldset class="fieldarea f2">
+								<legend>
+									<span>이용</span>약관
+								</legend>
+								<p class="agreeText">
+									<label for="agreement1">아래 사항에 동의 합니다.</label> <input
+										id="agreement1" type="checkbox" name="agreement1" />
+									<textarea id="text1" readonly>
 			이용약관
 		</textarea>
-	</p>
-</fieldset>
-<fieldset class="fieldarea f3">
-	<legend><span>개인정보</span>취급방침</legend>
-	<p class="agreeText">
-		<label for="agreement2">아래 사항에 동의 합니다.</label>
-		<input id="agreement2" type="checkbox" name="agreement2"/>
-		<textarea id="text2" readonly>
+								</p>
+							</fieldset>
+							<fieldset class="fieldarea f3">
+								<legend>
+									<span>개인정보</span>취급방침
+								</legend>
+								<p class="agreeText">
+									<label for="agreement2">아래 사항에 동의 합니다.</label> <input
+										id="agreement2" type="checkbox" name="agreement2" />
+									<textarea id="text2" readonly>
 			개인정보 방침 및 안내
 		</textarea>
-	</p>
-</fieldset>	   		 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark"" data-bs-dismiss="modal">취소</button>
-        <button type="button" id="clickConfirm" class="btn btn-outline-primary" onclick="clickWithdrawal(WithdrawalInfo)">회원탈퇴</button>
-      </div>
-    </div>
-  </div>
-</div>
+								</p>
+							</fieldset>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-outline-dark"
+								" data-bs-dismiss="modal">취소</button>
+							<button type="button" id="clickConfirm"
+								class="btn btn-outline-primary"
+								onclick="clickWithdrawal(WithdrawalInfo)">회원탈퇴</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
 
-<!-- 비밀번호 변경하기 누르면 넘어갈 데이타 -->
-<form name="passwordInfo">
-	<input type="hidden" name="u_key" value="${u_key}">
-	<input type="hidden"  class="form-control"  name="newpassword1_1" placeholder="id" id="newpassword1_1"> 
-	 <input type="hidden"  class="form-control"  name="newpassword2_1" placeholder="id" id="newpassword2_1"> 
-	 <input type="hidden"  class="form-control"  name="password1_1" placeholder="id" id="password1_1">   
-</form>
+			<!-- 비밀번호 변경하기 누르면 넘어갈 데이타 -->
+			<form name="passwordInfo">
+				<input type="hidden" name="u_key" value="${u_key}"> <input
+					type="hidden" class="form-control" name="newpassword1_1"
+					placeholder="id" id="newpassword1_1"> <input type="hidden"
+					class="form-control" name="newpassword2_1" placeholder="id"
+					id="newpassword2_1"> <input type="hidden"
+					class="form-control" name="password1_1" placeholder="id"
+					id="password1_1">
+			</form>
 
-<!-- 비밀번호 변경하기 누르면 넘어갈 데이타 -->
-<form name="usernameInfo">
-	<input type="hidden" name="u_key" value="${u_key}">
-	<input type="hidden"  class="form-control"  name="username_1" placeholder="id" id="username_1"> 
-	 
-</form>
+			<!-- 비밀번호 변경하기 누르면 넘어갈 데이타 -->
+			<form name="usernameInfo">
+				<input type="hidden" name="u_key" value="${u_key}"> <input
+					type="hidden" class="form-control" name="username_1"
+					placeholder="id" id="username_1">
 
-<!-- 회원탈퇴하기 누르면 넘어갈 데이타 -->
-<form name="WithdrawalInfo">
-	<input type="hidden" name="u_key" value="${u_key}">
-	<input type="hidden"  class="form-control"  name="Withdrawalpassword1_1" placeholder="id" id="Withdrawalpassword1_1"> 
-    <input type="hidden"  class="form-control"  name="Withdrawalpassword2_1" placeholder="id" id="Withdrawalpassword2_1"> 
-</form>
+			</form>
+
+			<!-- 회원탈퇴하기 누르면 넘어갈 데이타 -->
+			<form name="WithdrawalInfo">
+				<input type="hidden" name="u_key" value="${u_key}"> <input
+					type="hidden" class="form-control" name="Withdrawalpassword1_1"
+					placeholder="id" id="Withdrawalpassword1_1"> <input
+					type="hidden" class="form-control" name="Withdrawalpassword2_1"
+					placeholder="id" id="Withdrawalpassword2_1">
+			</form>
 
 
 
-<script>
+			<script>
   // input1 값이 변경될 때마다 input2의 값을 변경하는 JavaScript 
   // 입력값이 변할때마다 넘겨줄 데이타 업데이트
   const input1 = document.getElementById("newpassword1");
@@ -524,7 +662,7 @@ style>.image-container2 {
 </script>
 
 
-<script>
+			<script>
   // input1 값이 변경될 때마다 input2의 값을 변경하는 JavaScript 
   // 입력값이 변할때마다 넘겨줄 데이타 업데이트
   const input7 = document.getElementById("username");
@@ -537,7 +675,7 @@ style>.image-container2 {
   
 </script>
 
-<script>
+			<script>
   // input1 값이 변경될 때마다 input2의 값을 변경하는 JavaScript
   const input5 = document.getElementById("password1");
   const input6 = document.getElementById("password1_1");
@@ -548,7 +686,7 @@ style>.image-container2 {
   });
 </script>
 
-<script>
+			<script>
   const input9 = document.getElementById("Withdrawalpassword1");
   const input10 = document.getElementById("Withdrawalpassword1_1");
   
@@ -713,40 +851,40 @@ style>.image-container2 {
 	}
 </script>
 
-<!-- 승인취소하기 누르면 발생 -->
-<script>
+			<!-- 승인취소하기 누르면 발생 -->
+			<script>
 	function clickUsernameModify(formName) {
 		formName.action = "/usernameModify";
 		formName.method = "post";
 		formName.submit();
 	}
-</script>	
-	
-	
-
-	
-	
-	
-		<footer class="my-5 pt-5 text-muted text-center text-small">
-			<p class="mb-1">&copy; 2017–2023 Company Name</p>
-			<ul class="list-inline">
-				<li class="list-inline-item"><a href="#">Privacy</a></li>
-				<li class="list-inline-item"><a href="#">Terms</a></li>
-				<li class="list-inline-item"><a href="#">Support</a></li>
-			</ul>
-		</footer>
-	
+</script>
 
 
 
 
-	<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-		crossorigin="anonymous"></script>
 
-	<script src="form-validation.js"></script>
 
-	<script>
+			<footer class="my-5 pt-5 text-muted text-center text-small">
+				<p class="mb-1">&copy; 2017–2023 Company Name</p>
+				<ul class="list-inline">
+					<li class="list-inline-item"><a href="#">Privacy</a></li>
+					<li class="list-inline-item"><a href="#">Terms</a></li>
+					<li class="list-inline-item"><a href="#">Support</a></li>
+				</ul>
+			</footer>
+
+
+
+
+
+			<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+				crossorigin="anonymous"></script>
+
+			<script src="form-validation.js"></script>
+
+			<script>
       function setThumbnail(event) {
         for (var image of event.target.files) {
           var reader = new FileReader();
@@ -762,7 +900,7 @@ style>.image-container2 {
         }
       }
 </script>
-<script>
+			<script>
       function setThumbnail4(event) {
         for (var image of event.target.files) {
           var reader = new FileReader();
@@ -778,7 +916,7 @@ style>.image-container2 {
         }
       }
 </script>
-<script>
+			<script>
       function setThumbnail5(event) {
         for (var image of event.target.files) {
           var reader = new FileReader();
@@ -794,7 +932,7 @@ style>.image-container2 {
         }
       }
 </script>
-<script>
+			<script>
       function setThumbnail6(event) {
         for (var image of event.target.files) {
           var reader = new FileReader();
@@ -810,7 +948,7 @@ style>.image-container2 {
         }
       }
 </script>
-<script>
+			<script>
       function setThumbnail7(event) {
         for (var image of event.target.files) {
           var reader = new FileReader();
@@ -826,7 +964,7 @@ style>.image-container2 {
         }
       }
 </script>
-<script>
+			<script>
       function setThumbnail8(event) {
         for (var image of event.target.files) {
           var reader = new FileReader();
@@ -842,7 +980,7 @@ style>.image-container2 {
         }
       }
 </script>
-<script>
+			<script>
       function setThumbnail9(event) {
         for (var image of event.target.files) {
           var reader = new FileReader();
@@ -858,7 +996,7 @@ style>.image-container2 {
         }
       }
 </script>
-<script>
+			<script>
       function setThumbnail10(event) {
         for (var image of event.target.files) {
           var reader = new FileReader();
@@ -875,7 +1013,7 @@ style>.image-container2 {
       }
 </script>
 
-	<script>
+			<script>
       function setThumbnail2(event) {
         for (var image of event.target.files) {
           var reader = new FileReader();
@@ -1054,6 +1192,6 @@ style>.image-container2 {
 	   }
     	
 </script>
-</body>        
+</body>
 </body>
 </html>

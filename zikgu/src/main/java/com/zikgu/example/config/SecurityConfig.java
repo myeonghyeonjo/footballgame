@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -21,11 +22,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.zikgu.example.service.UserService;
 
+import lombok.RequiredArgsConstructor;
+@RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
  
+   /* 로그인 실패 핸들러 의존성 주입 */
+	private final AuthenticationFailureHandler customFailureHandler;
+	
+	
    @Autowired
    private UserService userService;
    
@@ -53,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       .formLogin()
             .loginPage("/signin")
             .loginProcessingUrl("/loginPro")
+            .failureHandler(customFailureHandler) // 로그인 실패 핸들러
             .defaultSuccessUrl("/", true)
             .permitAll()
             .and()

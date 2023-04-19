@@ -117,7 +117,13 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+.aa {
+	text-decoration: none
+}
 
+.aa:hover {
+	text-decoration: underline
+}
     </style>
 
     <!-- Custom styles for this template -->
@@ -130,8 +136,8 @@ body {
 <main class="form-signin w-100 m-auto" >
   <form  action="/loginPro" method="post">
    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-    <a href="/"><img class="mb-4" src="../../../Img/덤벨.JPG" alt="" width="72" height="57" ></a>
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <a href="/"><img class="mb-4" src="../../../Img/덤벨.JPG" alt="" width="170" height="140" style="border-radius:20%;"></a>
+    <h1 class="h3 mb-3 fw-normal"><strong>Please sign in</strong></h1>
 
     <div class="form-floating">
              <input type="text"  class="form-control"  name="username" placeholder="id">
@@ -148,8 +154,20 @@ body {
       <label>
        <input id = "remember_me" name ="remember-me" type = "checkbox"/>Remember me
       </label>
-    </div>
+    <span>
+   				
+               <c:if test="${error}">
+                    <p id="valid" class="alert alert-danger">${exception}</p>
+				</c:if>
+                
+            </span>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <p><Strong style="font-size:14px;">아직 회원이 아니신가요? </Strong></p>
+    <p><a href="/beforeSignup" class="aa" style="color: #4169e1; font-size:14px; margin-left: 40px; margin-top: -5px; margin-right: 50px">일반 회원가입 하기></a><p>
+	<p><a href="/beforeSignuptrainer" class="aa"style="color: #4169e1; font-size:14px; margin-left: 40px; margin-top: -5px; margin-right: 50px">트레이너 회원가입 하기></a></p>
+     </div>
+    
+   
     <p class="mt-5 mb-3 text-muted">&copy; 2017~2023</p>
   </form>
   

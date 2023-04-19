@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.lang.String"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
-    <fullyQualifiedTypeName name="com.zikgu.example.domain.K1Image"/>
-    <fullyQualifiedTypeName name="javax.lang.model.element.Element"/>
-    <fullyQualifiedTypeName name="javax.lang.model.util.Elements"/>
-    <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder"/>
-    <fullyQualifiedTypeName name="com.zikgu.example.domain.News.Builder"/>
-    <fullyQualifiedTypeName name="lombok.Builder"/>
-    <fullyQualifiedTypeName name="lombok.Getter"/>
-    <fullyQualifiedTypeName name="lombok.ToString"/>
-    <fullyQualifiedTypeName name="javax.annotation.PostConstruct"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="org.jsoup.Jsoup"/>
-    <fullyQualifiedTypeName name="javax.swing.text.Document"/>
-    <fullyQualifiedTypeName name="org.jsoup.nodes.Document"/>
-    <fullyQualifiedTypeName name="org.jsoup.select.Elements"/>
     <fullyQualifiedTypeName name="org.jsoup.nodes.Element"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="com.zikgu.example.domain.News"/>
@@ -33,7 +17,6 @@
     <fullyQualifiedTypeName name="org.springframework.context.annotation.Configuration"/>
     <fullyQualifiedTypeName name="org.springframework.context.annotation.PropertySource"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
-    <fullyQualifiedTypeName name="lombok.RequiredArgsConstructor"/>
     <fullyQualifiedTypeName name="java.io.UnsupportedEncodingException"/>
     <fullyQualifiedTypeName name="net.nurigo.java_sdk.api.Message"/>
     <fullyQualifiedTypeName name="javax.mail.Message"/>
@@ -46,7 +29,6 @@
     <fullyQualifiedTypeName name="com.zikgu.example.controller.RegisterMail"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ResponseBody"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.zikgu.example.service.RegisterMail"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
@@ -55,9 +37,27 @@
     <fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartFile"/>
     <fullyQualifiedTypeName name="java.util.UUID"/>
     <fullyQualifiedTypeName name="java.io.File"/>
-    <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartHttpServletRequest"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="com.zikgu.example.domain.Center"/>
+    <fullyQualifiedTypeName name="org.springframework.security.web.authentication.AuthenticationFailureHandler"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
+    <fullyQualifiedTypeName name="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"/>
     <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="javax.servlet.ServletException"/>
+    <fullyQualifiedTypeName name="org.springframework.security.authentication.BadCredentialsException"/>
+    <fullyQualifiedTypeName name="org.springframework.security.authentication.InternalAuthenticationServiceException"/>
+    <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UsernameNotFoundException"/>
+    <fullyQualifiedTypeName name="org.springframework.security.authentication.AuthenticationCredentialsNotFoundException"/>
+    <fullyQualifiedTypeName name="javax.security.sasl.AuthenticationException"/>
+    <fullyQualifiedTypeName name="org.springframework.security.core.AuthenticationException"/>
+    <fullyQualifiedTypeName name="net.bytebuddy.implementation.bind.annotation.Super"/>
+    <fullyQualifiedTypeName name="org.codehaus.plexus.component.annotations.Component"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="lombok.RequiredArgsConstructor"/>
+    <fullyQualifiedTypeName name="org.apache.catalina.util.URLEncoder"/>
+    <fullyQualifiedTypeName name="java.net.URLEncoder"/>
 </qualifiedTypeNameHistroy>

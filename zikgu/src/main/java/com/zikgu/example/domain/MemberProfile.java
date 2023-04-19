@@ -25,6 +25,8 @@ public class MemberProfile {
 	private String m_sundayafter;
 	private String m_saterdayafter;
 	private String m_consulting;
+	private String m_consultingconfirm;
+	
 	
 	
 	public String getM_day() {
@@ -170,6 +172,12 @@ public class MemberProfile {
 	}
 	public void setM_consulting(String m_consulting) {
 		this.m_consulting = m_consulting;
+	}
+	public String getM_consultingconfirm() {
+		return m_consultingconfirm;
+	}
+	public void setM_consultingconfirm(String m_consultingconfirm) {
+		this.m_consultingconfirm = m_consultingconfirm;
 	}
 
 

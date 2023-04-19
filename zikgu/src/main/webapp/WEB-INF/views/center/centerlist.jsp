@@ -221,7 +221,7 @@
 				 			  <td style="color:red;">승인대기</td>
 				  		</c:if>
 				  		 <c:if test="${!(list.c_confirm=='0')}">
-				 			  <td>승인완료</td>
+				 			  <td style="color:green;">승인완료</td>
 				  		</c:if>
 		             
 	            </tr>

@@ -112,6 +112,10 @@ public interface BoardService {
 
 	public List<MemberProfile> memberprofileconsulting(int tf_id);
 
+	public void updateTf_Consultingconfirm(TrainerProfile trainerprofile);
+
+	public void updateM_consultingconfirm(MemberProfile memberprofile);
+
 	
 
 	

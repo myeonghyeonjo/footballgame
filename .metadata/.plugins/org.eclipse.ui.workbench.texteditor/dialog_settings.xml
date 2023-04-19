@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="getcenterFileList2"/>
+		<item key="selection" value="login"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="getcenterFileList2"/>
-			<item value="getprofileFileList2"/>
-			<item value="sear"/>
-			<item value="centerfileUpload"/>
-			<item value="hidden"/>
-			<item value="getu_key"/>
-			<item value="centerins"/>
-			<item value="getsearch"/>
-			<item value="getsea"/>
-			<item value="file"/>
-			<item value="search"/>
-			<item value="main"/>
-			<item value="승인하기"/>
-			<item value="getcenterListAll"/>
-			<item value="centerlist"/>
+			<item value="login"/>
+			<item value="loginPro"/>
+			<item value="/loginPro"/>
+			<item value="aa"/>
+			<item value="회원 프로필"/>
+			<item value="프로필등"/>
+			<item value="프로필 등"/>
+			<item value="프로필 등록"/>
+			<item value="전화번호"/>
+			<item value="centerInfo"/>
+			<item value="clickConfirmlogin"/>
+			<item value="clickConfirmconsulting"/>
+			<item value="clickConfirmCancelconsulting"/>
+			<item value="clickConfirm"/>
+			<item value="상담 신청"/>
 		</list>
 		<list key="replacehistory">
 		</list>

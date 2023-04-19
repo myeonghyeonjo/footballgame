@@ -68,7 +68,7 @@
 	object-fit: cover;
 }
 
-<
+
 style>.image-container2 {
 	width: 100px; /* 원하는 가로 크기로 지정 */
 	height: 100px; /* 원하는 세로 크기로 지정 */

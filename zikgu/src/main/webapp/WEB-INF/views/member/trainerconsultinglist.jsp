@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.io.File"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html lang="ko">
   <head>
@@ -196,7 +198,7 @@
         </div>
       </div>
 
-     
+    
 
     
       <div class="table-responsive">
@@ -212,16 +214,20 @@
             </tr>
           </thead>
           <tbody>
+          
            	<c:forEach var="list" items="${list }">
            		<tr>
 		              <td>${list.m_id }</td>
-		              <td><a href="memberDetail?u_key=${list.u_key }">${list.m_name }</a></td>
+		              <td><a href="memberDetail?memberprofile_u_key=${list.u_key }&trainerprofile_u_key=${u_key}">${list.m_name }</a></td>
 		              <td>${list.m_loadaddress }</td>
 		              <td>${list.m_postcode }</td>
 		              <td>${list.m_gender }</td>
-		              <td>${list.m_gender }</td>
-		             
-		             
+		          	  <c:if test="${(fn:contains(list.m_consultingconfirm,trainerprofile.tf_id))}">
+		             	 <td style="color:green;">대기</td>
+		              </c:if>
+		              <c:if test="${!((fn:contains(list.m_consultingconfirm,trainerprofile.tf_id)))}">
+		             	 <td style="color:red;">완료</td>
+		              </c:if>  
 	            </tr>
 			</c:forEach>
           </tbody>
@@ -234,6 +240,6 @@
 
     <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
-      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
   </body>
 </html>

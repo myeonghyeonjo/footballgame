@@ -297,7 +297,7 @@ style>.image-container2 {
 					
 							</div>
 
-<P style="margin-top:-10px;"> ${ trainerprofile.tf_hanjulintro}</P>
+
 
 
 
@@ -306,26 +306,29 @@ style>.image-container2 {
 							</div>
 
 							<hr class="my-4">
-	<sec:authorize access="hasRole('ROLE_ADMIN')">
-	<c:if test="${(trainerprofile.tf_check=='완료')}">
-		<button type="button" class="btn btn-success" disabled >
-  			검토완료
-		</button>
-		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelModal">
-  			검토취소
-		</button>
-	</c:if>
-	
-	<c:if test="${(trainerprofile.tf_check=='대기')}">
-		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  			검토완료
-		</button>
+		<sec:authentication property="principal" var="principal"/>  
+	<c:if test="${!((fn:contains(trainerprofile.tf_consultingconfirm,memberprofile.u_key)))}">
+		<sec:authorize access="hasRole('ROLE_USER')">
 		
-	</c:if>
-</sec:authorize>
+			<button type="button" class="btn btn-success" disabled >
+	  			상담완료
+			</button>
+			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelconsultingModal">
+	  			상담완료취소
+			</button>
+				</sec:authorize>
+		</c:if>
+		
+		<c:if test="${(fn:contains(trainerprofile.tf_consultingconfirm,memberprofile.u_key))}">
+			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#consultingcheckModal">
+	  			상담완료
+			</button>
+		</c:if>
+	
+	
 
-<!-- 검토완료 Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- 상담완료 Modal -->
+<div class="modal fade" id="consultingcheckModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -333,17 +336,17 @@ style>.image-container2 {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        정말 검토완료 하시겠습니까?
+        정말 상담완료 하시겠습니까?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark"" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-outline-primary" onclick="clickConfirm(centerInfo)">확인</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickConfirm(consultingInfo)">확인</button>
       </div>
     </div>
   </div>
 </div>	
 <!-- 검토취소 Modal -->
-<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="cancelconsultingModal" tabindex="-1" aria-labelledby="cancelconsultingModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -351,18 +354,21 @@ style>.image-container2 {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        정말 검토를 취소하시겠습니까? 확인을 누르면 검토대기상태로 변경됩니다.
+        정말 상담완료를 취소하시겠습니까? 확인을 누르면 상담대기상태로 변경됩니다.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark"" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-outline-primary" onclick="clickConfirmCancel(centerInfo)">확인</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickConfirmCancel(consultingInfo)">확인</button>
       </div>
     </div>
   </div>
 </div>
-<!-- 검토완료하기 누르면 넘어갈 데이타 -->
-<form name="centerInfo">
-	<input type="hidden" name="u_key" value="${trainerprofile.u_key}">
+<!-- 상담완료하기 누르면 넘어갈 데이타 -->
+<form name="consultingInfo">
+<sec:authentication property="principal" var="principal"/>  
+	<input type="hidden" name="trainerprofile_u_key" value="${principal.u_key}">
+	<input type="hidden" name="memberprofile_u_key" value="${memberprofile.u_key}">
+	<input type="hidden" name="m_id" value="${memberprofile.m_id}">
 </form>					
 						</div>
 						
@@ -383,19 +389,19 @@ style>.image-container2 {
 		</footer>
 	</div>
 
-<!-- 검토완료하기 누르면 발생 -->
+<!-- 상담완료하기 누르면 발생 -->
 <script>
 	function clickConfirm(formName) {
-		formName.action = "/trainerprofilecheck";
+		formName.action = "/consultingconfirm";
 		formName.method = "post";
 		formName.submit();
 	}
 </script>
 
-<!-- 검토취소하기 누르면 발생 -->
+<!-- 상담완료 취소하기 누르면 발생 -->
 <script>
 	function clickConfirmCancel(formName) {
-		formName.action = "/trainerprofilecheckcancel";
+		formName.action = "/consultingconfirmcancel";
 		formName.method = "post";
 		formName.submit();
 	}

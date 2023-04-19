@@ -318,7 +318,9 @@
 				                    tf_gender as tf_gender,
 				                    tf_check as tf_check,
 				                	tf_consulting as tf_consulting,
-				                	tf_name as tf_name
+				                	tf_name as tf_name,
+				                	tf_consulting as tf_consulting,
+				                	tf_consultingconfirm as tf_consultingconfirm
 				                  
      
         from trainerprofile where u_key = #{u_key}
@@ -399,7 +401,8 @@
 				                  tf_lessonprice2 as  tf_lessonprice2,
 				                   tf_lessonprice3 as  tf_lessonprice3,
 				                    tf_lessonprice4 as  tf_lessonprice4,
-				                    tf_loadaddress as tf_loadaddress
+				                    tf_loadaddress as tf_loadaddress,
+				                    tf_name as tf_name
 				                  
      
         from trainerprofile  ORDER BY tf_id DESC
@@ -444,7 +447,9 @@
 				                    tf_loadaddress as tf_loadaddress,
 				                    tf_name as tf_name,
 				                    tf_postcode as tf_postcode,
-				                    tf_gender as tf_gender
+				                    tf_gender as tf_gender,
+				                    tf_consulting as tf_consulting,
+				                    tf_consultingconfirm as tf_consultingconfirm
 				                  
      
         from trainerprofile  
@@ -517,7 +522,9 @@
 				m_sunday,
 				m_sundaymorning,
 				m_sundayafter,
-				m_schedureintro
+				m_schedureintro,
+				m_consulting,
+				m_consultingconfirm
 			 
 		from memberprofile  
 		where m_id = #{m_id}
@@ -549,7 +556,8 @@
 				m_sundaymorning,
 				m_sundayafter,
 				m_schedureintro,
-				m_consulting
+				m_consulting,
+				m_consultingconfirm
 			 
 		from memberprofile  
 		where u_key = #{member_u_key}
@@ -628,6 +636,7 @@
 				      	c_file_id as c_file_id
 	      FROM            center_file
 	      	WHERE 		c_id = #{c_id}
+	      	LIMIT 1
 	</select>
 	
 	  <!-- 센터별 파일정보 가져오기 -->
@@ -656,6 +665,7 @@
 				      	tf_certificatetitle as tf_certificatetitle
 	      FROM            tf_file
 	      	WHERE 		tf_id = #{tf_id} and FILE_GROUP = #{FILE_GROUP}
+	      	LIMIT	1
 	</select>
 	
 		  <!-- 트레이너별 파일정보 가져오기 -->
@@ -751,7 +761,9 @@
 				         	   m_postcode as m_postcode,
 				         	   m_loadaddress as m_loadaddress,
 				         	   u_key as u_key,
-				         	   m_likegender as m_likegender
+				         	   m_likegender as m_likegender,
+				         	   m_consulting as m_consulting,
+				         	   m_consultingconfirm as m_consultingconfirm
 		 FROM          memberprofile
 		WHERE m_consulting like  concat('%',#{tf_id},'%') 
 	   </select>
@@ -772,11 +784,30 @@
 		 Where        u_key = #{u_key}
 			
 	   </select>
+	  
+	
+	   
+	      <!--멤버  상담완료or상담취소 (신청자 빼기or더하기) 업데이트 -->
+	        <update id="updateM_consultingconfirm" parameterType="center">
+			    UPDATE memberprofile SET  
+			    m_consultingconfirm = #{m_consultingconfirm}
+			    
+			    WHERE m_id = #{m_id}
+    		</update>
+	   
+	   <!--트레이너 상담신청회원 상담완료or상담취소 (신청자 빼기or더하기) 업데이트 -->
+	        <update id="updateTf_Consultingconfirm" parameterType="center">
+			    UPDATE trainerprofile SET  
+			    tf_consultingconfirm = #{tf_consultingconfirm}
+			    
+			    WHERE tf_id = #{tf_id}
+    		</update>
 	   
 	     <!--트레이너 상담신청회원 (신청자 빼기) 업데이트 -->
 	        <update id="updateTf_consulting" parameterType="center">
 			    UPDATE trainerprofile SET  
-			    tf_consulting = #{tf_consulting}
+			    tf_consulting = #{tf_consulting},
+			    tf_consultingconfirm = #{tf_consultingconfirm}
 			    
 			    WHERE tf_id = #{tf_id}
     		</update>
@@ -784,7 +815,9 @@
     		<!--트레이너 상담신청회원 (신청자 더하기) 업데이트 -->
 	        <update id="updateTf_consulting2" parameterType="center">
 			    UPDATE trainerprofile SET  
-			    tf_consulting = #{tf_consulting}
+			    tf_consulting = #{tf_consulting},
+			    tf_consultingconfirm = #{tf_consultingconfirm}
+			    
 			    
 			    WHERE tf_id = #{tf_id}
     		</update>
@@ -792,7 +825,8 @@
 	      <!--회원 상담 목록프로필 (빼기)업데이트 -->
 	        <update id="updateM_consulting" parameterType="center">
 			    UPDATE memberprofile SET  
-			    m_consulting = #{m_consulting}
+			    m_consulting = #{m_consulting},
+			     m_consultingconfirm = #{m_consultingconfirm}
 			    
 			    WHERE m_id = #{m_id}
     		</update>
@@ -800,7 +834,9 @@
     		 <!--회원 상담 목록프로필 (더하기)업데이트 -->
 	        <update id="updateM_consulting2" parameterType="center">
 			    UPDATE memberprofile SET  
-			    m_consulting = #{m_consulting}
+			    m_consulting = #{m_consulting},
+			    m_consultingconfirm = #{m_consultingconfirm}
+			   
 			    
 			    WHERE m_id = #{m_id}
     		</update>

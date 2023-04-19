@@ -49,7 +49,7 @@ public class TrainerProfile {
 	private String tf_postcode;
 	private String tf_gender;
 	private String tf_consulting;
-	
+	private String tf_consultingconfirm;
 	
 	public String getTf_lessonpotion() {
 		return tf_lessonpotion;
@@ -315,6 +315,12 @@ public class TrainerProfile {
 	}
 	public void setTf_consulting(String tf_consulting) {
 		this.tf_consulting = tf_consulting;
+	}
+	public String getTf_consultingconfirm() {
+		return tf_consultingconfirm;
+	}
+	public void setTf_consultingconfirm(String tf_consultingconfirm) {
+		this.tf_consultingconfirm = tf_consultingconfirm;
 	}
 	
 	

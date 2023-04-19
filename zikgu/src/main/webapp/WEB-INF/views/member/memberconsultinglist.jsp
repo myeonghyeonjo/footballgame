@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!doctype html>
 <html lang="ko">
   <head>
@@ -208,6 +209,7 @@
               <th scope="col">센터위치</th>
               <th scope="col">우편번호</th>
               <th scope="col">성별</th>
+              <th scope="col">상담여부</th>
             </tr>
           </thead>
           <tbody>
@@ -218,6 +220,12 @@
 		              <td>${list.tf_loadaddress }</td>
 		              <td>${list.tf_postcode }</td>
 		              <td>${list.tf_gender }</td>
+		              	<c:if test="${(fn:contains(trainerprofile.tf_consultingconfirm,u_key))}">
+		              <td style="color:red;">대기</td>
+		              </c:if>
+		              <c:if test="${!((fn:contains(trainerprofile.tf_consultingconfirm,u_key)))}">
+		              <td style="color:green;">완료</td>
+		              </c:if>
 		             
 		             
 	            </tr>

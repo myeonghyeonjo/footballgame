@@ -321,6 +321,16 @@ public class BoardServiceImpl implements BoardService {
 	public List<MemberProfile> memberprofileconsulting(int tf_id){
 		return boardmapper.memberprofileconsulting(tf_id);
 	}
+	
+	@Override
+	public void updateTf_Consultingconfirm(TrainerProfile trainerprofile) {
+		boardmapper.updateTf_Consultingconfirm(trainerprofile);
+	}
+	
+	@Override
+	public void updateM_consultingconfirm(MemberProfile memberprofile) {
+		boardmapper.updateM_consultingconfirm(memberprofile);
+	}
 }
 
 

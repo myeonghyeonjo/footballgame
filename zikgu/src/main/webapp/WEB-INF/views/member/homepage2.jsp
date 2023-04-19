@@ -230,7 +230,7 @@
 		
         <div class="col">
           <div class="card shadow-sm">
-						<a  href="/trainerDetail?u_key=${list.u_key}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="180" height="175"   alt=""
+						<a  href="/trainerProfileDetail?u_key=${list.u_key}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="180" height="175"   alt=""
 							
 						
 			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="180" height="175"   alt=""
