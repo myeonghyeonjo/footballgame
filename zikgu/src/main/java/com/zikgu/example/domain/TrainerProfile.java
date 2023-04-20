@@ -50,6 +50,7 @@ public class TrainerProfile {
 	private String tf_gender;
 	private String tf_consulting;
 	private String tf_consultingconfirm;
+	private String tf_option;
 	
 	public String getTf_lessonpotion() {
 		return tf_lessonpotion;
@@ -321,6 +322,12 @@ public class TrainerProfile {
 	}
 	public void setTf_consultingconfirm(String tf_consultingconfirm) {
 		this.tf_consultingconfirm = tf_consultingconfirm;
+	}
+	public String getTf_option() {
+		return tf_option;
+	}
+	public void setTf_option(String tf_option) {
+		this.tf_option = tf_option;
 	}
 	
 	

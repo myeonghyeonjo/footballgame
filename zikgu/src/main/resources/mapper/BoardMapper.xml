@@ -66,7 +66,8 @@
 		tf_lessonprice4,
 		tf_name,
 		tf_postcode,
-		tf_gender
+		tf_gender,
+		tf_option
 		
 		) VALUES (
 		#{tf_lessonoption},
@@ -104,7 +105,8 @@
 		#{tf_lessonprice4},
 		#{tf_name},
 		#{tf_postcode},
-		#{tf_gender}
+		#{tf_gender},
+		#{tf_option}
 		)
 	</insert>
 
@@ -636,7 +638,7 @@
 				      	c_file_id as c_file_id
 	      FROM            center_file
 	      	WHERE 		c_id = #{c_id}
-	      	LIMIT 1
+	    
 	</select>
 	
 	  <!-- 센터별 파일정보 가져오기 -->
@@ -648,7 +650,7 @@
 				      	u_key as u_key
 	      FROM            center_file
 	      	WHERE 		c_loadaddress = #{tf_loadaddress}
-	      	LIMIT 			 1 
+	      
 	</select>
 	
 	
@@ -665,7 +667,7 @@
 				      	tf_certificatetitle as tf_certificatetitle
 	      FROM            tf_file
 	      	WHERE 		tf_id = #{tf_id} and FILE_GROUP = #{FILE_GROUP}
-	      	LIMIT	1
+	      
 	</select>
 	
 		  <!-- 트레이너별 파일정보 가져오기 -->
@@ -693,7 +695,7 @@
 	      FROM            tf_file
 	      
 	      	WHERE tf_id like  concat('%',#{tf_id},'%') and FILE_GROUP = 1
-	      	LIMIT 			 1 
+	      
 	</select>
 	
 	
@@ -895,7 +897,7 @@
 				                
 	    			FROM            trainerprofile						
 	      
-	   	  	   WHERE tf_loadaddress like  concat('%',#{keyword},'%')
+	   	  	   WHERE tf_loadaddress like  concat('%',#{keyword},'%') OR tf_option like  concat('%',#{keyword},'%') OR tf_name like  concat('%',#{keyword},'%') 
 				
 	</select>
 	

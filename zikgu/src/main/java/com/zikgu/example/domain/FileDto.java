@@ -3,7 +3,7 @@ package com.zikgu.example.domain;
 public class FileDto {
 	private int file_num;
 	private String o_name;
-	private String file_name;
+	public String file_name;
 	private long file_size;
 	private int article_num;
 	private int f_group;

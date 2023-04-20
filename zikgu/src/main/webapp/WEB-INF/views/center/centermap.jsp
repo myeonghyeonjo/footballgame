@@ -8,17 +8,106 @@
 <!DOCTYPE html>
 
 <html>
-	<head>
+		<head>
 		<title>Stellar by HTML5 UP</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
+		
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=272bc96032396df76a8c8d79f886c824&libraries=services"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>		
+
+<!-- 버튼모달 -->		
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+	crossorigin="anonymous"></script>
+
+
+<link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
 	
+			
+		<!-- 이미지 팝업 슬라이드 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
+ 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+
+
+	
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=272bc96032396df76a8c8d79f886c824&libraries=services"></script>
+
+
+
+
+
+
+	
+
+<!-- 모달 지우지말것 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+
+<!-- slit 슬라이드 -->
+ <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />	
+	
+
 	</head>
+
+ <script>
+      $( document ).ready( function() {
+        $( '.slider2' ).slick( {
+          autoplay: true,
+          autoplaySpeed: 1000,
+        } );
+      } );
+    </script>
+    <style>
+    .slider2 img {
+        max-width: 100%;
+        height: 250px;
+         border-radius: 95%;
+       
+         
+         
+      }
+      .slider2 {
+        width: 300px;
+        margin: 0px auto; 
+      }
+      
+      
+      .slick-prev:before, .slick-next:before {
+        color: #000000;
+       
+      }
+      
+      .slick-prev.slick-arrow{
+        margin-left:10px;
+        
+      }
+      
+   
+      
+     
+    
+    
+    </style>
 <style>
 @import url(fontawesome-all.min.css);
 @import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400';
@@ -129,14 +218,11 @@ input, select, textarea {
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
-			-moz-animation: none !important;
-			-webkit-animation: none !important;
-			-ms-animation: none !important;
-			animation: none !important;
-			-moz-transition: none !important;
-			-webkit-transition: none !important;
-			-ms-transition: none !important;
-			transition: none !important;
+			-webkit-transition: all 0.3s cubic-bezier(1,.01,.32,1);
+  -moz-transition: all 0.3s cubic-bezier(1,.01,.32,1);
+  -o-transition: all 0.3s cubic-bezier(1,.01,.32,1);
+  -ms-transition: all 0.3s cubic-bezier(1,.01,.32,1);
+  transition: all 0.3s cubic-bezier(1,.01,.32,1);
 		}
 
 /* Type */
@@ -178,13 +264,7 @@ input, select, textarea {
 		}
 
 	a {
-		-moz-transition: color 0.2s ease, border-bottom 0.2s ease;
-		-webkit-transition: color 0.2s ease, border-bottom 0.2s ease;
-		-ms-transition: color 0.2s ease, border-bottom 0.2s ease;
-		transition: color 0.2s ease, border-bottom 0.2s ease;
-		text-decoration: none;
-		border-bottom: dotted 1px;
-		color: inherit;
+		
 	}
 
 		a:hover {
@@ -1951,7 +2031,7 @@ input, select, textarea {
 	.button {
 		background-color: transparent;
 		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
-		color: #ffffff !important;
+		color: black;
 	}
 
 		input[type="submit"]:hover,
@@ -3414,6 +3494,7 @@ input, select, textarea {
 			background-color: transparent;
 			box-shadow: inset 0 0 0 1px #dddddd;
 			color: #636363 !important;
+			
 		}
 
 			#main input[type="submit"]:hover,
@@ -3882,9 +3963,14 @@ input, select, textarea {
 										<p style="color:black">${center.c_intro}</p>
 										
 									</div>
-									<c:forEach var="filelist" items="${filelist}">
-										<a  href="../../../Img/${filelist.file_name}">	<span class="image"><img src="../../../Img/${filelist.file_name}" alt="" data-lightbox="example-set"/></span></a>
-									</c:forEach>
+											<div class="slider2" style="margin-left:25px;">
+		<c:forEach var="filelist" items="${filelist}">
+		
+		  <div style="margin-left:-50px;"><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set4"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
+</div>
+		  
+		  </c:forEach> 
+    </div>
 									
 								</div>
 							</section>
@@ -3896,14 +3982,9 @@ input, select, textarea {
 									<h2><Strong  style="color:black">센터 사진</Strong></h2>
 									
 									<c:forEach var="filelist" items="${filelist}">
-										<a  href="../../../Img/${filelist.file_name}">	<span class="image"><img src="../../../Img/${filelist.file_name}" alt="" data-lightbox="example-set"/></span></a>
+											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set5"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
 									</c:forEach>
-									<c:forEach var="filelist" items="${filelist}">
-										<a  href="../../../Img/${filelist.file_name}">	<span class="image"><img src="../../../Img/${filelist.file_name}" alt="" data-lightbox="example-set"/></span></a>
-									</c:forEach>
-									<c:forEach var="filelist" items="${filelist}">
-										<a  href="../../../Img/${filelist.file_name}">	<span class="image"><img src="../../../Img/${filelist.file_name}" alt="" data-lightbox="example-set"/></span></a>
-									</c:forEach>
+									
 									
 								
 								</header>

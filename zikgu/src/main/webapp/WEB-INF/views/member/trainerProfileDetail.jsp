@@ -5,6 +5,7 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 
 <html>
@@ -15,11 +16,12 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=272bc96032396df76a8c8d79f886c824&libraries=services"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>		
 
+<!-- 버튼모달 -->		
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -34,6 +36,26 @@
 <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
+	
+			
+		<!-- 이미지 팝업 슬라이드 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" rel="stylesheet">
+ 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+
+
+	
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=272bc96032396df76a8c8d79f886c824&libraries=services"></script>
+
+
+
+
+
+
 	
 
 <!-- 모달 지우지말것 -->
@@ -61,15 +83,31 @@
         max-width: 100%;
         height: 250px;
          border-radius: 95%;
+       
+         
+         
       }
       .slider1 {
         width: 300px;
-        margin: 0px auto;
+        margin: 0px auto; 
+      }
+      
+      
+      .slick-prev:before, .slick-next:before {
+        color: #000000;
+       
+      }
+      
+      .slick-prev.slick-arrow{
+        margin-left:10px;
         
       }
-      .slick-prev:before, .slick-next:before {
-        color: #444444;
-      }
+      
+   
+      
+     
+    
+    
     </style>
 <style>
 @import url(fontawesome-all.min.css);
@@ -181,14 +219,11 @@ input, select, textarea {
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
-			-moz-animation: none !important;
-			-webkit-animation: none !important;
-			-ms-animation: none !important;
-			animation: none !important;
-			-moz-transition: none !important;
-			-webkit-transition: none !important;
-			-ms-transition: none !important;
-			transition: none !important;
+			-webkit-transition: all 0.3s cubic-bezier(1,.01,.32,1);
+  -moz-transition: all 0.3s cubic-bezier(1,.01,.32,1);
+  -o-transition: all 0.3s cubic-bezier(1,.01,.32,1);
+  -ms-transition: all 0.3s cubic-bezier(1,.01,.32,1);
+  transition: all 0.3s cubic-bezier(1,.01,.32,1);
 		}
 
 /* Type */
@@ -230,13 +265,7 @@ input, select, textarea {
 		}
 
 	a {
-		-moz-transition: color 0.2s ease, border-bottom 0.2s ease;
-		-webkit-transition: color 0.2s ease, border-bottom 0.2s ease;
-		-ms-transition: color 0.2s ease, border-bottom 0.2s ease;
-		transition: color 0.2s ease, border-bottom 0.2s ease;
-		text-decoration: none;
-		border-bottom: dotted 1px;
-		color: inherit;
+		
 	}
 
 		a:hover {
@@ -2002,7 +2031,7 @@ input, select, textarea {
 	button,
 	.button {
 		background-color: transparent;
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+		
 		color: black;
 	}
 
@@ -2856,7 +2885,10 @@ input, select, textarea {
 	
 	.aa { text-decoration:none }
 
-.aa:hover{ text-decoration: underline }
+.aa:hover{ text-decoration: underline ;
+			text-decoration-color : black;
+			
+}
 
 		table tbody tr:nth-child(2n + 1) {
 			background-color: rgba(255, 255, 255, 0.075);
@@ -3464,8 +3496,9 @@ input, select, textarea {
 		#main button,
 		#main .button {
 			background-color: transparent;
-			box-shadow: inset 0 0 0 1px #dddddd;
+		
 			color: #636363 !important;
+			
 		}
 
 			#main input[type="submit"]:hover,
@@ -3885,18 +3918,18 @@ input, select, textarea {
 </style>
 
 
-
+<script>
+      $( document ).ready( function() {
+        $( '.slider2' ).slick( {
+          autoplay: true,
+          autoplaySpeed: 1000,
+        } );
+      } );
+    </script>
 <div id="centerview">	
 <jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>
 	<body class="is-preload">
-		<div class="slider1">
-      <div><img src="../../../Img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG"  alt=""></div>
-      <div><img src="../../../Img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG"  alt=""></div>
-      <div><img src="../../../Img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG"  alt=""></div>
-      <div><img src="../../../Img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG" alt=""></div>
-      <div><img src="../../../Img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG" alt=""></div>
-      <div><img src="../../../Img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG" alt=""></div>
-    </div>
+		
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -3943,26 +3976,25 @@ input, select, textarea {
 										<p style="color:black">${trainerprofile.tf_intro}</p>
 										
 									</div>
-									<c:forEach var="filelist" items="${filelist}">
-										<a  href="../../../Img/${filelist.file_name}">	<span class="image"><img src="../../../Img/${filelist.file_name}" alt="" data-lightbox="example-set"/></span></a>
-									</c:forEach>
-									
-									
-									
-									
-									
-								
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
+										<div class="slider1" style="margin-left:25px;">
+											<c:forEach var="filelist" items="${filelist}">
+											
+											  <div style="margin-left:-50px;"><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a></div>
+											  
+											  
+					
+												
+												
+											  </c:forEach> 
+		   								 </div>		
 								</div>
+								
+								<h4><Strong style="color:black">자격사항</Strong></h4>
+								<c:forEach var="filelist" items="${filelist_2}">
+											<a class="aa" style="text-decoration-color : white;"   href="../../../Img/${filelist.file_name}"  data-lightbox="example-set2"><input type="text" class="form-control" style="flex: 0.5; color:white; background-color:black; " name="tf_certificatetitle"
+												id="address2" placeholder="내용을 입력해주세요" value="${filelist.tf_certificatetitle }"readonly></a>
+								
+								</c:forEach>
 							</section>
 
 						<!-- First Section -->
@@ -3971,15 +4003,11 @@ input, select, textarea {
 								
 									<h2><Strong  style="color:black">${trainerprofile.tf_programtitle }</Strong></h2>
 									
-									<c:forEach var="filelist" items="${filelist}">
-										<a  href="../../../Img/${filelist.file_name}">	<span class="image"><img src="../../../Img/${filelist.file_name}" alt="" data-lightbox="example-set"/></span></a>
+									<c:forEach var="filelist" items="${filelist_3}">
+											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set3"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
 									</c:forEach>
-									<c:forEach var="filelist" items="${filelist}">
-										<a  href="../../../Img/${filelist.file_name}">	<span class="image"><img src="../../../Img/${filelist.file_name}" alt="" data-lightbox="example-set"/></span></a>
-									</c:forEach>
-									<c:forEach var="filelist" items="${filelist}">
-										<a  href="../../../Img/${filelist.file_name}">	<span class="image"><img src="../../../Img/${filelist.file_name}" alt="" data-lightbox="example-set"/></span></a>
-									</c:forEach>
+									
+								
 									
 								
 								</header>
@@ -4167,14 +4195,7 @@ input, select, textarea {
 
 			</div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+		
 
 	</body>
 	</div>
@@ -4330,8 +4351,14 @@ function Centerview(test) {
 			data: { tf_loadaddress: tf_loadaddress , u_key : u_key}
 		})
 		.done(function( html ) {
-			
+			console.log(html);
 			$('#centerview').html(html);
+		     $( '.slider2' ).slick( {
+			          autoplay: true,
+			          autoplaySpeed: 1000,
+			        } );
+			     
+			   
 		});
 		
 }
@@ -4382,6 +4409,6 @@ function clickConfirmCancelconsulting(formName) {
 		crossorigin="anonymous"></script>
 
 	<script src="form-validation.js"></script>
-
+ 
 
 </html>

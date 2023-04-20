@@ -513,7 +513,7 @@
 										<input type="text" class="form-control"  style="margin: 2px;"  id="sample4_jibunAddress" name="c_oldaddress" placeholder="지번주소" readonly>
 										<span id="guide" style="color:#999;display:none"></span>
 										<input type="text"  class="form-control"  style="margin: 2px;"  id="sample4_detailAddress" name="c_detailaddress" placeholder="상세주소" >
-										<input type="text" class="form-control"  style="margin: 2px;"  id="sample4_extraAddress" name="c_option" placeholder="참고항목" readonly>
+										<input type="text" class="form-control"  style="margin: 2px;"  id="sample4_extraAddress" name="tf_option" placeholder="참고항목" readonly>
 								</div>
 
 							<hr class="my-4">

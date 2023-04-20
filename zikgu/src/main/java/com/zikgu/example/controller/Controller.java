@@ -88,12 +88,27 @@ public class Controller {
 	@RequestMapping("/")
 	public String home(Model model) {
 
+		
+		
+		
+		
+		
 		// List<Board> list = boardservice.selectBoardList();
 		// model.addAttribute("list", list);
 		logger.debug("debug");
 		logger.info("info");
 		logger.error("error");
 		List<TrainerProfile> list = boardservice.trainerList();
+		List<String> centernameList = new ArrayList<>();
+		
+		for (int i = 0; i < list.size(); i++) {
+		    TrainerProfile trainerProfile = list.get(i);
+		    String loadaddress =  trainerProfile.getTf_loadaddress();
+		    Center center = boardservice.getcenterDetail2(loadaddress);
+		    String centername = center.getC_name();
+		    centernameList.add(centername);
+		    // trainerProfile 변수를 이용해 해당 요소의 필드에 접근하고 작업을 수행합니다.
+		}
 		System.out.println("list:"+list);
 		List<FileDto> filelistAll = new ArrayList<>();
 		List<FileDto> centerfilelistAll = new ArrayList<>();
@@ -111,6 +126,7 @@ public class Controller {
 			  model.addAttribute("list", list);
 			  model.addAttribute("filelistAll", filelistAll);
 			  model.addAttribute("centerfilelistAll", centerfilelistAll);
+			  model.addAttribute("centernameList", centernameList);
 		}
 		
 		
@@ -253,9 +269,26 @@ model.addAttribute("exception", exception);
 	    }
 	
 	@RequestMapping("/test")
-    public String test(Model model) throws Exception{
-       
-        return "/center/test2";
+    public String test(Model model, Center center) throws Exception{
+		System.out.println("tf_loadaddress:"+"경북 구미시 인동54길 32-36");
+		String tf_loadaddress = "경북 구미시 인동54길 32-36";
+		center = boardservice.getcenterDetail2(tf_loadaddress);
+		int c_id = center.getC_id();
+		
+		String c_name = center.getC_name();
+		List<FileDto> filelist = boardservice.getcenterFileList(c_id);
+		model.addAttribute("center",center);
+		model.addAttribute("filelist",filelist);
+		model.addAttribute("c_id",c_id);
+		model.addAttribute("c_name",c_name);
+		int u_key = 7; 
+		model.addAttribute("u_key",u_key);
+		model.addAttribute("tf_loadaddress",tf_loadaddress);
+
+		System.out.println("tf_loadaddress:"+tf_loadaddress);
+		List<Center> list = boardservice.getcenterDetail(c_id);
+		model.addAttribute("list",list);
+        return "/center/centermap2";
     }
 
 	@org.springframework.stereotype.Controller
@@ -628,7 +661,7 @@ model.addAttribute("exception", exception);
 			model.addAttribute("filelist",filelist);
 			model.addAttribute("filelist_2",filelist_2);
 			model.addAttribute("filelist_3",filelist_3);
-	        return "/member/trainerProfileDetail";
+	        return "/member/trainerProfileDetail2";
 	    }
 		
 		@RequestMapping("/centerinsert")
@@ -739,6 +772,7 @@ model.addAttribute("exception", exception);
 				
 				int tf_id = trainerprofile.getTf_id();
 				List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+				System.out.println(filelist.get(0).file_name);
 				List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
 				List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
 				String tf_loadaddress = trainerprofile.getTf_loadaddress();
@@ -761,7 +795,18 @@ model.addAttribute("exception", exception);
 		@RequestMapping("/search_All")
 	    public String search_All(Model model,@RequestParam("keyword") String keyword,TrainerProfile trainerprofile,FileDto filedto) {
 			List<TrainerProfile> list = boardservice.search_All(keyword);
+			int listlength = list.size();
+			System.out.println("listlength:"+listlength);
+			List<String> centernameList = new ArrayList<>();
 			model.addAttribute("list",list);
+			for (int i = 0; i < list.size(); i++) {
+			    TrainerProfile trainerProfile = list.get(i);
+			    String loadaddress =  trainerProfile.getTf_loadaddress();
+			    Center center = boardservice.getcenterDetail2(loadaddress);
+			    String centername = center.getC_name();
+			    centernameList.add(centername);
+			    // trainerProfile 변수를 이용해 해당 요소의 필드에 접근하고 작업을 수행합니다.
+			}
 			
 			Map<String, List<FileDto>> fileListMap2 = new HashMap<>();
 			List<Integer> tfIdList = new ArrayList<>();
@@ -785,11 +830,13 @@ model.addAttribute("exception", exception);
 			
 			fileListMap.put("filelistAll", filelistAll);
 			//fileListMap.put("centerfilelistAll", centerfilelistAll);
-			
+
 			model.addAttribute("filelistAll",filelistAll);
+			model.addAttribute("listlength",listlength);
 			model.addAttribute("fileListMap",fileListMap);
 			model.addAttribute("keyword",keyword);
 			model.addAttribute("centerfilelistAll",centerfilelistAll);
+			model.addAttribute("centernameList",centernameList);
 			System.out.println("centerfilelistAll:"+centerfilelistAll);
 			
 			return "/member/searchList";

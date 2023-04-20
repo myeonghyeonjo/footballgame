@@ -188,8 +188,8 @@
       <div class="d-flex justify-content-center h-100" style="margin: auto; margine-left:500px;">
         <div class="searchbar" style="margin: auto; margine-left:500px;">
         	<form action="search_All" method="post">
-		          <input class="search_input" type="text" name="keyword" placeholder="지역,센터명,선생님 검색" value="${keyword }">
-		          <a href="search_All" class="search_icon" ><i class="fas fa-search"></i></a>
+		          <input class="search_input" type="text" name="keyword" placeholder="지역,선생님 검색" value="${keyword }">
+		          <a href="search_All?keyword=${keyword}" class="search_icon" ><i class="fas fa-search"></i></a>
           	</form>
         </div>
       </div>
@@ -225,8 +225,9 @@
    <c:forEach var="centerfilelistAll" items="${centerfilelistAll}" varStatus="status1">
 
    <c:forEach var="list" items="${list}" varStatus="status2">       	
-          
-			<c:if test="${status.index == status1.index && status.index == status2.index}">
+         
+   <c:forEach var="centernameList" items="${centernameList}" varStatus="status3">          
+			<c:if test="${status.index == status1.index && status.index == status2.index && status.index == status3.index}">
 		
         <div class="col">
           <div class="card shadow-sm">
@@ -236,17 +237,18 @@
 			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="180" height="175"   alt=""
 						 ></a>			 
 		
-            <div onclick="location.href='/trainerDetail?u_key=${list.u_key}';" style="cursor: pointer; padding:10px;">
+            <div onclick="location.href='/trainerProfileDetail?u_key=${list.u_key}';" style="cursor: pointer; padding:10px;">
               <p class="card-text" style=" margin-bottom:1px; margin-left:1px"><Strong>${list.tf_name }선생님</Strong></p>
               <p class="card-text" style=" margin-bottom:4px;">${list.tf_hanjulintro }</p>
               	<p class="card-text" style="font-size: 8px; margin-bottom:1px;"><Strong>${list.tf_lessonnumber }${list.tf_lessonunit }</Strong> 기준 ${list.tf_lessonunit }당 <strong>${list.tf_lessonprice }원</Strong></p>
                   <p class="card-text" style="font-size: 8px;">${list.tf_loadaddress }</p>
+        			<p class="card-text" style="font-size: 8px;">${centernameList }</p>
                   </div>
                    </div>
      
         </div>
             </c:if>
-          
+        </c:forEach>
         </c:forEach>
         </c:forEach>
 		</c:forEach>
