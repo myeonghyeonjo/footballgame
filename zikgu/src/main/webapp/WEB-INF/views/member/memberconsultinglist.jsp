@@ -216,14 +216,14 @@
            	<c:forEach var="list" items="${list }">
            		<tr>
 		              <td>${list.tf_id }</td>
-		              <td><a href="trainerDetail?u_key=${list.u_key }">${list.tf_name }</a></td>
+		              <td><a href="trainerProfileDetail?u_key=${list.u_key }">${list.tf_name }</a></td>
 		              <td>${list.tf_loadaddress }</td>
 		              <td>${list.tf_postcode }</td>
 		              <td>${list.tf_gender }</td>
-		              	<c:if test="${(fn:contains(trainerprofile.tf_consultingconfirm,u_key))}">
+		              	<c:if test="${(fn:contains(list.tf_consultingconfirm,u_key))}">
 		              <td style="color:red;">대기</td>
 		              </c:if>
-		              <c:if test="${!((fn:contains(trainerprofile.tf_consultingconfirm,u_key)))}">
+		              <c:if test="${!(fn:contains(list.tf_consultingconfirm,u_key))}">
 		              <td style="color:green;">완료</td>
 		              </c:if>
 		             

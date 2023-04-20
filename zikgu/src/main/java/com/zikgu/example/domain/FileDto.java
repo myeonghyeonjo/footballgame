@@ -14,6 +14,9 @@ public class FileDto {
 	private int tf_file_id;
 	private int filecount;
 	private String tf_certificatetitle;
+	private int pt_file_id;
+	private int trainer_u_key;
+	private int pt_id;
 	
 	
 	public int getfile_num() {
@@ -93,6 +96,24 @@ public class FileDto {
 	}
 	public void setTf_certificatetitle(String tf_certificatetitle) {
 		this.tf_certificatetitle = tf_certificatetitle;
+	}
+	public int getPt_file_id() {
+		return pt_file_id;
+	}
+	public void setPt_file_id(int pt_file_id) {
+		this.pt_file_id = pt_file_id;
+	}
+	public int getTrainer_u_key() {
+		return trainer_u_key;
+	}
+	public void setTrainer_u_key(int trainer_u_key) {
+		this.trainer_u_key = trainer_u_key;
+	}
+	public int getPt_id() {
+		return pt_id;
+	}
+	public void setPt_id(int pt_id) {
+		this.pt_id = pt_id;
 	}
 
 }

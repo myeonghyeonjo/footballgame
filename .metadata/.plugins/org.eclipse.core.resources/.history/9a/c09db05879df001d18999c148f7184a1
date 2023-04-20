@@ -1,0 +1,15 @@
+package com.zikgu.example.domain;
+
+public class PT {
+	private int pt_id;
+	private int u_key;
+	private String pt_title;
+	private String pt_programsub1;
+	private String pt_programsub2;
+	private String pt_programsub3;
+	private String O_NAME;
+	private String FILE_NAME;
+	private int FILE_SIZE;
+	private String FILE_PATH;
+	private String pt_programintro;
+}

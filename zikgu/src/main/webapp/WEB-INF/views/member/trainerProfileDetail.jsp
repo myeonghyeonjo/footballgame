@@ -79,6 +79,25 @@
       } );
     </script>
     <style>
+    
+    
+    /* PT사진 슬라이드 */
+    .slider10 img {
+        max-width: 100%;
+        height: auto;
+      }
+      .slider10 {
+        width: 900px;
+        margin: 0px auto;
+      }
+      .slider10 .slick-slide {
+        margin: 10px;
+      }
+     
+   
+    
+    
+    
     .slider1 img {
         max-width: 100%;
         height: 250px;
@@ -3997,7 +4016,7 @@ input, select, textarea {
 								</c:forEach>
 							</section>
 
-						<!-- First Section -->
+						<!-- First Section PT프로그램
 							<section id="first" class="main special">
 								<header class="major">
 								
@@ -4033,7 +4052,96 @@ input, select, textarea {
 									
 								</footer>
 							</section>
-
+						-->
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						<c:forEach var="PT_List" items="${PT_List}" varStatus="status1">
+						
+						<!-- First Section PT프로그램-->
+							<section id="first" class="main special">
+								<header class="major">
+								
+									<h2><Strong  style="color:black">${PT_List.pt_title }</Strong></h2>
+									<div class="slider10">
+									<c:forEach var="filelist" items="${PT_filelist}" varStatus="status2">
+									
+										<c:if test="${PT_List.pt_id == filelist.pt_id }">
+											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set${filelist.pt_id }"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
+										</c:if>
+									</c:forEach>
+									</div>
+									
+								
+									
+								
+								</header>
+								<ul class="features">
+									<li>
+										<span class="icon solid major style1 fa-code"></span>
+										<h5><Strong style="color:black">${PT_List.pt_programsub1}</Strong></h5>
+									</li>
+									<li>
+										<span class="icon major style3 fa-copy"></span>
+										<h5><Strong style="color:black">${PT_List.pt_programsub2}</strong></h5>
+									</li>
+									<li>
+										<span class="icon major style5 fa-gem"></span>
+										<h5><Strong style="color:black">${PT_List.pt_programsub3}</Strong></h5>
+									</li>
+									
+										<p style="color:black; margin-top:40px;">${PT_List.pt_programintro}</p>
+								</ul>
+								
+								<footer class="major">
+								
+									
+								</footer>
+								
+							</section>
+							</c:forEach>
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
 						<!-- Second Section -->
 							<section id="second" class="main special">
 								<header class="major">
@@ -4247,7 +4355,13 @@ input, select, textarea {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        정말 상담을 신청하시겠습니까?
+        <p style="color:black;">정말 상담을 신청하시겠습니까?</p>
+       <select class="form-select" aria-label="Default select example" onchange="selectBoxChange(this.value);">
+  <c:forEach var="PT_List" items="${PT_List}">
+    <option value="${PT_List.pt_title}"<c:if test="${PT_List.pt_title}"> selected</c:if>>${PT_List.pt_title}</option>
+  </c:forEach>
+</select>
+  <p style="size:5px; color:black;">상담을 신청할 PT 프로그램을 선택해주세요.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
@@ -4324,13 +4438,21 @@ input, select, textarea {
 	<input type="hidden" name="member_u_key" value="${principal.u_key}">
 	<input type="hidden" name="trainer_u_key" value="${trainerprofile.u_key}">
 	<input type="hidden" name="tf_id" value="${trainerprofile.tf_id}">
+	
+	<input type="hidden" name="selectedPT" id="selectedPT" value="${PT_List[0].pt_title}">
+	
 </form>			
 </sec:authorize>
 	
 	
 	
 	
-	
+<script>
+var selectBoxChange = function(value){
+	console.log("값변경테스트:"+ value);
+	$("#selectedPT").val(value);
+}
+</script>	
 	
 	
 	
@@ -4409,6 +4531,16 @@ function clickConfirmCancelconsulting(formName) {
 		crossorigin="anonymous"></script>
 
 	<script src="form-validation.js"></script>
- 
-
+	
+ <!-- PT사진 슬라이드 -->
+<script>
+$( document ).ready( function() {
+    $( '.slider10' ).slick( {
+      autoplay: true,
+      autoplaySpeed: 1000,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+    } );
+  } );
+</script>
 </html>

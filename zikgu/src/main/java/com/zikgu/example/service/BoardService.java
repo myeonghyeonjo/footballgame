@@ -5,6 +5,8 @@ import com.zikgu.example.domain.Board;
 import com.zikgu.example.domain.Center;
 import com.zikgu.example.domain.FileDto;
 import com.zikgu.example.domain.MemberProfile;
+import com.zikgu.example.domain.PT;
+import com.zikgu.example.domain.SelectedPT;
 import com.zikgu.example.domain.TrainerProfile;
 import com.zikgu.example.domain.User;
 
@@ -115,6 +117,19 @@ public interface BoardService {
 	public void updateTf_Consultingconfirm(TrainerProfile trainerprofile);
 
 	public void updateM_consultingconfirm(MemberProfile memberprofile);
+
+	public void ptInsert(PT pt);
+
+	public int getpt_id();
+
+	public void PTfileUpload(String originalfileName, String saveFileName, long fileSize, String savePath,
+			int trainer_u_key, int pt_id);
+
+	public List<PT> getPTdetail(int u_key);
+
+	public List<FileDto> getPT_FileList(int u_key);
+
+	public void insertselectedpt(SelectedPT selectedpt);
 
 	
 

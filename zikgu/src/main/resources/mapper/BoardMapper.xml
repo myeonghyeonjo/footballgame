@@ -199,6 +199,28 @@
 		)
 	</insert>
 	
+	<!--PT 파일업로드 -->
+	<insert id="PTfileUpload" parameterType="HashMap">
+		INSERT INTO pt_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		u_key,
+		pt_id
+		
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{trainer_u_key},
+			#{pt_id}
+		
+		)
+	</insert>
+	
+	
 		<!-- 파일업로드 -->
 	<insert id="fileUpload2" parameterType="HashMap">
 		INSERT INTO tf_file (
@@ -837,7 +859,9 @@
 	        <update id="updateM_consulting2" parameterType="center">
 			    UPDATE memberprofile SET  
 			    m_consulting = #{m_consulting},
-			    m_consultingconfirm = #{m_consultingconfirm}
+			    m_consultingconfirm = #{m_consultingconfirm},
+			    m_selectedPT = #{m_selectedPT},
+			    m_selectedPTconfirm = #{m_selectedPTconfirm}
 			   
 			    
 			    WHERE m_id = #{m_id}
@@ -954,14 +978,84 @@
 		#{m_sundayafter},
 		#{m_schedureintro}
 		
+		)
+	</insert>	
+		<!-- PT 프로그램 등록 -->
+	<insert id="ptInsert" parameterType="memberprofile">
+		INSERT INTO pt (
+		u_key,	
+		pt_title,
+		pt_programsub1,
+		pt_programsub2,
+		pt_programsub3,
+		pt_programintro
+		
+		) VALUES (
+		#{u_key},
+		#{pt_title},
+		#{pt_programsub1},
+		#{pt_programsub2},
+		#{pt_programsub3},
+		#{pt_programintro}
+		)
+		
+	</insert>
+	
+	<!--  트레이너 pt id정보 --> 
+	  <select id="getpt_id" resultType="int">
+        select  				MAX(pt_id) as pt_id
+        from pt
+    </select>
+    
+    <!--  트레이너 pt 디테일정보 --> 
+	  <select id="getPTdetail" resultType="pt">
+         SELECT         
+				              pt_id as pt_id,
+				         	  pt_title as pt_title,
+				         	  pt_programsub1 as pt_programsub1,
+				         	   pt_programsub2 as pt_programsub2,
+				         	   pt_programsub3 as pt_programsub3,
+				         	   pt_programintro as pt_programintro
+		 FROM           pt
+		 Where        u_key = #{u_key}
+    </select>
+    
+     <!--  PT파일리스트 --> 
+	  <select id="getPT_FileList" resultType="FileDto">
+         SELECT         
+				              pt_file_id as pt_file_id,
+				         	  O_NAME as O_NAME,
+				         	  FILE_NAME as FILE_NAME,
+				         	   FILE_SIZE as FILE_SIZE,
+				         	   FILE_PATH as FILE_PATH,
+				         	   u_key as u_key,
+				         	   pt_id as pt_id
+		 FROM           pt_file
+		 Where        u_key = #{u_key}
+    </select>
+    
+    
+    
+    
+   
+    	<!-- 선택된 프로그램 정보 등록 -->
+	<insert id="insertselectedpt" parameterType="selectedpt">
+		INSERT INTO selectedpt (
+		selectedPT_title,	
+		tf_id,
+		m_u_key,
+		tf_u_key
 		
 		
-		
-		
-		
-		
-		
+		) VALUES (
+		#{selectedPT_title},
+		#{tf_id},
+		#{m_u_key},
+		#{tf_u_key}
 		
 		)
+		
 	</insert>
+ 
+	
 </mapper>

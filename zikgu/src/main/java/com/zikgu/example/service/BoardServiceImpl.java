@@ -11,6 +11,8 @@ import com.zikgu.example.domain.Board;
 import com.zikgu.example.domain.Center;
 import com.zikgu.example.domain.FileDto;
 import com.zikgu.example.domain.MemberProfile;
+import com.zikgu.example.domain.PT;
+import com.zikgu.example.domain.SelectedPT;
 import com.zikgu.example.domain.TrainerProfile;
 import com.zikgu.example.mapper.BoardMapper;
 
@@ -330,6 +332,43 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void updateM_consultingconfirm(MemberProfile memberprofile) {
 		boardmapper.updateM_consultingconfirm(memberprofile);
+	}
+	@Override
+	public void ptInsert(PT pt) {
+		boardmapper.ptInsert(pt);
+	}
+	
+	@Override
+	public int getpt_id() {
+		return boardmapper.getpt_id();
+	}
+	
+	@Override
+	public void PTfileUpload(String originalfileName, String saveFileName, long fileSize, String savePath, int trainer_u_key,int pt_id) {
+		
+		HashMap<String, Object> hm = new HashMap<>();
+		hm.put("originalfileName", originalfileName);
+		hm.put("saveFileName", saveFileName);
+		hm.put("fileSize", fileSize);
+		hm.put("savePath", savePath);
+		hm.put("trainer_u_key", trainer_u_key);
+		hm.put("pt_id", pt_id);
+		boardmapper.PTfileUpload(hm);
+	}
+	
+	@Override
+	public  List<PT> getPTdetail(int u_key) {
+		return boardmapper.getPTdetail(u_key);
+	}
+	
+	@Override
+	public List<FileDto> getPT_FileList(int u_key){
+		return boardmapper.getPT_FileList(u_key);
+	}
+	
+	@Override
+	public void insertselectedpt(SelectedPT selectedpt) {
+		boardmapper.insertselectedpt(selectedpt);
 	}
 }
 

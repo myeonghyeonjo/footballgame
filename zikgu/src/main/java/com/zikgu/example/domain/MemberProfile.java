@@ -26,6 +26,8 @@ public class MemberProfile {
 	private String m_saterdayafter;
 	private String m_consulting;
 	private String m_consultingconfirm;
+	private String m_selectedPT;
+	private String m_selectedPTconfirm;
 	
 	
 	
@@ -178,6 +180,18 @@ public class MemberProfile {
 	}
 	public void setM_consultingconfirm(String m_consultingconfirm) {
 		this.m_consultingconfirm = m_consultingconfirm;
+	}
+	public String getM_selectedPT() {
+		return m_selectedPT;
+	}
+	public void setM_selectedPT(String m_selectedPT) {
+		this.m_selectedPT = m_selectedPT;
+	}
+	public String getM_selectedPTconfirm() {
+		return m_selectedPTconfirm;
+	}
+	public void setM_selectedPTconfirm(String m_selectedPTconfirm) {
+		this.m_selectedPTconfirm = m_selectedPTconfirm;
 	}
 
 

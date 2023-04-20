@@ -22,3 +22,15 @@
 1681918591057	Delete element
 1681967336307	Copy file
 1681977320141	Encapsulate field 'tf_option'
+1681995783853	Encapsulate field 'PT_programsub'
+1681996345902	Encapsulate field 'pt_file_id'
+1681997031130	Encapsulate field 'PT_programintro'
+1681997033593	Encapsulate field 'PT_title'
+1681997113303	Encapsulate field 'pt_title'
+1681997128299	Encapsulate field 'pt_programintro'
+1681997711787	Encapsulate field 'trainer_u_key'
+1682002947836	Encapsulate field 'pt_id'
+1682010561682	Encapsulate field 'm_selectedPT'
+1682010564171	Encapsulate field 'm_selectedPTconfirm'
+1682012133492	Encapsulate field 'm_u_key'
+1682012394632	Encapsulate field 'tf_u_key'

@@ -223,10 +223,10 @@
 		              <td>${list.m_postcode }</td>
 		              <td>${list.m_gender }</td>
 		          	  <c:if test="${(fn:contains(list.m_consultingconfirm,trainerprofile.tf_id))}">
-		             	 <td style="color:green;">대기</td>
+		             	 <td style="color:red;">대기</td>
 		              </c:if>
 		              <c:if test="${!((fn:contains(list.m_consultingconfirm,trainerprofile.tf_id)))}">
-		             	 <td style="color:red;">완료</td>
+		             	 <td style="color:green;">완료</td>
 		              </c:if>  
 	            </tr>
 			</c:forEach>

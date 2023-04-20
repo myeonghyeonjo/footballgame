@@ -8,6 +8,8 @@ import com.zikgu.example.domain.Board;
 import com.zikgu.example.domain.Center;
 import com.zikgu.example.domain.FileDto;
 import com.zikgu.example.domain.MemberProfile;
+import com.zikgu.example.domain.PT;
+import com.zikgu.example.domain.SelectedPT;
 import com.zikgu.example.domain.TrainerProfile;
 
 @Mapper
@@ -111,6 +113,18 @@ public interface BoardMapper {
 	public void updateTf_Consultingconfirm(TrainerProfile trainerprofile);
 
 	public void updateM_consultingconfirm(MemberProfile memberprofile);
+
+	public void ptInsert(PT pt);
+
+	public int getpt_id();
+
+	public void PTfileUpload(HashMap<String, Object> hm);
+
+	public  List<PT> getPTdetail(int u_key);
+
+	public List<FileDto> getPT_FileList(int u_key);
+
+	public void insertselectedpt(SelectedPT selectedpt);
 
 	
 

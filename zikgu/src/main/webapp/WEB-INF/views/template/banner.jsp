@@ -119,7 +119,7 @@ body {
   display : block;
   text-decoration : none;
   color : black;
-  font-size: 12px;
+  font-size: 11px;
   padding : 13px 9px;
 }
 
@@ -149,18 +149,18 @@ body {
             <ul class="navbar-nav">
             	 <sec:authorize access="isAnonymous()">
                 <li class="nav-item ">
-                    <a id="a" class="nav-link" href="signin">Sign In</a>
+                    <a id="a" class="nav-link" href="signin">로그인</a>
                 </li>
                 
                 
                 <div class="dropdown">
       <button class="dropbtn"> 
-        <span class="dropbtn_icon">Sign Up</span>
+        <span class="dropbtn_icon">회원가입</span>
        
       </button>
       <div class="dropdown-content">
-        <a href="beforeSignup">Sign Up(member)</a>
-        <a href="beforeSignuptrainer">Sign Up(trainer)</a>
+        <a href="beforeSignup">회원가입(일반)</a>
+        <a href="beforeSignuptrainer">회원가입(트레이너)</a>
       
       </div>
     </div>

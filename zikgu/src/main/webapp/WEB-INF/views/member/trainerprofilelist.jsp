@@ -219,7 +219,7 @@
            	<c:forEach var="list" items="${list }">
            		<tr>
 		              <td>${list.tf_id }</td>
-		              <td><a href="trainerDetail?u_key=${list.u_key }">${list.tf_name }</a></td>
+		              <td><a href="trainerProfileDetail?u_key=${list.u_key }">${list.tf_name }</a></td>
 		              <td>${list.tf_loadaddress }</td>
 		              <td>${list.tf_postcode }</td>
 		               <td>${list.tf_gender }</td>

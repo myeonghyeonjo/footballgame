@@ -41,7 +41,9 @@ import com.zikgu.example.domain.FileDto;
 
 import com.zikgu.example.domain.MemberProfile;
 import com.zikgu.example.domain.News;
+import com.zikgu.example.domain.PT;
 import com.zikgu.example.domain.Player;
+import com.zikgu.example.domain.SelectedPT;
 import com.zikgu.example.domain.TrainerProfile;
 import com.zikgu.example.domain.User;
 import com.zikgu.example.service.AutoComService;
@@ -87,12 +89,6 @@ public class Controller {
 	
 	@RequestMapping("/")
 	public String home(Model model) {
-
-		
-		
-		
-		
-		
 		// List<Board> list = boardservice.selectBoardList();
 		// model.addAttribute("list", list);
 		logger.debug("debug");
@@ -128,8 +124,6 @@ public class Controller {
 			  model.addAttribute("centerfilelistAll", centerfilelistAll);
 			  model.addAttribute("centernameList", centernameList);
 		}
-		
-		
 		return "/member/homepage2";
 	}
 
@@ -541,13 +535,13 @@ model.addAttribute("exception", exception);
 			boardservice.trainerProfileinsert(trainerprofile);
 			
 			String tf_certificatetitle = trainerprofile.getTf_certificatetitle();
-			System.out.println("2"+2);
+			
 			String[] tf_certificatetitle2 = tf_certificatetitle.split(",");
-			System.out.println("3"+3);
+		
 			
 		int tf_id = boardservice.gettf_id(trainerprofile);  
 		
-			System.out.println("tf_id"+tf_id);
+			
 			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
 			 File dir = new File(realFolder);
 			   if (!dir.isDirectory()) {
@@ -761,7 +755,7 @@ model.addAttribute("exception", exception);
 	    }
 		
 		@RequestMapping("/trainerProfileDetail")
-	    public String test(Model model,TrainerProfile trainerprofile,@RequestParam("u_key") int u_key) {
+	    public String test(Model model,PT pt,TrainerProfile trainerprofile,@RequestParam("u_key") int u_key) {
 			
 				trainerprofile = boardservice.trainerprofileDetail(u_key);
 				String u_name = boardservice.getU_name2(u_key);
@@ -777,7 +771,13 @@ model.addAttribute("exception", exception);
 				List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
 				String tf_loadaddress = trainerprofile.getTf_loadaddress();
 				System.out.println("u_key:"+u_key);
+				
+				List<PT> PT_List= boardservice.getPTdetail(u_key);
+				System.out.println("PT_List:"+PT_List);
+				List<FileDto> PT_filelist = boardservice.getPT_FileList(u_key);
 				model.addAttribute("programsub",programsub2);
+				model.addAttribute("PT_List",PT_List);
+				model.addAttribute("PT_filelist",PT_filelist);
 				model.addAttribute("tf_loadaddress",tf_loadaddress);
 				model.addAttribute("u_key",u_key);
 				model.addAttribute("trainerprofile",trainerprofile);
@@ -1108,7 +1108,14 @@ model.addAttribute("exception", exception);
 			
 			String delete_m_consulting = m_consulting.replace(Integer.toString(tf_id)+"," ,"");
 			String delete_m_consultingconfirm = m_consultingconfirm.replace(Integer.toString(tf_id)+"," ,"");
-			System.out.println("delete_m_consulting: "+delete_m_consulting);   
+			System.out.println("delete_m_consulting: "+delete_m_consulting); 
+			List<PT> PT_List= boardservice.getPTdetail(trainer_u_key);
+			System.out.println("PT_List:"+PT_List);
+			List<FileDto> PT_filelist = boardservice.getPT_FileList(trainer_u_key);
+			model.addAttribute("PT_filelist",PT_filelist);
+			model.addAttribute("PT_List",PT_List);
+			
+			
 			memberprofile.setM_consulting(delete_m_consulting);
 			memberprofile.setM_consultingconfirm(delete_m_consultingconfirm);
 			boardservice.updateM_consulting(memberprofile);   
@@ -1141,9 +1148,10 @@ model.addAttribute("exception", exception);
 		
 		
 		@RequestMapping("/profileconsultingcheck")
-	    public String profileconsultingcheck(User user, Model model,@RequestParam("member_u_key") int member_u_key,@RequestParam("tf_id") int tf_id, @RequestParam("trainer_u_key") int trainer_u_key,MemberProfile memberprofile, TrainerProfile trainerprofile) {
+	    public String profileconsultingcheck(SelectedPT selectedpt,User user, Model model,@RequestParam("member_u_key") int member_u_key,@RequestParam("selectedPT") String selectedPT,@RequestParam("tf_id") int tf_id, @RequestParam("trainer_u_key") int trainer_u_key,MemberProfile memberprofile, TrainerProfile trainerprofile) {
 			
-			
+	
+			System.out.println("selectedPT:"+selectedPT);
 			System.out.println("member_u_key:"+member_u_key);
 			System.out.println("tf_id:"+tf_id);
 			System.out.println("trainer_u_key:"+trainer_u_key);
@@ -1160,8 +1168,14 @@ model.addAttribute("exception", exception);
 			String m_consulting = memberprofile.getM_consulting();
 			String m_consultingconfirm = memberprofile.getM_consultingconfirm();
 			
+			String m_selectedPT = memberprofile.getM_selectedPT();
+			String m_selectedPTconfirm = memberprofile.getM_selectedPTconfirm();
+			
 			memberprofile.setM_consulting(m_consulting+tf_id+",");
 			memberprofile.setM_consultingconfirm(m_consultingconfirm+tf_id+",");
+			
+			memberprofile.setM_selectedPT(m_selectedPT+selectedPT+",");
+			memberprofile.setM_selectedPTconfirm(m_selectedPTconfirm+selectedPT+",");
 			
 			boardservice.updateM_consulting2(memberprofile);
 			
@@ -1169,11 +1183,29 @@ model.addAttribute("exception", exception);
 			List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
 			List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
 			
+			
+			
+			List<PT> PT_List= boardservice.getPTdetail(trainer_u_key);
+			System.out.println("PT_List:"+PT_List);
+			List<FileDto> PT_filelist = boardservice.getPT_FileList(trainer_u_key);
+			model.addAttribute("PT_filelist",PT_filelist);
+			model.addAttribute("PT_List",PT_List);
+			
 			model.addAttribute("trainerprofile",trainerprofile);
 		
 			model.addAttribute("filelist",filelist);
 			model.addAttribute("filelist_2",filelist_2);
 			model.addAttribute("filelist_3",filelist_3);
+			
+			
+			
+			
+			
+			selectedpt.setM_u_key(member_u_key);
+			selectedpt.setTf_id(tf_id);
+			selectedpt.setSelectedPT_title(selectedPT);
+			selectedpt.setTf_u_key(trainer_u_key);
+			boardservice.insertselectedpt(selectedpt);
 			return "/member/trainerProfileDetail";
 	    }
 		
@@ -1184,6 +1216,7 @@ model.addAttribute("exception", exception);
 			
 			List<TrainerProfile> list = boardservice.trainerprofileconsulting(u_key);
 			model.addAttribute("u_key",u_key);
+			System.out.println("u_key:"+u_key);
 			model.addAttribute("list",list);
 			return "/member/memberconsultinglist";
 	    }
@@ -1275,5 +1308,54 @@ model.addAttribute("exception", exception);
 			return "/member/memberprofiledetail";
 	    }
 		
+		@RequestMapping("/trainerPT")
+	    public String trainerPT( Model model,@RequestParam("u_key") int trainerprofile_u_key,TrainerProfile trainerprofile) {
+		
+			model.addAttribute("trainerprofile_u_key",trainerprofile_u_key);
+			return "/member/trainerPT";
+	    }
+		
+		
+		@RequestMapping("/PTinseretProcess")
+	    public String PTinseretProcess(MultipartHttpServletRequest mhsq, Model model,PT pt,@RequestParam("trainer_u_key") int trainer_u_key)throws IllegalStateException, IOException {
+			PT ptfile = pt;
+			pt.setU_key(trainer_u_key);
+			String pt_programsubAll = pt.getPT_programsub();
+			String[] programs = pt_programsubAll.split(","); // ','로 문자열을 나눠서 배열에 저장
+			pt.setPt_programsub1(programs[0]); // 
+			pt.setPt_programsub2(programs[1]);//
+			pt.setPt_programsub3(programs[2]);
+			boardservice.ptInsert(pt);
+			int pt_id = boardservice.getpt_id();
+			System.out.println("pt_id:"+pt_id);
+			
+			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
+			 File dir = new File(realFolder);
+			   if (!dir.isDirectory()) {
+				   dir.mkdirs();
+			   }
+			   //1번째 파일업로드
+			   List<MultipartFile> mf = mhsq.getFiles("PT_photo");
+			   if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
+			   } else {
+				   for (int i = 0; i < mf.size(); i++) {
+					   // 파일 중복명 처리                
+					   String genId = UUID.randomUUID().toString(); 
+					   // 본래 파일명                
+					   String originalfileName = mf.get(i).getOriginalFilename();
+					 
+					   
+					   String saveFileName = genId + "." + originalfileName.substring(originalfileName.lastIndexOf(".") + 1);
+					   // 저장되는 파일 이름                
+					   String savePath = realFolder + saveFileName; 
+					   // 저장 될 파일 경로                 
+					   long fileSize = mf.get(i).getSize(); 	
+					   // 파일 사이즈                
+					   mf.get(i).transferTo(new File(savePath)); 	// 파일 저장                 
+					   boardservice.PTfileUpload(originalfileName, saveFileName, fileSize,savePath,trainer_u_key,pt_id);
+				   		}
+			   	}
+			return "/member/trainerPT";
+	    }
 	}
 }
