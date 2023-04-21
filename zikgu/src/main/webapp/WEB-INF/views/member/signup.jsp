@@ -147,7 +147,7 @@
 
 <div id="signupComplete">
 
-</div>
+
    <jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>
         
         
@@ -172,21 +172,21 @@
     
 <div class="container">
   <main>
-    <div class="py-5 text-center">
-     
-      <h2>회원 가입</h2>
-    </div>
+   
 
     <div class="row g-5">
       <div class="col-md-5 col-lg-4 order-md-last">
        
 
-      <p>test</p>
+     
       </div>
       <div class="col-md-7 col-lg-8">
      
       
-         
+          <div class="py-5 text-center">
+     
+      <h2 style="color:black"><Strong>회원 가입</Strong></h2>
+    </div>
         
 
             
@@ -276,7 +276,7 @@
     </ul>
   </footer>
 </div>
-
+</div>
 
     <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
@@ -292,24 +292,9 @@ $("#username").blur(function(){
 		$(".successNameChk").css("color", "red");
 		$("#nameDoubleChk").val("false");
 	}else{
-		$.ajax({
-			url : '${pageContext.request.contextPath}/nameCheck?sm_name='+ sm_name,
-			type : 'post',
-			cache : false,
-			success : function(data) {
-				if (data == 0) {
-					$(".successNameChk").text("사용가능한 이름입니다.");
-					$(".successNameChk").css("color", "green");
-					$("#nameDoubleChk").val("true");
-				} else {
-					$(".successNameChk").text("사용중인 이름입니다 :p");
-					$(".successNameChk").css("color", "red");
-					$("#nameDoubleChk").val("false");
-				}
-			}, error : function() {
-				console.log("실패");
-			}
-		});
+		$(".successNameChk").text("사용가능한 이름입니다.");
+		$(".successNameChk").css("color", "green");
+		$("#nameDoubleChk").val("true");
 	}
 });
 
@@ -524,10 +509,10 @@ $("#phone").blur(function(){
 		    	})
 		    	.done(function( html ) {
 		    		console.log(html);
-		    		 $('.signupComplete').html(html);
+		    		 $('#signupComplete').html(html);
 		    	});
 	   
-	       	alert("회원가입을 완료할 수 없습니다. 다시한번 확인해주십시오.");
+		    }else{	alert("회원가입을 완료할 수 없습니다. 다시한번 확인해주십시오.");
 		    	if(!$("#agreement1").prop("checked")){
 		    		$("label[for=agreement1]").text("동의 해주시기 바랍니다.");
 		    		$("label[for=agreement1]").css("color","red");

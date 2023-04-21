@@ -430,6 +430,8 @@
 				                  
      
         from trainerprofile  ORDER BY tf_id DESC
+       
+        
          	LIMIT 			 3
     </select>
     

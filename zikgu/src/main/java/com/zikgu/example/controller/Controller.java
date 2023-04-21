@@ -632,7 +632,7 @@ model.addAttribute("exception", exception);
 			   trainerprofile =  boardservice.trainerprofileDetail(tf_id);
 			   model.addAttribute("u_name",u_name);
 			   model.addAttribute("trainerprofile",trainerprofile);
-	        return "/member/trainerProfileDetail";
+	        return "/member/trainerProfile";
 	    }
 	
 		@RequestMapping("/trainerDetail")
