@@ -238,7 +238,7 @@ style>.image-container2 {
 							<a href="/trainerProfile?u_key=${u_key}" class="aa"
 								style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">프로필
 								등록 ></a> 
-								<a href="/trainerProfileDetail?u_key=${u_key}" class="aa"
+								<a href="/trainerProfileDetailModify?u_key=${u_key}" class="aa"
 								style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">프로필
 								조회 ></a>
 						</div>
@@ -260,6 +260,7 @@ style>.image-container2 {
 					</div>
 
 					<div class="wrapper">
+						<!--  
 						<div id="rounded-rectangle1" class="bg-light"
 							style="margin-top: 30px;">
 							<h3 style="color: black; padding: 30px;">
@@ -272,7 +273,7 @@ style>.image-container2 {
 								style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">상담요청
 								조회 ></a>
 						</div>
-
+						-->
 						<div id="rounded-rectangle2" class="bg-light"
 							style="margin-top: 30px;">
 							<h3 style="color: black; padding: 30px;">
@@ -281,8 +282,9 @@ style>.image-container2 {
 							<p
 								style="margin-left: 30px; margin-top: -10px; margin-right: 50px">PT를 등록하고, 수정하세요</p>
 							<a href="/trainerPT?u_key=${u_key}" class="aa"
-								style="color: #4169e1; margin-left: 30px; margin-top: -20px; margin-right: 50px">PT 등록 ></a> <a href="/centerconfirmlist?u_key=${u_key}" class="aa"
-								style="color: #4169e1; margin-left: 30px; margin-top: -20px; margin-right: 50px">요청
+								style="color: #4169e1; margin-left: 30px; margin-top: -20px; margin-right: 50px">PT 등록 ></a> 
+							<a href="/trainerconsultinglist?u_key=${u_key}" class="aa"
+								style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">PT 요청
 								조회 ></a>
 						</div>
 					</div>

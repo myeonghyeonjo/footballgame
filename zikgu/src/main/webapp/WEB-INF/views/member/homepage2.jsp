@@ -231,12 +231,23 @@
 		
         <div class="col">
           <div class="card shadow-sm">
-						<a  href="/trainerProfileDetail?u_key=${list.u_key}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="180" height="175"   alt=""
-							
-						
+          <sec:authorize access="hasRole('ROLE_USER')">
+          <sec:authentication property="principal" var="principal"/>
+          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=${principal.u_key}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="180" height="175"   alt=""
 			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="180" height="175"   alt=""
 						 ></a>			 
-		
+			</sec:authorize>
+			 <sec:authorize access="hasRole('ROLE_ADMIN')">
+          <sec:authentication property="principal" var="principal"/>
+          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="180" height="175"   alt=""
+			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="180" height="175"   alt=""
+						 ></a>			 
+			</sec:authorize>
+			 <sec:authorize access="isAnonymous()">
+		<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="180" height="175"   alt=""
+			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="180" height="175"   alt=""
+						 ></a>	
+			</sec:authorize>
             <div onclick="location.href='/trainerProfileDetail?u_key=${list.u_key}';" style="cursor: pointer; padding:10px;">
               <p class="card-text" style=" margin-bottom:1px; margin-left:1px"><Strong>${list.tf_name }선생님</Strong></p>
               <p class="card-text" style=" margin-bottom:4px;">${list.tf_hanjulintro }</p>

@@ -126,6 +126,14 @@ public interface BoardMapper {
 
 	public void insertselectedpt(SelectedPT selectedpt);
 
+	public void modifytf_name(TrainerProfile trainerprofile);
+
+	public void modifytf_hanjulintro(TrainerProfile trainerprofile);
+
+	public void modifytf_intro(TrainerProfile trainerprofile);
+
+	public void modifytf_schedule(TrainerProfile trainerprofile);
+
 	
 
 

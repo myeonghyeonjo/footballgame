@@ -1058,6 +1058,44 @@
 		)
 		
 	</insert>
- 
+	
+		 <!-- 트레이너 프로필 이름 수정 -->
+	        <update id="modifytf_name" parameterType="trainerprofile">
+			    UPDATE trainerprofile SET  
+			    tf_name = #{tf_name}
+			    
+			    WHERE tf_id = #{tf_id}
+    		</update>
+	
+ 	 <!-- 트레이너 한줄소개 수정 -->
+	        <update id="modifytf_hanjulintro" parameterType="trainerprofile">
+			    UPDATE trainerprofile SET  
+			    tf_hanjulintro = #{tf_hanjulintro}
+			    
+			    WHERE tf_id = #{tf_id}
+    		</update>
+    		
+     <!-- 트레이너 소개 수정 -->
+	        <update id="modifytf_intro" parameterType="trainerprofile">
+			    UPDATE trainerprofile SET  
+			    tf_intro = #{tf_intro}
+			    
+			    WHERE tf_id = #{tf_id}
+    		</update>		
+      		
+     <!-- 트레이너 스케쥴 수정 -->
+	        <update id="modifytf_schedule" parameterType="trainerprofile">
+			    UPDATE trainerprofile SET  
+			    tf_daymorning = #{tf_daymorning},
+			     tf_dayafter = #{tf_dayafter},
+			      tf_saterdaymorning = #{tf_saterdaymorning},
+			       tf_saterafter = #{tf_saterafter},
+			        tf_sundaymorning = #{tf_sundaymorning},
+			         tf_sundayafter = #{tf_sundayafter},
+			          tf_dayoff = #{tf_dayoff},
+			           tf_lessonintro = #{tf_lessonintro}
+			    
+			    WHERE tf_id = #{tf_id}
+    		</update>			
 	
 </mapper>

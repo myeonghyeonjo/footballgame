@@ -307,6 +307,7 @@ style>.image-container2 {
 
 							<hr class="my-4">
 		<sec:authentication property="principal" var="principal"/>  
+ <c:if test="${((fn:contains(trainerprofile.tf_consulting,memberprofile.u_key)))}">
 	<c:if test="${!((fn:contains(trainerprofile.tf_consultingconfirm,memberprofile.u_key)))}">
 		<sec:authorize access="hasRole('ROLE_USER')">
 		
@@ -318,7 +319,7 @@ style>.image-container2 {
 			</button>
 				</sec:authorize>
 		</c:if>
-		
+	</c:if>
 		<c:if test="${(fn:contains(trainerprofile.tf_consultingconfirm,memberprofile.u_key))}">
 			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#consultingcheckModal">
 	  			상담완료

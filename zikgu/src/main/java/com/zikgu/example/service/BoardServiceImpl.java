@@ -370,6 +370,26 @@ public class BoardServiceImpl implements BoardService {
 	public void insertselectedpt(SelectedPT selectedpt) {
 		boardmapper.insertselectedpt(selectedpt);
 	}
+	
+	@Override
+	public void modifytf_name(TrainerProfile trainerprofile) {
+		boardmapper.modifytf_name(trainerprofile);
+	}
+	
+	@Override
+	public void modifytf_hanjulintro(TrainerProfile trainerprofile) {
+		boardmapper.modifytf_hanjulintro(trainerprofile);
+	}
+	
+	@Override
+	public void modifytf_intro(TrainerProfile trainerprofile) {
+		boardmapper.modifytf_intro(trainerprofile);
+	}
+	
+	@Override
+	public void modifytf_schedule(TrainerProfile trainerprofile) {
+		boardmapper.modifytf_schedule(trainerprofile);
+	}
 }
 
 

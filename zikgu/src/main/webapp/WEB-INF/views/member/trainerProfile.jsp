@@ -309,66 +309,7 @@
 
 
 
-							<br>
-							<label for="email" style="font-size: 20px;" form-labelmt-4" ><strong>프로그램</label>
-							<div id="sectionbox" class="form-control"
-								style="padding: 10px; background-color: white;"">
-
-
-								<div style="display: flex;"></div>
-								<div>
-									<label for="username2" class="form-label" 
-										style="font-size: 15px;">프로그램 제목을 작성해주세요 (40자 이내)</label> <input
-										type="text" id="username2" style="flex: 1; height: 40px;" name="tf_programtitle"
-										class="form-control" placeholder="제목을입력해주세요">
-								</div>
-								<div>
-
-									<label for="username2" class="form-label"
-										style="font-size: 15px;">프로그램의 전문 분야를 선택해주세요 (1~3개)</label><br>
-									<div style="display: flex;">
-										<input type="checkbox" style="flex: 0.3;" name="tf_programsub"
-											class="btn-check" id="btn-check-outlined" autocomplete="off" value="벌크업">
-										<label class="btn btn-outline-dark" for="btn-check-outlined">벌크업</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="tf_programsub"
-											class="btn-check" id="btn-check-outlined2" autocomplete="off" value="식단관리">
-										<label class="btn btn-outline-dark" for="btn-check-outlined2">식단관리</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="tf_programsub"
-											class="btn-check" id="btn-check-outlined3" autocomplete="off" value="기능개선">
-										<label class="btn btn-outline-dark" for="btn-check-outlined3">기능개선</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="tf_programsub"
-											class="btn-check" id="btn-check-outlined4" autocomplete="off" value="바른체형">
-										<label class="btn btn-outline-dark" for="btn-check-outlined4">바른체형</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="tf_programsub"
-											class="btn-check" id="btn-check-outlined5" autocomplete="off" value="다이어트">
-										<label class="btn btn-outline-dark" for="btn-check-outlined5">다이어트</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="tf_programsub"
-											class="btn-check" id="btn-check-outlined6" autocomplete="off" value="하체라인">
-										<label class="btn btn-outline-dark" for="btn-check-outlined6">하체라인</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="tf_programsub"
-											class="btn-check" id="btn-check-outlined7" autocomplete="off" value="기초체력">
-										<label class="btn btn-outline-dark" for="btn-check-outlined7">기초체력</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="tf_programsub"
-											class="btn-check" id="btn-check-outlined8" autocomplete="off" value="근력향상">
-										<label class="btn btn-outline-dark" for="btn-check-outlined8">근력향상</label><br>
-									</div>
-									<div style="display: flex;">
-										<input type="checkbox" style="flex: 0.3;" name="tf_programsub"
-											class="btn-check" id="btn-check-outlined9" autocomplete="off" value="대회준비">
-										<label class="btn btn-outline-dark" for="btn-check-outlined9">대회준비</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="tf_programsub	"
-											class="btn-check" id="btn-check-outlined10" value="산전산후케어"
-											autocomplete="off"> <label
-											class="btn btn-outline-dark" for="btn-check-outlined10">산전산후케어</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="tf_programsub"
-											class="btn-check" id="btn-check-outlined11" value="바디프로필"
-											autocomplete="off"> <label
-											class="btn btn-outline-dark" for="btn-check-outlined11">바디프로필</label><br>
-									</div>
-								</div>
-								<label for="state" class="form-label">참고 사진을 올릴 수
-									있어요(선택)</label>
-									
+							
 									<input class="form-control" type="file"
 											name="tf_photo3" accept="image/*" onchange="setThumbnail3(event);"
 											id="formFile2" multiple />

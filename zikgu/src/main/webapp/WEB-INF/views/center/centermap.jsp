@@ -3932,7 +3932,7 @@ input, select, textarea {
 					<nav id="nav">
 					<ul>
 			
-							<li class="aa"><a href="/trainerProfileDetail?u_key=${u_key}" class="sticky_btn" style="color:black; text-decoration:none;" >Profile</a></li>
+							<li class="aa"><a href="/trainerProfileDetailModify?u_key=${u_key}" class="sticky_btn" style="color:black; text-decoration:none;" >Profile</a></li>
       						<li class="aa" ><a href="#" class="sticky_btn" style="color:black; text-decoration:none;">Review</a></li>
       						<li onclick="Centerview(1);" class="aa" style="color:black;">Center</li>
       						<p><input type="hidden" name="tf_loadaddress" class="sticky_btn"  value="${tf_loadaddress}" id="tf_loadaddress"></p>
@@ -4015,8 +4015,7 @@ input, select, textarea {
 							<section id="second" class="main special">
 								<header class="major">
 								<h2 ><Strong style="color:black">운영 시간</Strong></h2>
-									<p>Donec imperdiet consequat consequat. Suspendisse feugiat congue<br />
-									posuere. Nulla massa urna, fermentum eget quam aliquet.</p>
+									
 								</header>
 								<ul class="statistics">
 									<li class="style1">
@@ -4040,10 +4039,7 @@ input, select, textarea {
 										<strong>참고사항</strong> ${trainerprofile.tf_lessonintro }
 									</li>
 								</ul>
-								<p class="content">Nam elementum nisl et mi a commodo porttitor. Morbi sit amet nisl eu arcu faucibus hendrerit vel a risus. Nam a orci mi, elementum ac arcu sit amet, fermentum pellentesque et purus. Integer maximus varius lorem, sed convallis diam accumsan sed. Etiam porttitor placerat sapien, sed eleifend a enim pulvinar faucibus semper quis ut arcu. Ut non nisl a mollis est efficitur vestibulum. Integer eget purus nec nulla mattis et accumsan ut magna libero. Morbi auctor iaculis porttitor. Sed ut magna ac risus et hendrerit scelerisque. Praesent eleifend lacus in lectus aliquam porta. Cras eu ornare dui curabitur lacinia.</p>
-								<footer class="major">
-								
-								</footer>
+							
 							</section>
 
 						<!-- Get Started -->
