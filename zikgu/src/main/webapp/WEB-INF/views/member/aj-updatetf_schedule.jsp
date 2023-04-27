@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<ul class="statistics">
+<ul class="statistics" style="margin-bottom:-0px;">
 									<li class="style1">
 										<span class="icon solid fa-code-branch"></span>
 										<strong>∆Ú¿œ</strong> ${trainerprofile.tf_daymorning } ~  ${trainerprofile.tf_dayafter }

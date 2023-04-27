@@ -1527,6 +1527,154 @@ model.addAttribute("exception", exception);
 	    }
 		
 		
-	
+		
+		
+		
+		@RequestMapping("/tfFile1Delete")
+	    public String tfFile1Delete( Model model, FileDto filedto,@RequestParam("u_key") int u_key,@RequestParam("file_path") String file_path,TrainerProfile trainerprofile) {
+		
+			System.out.println("file_path:"+file_path);
+			
+			filedto.setfile_path(file_path);
+			boardservice.tfFile1Delete(filedto);
+		
+			//리로드시작
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			String u_name = boardservice.getU_name2(u_key);
+			
+			String programsub = trainerprofile.getTf_programsub();
+			String[] programsub2 = programsub.split(",");
+			
+			
+			int tf_id = trainerprofile.getTf_id();
+			List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+			System.out.println(filelist.get(0).file_name);
+			List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
+			List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
+			String tf_loadaddress = trainerprofile.getTf_loadaddress();
+			System.out.println("u_key:"+u_key);
+			
+			List<PT> PT_List= boardservice.getPTdetail(u_key);
+			System.out.println("PT_List:"+PT_List);
+			List<FileDto> PT_filelist = boardservice.getPT_FileList(u_key);
+			model.addAttribute("programsub",programsub2);
+			model.addAttribute("PT_List",PT_List);
+			model.addAttribute("PT_filelist",PT_filelist);
+			model.addAttribute("tf_loadaddress",tf_loadaddress);
+			model.addAttribute("u_key",u_key);
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("u_name",u_name);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("filelist_2",filelist_2);
+			model.addAttribute("filelist_3",filelist_3);
+	     	//리로드끝
+			
+			 return "/member/trainerProfileDetailModify";
+	    }
+		
+		@RequestMapping("/trainerProfileFileInsert")
+	    public String trainerProfileFileInsert( Model model,MultipartHttpServletRequest mhsq,@RequestParam("u_key") int u_key, FileDto filedto,@RequestParam("tf_id") int tf_id,@RequestParam("file_group") int file_group,TrainerProfile trainerprofile) throws IllegalStateException, IOException {
+		
+			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
+			 File dir = new File(realFolder);
+			   if (!dir.isDirectory()) {
+				   dir.mkdirs();
+			   }
+			   
+			   List<MultipartFile> mf = mhsq.getFiles("uploadFile");
+			   if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
+			   } else {
+				   for (int i = 0; i < mf.size(); i++) {
+					   // 파일 중복명 처리                
+					   String genId = UUID.randomUUID().toString(); 
+					   // 본래 파일명                
+					   String originalfileName = mf.get(i).getOriginalFilename();
+					 
+					   
+					   String saveFileName = genId + "." + originalfileName.substring(originalfileName.lastIndexOf(".") + 1);
+					   // 저장되는 파일 이름                
+					   String savePath = realFolder + saveFileName; 
+					   // 저장 될 파일 경로                 
+					   long fileSize = mf.get(i).getSize(); 	
+					   // 파일 사이즈                
+					   mf.get(i).transferTo(new File(savePath)); 	// 파일 저장                 
+					   boardservice.filemodifyUpload(originalfileName, saveFileName, fileSize,savePath,tf_id,file_group);
+				   		}
+			   	}
+			//리로드시작
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			String u_name = boardservice.getU_name2(u_key);
+			
+			String programsub = trainerprofile.getTf_programsub();
+			String[] programsub2 = programsub.split(",");
+			
+			
+			List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+			System.out.println(filelist.get(0).file_name);
+			List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
+			List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
+			String tf_loadaddress = trainerprofile.getTf_loadaddress();
+			System.out.println("u_key:"+u_key);
+			
+			List<PT> PT_List= boardservice.getPTdetail(u_key);
+			System.out.println("PT_List:"+PT_List);
+			List<FileDto> PT_filelist = boardservice.getPT_FileList(u_key);
+			model.addAttribute("programsub",programsub2);
+			model.addAttribute("PT_List",PT_List);
+			model.addAttribute("PT_filelist",PT_filelist);
+			model.addAttribute("tf_loadaddress",tf_loadaddress);
+			model.addAttribute("u_key",u_key);
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("u_name",u_name);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("filelist_2",filelist_2);
+			model.addAttribute("filelist_3",filelist_3);
+	     	//리로드끝
+			
+			 return "/member/trainerProfileDetailModify";
+	    }
+		
+		@RequestMapping("/tfProgramFileDelete")
+	    public String tfProgramFileDelete( Model model, FileDto filedto,@RequestParam("u_key") int u_key,@RequestParam("file_path") String file_path,TrainerProfile trainerprofile) {
+		
+			System.out.println("file_path:"+file_path);
+			
+			filedto.setfile_path(file_path);
+			boardservice.tfProgramFileDelete(filedto);
+		
+			//리로드시작
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			String u_name = boardservice.getU_name2(u_key);
+			
+			String programsub = trainerprofile.getTf_programsub();
+			String[] programsub2 = programsub.split(",");
+			
+			
+			int tf_id = trainerprofile.getTf_id();
+			List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+			System.out.println(filelist.get(0).file_name);
+			List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
+			List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
+			String tf_loadaddress = trainerprofile.getTf_loadaddress();
+			System.out.println("u_key:"+u_key);
+			
+			List<PT> PT_List= boardservice.getPTdetail(u_key);
+			System.out.println("PT_List:"+PT_List);
+			List<FileDto> PT_filelist = boardservice.getPT_FileList(u_key);
+			model.addAttribute("programsub",programsub2);
+			model.addAttribute("PT_List",PT_List);
+			model.addAttribute("PT_filelist",PT_filelist);
+			model.addAttribute("tf_loadaddress",tf_loadaddress);
+			model.addAttribute("u_key",u_key);
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("u_name",u_name);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("filelist_2",filelist_2);
+			model.addAttribute("filelist_3",filelist_3);
+	     	//리로드끝
+			
+			 return "/member/trainerProfileDetailModify";
+	    }
+		
 	}
 }

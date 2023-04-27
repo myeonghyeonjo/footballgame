@@ -405,6 +405,30 @@ public class BoardServiceImpl implements BoardService {
 	public void updatetf_lessonprice(TrainerProfile trainerprofile) {
 		boardmapper.updatetf_lessonprice(trainerprofile);
 	}
+	
+	@Override
+	public void tfFile1Delete(FileDto filedto) {
+		boardmapper.tfFile1Delete(filedto);
+	}
+	
+	@Override
+	public void filemodifyUpload(String originalfileName, String saveFileName, long fileSize, String savePath,
+			int tf_id, int file_group) {
+		HashMap<String, Object> hm = new HashMap<>();
+		hm.put("originalfileName", originalfileName);
+		hm.put("saveFileName", saveFileName);
+		hm.put("fileSize", fileSize);
+		hm.put("savePath", savePath);
+		hm.put("tf_id", tf_id);
+		hm.put("file_group", file_group);
+		boardmapper.filemodifyUpload(hm);
+	}
+	
+	@Override
+	public void tfProgramFileDelete(FileDto filedto) {
+		boardmapper.tfProgramFileDelete(filedto);
+	}
+
 }
 
 

@@ -80,7 +80,19 @@
       } );
     </script>
     <style>
-    
+    .my-button {
+  background-color: transparent; /* 배경 제거 */
+  color: #fff; /* 텍스트 색상 */
+  
+  padding: 0px 0px; /* 내부 여백 */
+  border: none; /* 테두리 제거 */
+  cursor: pointer; /* 포인터 커서 설정 */
+}
+.my-button img {
+  vertical-align: middle; /* 이미지와 텍스트 수직 정렬 */
+  margin-right: 40px; /* 이미지 오른쪽 여백 */
+  margin-bottom:5px;
+}
     
     /* PT사진 슬라이드 */
     .slider10 img {
@@ -129,6 +141,32 @@
     
     
     </style>
+<style>
+<style>
+   .uploadResult {
+       width: 100%;
+   }
+
+   .uploadResult ul {
+       display: flex;
+       flex-flow: row;
+       justify-content: center;
+       align-items: center;
+       padding: 0;
+   }
+
+   .uploadResult ul li {
+       list-style: none;
+       padding: 10px;
+   }
+
+   .uploadResult ul li img {
+       width: 100px;
+   }
+   
+   .uploadResult ul li span {color: dimgray;}
+</style>
+</style>
 <style>
 
 .container10 {
@@ -1978,7 +2016,7 @@ input, select, textarea {
 		font-weight: 300;
 		height: 2.75em;
 		line-height: 2.75em;
-		min-width: 9.25em;
+		width: 9.25em;
 		padding: 0 1.5em;
 		text-align: center;
 		text-decoration: none;
@@ -3965,15 +4003,15 @@ input, select, textarea {
 						
 						<h1 id="tf_nameUpdateOk" style="color:white;" >${trainerprofile.tf_name} 트레이너</h1>
 						<textarea 	style="display: none; color:white;" rows="2" cols="120" name="" >${trainerprofile.tf_name}</textarea>
-				  		<button	style="display: none;"  id="tf_nameBtnOK" tf_id="${trainerprofile.tf_id}" class="btn btn-outline-dark">등록</button>
-				  		<button  	style="display: none;"  id="tf_nameBtnCancel" class="btn btn-outline-dark" >취소</button>
-						<button style="display:on" type="button" id="tf_nameBtn" class="btn btn-outline-dark">수정</button> 	
+				  		<button	style="display: none; color:white;"  id="tf_nameBtnOK" tf_id="${trainerprofile.tf_id}" class="btn btn-outline-dark">등록</button>
+				  		<button  	style="display: none; color:white;"  id="tf_nameBtnCancel" class="btn btn-outline-dark" >취소</button>
+						<button style="display:on; color:white;" type="button" id="tf_nameBtn" class="btn btn-outline-dark">수정</button> 	
 					
 						<p id="tf_hanjulintroUpdateOk" >${trainerprofile.tf_hanjulintro}<br /></p>
 						<textarea 	style="display: none; color:white;" rows="2" cols="120" name="" >${trainerprofile.tf_hanjulintro}</textarea>
-				  		<button	style="display: none;"  id="tf_hanjulintroBtnOK" tf_id="${trainerprofile.tf_id}" class="btn btn-outline-dark">등록</button>
-				  		<button  	style="display: none;"  id="tf_nameBtnCancel" class="btn btn-outline-dark" >취소</button>
-						<button style="display:on" type="button" id="tf_hanjulBtn" class="btn btn-outline-dark">수정</button> 	
+				  		<button	style="display: none; color:white;"  id="tf_hanjulintroBtnOK" tf_id="${trainerprofile.tf_id}" class="btn btn-outline-dark">등록</button>
+				  		<button  	style="display: none; color:white; "  id="tf_nameBtnCancel" class="btn btn-outline-dark" >취소</button>
+						<button style="display:on; color:white; " type="button" id="tf_hanjulBtn" class="btn btn-outline-dark">수정</button> 	
 						
 					</header>
 
@@ -4022,19 +4060,61 @@ input, select, textarea {
 											<c:forEach var="filelist" items="${filelist}">
 											
 											  <div style="margin-left:-50px;"><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a></div>
-											  
-											  
-					
-												
-												
+				
 											  </c:forEach> 
+											  
 		   								 </div>		
 								</div>
 								
+								
+								
+								
+<!-- 첨부파일 --------------------------------->
+<div class="row">
+   <div class="col-lg-12">
+      <div class="card shadow mb-4">
+         <div class="card-header py-3">
+            <h4><Strong>파일목록</Strong></h4>
+         </div>
+         <div class="card-body">
+            <div class="form-group uploadDiv">
+	            <form  action="/trainerProfileFileInsert" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+	               <input type="file" name="uploadFile" multiple>
+	               <input type="hidden" name="tf_id" value="${trainerprofile.tf_id }">
+	               <sec:authentication property="principal" var="principal"/>  
+	               <input type="hidden" name="u_key" value=" ${principal.u_key }">
+	                 <input type="hidden" name="file_group" value="1">
+	        		<button style="margin-left:-70px; width:90px;"class="btn btn-outline-dark" type="submit">등록하기</button>
+	             </form>
+            
+            </div>
+            <div style="display: flex; justify-content: left;  flex-wrap: wrap;"  >
+              <c:forEach var="filelist" items="${filelist}">
+											 <div style="position:relative;"><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img style="width:80px; height:80px;"src="../../../Img/${filelist.file_name}" ></span></a>
+											<sec:authentication property="principal" var="principal"/>  
+											<div style="position:absolute; left:58px; top:1px;"><button class="my-button" style="height:20px; width:20px;"class="btn btn-outline-dark"  data-bs-toggle="modal" data-bs-target="#deleteFile1Modal" id="removefileBtn"  data-filepath="${filelist.file_path}" data-ukey="${principal.u_key}" >
+											  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px; " alt="Button Icon">
+											</button></div>
+											  </div>	
+				</c:forEach> 
+			</div>
+           
+         </div>
+      </div>
+   </div>
+</div>
+<!-- 첨부파일 End -------------->	 
+
+
+								
 								<h4><Strong style="color:black">자격사항</Strong></h4>
 								<c:forEach var="filelist" items="${filelist_2}">
-											<a class="aa" style="text-decoration-color : white;"   href="../../../Img/${filelist.file_name}"  data-lightbox="example-set2"><input type="text" class="form-control" style="flex: 0.5; color:white; background-color:black; " name="tf_certificatetitle"
-												id="address2" placeholder="내용을 입력해주세요" value="${filelist.tf_certificatetitle }"readonly></a>
+											<div style="position:relative;">
+											<a  class="aa" style="text-decoration-color : white;"   href="../../../Img/${filelist.file_name}"  data-lightbox="example-set2"><input type="text" class="form-control" style=" color:white; background-color:black; " name="tf_certificatetitle"
+												id="address2"  value="${filelist.tf_certificatetitle }"readonly ></a>
+											
+											<div style="position:absolute; right:4px; top:4px;"><button style="height:35px; width:60px; background-color:white;" class="btn btn-outline-dark"  data-bs-toggle="modal" data-bs-target="#deleteFile1Modal" id="removefileBtn"  data-filepath="${filelist.file_path}" data-ukey="${principal.u_key}">삭제</button></div>
+											</div>
 								
 								</c:forEach>
 							</section>
@@ -4104,7 +4184,43 @@ input, select, textarea {
 										</c:if>
 									</c:forEach>
 									</div>
-									
+<!-- 첨부파일 --------------------------------->
+<div class="row">
+   <div class="col-lg-12">
+      <div class="card shadow mb-4">
+         <div class="card-header py-3">
+            <h4><Strong style=" margin-left: -770px;">파일목록</Strong></h4>
+         </div>
+         <div class="card-body">
+            <div class="form-group uploadDiv">
+	            <form  action="/trainerProfileFileInsert2" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+	               <input style=" margin-left: -540px;" type="file" name="uploadFile" multiple>
+	               <input type="hidden" name="tf_id" value="${trainerprofile.tf_id }">
+	               <sec:authentication property="principal" var="principal"/>  
+	               <input type="hidden" name="u_key" value=" ${principal.u_key }">
+	                 <input type="hidden" name="file_group" value="1">
+	        		<button style="margin-left:-70px; width:90px;"class="btn btn-outline-dark" type="submit">등록하기</button>
+	             </form>
+            
+            </div>
+            <div style="display: flex; justify-content: left;  flex-wrap: wrap;"  >
+              <c:forEach var="filelist" items="${PT_filelist}">
+              								<c:if test="${PT_List.pt_id == filelist.pt_id }">
+											 <div style="position:relative;"><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img style="width:80px; height:80px;"src="../../../Img/${filelist.file_name}" ></span></a>
+											<sec:authentication property="principal" var="principal"/>  
+											<div style="position:absolute; left:58px; top:1px;"><button class="my-button" style="height:20px; width:20px;"class="btn btn-outline-dark"  data-bs-toggle="modal" data-bs-target="#deleteFile2Modal" id="removefileBtn"  data-filepath="${filelist.file_path}" data-ukey="${principal.u_key}" >
+											  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px; " alt="Button Icon">
+											</button></div>
+											  </div>	
+											 </c:if>
+				</c:forEach> 
+			</div>
+           
+         </div>
+      </div>
+   </div>
+</div>
+<!-- 첨부파일 End -------------->										
 								
 									
 								
@@ -4123,7 +4239,7 @@ input, select, textarea {
 										<h5><Strong style="color:black">${PT_List.pt_programsub3}</Strong></h5>
 									</li>
 									
-									<p id="pt_programintroUpdateOk" style="color:black; margin-top:40px;">${PT_List.pt_programintro}</p>
+									<p id="pt_programintroUpdateOk${PT_List.pt_id}" style="color:black; margin-top:40px;">${PT_List.pt_programintro}</p>
 								</ul>
 								
 								<footer class="major">
@@ -4178,7 +4294,7 @@ input, select, textarea {
 								<h2 ><Strong style="color:black">레슨 스케쥴</Strong></h2>
 								
 								</header>
-								<ul class="statistics">
+								<ul class="statistics" id="tf_scheduleUpdateOk">
 									<li class="style1">
 										<span class="icon solid fa-code-branch"></span>
 										<strong>평일</strong> ${trainerprofile.tf_daymorning } ~  ${trainerprofile.tf_dayafter }
@@ -4200,7 +4316,7 @@ input, select, textarea {
 										<strong>참고사항</strong> ${trainerprofile.tf_lessonintro }
 									</li>
 								</ul>
-									<div id="tf_scheduleUpdateOk"></div>
+								
 							<ul class="statistics" style="display:none;">
 									<li class="style1">
 										<span class="icon solid fa-code-branch"></span>
@@ -4223,9 +4339,10 @@ input, select, textarea {
 										<strong>참고사항</strong> <textarea 	style="display: ; color:white;" rows="2" cols="120" name="" id="tf_lessonintroUpdate">${trainerprofile.tf_lessonintro}</textarea>
 
 									</li>
-								</ul>				  		<button	style="display: none;"  id="tf_scheduleBtnOK" tf_id="${trainerprofile.tf_id}" class="btn btn-outline-dark">등록</button>
+								</ul>				  		
+								<button	style="display: none;"  id="tf_scheduleBtnOK" tf_id="${trainerprofile.tf_id}" class="btn btn-outline-dark">등록</button>
 				  		<button  	style="display: none;"  id="tf_nameBtnCancel" class="btn btn-outline-dark" >취소</button>
-						<button style="display:on" type="button" id="tf_nameBtn" class="btn btn-outline-dark">수정</button> 	
+						<button style="display:on" type="button" id="tf_scheduleBtn" class="btn btn-outline-dark">수정</button> 	
 						
 							</section>
 
@@ -4453,7 +4570,40 @@ input, select, textarea {
 	
 	
 	
-
+<!-- 트레이너 프로필 사진 1 삭제 Modal Modal -->
+<div class="modal fade" id="deleteFile1Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">소개사진삭제</h1>
+      </div>
+      <div class="modal-body">
+        정말 사진을 삭제 하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickDelete2(PtInfo)"data-target="#clickDelete">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 트레이너 프로필 프로그램 사진  삭제 Modal Modal -->
+<div class="modal fade" id="deleteFile2Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">PT사진삭제</h1>
+      </div>
+      <div class="modal-body">
+        정말 사진을 삭제 하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickDeleteProgram(PtInfo)"data-target="#clickDelete">확인</button>
+      </div>
+    </div>
+  </div>
+</div>	
 <!-- PT삭제Modal Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -4705,6 +4855,17 @@ $(document).on('click', '#tf_nameBtn', function () {
 	$(this).css("display", "none");
 	//$(this).parent().parent().css("display", "none");
 });
+$(document).on('click', '#tf_scheduleBtn', function () {
+	$(this).prev().css("display", "");
+	$(this).prev().prev().css("display", "");
+	$(this).prev().prev().prev().css("display", "");
+	$(this).prev().prev().prev().prev().css("display", "none");
+	
+	
+	$(this).css("display", "none");
+	//$(this).parent().parent().css("display", "none");
+});
+
 $(document).on('click', '#tf_PTmodifyBtnOK', function () {
 	$(this).prev().prev().prev().children('p').css("display", "");
 	$(this).next().css("display", "none");
@@ -4724,7 +4885,7 @@ $(document).on('click', '#tf_PTmodifyBtnOK', function () {
 	})
 	.done(function( html ) {
 		//console.log(html);
-		$('#pt_programintroUpdateOk').html(html);
+		$('#pt_programintroUpdateOk'+pt_id).html(html);
 	});
 });
 
@@ -4918,11 +5079,11 @@ $(document).on('click', '#tf_introBtnOK', function () {
 
 $(document).on('click', '#tf_scheduleBtnOK', function () {
 	$(this).css("display", "none");
-	
 	$(this).prev().css("display", "none");
+	$(this).prev().prev().css("display", "");
 	$(this).next().next().css("display", "");
 	$(this).next().css("display", "none");
-	$(this).prev().prev().prev().css("display", "none");
+	
 	console.log("tf_introBtnOK 누름");
 	
 	let tf_id = $(this).attr('tf_id');
@@ -4990,6 +5151,40 @@ var u_key= "";
 
     	 location.href='${path}	/PtDelete?pt_id='+pt_id+'&u_key='+u_key+'';
     }
+    
+  
+$('#deleteFile1Modal').on('show.bs.modal', function(event) {          
+       //pt_id = $(event.relatedTarget).data('ptid');
+       file_path = $(event.relatedTarget).data('filepath');
+       u_key =  $(event.relatedTarget).data('ukey');
+       
+       console.log(file_path);
+    })
+    
+     function clickDelete2()
+    {
+      
+
+	 location.href='${path}	/tfFile1Delete?file_path='+file_path+'&u_key='+u_key+'';
+    }
+
+
+
+$('#deleteFile2Modal').on('show.bs.modal', function(event) {          
+    //pt_id = $(event.relatedTarget).data('ptid');
+    file_path = $(event.relatedTarget).data('filepath');
+    u_key =  $(event.relatedTarget).data('ukey');
+    
+    console.log("file_path:"+file_path);
+    console.log("u_key:"+u_key);
+ })
+ 
+  function clickDeleteProgram()
+ {
+   
+
+	 location.href='${path}	/tfProgramFileDelete?file_path='+file_path+'&u_key='+u_key+'';
+ }
 
 </script>
 </html>

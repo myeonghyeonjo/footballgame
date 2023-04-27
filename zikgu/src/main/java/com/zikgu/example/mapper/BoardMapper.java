@@ -140,6 +140,12 @@ public interface BoardMapper {
 
 	public void updatetf_lessonprice(TrainerProfile trainerprofile);
 
+	public void tfFile1Delete(FileDto filedto);
+
+	public void filemodifyUpload(HashMap<String, Object> hm);
+
+	public void tfProgramFileDelete(FileDto filedto);
+
 	
 
 

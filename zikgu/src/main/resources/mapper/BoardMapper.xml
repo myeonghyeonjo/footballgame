@@ -240,6 +240,26 @@
 		)
 	</insert>
 	
+		<!-- 수장페이지 파일업로드 -->
+	<insert id="filemodifyUpload" parameterType="HashMap">
+		INSERT INTO tf_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		tf_id,
+		FILE_GROUP
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{tf_id},
+		#{file_group}
+		)
+	</insert>
+	
+	
 	<!-- 파일업로드 -->
 	<insert id="fileUpload2_1" parameterType="HashMap">
 		INSERT INTO tf_file (
@@ -1132,5 +1152,21 @@
 			                          
 			    WHERE tf_id = #{tf_id}
     		</update>			
+	 <!--트레이너 파일1 삭제 -->
+    <delete id="tfFile1Delete" parameterType="pt">
+    DELETE FROM tf_file
+   
+     WHERE  FILE_PATH = #{file_path}
+    
+    </delete>
+    
+    <!--트레이너 프로그램파일 삭제 -->
+    <delete id="tfProgramFileDelete" parameterType="pt">
+    DELETE FROM pt_file
+   
+     WHERE  FILE_PATH = #{file_path}
+    
+    </delete>
+    
 	
 </mapper>

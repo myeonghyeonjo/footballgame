@@ -145,6 +145,13 @@ public interface BoardService {
 
 	public void updatetf_lessonprice(TrainerProfile trainerprofile);
 
+	public void tfFile1Delete(FileDto filedto);
+
+	public void filemodifyUpload(String originalfileName, String saveFileName, long fileSize, String savePath,
+			int tf_id, int file_group);
+
+	public void tfProgramFileDelete(FileDto filedto);
+
 	
 
 	

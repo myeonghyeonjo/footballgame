@@ -17,6 +17,7 @@ public class FileDto {
 	private int pt_file_id;
 	private int trainer_u_key;
 	private int pt_id;
+	private int tf_id;
 	
 	
 	public int getfile_num() {
@@ -114,6 +115,12 @@ public class FileDto {
 	}
 	public void setPt_id(int pt_id) {
 		this.pt_id = pt_id;
+	}
+	public int getTf_id() {
+		return tf_id;
+	}
+	public void setTf_id(int tf_id) {
+		this.tf_id = tf_id;
 	}
 
 }
