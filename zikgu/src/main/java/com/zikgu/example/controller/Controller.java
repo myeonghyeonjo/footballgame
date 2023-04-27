@@ -1386,6 +1386,7 @@ model.addAttribute("exception", exception);
 			trainerprofile.setTf_intro(tf_intro);
 			boardservice.modifytf_intro(trainerprofile);
 			model.addAttribute("tf_intro",tf_intro);
+			System.out.println(tf_intro);
 			 return "/member/aj-updatetf_intro";
 	    }
 		
@@ -1446,6 +1447,86 @@ model.addAttribute("exception", exception);
 			model.addAttribute("trainerprofile",trainerprofile);
 			 return "/member/aj-updatetf_schedule";
 	    }
+		
+		@RequestMapping("/PtDelete")
+	    public String PtDelete( Model model, PT pt,@RequestParam("u_key") int u_key,@RequestParam("pt_id") int pt_id,TrainerProfile trainerprofile) {
+		
+			System.out.println("u_key:"+u_key);
+			System.out.println("pt_id"+pt_id);
+			pt.setPt_id(pt_id);
+			pt.setU_key(u_key);
+			boardservice.deletePt(pt);
+			
+			
+			
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			String u_name = boardservice.getU_name2(u_key);
+			
+			String programsub = trainerprofile.getTf_programsub();
+			String[] programsub2 = programsub.split(",");
+			
+			
+			int tf_id = trainerprofile.getTf_id();
+			List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+			System.out.println(filelist.get(0).file_name);
+			List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
+			List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
+			String tf_loadaddress = trainerprofile.getTf_loadaddress();
+			System.out.println("u_key:"+u_key);
+			
+			List<PT> PT_List= boardservice.getPTdetail(u_key);
+			System.out.println("PT_List:"+PT_List);
+			List<FileDto> PT_filelist = boardservice.getPT_FileList(u_key);
+			model.addAttribute("programsub",programsub2);
+			model.addAttribute("PT_List",PT_List);
+			model.addAttribute("PT_filelist",PT_filelist);
+			model.addAttribute("tf_loadaddress",tf_loadaddress);
+			model.addAttribute("u_key",u_key);
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("u_name",u_name);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("filelist_2",filelist_2);
+			model.addAttribute("filelist_3",filelist_3);
+			
+			 return "/member/trainerProfileDetailModify";
+	    }
+		
+		@RequestMapping("/aj-updatept_programintro")
+	    public String updatept_programintro( Model model, PT pt,@RequestParam("pt_programintro") String pt_programintro,@RequestParam("pt_id") int pt_id,TrainerProfile trainerprofile) {
+		
+			System.out.println("pt_programintro:"+pt_programintro);
+			System.out.println("pt_id:"+pt_id);
+			pt.setPt_id(pt_id);
+			pt.setPt_programintro(pt_programintro);
+			boardservice.updatept_programintro(pt);
+			model.addAttribute("pt_programintro",pt_programintro);
+			 return "/member/aj-updatept_programintro";
+	    }
+		@RequestMapping("/aj-updatept_lessonprice")
+	    public String updatept_lessonprice( Model model, PT pt,@RequestParam("tf_id") int tf_id,@RequestParam("tf_lessonunit") String tf_lessonunit,@RequestParam("tf_lessonnumber") String tf_lessonnumber ,@RequestParam("tf_lessonnumber2") String tf_lessonnumber2 ,@RequestParam("tf_lessonnumber3") String tf_lessonnumber3 ,@RequestParam("tf_lessonnumber4") String tf_lessonnumber4 ,
+	    		@RequestParam("tf_lessonprice") int tf_lessonprice,@RequestParam("tf_lessonprice2") int tf_lessonprice2,@RequestParam("tf_lessonprice3") int tf_lessonprice3,@RequestParam("tf_lessonprice4") int tf_lessonprice4,@RequestParam("tf_lessontime") String tf_lessontime,@RequestParam("tf_lessonoption") String tf_lessonoption,@RequestParam("tf_lessontitle") String tf_lessontitle,@RequestParam("tf_lessonintro") String tf_lessonintro,TrainerProfile trainerprofile) {
+		
+			
+		trainerprofile.setTf_lessonintro(tf_lessonintro);
+		trainerprofile.setTf_lessonnumber(tf_lessonnumber);
+		trainerprofile.setTf_lessonnumber2(tf_lessonnumber2);
+		trainerprofile.setTf_lessonnumber3(tf_lessonnumber3);
+		trainerprofile.setTf_lessonnumber4(tf_lessonnumber4);
+		trainerprofile.setTf_lessonprice(tf_lessonprice);
+		trainerprofile.setTf_lessonprice2(tf_lessonprice2);
+		trainerprofile.setTf_lessonprice3(tf_lessonprice3);
+		trainerprofile.setTf_lessonprice4(tf_lessonprice4);
+		trainerprofile.setTf_lessonoption(tf_lessonoption);
+		trainerprofile.setTf_id(tf_id);
+		trainerprofile.setTf_lessontime(tf_lessontime);
+		trainerprofile.setTf_lessontime(tf_lessontime);
+		trainerprofile.setTf_lessonunit(tf_lessonunit);
+			boardservice.updatetf_lessonprice(trainerprofile);
+			model.addAttribute("trainerprofile",trainerprofile);
+			 return "/member/aj-updatept_lessonprice";
+	    }
+		
+		
 	
 	}
 }

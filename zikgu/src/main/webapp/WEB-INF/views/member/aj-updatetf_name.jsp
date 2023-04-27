@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1 style="color:white;">${tf_name} 트레이너</h1>
+<h1 style="color:white; font-size:52px;">${tf_name} 트레이너</h1>
+
 </body>
 </html>

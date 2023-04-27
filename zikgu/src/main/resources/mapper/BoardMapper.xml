@@ -1096,6 +1096,41 @@
 			           tf_lessonintro = #{tf_lessonintro}
 			    
 			    WHERE tf_id = #{tf_id}
+    		</update>		
+ 
+	
+     <!-- pt 삭제 -->
+    <delete id="deletePt" parameterType="pt">
+    DELETE FROM pt
+     WHERE pt_id = #{pt_id}
+    
+    </delete>  
+	
+	   <!-- PT 소개 수정 -->
+	        <update id="updatept_programintro" parameterType="trainerprofile">
+			    UPDATE pt SET  
+			    pt_programintro = #{pt_programintro}
+			   
+			    
+			    WHERE pt_id = #{pt_id}
+    		</update>	
+      <!--트레이너프로필 레슨 가격수정 -->
+	        <update id="updatetf_lessonprice" parameterType="trainerprofile">
+			    UPDATE trainerprofile   SET
+			    tf_lessonoption = #{tf_lessonoption},
+			      tf_lessontitle = #{tf_lessontitle},
+			       tf_lessonnumber = #{tf_lessonnumber},
+			         tf_lessonnumber2 = #{tf_lessonnumber2},
+			           tf_lessonnumber3 = #{tf_lessonnumber3},
+			             tf_lessonnumber4 = #{tf_lessonnumber4},
+			               tf_lessonprice = #{tf_lessonprice},
+			                 tf_lessonprice2 = #{tf_lessonprice2},
+			                   tf_lessonprice3 = #{tf_lessonprice3},
+			                     tf_lessonprice4 = #{tf_lessonprice4},
+			                       tf_lessontime = #{tf_lessontime},
+			                         tf_lessonintro = #{tf_lessonintro}
+			                          
+			    WHERE tf_id = #{tf_id}
     		</update>			
 	
 </mapper>

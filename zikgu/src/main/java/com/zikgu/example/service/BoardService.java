@@ -139,6 +139,12 @@ public interface BoardService {
 
 	public void modifytf_schedule(TrainerProfile trainerprofile);
 
+	public void deletePt(PT pt);
+
+	public void updatept_programintro(PT pt);
+
+	public void updatetf_lessonprice(TrainerProfile trainerprofile);
+
 	
 
 	

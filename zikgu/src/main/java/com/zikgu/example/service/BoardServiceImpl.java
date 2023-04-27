@@ -390,6 +390,21 @@ public class BoardServiceImpl implements BoardService {
 	public void modifytf_schedule(TrainerProfile trainerprofile) {
 		boardmapper.modifytf_schedule(trainerprofile);
 	}
+	
+	@Override
+	public void deletePt(PT pt) {
+		boardmapper.deletePt(pt);
+	}
+	
+	@Override
+	public void updatept_programintro(PT pt) {
+		boardmapper.updatept_programintro(pt);
+	}
+	
+	@Override
+	public void updatetf_lessonprice(TrainerProfile trainerprofile) {
+		boardmapper.updatetf_lessonprice(trainerprofile);
+	}
 }
 
 
