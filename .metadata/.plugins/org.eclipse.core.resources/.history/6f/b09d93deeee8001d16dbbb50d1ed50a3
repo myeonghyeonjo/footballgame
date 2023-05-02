@@ -1,0 +1,72 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.io.File"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+
+</head>
+
+
+<style>
+.rating_box {
+  display: flex;
+}
+
+.rating {
+  position: relative;
+  color: #ddd;
+  font-size: 30px;
+  text-align: center;
+}
+
+.rating input {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.rating_star {
+  width: 0;
+  color: #ffc107;
+  position: absolute;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+</style>
+<body>
+  <div class="rating_box">
+    <div class="rating">
+      ★★★★★
+      <span class="rating_star">★★★★★</span>
+      <input type="range" value="1" step="1" min="0" max="10">
+    </div>
+  </div>
+
+</body>
+<script>
+const rating_input = document.querySelector('.rating input');
+const rating_star = document.querySelector('.rating_star');
+
+// 별점 드래그 할 때
+rating_input.addEventListener('input', () => {
+  rating_star.style.width = `${rating_input.value * 10}%`;
+});
+</script>
+</html>

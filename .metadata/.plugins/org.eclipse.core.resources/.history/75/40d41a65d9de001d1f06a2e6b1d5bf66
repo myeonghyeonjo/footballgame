@@ -1,5 +1,0 @@
-package com.zikgu.example.config;
-
-public class CustomAuthFailureHandler {
-
-}

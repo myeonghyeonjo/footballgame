@@ -79,6 +79,9 @@
       } );
     </script>
     <style>
+
+
+
     
     
     /* PT사진 슬라이드 */
@@ -3964,9 +3967,9 @@ input, select, textarea {
 					<nav id="nav">
 					<ul>
 			
-							<li class="aa"><a href="/trainerProfileDetail?u_key=${trainerprofile.u_key}" class="sticky_btn" style="color:black; text-decoration:none;" >Profile</a></li>
-      						<li class="aa" ><a href="#" class="sticky_btn" style="color:black; text-decoration:none;">Review</a></li>
+							<li class="aa"><a href="/trainerProfileDetail?u_key=${trainerprofile.u_key}" class="sticky_btn" style="color:black; text-decoration:none;" >Profile</a></li>      						
       						<li onclick="Centerview(1);" class="aa" style="color:black;">Center</li>
+      						 <li onclick="review(1);" class="aa" style="color:black;">review</li>				
       						<p><input type="hidden" name="tf_loadaddress" class="sticky_btn"  value="${trainerprofile.tf_loadaddress}" id="tf_loadaddress"></p>
 							<p><input type="hidden" name="u_key" class="sticky_btn"  value="${trainerprofile.u_key}" id="u_key"></p>
 							
@@ -4431,7 +4434,7 @@ input, select, textarea {
 <sec:authorize access="hasRole('ROLE_USER')">
 <form name="memberInfo">
 <sec:authentication property="principal" var="principal"/>
-	<input type="hidden" name="member_u_key" value="${principal.u_key}">
+	<input type="hidden" name="member_u_key" id="member_u_key" value="${principal.u_key}">
 	<input type="hidden" name="trainer_u_key" value="${trainerprofile.u_key}">
 	<input type="hidden" name="tf_id" value="${trainerprofile.tf_id}">
 	
@@ -4462,11 +4465,34 @@ function Centerview(test) {
 	  let u_key = $('#u_key').val();
 	  
 		console.log('tf_loadaddress:test'+tf_loadaddress);
-		
+		console.log('u_key:'+u_key);
 		$.ajax({
 			method: "POST",
 			url: "/aj-centerview2",
 			data: { tf_loadaddress: tf_loadaddress , u_key : u_key}
+		})
+		.done(function( html ) {
+			console.log(html);
+			$('#centerview').html(html);
+		     $( '.slider2' ).slick( {
+			          autoplay: true,
+			          autoplaySpeed: 1000,
+			        } );
+			     
+			   
+		});
+		
+}
+function review(test) {
+	
+	  let trainer_u_key = $('#u_key').val();
+	  
+	 let member_u_key = $('#member_u_key').val();
+		
+		$.ajax({
+			method: "POST",
+			url: "/aj-review",
+			data: { member_u_key: member_u_key , trainer_u_key : trainer_u_key}
 		})
 		.done(function( html ) {
 			console.log(html);

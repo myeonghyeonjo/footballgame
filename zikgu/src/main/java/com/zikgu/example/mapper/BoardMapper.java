@@ -152,6 +152,8 @@ public interface BoardMapper {
 
 	public void fileprogrammodifyUpload(HashMap<String, Object> hm);
 
+	public void fileUploadtest(HashMap<String, Object> hm);
+
 	
 
 

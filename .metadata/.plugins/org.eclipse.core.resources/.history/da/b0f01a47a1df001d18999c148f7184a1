@@ -1,8 +1,0 @@
-package com.zikgu.example.domain;
-
-public class SelectedPT {
-	private String selectedPT_title;
-	private int selectedPT_id;
-	private int m_id;
-	private int tf_id;
-}

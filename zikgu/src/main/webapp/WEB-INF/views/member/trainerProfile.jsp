@@ -52,6 +52,9 @@
 
 
 <style>
+
+
+
 .image-container {
 	width: 200px; /* 원하는 가로 크기로 지정 */
 	height: 200px; /* 원하는 세로 크기로 지정 */
@@ -197,9 +200,10 @@
 					<label for="email" style="font-size: 20px; margin-top:20px;" form-labelmt-4" ><strong>사진</label><br>
 					<label for="formFile2" class="form-label mt-4">코치님 및 레슨 방식을
 						잘 보여주는 사진을 올려주세요.</label> 
-						<input class="form-control" type="file"
+					 <input class="form-control" type="file"
 						name="tf_photo1" accept="image/*" onchange="setThumbnail(event);"
 						id="formFile2" multiple />
+			  
 					<div class="image-container" id="image_container"></div>
 					
 					
@@ -754,7 +758,52 @@ for (let i = 0; i < checkboxes.length; i++) {
 
 
 
-    	
+    
+    
+const handler = {
+        init() {
+            const fileInput = document.querySelector('#file-input');
+            const preview = document.querySelector('#preview');
+            fileInput.addEventListener('change', () => {  
+                console.dir(fileInput)                  
+                const files = Array.from(fileInput.files)
+                files.forEach(file => {
+                    preview.innerHTML += `
+                    <p id="${file.lastModified}">
+                        ${file.name}
+                        <button data-index='${file.lastModified}' class='file-remove'>X</button>
+                    </p>`;
+                });
+            });
+        },
+
+        removeFile: () => {
+            document.addEventListener('click', (e) => {
+            if(e.target.className !== 'file-remove') return;
+            const removeTargetId = e.target.dataset.index;
+            const removeTarget = document.getElementById(removeTargetId);
+            const files = document.querySelector('#file-input').files;
+            const dataTranster = new DataTransfer();
+
+            // document.querySelector('#file-input').files =
+            //             Array.from(files).filter(file => file.lastModified !== removeTarget);
+
+        
+            Array.from(files)
+                .filter(file => file.lastModified != removeTargetId)
+                .forEach(file => {
+                dataTranster.items.add(file);
+             });
+
+            document.querySelector('#file-input').files = dataTranster.files;
+
+            removeTarget.remove();
+        })
+        }
+    }
+
+    handler.init()
+    handler.removeFile()
 </script>
 </body>
 </html>

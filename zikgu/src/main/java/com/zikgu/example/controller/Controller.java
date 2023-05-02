@@ -32,6 +32,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -1814,6 +1815,57 @@ model.addAttribute("exception", exception);
 			boardservice.updatept_title(pt);
 			model.addAttribute("pt_title",pt_title);
 			 return "/member/aj-updatept_title";
+	    }
+	
+		@RequestMapping("/aj-review")
+	    public String review( Model model, PT pt,@RequestParam("trainer_u_key") int trainer_u_key,@RequestParam("member_u_key") int member_u_key,TrainerProfile trainerprofile) {
+			trainerprofile = boardservice.trainerprofileDetail(trainer_u_key);
+			model.addAttribute("trainerprofile",trainerprofile);
+			
+			 return "/review/reviewlist";
+	    }
+		
+		@RequestMapping("/test2")
+	    public String test2( Model model, PT pt,TrainerProfile trainerprofile) {
+		
+			
+			 return "/center/test2";
+	    }
+		@RequestMapping("/register")
+		 public String register( Model model,  @RequestPart(value = "test") Map<String, Object> test,MultipartHttpServletRequest mhsq, FileDto filedto,TrainerProfile trainerprofile) throws IllegalStateException, IOException {
+			
+			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
+			 File dir = new File(realFolder);
+			   if (!dir.isDirectory()) {
+				   dir.mkdirs();
+			   }
+			   
+			   List<MultipartFile> mf = mhsq.getFiles("attach_file");
+			   
+			   System.out.println("test:"+test);
+			   System.out.println("test:"+test.get("test"));
+			   if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
+			   } else {
+				   for (int i = 0; i < mf.size(); i++) {
+					   // 파일 중복명 처리                
+					   String genId = UUID.randomUUID().toString(); 
+					   // 본래 파일명                
+					   String originalfileName = mf.get(i).getOriginalFilename();
+					 
+					   
+					   String saveFileName = genId + "." + originalfileName.substring(originalfileName.lastIndexOf(".") + 1);
+					   // 저장되는 파일 이름                
+					   String savePath = realFolder + saveFileName; 
+					   // 저장 될 파일 경로                 
+					   long fileSize = mf.get(i).getSize(); 	
+					   // 파일 사이즈                
+					   mf.get(i).transferTo(new File(savePath)); 	// 파일 저장                 
+					   boardservice.fileUploadtest(originalfileName, saveFileName, fileSize,savePath);
+				   		}
+			   	}
+			
+			
+			 return "/member/trainerProfileDetailModify";
 	    }
 	
 		

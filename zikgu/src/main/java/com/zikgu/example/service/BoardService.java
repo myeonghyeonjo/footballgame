@@ -159,6 +159,8 @@ public interface BoardService {
 	public void fileprogrammodifyUpload(String originalfileName, String saveFileName, long fileSize, String savePath,
 			int pt_id,int u_key);
 
+	public void fileUploadtest(String originalfileName, String saveFileName, long fileSize, String savePath);
+
 	
 
 	

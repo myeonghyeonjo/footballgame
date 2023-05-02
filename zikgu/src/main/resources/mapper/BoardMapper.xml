@@ -1283,6 +1283,23 @@
 		
 		)
 	</insert>
-    
+    	<!-- 파일업로드 테스트 -->
+	<insert id="fileUploadtest" parameterType="HashMap">
+		INSERT INTO pt_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH
+		
+
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath}
+		
+		
+		)
+	</insert>
 	
 </mapper>

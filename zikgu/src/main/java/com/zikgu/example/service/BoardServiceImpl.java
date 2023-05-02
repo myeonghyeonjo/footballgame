@@ -452,6 +452,22 @@ public class BoardServiceImpl implements BoardService {
 	
 		boardmapper.fileprogrammodifyUpload(hm);
 	}
+	
+	@Override
+	public void fileUploadtest(String originalfileName, String saveFileName, long fileSize, String savePath) {
+		HashMap<String, Object> hm = new HashMap<>();
+		hm.put("originalfileName", originalfileName);
+		hm.put("saveFileName", saveFileName);
+		hm.put("fileSize", fileSize);
+		hm.put("savePath", savePath);
+	
+		boardmapper.fileUploadtest(hm);
+	}
+
+	
+
+	
+	
 
 }
 
