@@ -31,6 +31,8 @@ public interface UserMapper {
 
 		public void getUserdeleteAuth(String u_id);
 
+		public User getUserdetail2();
+
 	
 }
 

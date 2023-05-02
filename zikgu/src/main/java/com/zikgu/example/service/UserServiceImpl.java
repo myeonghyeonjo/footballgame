@@ -76,6 +76,11 @@ public class UserServiceImpl implements UserService {
 	   userMapper.getUserdeleteAuth(u_id);
    }
    
+   @Override
+   public User getUserdetail2() {
+	   return userMapper.getUserdetail2();
+   }
+
   
 
 }

@@ -11,6 +11,7 @@
 
 <html>
 	<head>
+
 		<title>트레이너 프로필</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -21,7 +22,6 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=272bc96032396df76a8c8d79f886c824&libraries=services"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>		
-
 <!-- 버튼모달 -->		
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -4021,7 +4021,7 @@ input, select, textarea {
 			
 							<li class="aa"><a href="/trainerProfileDetailModify?u_key=${trainerprofile.u_key}" class="sticky_btn" style="color:black; text-decoration:none;" >Profile</a></li>
       						<li class="aa" ><a href="#" class="sticky_btn" style="color:black; text-decoration:none;">Review</a></li>
-      						<li onclick="Centerview(1);" class="aa" style="color:black;">Center</li>
+      						<li onclick="Centerview2(1);" class="aa" style="color:black;">Center</li>
       						<p><input type="hidden" name="tf_loadaddress" class="sticky_btn"  value="${trainerprofile.tf_loadaddress}" id="tf_loadaddress"></p>
 							<p><input type="hidden" name="u_key" class="sticky_btn"  value="${trainerprofile.u_key}" id="u_key"></p>
 							
@@ -4074,7 +4074,7 @@ input, select, textarea {
    <div class="col-lg-12">
       <div class="card shadow mb-4">
          <div class="card-header py-3">
-            <h4><Strong>파일목록</Strong></h4>
+            <h4><Strong>파일목록(코치님 및 레슨 방식을 잘 보여주는 사진)</Strong></h4>
          </div>
          <div class="card-body">
             <div class="form-group uploadDiv">
@@ -4168,19 +4168,24 @@ input, select, textarea {
 						
 						
 						
-						
+					
 						<c:forEach var="PT_List" items="${PT_List}" varStatus="status1">
 						
 						<!-- First Section PT프로그램-->
 							<section id="first" class="main special">
 								<header class="major">
-								
-									<h2><Strong  style="color:black">${PT_List.pt_title }</Strong></h2>
+									<input type="hidden" id="pt_id" value="${PT_List.pt_id }">
+									<h2 id="tf_pttitleBtnOK${PT_List.pt_id }"><Strong  style="color:black">${PT_List.pt_title }</Strong></h2>
+									<textarea 	style="display: none; color:black;" rows="2" cols="120" name="" >${PT_List.pt_title }</textarea>
+										<button	style="display: none;"  id="tf_pttitleBtnClick" tf_id="${trainerprofile.tf_id}" class="btn btn-outline-dark">등록</button>
+								  		<button  	style="display: none;"  id="tf_introBtnCancel" class="btn btn-outline-dark" >취소</button>
+										<button style="display:on; margin-top:-40px;" type="button" id="tf_pttitleBtn" class="btn btn-outline-dark">수정</button>
 									<div class="slider10">
 									<c:forEach var="filelist" items="${PT_filelist}" varStatus="status2">
 									
 										<c:if test="${PT_List.pt_id == filelist.pt_id }">
 											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set${filelist.pt_id }"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
+											
 										</c:if>
 									</c:forEach>
 									</div>
@@ -4193,12 +4198,13 @@ input, select, textarea {
          </div>
          <div class="card-body">
             <div class="form-group uploadDiv">
-	            <form  action="/trainerProfileFileInsert2" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+	            <form  action="/trainerProfileFileInsert3" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
 	               <input style=" margin-left: -540px;" type="file" name="uploadFile" multiple>
-	               <input type="hidden" name="tf_id" value="${trainerprofile.tf_id }">
+	                <input type="hidden" name="tf_id" value="${trainerprofile.tf_id }">
+	               <input type="hidden" name="pt_id" value="${PT_List.pt_id }">
 	               <sec:authentication property="principal" var="principal"/>  
 	               <input type="hidden" name="u_key" value=" ${principal.u_key }">
-	                 <input type="hidden" name="file_group" value="1">
+	                 <input type="hidden" name="file_group" value="3">
 	        		<button style="margin-left:-70px; width:90px;"class="btn btn-outline-dark" type="submit">등록하기</button>
 	             </form>
             
@@ -4225,6 +4231,7 @@ input, select, textarea {
 									
 								
 								</header>
+								
 								<ul class="features">
 									<li>
 										<span class="icon solid major style1 fa-code"></span>
@@ -4246,8 +4253,22 @@ input, select, textarea {
 								
 									
 								</footer>
-							
-						<textarea  style="display: none; color:black; height: 300px; " rows="2" cols="120" name="" >${PT_List.pt_programintro}</textarea>
+							<ul style="display: none;" class="features">
+									<li>
+										<span class="icon solid major style1 fa-code"></span>
+										<h5><Strong style="color:black">${PT_List.pt_programsub1}</Strong></h5>
+									</li>
+									<li>
+										<span class="icon major style3 fa-copy"></span>
+										<h5><Strong style="color:black">${PT_List.pt_programsub2}</strong></h5>
+									</li>
+									<li>
+										<span class="icon major style5 fa-gem"></span>
+										<h5><Strong style="color:black">${PT_List.pt_programsub3}</Strong></h5>
+									</li>
+									
+								<textarea  style=" color:black; height: 300px; " rows="2" cols="120" name="" >${PT_List.pt_programintro}</textarea>
+								</ul>	
 						<button	style="display: none;"  id="tf_PTmodifyBtnOK" tf_id="${trainerprofile.tf_id}" class="btn btn-outline-dark">등록</button>
 						<button  	style="display: none;"  id="tf_PTBtnCancel" class="btn btn-outline-dark" >취소</button>
 						<button style="display:on" type="button" id="tf_PTmodifyBtn" class="btn btn-outline-dark">수정</button>		
@@ -4448,7 +4469,7 @@ input, select, textarea {
 				  		<button  	style="display: none;"  id="tf_nameBtnCancel" class="btn btn-outline-dark" >취소</button>
 						<button style="display:on" type="button" id="pt_schedulemodify" class="btn btn-outline-dark">수정</button> 
 								</header>
-								
+					
 								<footer class="major">
 								
 								
@@ -4621,6 +4642,25 @@ input, select, textarea {
     </div>
   </div>
 </div>	
+<!-- 센터변경Modal Modal -->
+<div class="modal fade" id="centerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">센터변경</h1>
+      </div>
+     
+     
+	 <div class="modal-body">
+        정말 센터를 변경하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickDelete(PtInfo)"data-target="#clickDelete">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- 검토완료 Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -4782,6 +4822,31 @@ function Centerview(test) {
 		});
 		
 }
+
+function Centerview2(test) {
+	
+	  let tf_loadaddress = $('#tf_loadaddress').val();
+	  let u_key = $('#u_key').val();
+	  
+		console.log('tf_loadaddress:test'+tf_loadaddress);
+		
+		$.ajax({
+			method: "POST",
+			url: "/aj-centerview3",
+			data: { tf_loadaddress: tf_loadaddress , u_key : u_key}
+		})
+		.done(function( html ) {
+			console.log(html);
+			$('#centerview').html(html);
+		     $( '.slider2' ).slick( {
+			          autoplay: true,
+			          autoplaySpeed: 1000,
+			        } );
+			     
+			   
+		});
+		
+}
 <!-- 검토완료하기 누르면 발생 -->
 
 	function clickConfirm(formName) {
@@ -4867,17 +4932,17 @@ $(document).on('click', '#tf_scheduleBtn', function () {
 });
 
 $(document).on('click', '#tf_PTmodifyBtnOK', function () {
-	$(this).prev().prev().prev().children('p').css("display", "");
+	$(this).prev().prev().prev().css("display", "");
 	$(this).next().css("display", "none");
 	$(this).next().next().css("display", "");
 	$(this).prev().css("display", "none");
 	
-	$(this).prev().prev().prev().children('p').css("display", "");
+	
 	
 	
 	$(this).css("display", "none");
 	let pt_id = $(this).next().next().next().next().val();
-	let pt_programintro = $(this).prev().val();
+	let pt_programintro = $(this).prev().children('textarea').val();
 	$.ajax({
 		method: "POST",
 		url: "aj-updatept_programintro",
@@ -4900,6 +4965,9 @@ $(document).on('click', '#tf_introBtn', function () {
 	//$(this).parent().parent().css("display", "none");
 });
 
+
+
+
 $(document).on('click', '#tf_hanjulBtn', function () {
 	$(this).prev().css("display", "");
 	$(this).prev().prev().css("display", "");
@@ -4915,7 +4983,8 @@ $(document).on('click', '#tf_PTmodifyBtn', function () {
 	$(this).prev().css("display", "");
 	$(this).prev().prev().css("display", "");
 	$(this).prev().prev().prev().css("display", "");
-	$(this).prev().prev().prev().prev().prev().children('p').css("display", "none");
+	//$(this).prev().prev().prev().prev().prev().children('p').css("display", "none");
+	$(this).prev().prev().prev().prev().prev().css("display", "none");
 	
 	$(this).css("display", "none");
 	//$(this).parent().parent().css("display", "none");
@@ -4983,12 +5052,44 @@ $(document).on('click', '#pt_schedulemodifyOK', function () {
 
 
 $(document).on('click', '#tf_PTBtnCancel', function () {
-	$(this).prev().prev().prev().prev().children('p').css("display", "");
+	$(this).prev().prev().prev().prev().css("display", "");
 	$(this).prev().prev().css("display", "none");
 	$(this).prev().css("display", "none");
 	$(this).css("display", "none");
 	$(this).next().css("display", "");
 });
+
+$(document).on('click', '#tf_pttitleBtn', function () {
+	$(this).prev().prev().prev().prev().css("display", "none");
+	$(this).prev().prev().prev().css("display", "");
+	$(this).prev().prev().css("display", "");
+	$(this).prev().css("display", "");
+	$(this).css("display", "none");
+});
+
+$(document).on('click', '#tf_pttitleBtnClick', function () {
+	$(this).prev().prev().css("display", "");
+	$(this).prev().css("display", "none");
+	$(this).next().next().css("display", "");
+	$(this).next().css("display", "none");
+	$(this).css("display", "none");
+	
+	let pt_id = $(this).prev().prev().prev().val();
+	let u_key = $('#u_key').val();
+	let pt_title = $(this).prev().val();
+	
+	$.ajax({
+		method: "POST",
+		url: "aj-updatept_title",
+		data: { pt_id: pt_id,u_key : u_key, pt_title :pt_title }
+	})
+	.done(function( html ) {
+		//console.log(html);
+		$('#tf_pttitleBtnOK'+pt_id).html(html);
+	});
+});
+
+
 
 
 $(document).on('click', '#tf_nameBtnOK', function () {
@@ -5185,6 +5286,9 @@ $('#deleteFile2Modal').on('show.bs.modal', function(event) {
 
 	 location.href='${path}	/tfProgramFileDelete?file_path='+file_path+'&u_key='+u_key+'';
  }
+
+
+
 
 </script>
 </html>

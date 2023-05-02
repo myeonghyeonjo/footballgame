@@ -451,7 +451,7 @@
      
         from trainerprofile  ORDER BY tf_id DESC
        
-        
+        	 
          	LIMIT 			 3
     </select>
     
@@ -1167,6 +1167,122 @@
      WHERE  FILE_PATH = #{file_path}
     
     </delete>
+       <!-- PT 제목 수정 -->
+	        <update id="updatept_title" parameterType="trainerprofile">
+			    UPDATE pt SET  
+			    pt_title = #{pt_title}
+			   
+			    
+			    WHERE pt_id = #{pt_id}
+    		</update>	
+   
+   
+    	<!-- 초기 빈 트레이너 프로필 생성 -->
+	<insert id="createTrainerProfile" parameterType="selectedpt">
+		INSERT INTO trainerprofile (
+		tf_lessonoption,
+		tf_schedureintro,
+		tf_certificate,
+		tf_sunday,
+		tf_saterday,
+		tf_intro,
+		tf_day,
+		tf_daymorning,
+		tf_dayafter,
+		tf_saterdaymorning,
+		tf_saterafter,
+		tf_sundaymorning,
+		tf_sundayafter,
+		tf_certificatetitle,
+		tf_programtitle,
+		tf_programsub,
+		tf_programintro,
+		tf_lessontitle,
+		tf_lessonnumber,
+		tf_lessonnumber2,
+		tf_lessonnumber3,
+		tf_lessonnumber4,
+		tf_lessonprice,
+		tf_lessonunit,
+		tf_lessontime,
+		tf_lessonintro,
+		tf_hanjulintro,
+		tf_dayoff,
+		u_key,
+		tf_loadaddress,
+		tf_lessonprice2,
+		tf_lessonprice3,
+		tf_lessonprice4,
+		tf_name,
+		tf_postcode,
+		tf_gender,
+		tf_option
+		
+		
+		
+		) VALUES (
+		0,
+		"참고사항을 입력해주세요",
+		0,
+		0,
+		0,
+		"트레이너 소개글을 입력해주세요",
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		"참고사항을 입력해주세요",
+		"한줄 소개글을 입력해주세요",
+		"휴무일을 입력해주세요",
+		#{u_key},
+		0,
+		0,
+		0,
+		0,
+		"홍길동",
+		0,
+		0,
+		0
+		
+		
+		)
+		
+	</insert>
+   	<!-- 수장페이지 프로그램 파일업로드 -->
+	<insert id="fileprogrammodifyUpload" parameterType="HashMap">
+		INSERT INTO pt_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		pt_id,
+		u_key
+
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{pt_id},
+		#{u_key}
+		
+		)
+	</insert>
     
 	
 </mapper>

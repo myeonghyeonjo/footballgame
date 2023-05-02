@@ -32,5 +32,9 @@ public interface UserService extends UserDetailsService{
 
 	public void getUserdeleteAuth(String u_id);
 
+	public User getUserdetail2();
+
+	
+
 	
 	}

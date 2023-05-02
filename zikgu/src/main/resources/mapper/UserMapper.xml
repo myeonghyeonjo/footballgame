@@ -142,6 +142,26 @@
     		
     		</delete>
     		
+    		   <!-- 최근에 가입한 회원 불러오기 -->
+   <select id="getUserdetail2" parameterType="String" resultType="User">
+      SELECT         u_id                 						    as   username,
+			                 u_password             					as password,
+			                 u_name                						as   uName,
+			                 u_isAccountNonExpired        as isAccountNonExpired,
+			                 u_isAccountNonLocked    	    as isAccountNonLocked,
+			                 u_isCredentialNonExpired    as isCredentialsNonExpired,
+			                 u_isEnabled          				    as isEnabled,
+			                 u_key                                  as u_key,
+			                 u_trainercheck                         as u_trainercheck,
+			                 u_phone                                 as phone
+      FROM         lc_user ORDER BY u_key DESC
+      
+     
+       
+        
+         	LIMIT 			 1
+   </select>
+    		
     		
     		
 </mapper>
