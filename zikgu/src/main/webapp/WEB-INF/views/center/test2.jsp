@@ -58,12 +58,18 @@
    
     </form>
     
+   
+      
+       
 </div>
 
 </body>
 <script>
 var fileNo = 0;
 var filesArr = new Array();
+
+
+
 
 /* 첨부파일 추가 */
 function addFile(obj){
@@ -72,27 +78,50 @@ function addFile(obj){
     var remainFileCnt = maxFileCnt - attFileCnt;    // 추가로 첨부가능한 개수
     var curFileCnt = obj.files.length;  // 현재 선택된 첨부파일 개수
 
+   
+   
+    console.log("obj.target.value:"+event.target.value);
+    
+ 
     // 첨부파일 개수 확인
     if (curFileCnt > remainFileCnt) {
         alert("첨부파일은 최대 " + maxFileCnt + "개 까지 첨부 가능합니다.");
     } else {
+    	
         for (const file of obj.files) {
+        	 let value = URL.createObjectURL(event.target.files[0]); 
+        	    console.log("value:"+value);
+        	    console.log("fileNo:"+fileNo);
+        	
             // 첨부파일 검증
             if (validation(file)) {
                 // 파일 배열에 담기
                 var reader = new FileReader();
-                reader.onload = function () {
-                    filesArr.push(file);
+
+                reader.onload = function (event) {
+                	
+				    filesArr.push(file);
+				   
+                   
+                  
                 };
                 reader.readAsDataURL(file);
-
+				console.log(event.target.result);
                 // 목록 추가
                 let htmlData = '';
                 htmlData += '<div id="file' + fileNo + '" class="filebox">';
                 htmlData += '   <p class="name">' + file.name + '</p>';
-                htmlData += '   <a class="delete" onclick="deleteFile(' + fileNo + ');"><button>삭제</button></a>';
+     		  htmlData += '<div style="display: inline-flex; padding: 10px;"><li>';
+     		  htmlData +=  '<img src="'+value+'" title="'+file.name+'" width=100 height=100 />';
+     		  htmlData += '</li></div>';
+     		  htmlData += '   <a class="delete" onclick="deleteFile(' + fileNo + ');"><button>삭제</button></a>';
                 htmlData += '</div>';
                 $('.file-list').append(htmlData);
+                
+                
+               
+                
+                
                 fileNo++;
             } else {
                 continue;
