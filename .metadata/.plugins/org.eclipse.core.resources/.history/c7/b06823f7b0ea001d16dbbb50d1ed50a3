@@ -1378,8 +1378,7 @@
 				         	   FILE_PATH as FILE_PATH,
 				         	   r_opencheck as r_opencheck,	 
 				         	    memberprofile_name as memberprofile_name,
-				         	 memberprofile_u_key as memberprofile_u_key,
-				         	  r_date as r_date	  
+				         	 memberprofile_u_key as memberprofile_u_key	  
 		 FROM           review_file
 		 Where        trainerprofile_u_key = #{trainerprofile_u_key} AND r_opencheck=1
 		

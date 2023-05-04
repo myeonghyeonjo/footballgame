@@ -4079,9 +4079,9 @@ input, select, textarea {
 										   	<div style=" display: flex;">
 										   	<c:forEach var="reviewfilelist" items="${reviewfilelist}" varStatus="status2">
 										   				<c:if test="${reviewfilelist.memberprofile_u_key == reviewlist.memberprofile_u_key}">
-										   				<c:if test="${reviewfilelist.r_date == reviewlist.r_date}">
-											<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:100px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>
-											</c:if>
+										   	
+											<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }"><span class="reviewimage"><img style="width:100px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>
+											
 											</c:if>
 											
 											</c:forEach>
@@ -4520,7 +4520,7 @@ function submitForm() {
 	let opencheck = $('.open.on').length;
 	let trainerprofile_u_key = $('#u_key').val();
 	let memberprofile_u_key = $('#memberprofile_u_key').val();
-	let memberprofile_name = $('#memberprofile_name').val();
+	//let memberprofile_name = $('#memberprofile_name').val();
 	
 	console.log("test:"+test);
 	console.log("content:"+content);
@@ -4528,9 +4528,10 @@ function submitForm() {
 	console.log("opencheck:"+opencheck);
 	console.log("memberprofile_name:"+memberprofile_name);
 	console.log("trainerprofile_u_key:"+trainerprofile_u_key);
-	console.log("memberprofile_u_key:"+memberprofile_u_key);
+	//console.log("memberprofile_u_key:"+memberprofile_u_key);
 	var data = {   
-		    "test" : test , "content" : content, "starR":starR ,"opencheck":opencheck, "trainerprofile_u_key":trainerprofile_u_key, "memberprofile_u_key":memberprofile_u_key, "memberprofile_name":memberprofile_name
+		    "test" : test , "content" : content, "starR":starR ,"opencheck":opencheck, "trainerprofile_u_key":trainerprofile_u_key, "memberprofile_u_key":memberprofile_u_key
+		    
 		
 	}
 	formData.append('test', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
