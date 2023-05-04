@@ -3962,6 +3962,7 @@ input, select, textarea {
 						<h1 id="c_name" style="color:white;">${trainerprofile.tf_name} 트레이너</h1>
 						
 						<p>생생한 후기를 확인하세요!<br /></p>
+						
 					</header>
 
 				<!-- Nav -->
@@ -4040,11 +4041,28 @@ input, select, textarea {
 											</div>
 										<button  type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#reviewModal" data-ptid="${PT_List.pt_id}" data-ukey="${trainerprofile.u_key}" ><p style="margin-top:3px;">리뷰 남기기</p></button>
 										</div>
+										
+										
+										
+										
+										
+										
 											</li>
 										</ul>
 										<ul class="statistics" style="position:relative">
 											<li class="style6">
 												<span class="icon fa-gem"></span>
+												<div style=" display: flex;">
+											  <h4 style="color:white;">생생한 후기를 확인하세요!</h4>
+											  <div style="visibility:hidden; width:10%;"> 빈칸차지용
+											  </div>
+									<select class="form-select" name="tf_certificate" id="country" style="flex: 0.85; color:white;" required>
+										<option value="최신순">최신순</option>
+										<option value="평점높은순">평점높은순</option>
+										<option value="평점낮은순">평점낮은순</option>
+									</select>
+												</div>
+												<hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
 										  <c:forEach var="reviewlist" items="${reviewlist}" varStatus="status1">
 										  <div >
 										  <div style=" display: flex;">
@@ -4095,7 +4113,7 @@ input, select, textarea {
 										   	
 										  	</div>
 										  	<div style="visibility:hidden;">d</div>
-										  	<div style="visibility:hidden;">d</div>
+										  <hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
 										  	<div style="visibility:hidden;">d</div>
 										  </c:forEach>
 										  </li>
