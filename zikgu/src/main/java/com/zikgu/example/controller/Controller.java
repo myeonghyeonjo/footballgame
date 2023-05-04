@@ -3,6 +3,7 @@ package com.zikgu.example.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,7 @@ import com.zikgu.example.domain.MemberProfile;
 import com.zikgu.example.domain.News;
 import com.zikgu.example.domain.PT;
 import com.zikgu.example.domain.Player;
+import com.zikgu.example.domain.Review;
 import com.zikgu.example.domain.SelectedPT;
 import com.zikgu.example.domain.TrainerProfile;
 import com.zikgu.example.domain.User;
@@ -1819,10 +1821,24 @@ model.addAttribute("exception", exception);
 	
 		@RequestMapping("/aj-review")
 	    public String review( Model model, PT pt,@RequestParam("trainer_u_key") int trainer_u_key,@RequestParam("member_u_key") int member_u_key,TrainerProfile trainerprofile) {
-			trainerprofile = boardservice.trainerprofileDetail(trainer_u_key);
-			model.addAttribute("trainerprofile",trainerprofile);
+			 trainerprofile = boardservice.trainerprofileDetail(trainer_u_key);
+			 String trainerprofile_u_key = String.valueOf(trainer_u_key);
+			 List<Review> reviewlist = boardservice.gettf_reviewlist(trainerprofile_u_key);
+			 List<Review> reviewfilelist = boardservice.gettf_reviewfilelist(trainerprofile_u_key);
+			 int sumstar=0;
+			 int staraverage=0;
+			 int reviewlistlength = reviewlist.size();
+			 for(Review review : reviewlist) {
+				 sumstar+=review.getR_starR();
+			 }
+			 staraverage = sumstar/reviewlistlength;
+			 model.addAttribute("staraverage",staraverage);
+			 model.addAttribute("reviewlistlength",reviewlistlength);
+			 model.addAttribute("reviewlist",reviewlist);
+			 model.addAttribute("reviewfilelist",reviewfilelist);
+			 model.addAttribute("trainerprofile",trainerprofile);
 			
-			 return "/review/reviewlist";
+			 return "/review/aj-reviewlist";
 	    }
 		
 		@RequestMapping("/test2")
@@ -1831,8 +1847,8 @@ model.addAttribute("exception", exception);
 			
 			 return "/center/test2";
 	    }
-		@RequestMapping("/register")
-		 public String register( Model model,  @RequestPart(value = "test") Map<String, Object> test,MultipartHttpServletRequest mhsq, FileDto filedto,TrainerProfile trainerprofile) throws IllegalStateException, IOException {
+		@RequestMapping("/reviewInsert")
+		 public String reviewInsert( Model model,Review review,  @RequestPart(value = "test") Map<String, Object> test,MultipartHttpServletRequest mhsq, FileDto filedto,TrainerProfile trainerprofile) throws IllegalStateException, IOException {
 			
 			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
 			 File dir = new File(realFolder);
@@ -1841,9 +1857,26 @@ model.addAttribute("exception", exception);
 			   }
 			   
 			   List<MultipartFile> mf = mhsq.getFiles("attach_file");
-			   
+			   String r_content = (String) test.get("content");
+			   int r_starR =  (int) test.get("starR");
+			   int r_opencheck =  (int) test.get("opencheck");
+			   String memberprofile_u_key =   (String) test.get("memberprofile_u_key");
+			   String trainerprofile_u_key =   (String) test.get("trainerprofile_u_key");
+			   String memberprofile_name = (String) test.get("memberprofile_name");
+			   review.setR_content(r_content);
+			   review.setR_opencheck(r_opencheck);
+			   review.setR_starR(r_starR);
+			   review.setMemberprofile_u_key( Integer.parseInt(memberprofile_u_key));
+			   review.setMemberprofile_name(memberprofile_name);
+			   review.setTrainerprofile_u_key(Integer.parseInt(trainerprofile_u_key));
 			   System.out.println("test:"+test);
 			   System.out.println("test:"+test.get("test"));
+			   System.out.println("r_content:"+r_content);
+			   System.out.println("r_starR:"+r_starR);
+			   System.out.println("r_opencheck:"+r_opencheck);
+			   System.out.println("memberprofile_u_key:"+memberprofile_u_key);
+			   System.out.println("trainerprofile_u_key:"+trainerprofile_u_key);
+			   boardservice.ReviewInsert(review);
 			   if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
 			   } else {
 				   for (int i = 0; i < mf.size(); i++) {
@@ -1860,12 +1893,13 @@ model.addAttribute("exception", exception);
 					   long fileSize = mf.get(i).getSize(); 	
 					   // 파일 사이즈                
 					   mf.get(i).transferTo(new File(savePath)); 	// 파일 저장                 
-					   boardservice.fileUploadtest(originalfileName, saveFileName, fileSize,savePath);
+					   boardservice.ReviewfileUpload(originalfileName, saveFileName, fileSize,savePath,r_content,r_starR,r_opencheck,memberprofile_u_key,trainerprofile_u_key,memberprofile_name);
 				   		}
 			   	}
 			
-			
-			 return "/member/trainerProfileDetailModify";
+			   List<Review> reviewlist = boardservice.gettf_reviewlist(trainerprofile_u_key);
+			   model.addAttribute("reviewlist",reviewlist);
+			 return "/member/aj-updatetf_review";
 	    }
 	
 		

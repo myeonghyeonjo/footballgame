@@ -9,6 +9,7 @@ import com.zikgu.example.domain.Center;
 import com.zikgu.example.domain.FileDto;
 import com.zikgu.example.domain.MemberProfile;
 import com.zikgu.example.domain.PT;
+import com.zikgu.example.domain.Review;
 import com.zikgu.example.domain.SelectedPT;
 import com.zikgu.example.domain.TrainerProfile;
 
@@ -153,6 +154,14 @@ public interface BoardMapper {
 	public void fileprogrammodifyUpload(HashMap<String, Object> hm);
 
 	public void fileUploadtest(HashMap<String, Object> hm);
+
+	public void ReviewfileUpload(HashMap<String, Object> hm);
+
+	public List<Review> gettf_reviewlist(String trainerprofile_u_key);
+
+	public List<Review> gettf_reviewfilelist(String trainerprofile_u_key);
+
+	public void ReviewInsert(Review review);
 
 	
 

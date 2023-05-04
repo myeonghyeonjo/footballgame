@@ -1,4 +1,5 @@
 package com.zikgu.example.service;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import com.zikgu.example.domain.Center;
 import com.zikgu.example.domain.FileDto;
 import com.zikgu.example.domain.MemberProfile;
 import com.zikgu.example.domain.PT;
+import com.zikgu.example.domain.Review;
 import com.zikgu.example.domain.SelectedPT;
 import com.zikgu.example.domain.TrainerProfile;
 import com.zikgu.example.mapper.BoardMapper;
@@ -462,6 +464,41 @@ public class BoardServiceImpl implements BoardService {
 		hm.put("savePath", savePath);
 	
 		boardmapper.fileUploadtest(hm);
+	}
+	
+	@Override
+	public void ReviewfileUpload(String originalfileName, String saveFileName, long fileSize, String savePath,
+			String r_content, int r_starR, int r_opencheck,String memberprofile_u_key, String trainerprofile_u_key,
+			String memberprofile_name) {
+		HashMap<String, Object> hm = new HashMap<>();
+		hm.put("originalfileName", originalfileName);
+		hm.put("saveFileName", saveFileName);
+		hm.put("fileSize", fileSize);
+		hm.put("savePath", savePath);
+		hm.put("r_content", r_content);
+		hm.put("r_starR", r_starR);
+		hm.put("r_opencheck", r_opencheck);
+		hm.put("memberprofile_u_key", memberprofile_u_key);
+		hm.put("trainerprofile_u_key", trainerprofile_u_key);
+		hm.put("memberprofile_name", memberprofile_name);
+		
+	
+		boardmapper.ReviewfileUpload(hm);
+	}
+	
+	@Override
+	public List<Review> gettf_reviewlist(String trainerprofile_u_key){
+		return boardmapper.gettf_reviewlist(trainerprofile_u_key);
+	}
+	
+	@Override
+	public List<Review> gettf_reviewfilelist(String trainerprofile_u_key){
+		return boardmapper.gettf_reviewfilelist(trainerprofile_u_key);
+	}
+	
+	@Override
+	public void ReviewInsert(Review review) {
+		boardmapper.ReviewInsert(review);
 	}
 
 	

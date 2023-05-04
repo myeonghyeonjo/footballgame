@@ -1302,4 +1302,87 @@
 		)
 	</insert>
 	
+	  	<!-- 리뷰 파일 등록 -->
+	<insert id="ReviewfileUpload" parameterType="HashMap">
+		INSERT INTO review_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		trainerprofile_u_key,
+		memberprofile_u_key,
+		r_opencheck,
+		r_content,
+		r_starR,
+		memberprofile_name
+		
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{trainerprofile_u_key},
+		#{memberprofile_u_key},
+		#{r_opencheck},
+		#{r_content},
+		#{r_starR},
+		#{memberprofile_name}
+		
+			)
+	</insert>
+	  	<!-- 리뷰 등록 -->
+	<insert id="ReviewInsert" parameterType="HashMap">
+		INSERT INTO review (
+		trainerprofile_u_key,
+		memberprofile_u_key,
+		r_opencheck,
+		r_content,
+		r_starR,
+		memberprofile_name,
+		r_check
+		) VALUES (
+		#{trainerprofile_u_key},
+		#{memberprofile_u_key},
+		#{r_opencheck},
+		#{r_content},
+		#{r_starR},
+		#{memberprofile_name},
+		0
+		)
+	</insert>
+	
+	
+	   <!--  리뷰 리스트 --> 
+	  <select id="gettf_reviewlist" resultType="Review">
+         SELECT         
+				              r_id as r_id,
+				              trainerprofile_u_key as trainerprofile_u_key,
+				              memberprofile_u_key as memberprofile_u_key,
+				         	   r_opencheck as r_opencheck,
+				         	   r_content as r_content,
+				         	   r_starR as r_starR,
+				         	   memberprofile_name as memberprofile_name,
+				         	   r_date as r_date
+		 FROM           review
+		 Where        trainerprofile_u_key = #{trainerprofile_u_key}
+		
+    </select>
+	  <!--  리뷰 파일 리스트 --> 
+	  <select id="gettf_reviewfilelist" resultType="Review">
+         SELECT         
+				             
+				          
+				         	  O_NAME as O_NAME,
+				         	  FILE_NAME as FILE_NAME,
+				         	   FILE_SIZE as FILE_SIZE,
+				         	   FILE_PATH as FILE_PATH,
+				         	   r_opencheck as r_opencheck,	 
+				         	    memberprofile_name as memberprofile_name,
+				         	 memberprofile_u_key as memberprofile_u_key	  
+		 FROM           review_file
+		 Where        trainerprofile_u_key = #{trainerprofile_u_key} AND r_opencheck=1
+		
+    </select>
+	
+	
 </mapper>

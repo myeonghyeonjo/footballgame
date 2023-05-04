@@ -4082,7 +4082,7 @@ input, select, textarea {
 	               <input type="file" name="uploadFile" multiple>
 	               <input type="hidden" name="tf_id" value="${trainerprofile.tf_id }">
 	               <sec:authentication property="principal" var="principal"/>  
-	               <input type="hidden" name="u_key" value=" ${principal.u_key }">
+	               <input type="hidden" name="u_key"  value=" ${principal.u_key }">
 	                 <input type="hidden" name="file_group" value="1">
 	        		<button style="margin-left:-70px; width:90px;"class="btn btn-outline-dark" type="submit">등록하기</button>
 	             </form>

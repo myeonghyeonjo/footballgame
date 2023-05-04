@@ -4488,11 +4488,12 @@ function review(test) {
 	  let trainer_u_key = $('#u_key').val();
 	  
 	 let member_u_key = $('#member_u_key').val();
-		
+		console.log("trainer_u_key:"+trainer_u_key);
+		console.log("member_u_key:"+member_u_key);
 		$.ajax({
 			method: "POST",
 			url: "/aj-review",
-			data: { member_u_key: member_u_key , trainer_u_key : trainer_u_key}
+			data: { member_u_key: member_u_key , trainer_u_key: trainer_u_key}
 		})
 		.done(function( html ) {
 			console.log(html);

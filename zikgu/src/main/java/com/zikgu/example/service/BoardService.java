@@ -1,11 +1,13 @@
 package com.zikgu.example.service;
 
+import java.util.Date;
 import java.util.List;
 import com.zikgu.example.domain.Board;
 import com.zikgu.example.domain.Center;
 import com.zikgu.example.domain.FileDto;
 import com.zikgu.example.domain.MemberProfile;
 import com.zikgu.example.domain.PT;
+import com.zikgu.example.domain.Review;
 import com.zikgu.example.domain.SelectedPT;
 import com.zikgu.example.domain.TrainerProfile;
 import com.zikgu.example.domain.User;
@@ -160,6 +162,15 @@ public interface BoardService {
 			int pt_id,int u_key);
 
 	public void fileUploadtest(String originalfileName, String saveFileName, long fileSize, String savePath);
+
+	public void ReviewfileUpload(String originalfileName, String saveFileName, long fileSize, String savePath,
+			String r_content, int r_starR, int r_opencheck, String memberprofile_u_key, String trainerprofile_u_key, String memberprofile_name);
+
+	public List<Review> gettf_reviewlist(String trainerprofile_u_key);
+
+	public List<Review> gettf_reviewfilelist(String trainerprofile_u_key);
+	
+	public void ReviewInsert(Review review);
 
 	
 
