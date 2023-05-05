@@ -3,11 +3,13 @@ package com.zikgu.example.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Set;
 import java.util.UUID;
 
 import javax.mail.internet.MimeMessage;
@@ -1820,8 +1822,9 @@ model.addAttribute("exception", exception);
 	    }
 	
 		@RequestMapping("/aj-review")
-	    public String review( Model model, PT pt,@RequestParam("trainer_u_key") int trainer_u_key,@RequestParam("member_u_key") int member_u_key,TrainerProfile trainerprofile) {
+	    public String review( Model model, Center center,PT pt,@RequestParam("trainer_u_key") int trainer_u_key,@RequestParam("member_u_key") int member_u_key,TrainerProfile trainerprofile) {
 			 trainerprofile = boardservice.trainerprofileDetail(trainer_u_key);
+			 String tf_loadaddress = trainerprofile.getTf_loadaddress();
 			 String trainerprofile_u_key = String.valueOf(trainer_u_key);
 			 List<Review> reviewlist = boardservice.gettf_reviewlist(trainerprofile_u_key);
 			 List<Review> reviewfilelist = boardservice.gettf_reviewfilelist(trainerprofile_u_key);
@@ -1831,7 +1834,40 @@ model.addAttribute("exception", exception);
 			 for(Review review : reviewlist) {
 				 sumstar+=review.getR_starR();
 			 }
-			 staraverage = sumstar/reviewlistlength;
+			 if(reviewlistlength==0) {
+				 staraverage=0;
+			 } else if(reviewlistlength!=0) {
+				 staraverage = sumstar/reviewlistlength;
+			 }
+			 String programsub="";
+			 List<PT> ptList = boardservice.getPTdetail(trainer_u_key);
+			 int ptListlength = ptList.size();
+			 if(ptListlength==0) {
+				 
+			 } else if(ptListlength!=0) {
+				 for(int i=0;i<ptListlength;i++) {
+					 
+					 PT pt2 = ptList.get(i);
+					 programsub+= pt2.getPt_programsub1()+",";
+					 programsub+= pt2.getPt_programsub2()+",";
+					 if(i==ptListlength) {
+						 programsub+= pt2.getPt_programsub3();
+					 } else if(i!=ptListlength) {
+						 programsub+= pt2.getPt_programsub3()+",";
+					 }
+				 }
+			 }
+			 
+			 String[] parts = programsub.split(",");
+			 Set<String> set = new HashSet<>(Arrays.asList(parts));
+			 String outputprogramsub = String.join(",", set);
+			
+			
+			 center = boardservice.getcenterDetail2(tf_loadaddress);
+			 List<FileDto> filelist = boardservice.gettf_FileList(trainerprofile.getTf_id(),1);
+			 model.addAttribute("outputprogramsub",outputprogramsub);
+			 model.addAttribute("filelist",filelist);
+			 model.addAttribute("center",center);
 			 model.addAttribute("staraverage",staraverage);
 			 model.addAttribute("reviewlistlength",reviewlistlength);
 			 model.addAttribute("reviewlist",reviewlist);
@@ -1901,7 +1937,35 @@ model.addAttribute("exception", exception);
 			   model.addAttribute("reviewlist",reviewlist);
 			 return "/member/aj-updatetf_review";
 	    }
-	
+		
+		@RequestMapping("/aj-reviewselect")
+	    public String reviewselect( Model model, Center center,PT pt,@RequestParam("trainer_u_key") int trainer_u_key,@RequestParam("member_u_key") int member_u_key,@RequestParam("select") String select,TrainerProfile trainerprofile) {
+			System.out.println("리뷰셀렉트옵션별 리스트 호출"); 
+			trainerprofile = boardservice.trainerprofileDetail(trainer_u_key);
+			 String tf_loadaddress = trainerprofile.getTf_loadaddress();
+			 String trainerprofile_u_key = String.valueOf(trainer_u_key);
+			 if(select.equals("starhigh")) {
+			 List<Review> reviewlist = boardservice.gettf_reviewstarhighlist(trainerprofile_u_key);
+			 List<Review> reviewfilelist = boardservice.gettf_reviewstarhighfilelist(trainerprofile_u_key);
+			 model.addAttribute("reviewlist",reviewlist);
+			 model.addAttribute("reviewfilelist",reviewfilelist);
+			 } else if(select.equals("starlow")) {
+				 List<Review> reviewlist = boardservice.gettf_reviewstarlowlist(trainerprofile_u_key);
+				 List<Review> reviewfilelist = boardservice.gettf_reviewstarlowfilelist(trainerprofile_u_key);
+				 model.addAttribute("reviewlist",reviewlist);
+				 model.addAttribute("reviewfilelist",reviewfilelist);
+			 } else  if(select.equals("new")) {
+					 List<Review> reviewlist = boardservice.gettf_reviewlist(trainerprofile_u_key);
+					 List<Review> reviewfilelist = boardservice.gettf_reviewfilelist(trainerprofile_u_key);
+					 model.addAttribute("reviewlist",reviewlist);
+					 model.addAttribute("reviewfilelist",reviewfilelist);	 
+				 }
+			
+			 model.addAttribute("trainerprofile",trainerprofile);
+			
+			 return "/review/aj-reviewselect";
+	    }
+		
 		
 	}
 }

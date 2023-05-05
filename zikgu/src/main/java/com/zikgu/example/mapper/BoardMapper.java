@@ -163,6 +163,14 @@ public interface BoardMapper {
 
 	public void ReviewInsert(Review review);
 
+	public List<Review> gettf_reviewstarhighlist(String trainerprofile_u_key );
+
+	public List<Review> gettf_reviewstarhighfilelist(String trainerprofile_u_key);
+
+	public List<Review> gettf_reviewstarlowlist(String trainerprofile_u_key);
+
+	public List<Review> gettf_reviewstarlowfilelist(String trainerprofile_u_key);
+
 	
 
 

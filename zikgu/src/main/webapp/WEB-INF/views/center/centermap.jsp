@@ -3925,16 +3925,16 @@ input, select, textarea {
 						<span class="logo"><img src="images/logo.svg" alt="" /></span>
 						<h1 id="c_name" style="color:white;">${center.c_name}</h1>
 						
-						<p>${trainerprofile.tf_hanjulintro}<br /></p>
+						<p>${center.c_loadaddress}<br /></p>
 					</header>
 
 				<!-- Nav -->
 					<nav id="nav">
 					<ul>
 			
-							<li class="aa"><a href="/trainerProfileDetail?u_key=${u_key}" class="sticky_btn" style="color:black; text-decoration:none;" >Profile</a></li>
-      						<li onclick="Centerview(1);" class="aa" style="color:black;">Center</li>
-      						 <li onclick="review(1);" class="aa" style="color:black;">review</li>				
+							<li ><a class="aa" href="/trainerProfileDetail?u_key=${u_key}"  style="color:black; " >Profile</a></li>      						
+      						<li  ><a href="#" class="aa" style="color:white; background-color:black;">Center</a></li>	
+      						 <li   onclick="review(1);"><a  href="#"class="aa" style="color:black; ">review</a></li>		
 
       						<p><input type="hidden" name="tf_loadaddress" class="sticky_btn"  value="${tf_loadaddress}" id="tf_loadaddress"></p>
 							<p><input type="hidden" name="c_name" class="sticky_btn"  value="${c_name}" id="c_name"></p>
@@ -4094,14 +4094,17 @@ input, select, textarea {
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
-							<h2>Aliquam sed mauris</h2>
-							<p>Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris. Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas velit, vitae tincidunt odio.</p>
+							<h2>Health Catch</h2>
+							<p>사업자등록번호 000-00-00000</p>
+							<p> 통신판매업신고 : 제 0000-서울마포-0000호 | 대표 : 홍길동</p>
+							<p> 주소 : 서울특별시 구로구 디지털로00길 00, 0층 000호</p>
+							<p> 고객센터 및 제휴문의 : support@healthcatch.co.kr</p>
 							<ul class="actions">
 								<li><a href="generic.html" class="button">Learn More</a></li>
 							</ul>
 						</section>
 						<section>
-							<h2>Etiam feugiat</h2>
+							<h2>고객센터</h2>
 							<dl class="alt">
 								<dt>Address</dt>
 								<dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
@@ -4120,6 +4123,7 @@ input, select, textarea {
 						</section>
 						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
 					</footer>
+
 
 			</div>
 
@@ -4177,6 +4181,30 @@ geocoder.addressSearch(tf_loadaddress, function(result, status) {
     } 
 });    
 
-
+function Centerview(test) {
+	
+	  let tf_loadaddress = $('#tf_loadaddress').val();
+	  let u_key = $('#u_key').val();
+	  
+		console.log('tf_loadaddress:test'+tf_loadaddress);
+		console.log('u_key:'+u_key);
+		console.log('센터에서 센터 클릭');
+		$.ajax({
+			method: "POST",
+			url: "/aj-centerview2",
+			data: { tf_loadaddress: tf_loadaddress , u_key : u_key}
+		})
+		.done(function( html ) {
+			console.log(html);
+			$('#centerview').html(html);
+		     $( '.slider2' ).slick( {
+			          autoplay: true,
+			          autoplaySpeed: 1000,
+			        } );
+			     
+			   
+		});
+		
+}
 </script>
 </html>

@@ -2537,8 +2537,8 @@ input, select, textarea {
 		.image img {
 			border-radius: 8px;
 			display: block;
-			width:200px;
-		height:200px;
+			width:130px;
+		height:130px;
 		}
 
 		.image.left, .image.right {
@@ -3961,7 +3961,7 @@ input, select, textarea {
 						<span class="logo"><img src="images/logo.svg" alt="" /></span>
 						<h1 id="c_name" style="color:white;">${trainerprofile.tf_name} 트레이너</h1>
 						
-						<p>생생한 후기를 확인하세요!<br /></p>
+						<p>${trainerprofile.tf_hanjulintro}<br /></p>
 						
 					</header>
 
@@ -3969,9 +3969,10 @@ input, select, textarea {
 					<nav id="nav">
 					<ul>
 			
-							<li class="aa"><a href="/trainerProfileDetail?u_key=${trainerprofile.u_key}" class="sticky_btn" style="color:black; text-decoration:none;" >Profile</a></li>
-      						<li onclick="Centerview(1);" class="aa" style="color:black;">Center</li>
-      						 <li onclick="review(1);" class="aa" style="color:black;">review</li>				
+							<li ><a class="aa" href="/trainerProfileDetail?u_key=${trainerprofile.u_key}"  style="color:black; " >Profile</a></li>      						
+      						<li  onclick="Centerview(1);"><a href="#" class="aa" style="color:black">Center</a></li>	
+      						 <li ><a  href="#"class="aa" style="color:white;background-color:black; ">review</a></li>						
+
 
       						<p><input type="hidden" name="tf_loadaddress" class="sticky_btn"  value="${trainerprofile.tf_loadaddress}" id="tf_loadaddress"></p>
 							<p><input type="hidden" name="c_name" class="sticky_btn"  value="${c_name}" id="c_name"></p>
@@ -3980,9 +3981,6 @@ input, select, textarea {
 						</ul>
 						<ul>
 							<li><a class="aa" href="#intro" class="active" style="color:black">최근 후기</a></li>
-							<li><a class="aa" style="color:black" href="#first">센터 사진</a></li>
-							<li><a class="aa" style="color:black" href="#second">운영 시간</a></li>
-							<li><a class="aa" style="color:black" href="#cta">오시는 길</a></li>
 					
 						</ul>
 						
@@ -3993,10 +3991,10 @@ input, select, textarea {
 
 						<!-- Introduction -->
 							<section id="intro" class="main">
-								<div class="spotlight">
-									<div class="content">
-									<div id="tf_reviewUpdateOk" style=" display: flex;">
-									<div style="width: 60%; ">
+								<div class="spotlight" style="display: flex;">
+									<div class="content" style=" display: flex;">
+									<div id="tf_reviewUpdateOk" style=" display: flex; ">
+									<div style="width: 60%;">
 										<header class="major">
 										
 											<h2 ><Strong style="color:black">최근 후기</Strong></h2>
@@ -4041,12 +4039,6 @@ input, select, textarea {
 											</div>
 										<button  type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#reviewModal" data-ptid="${PT_List.pt_id}" data-ukey="${trainerprofile.u_key}" ><p style="margin-top:3px;">리뷰 남기기</p></button>
 										</div>
-										
-										
-										
-										
-										
-										
 											</li>
 										</ul>
 										<ul class="statistics" style="position:relative">
@@ -4056,20 +4048,19 @@ input, select, textarea {
 											  <h4 style="color:white;">생생한 후기를 확인하세요!</h4>
 											  <div style="visibility:hidden; width:10%;"> 빈칸차지용
 											  </div>
-									<select class="form-select" name="tf_certificate" id="country" style="flex: 0.85; color:white;" required>
-										<option value="최신순">최신순</option>
-										<option value="평점높은순">평점높은순</option>
-										<option value="평점낮은순">평점낮은순</option>
+									<select class="form-select" name="tf_certificate" id="reviewselect" style="flex: 0.85; color:white;" required>
+										<option value="new">최신순</option>
+										<option value="starhigh">평점높은순</option>
+										<option value="starlow">평점낮은순</option>
 									</select>
 												</div>
 												<hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
+											<div id="reviewselectlist">
 										  <c:forEach var="reviewlist" items="${reviewlist}" varStatus="status1">
 										  <div >
-										  <div style=" display: flex;">
-										 <Strong style="color:black; font-size:17px;">${reviewlist.memberprofile_name}  ${reviewlist.r_date}</Strong>  
-										   	<div style="width: 40%;">
-											</div>
-										   	<c:if test="${reviewlist.r_starR==1}">
+										 	<div style="text-align:left;">
+										 <h5 style="color:white">${reviewlist.memberprofile_name}  ${reviewlist.r_date} 
+										 <c:if test="${reviewlist.r_starR==1}">
 										   		  <span class="starR2 on" >⭐</span>
 										   		  
 										   	</c:if>
@@ -4090,22 +4081,24 @@ input, select, textarea {
 										   	<c:if test="${reviewlist.r_starR==5}">
 										   		<span class="starR2 on" >⭐⭐⭐⭐⭐</span>
 										   		 
-										   	</c:if>
+										   	</c:if></h5>  
+										   	
+										   	
 										  	
 										   	</div>
-										   	<div>
-										   	<div style=" display: flex;">
+										   
+										   	<div style="text-align:left;">
 										   	<c:forEach var="reviewfilelist" items="${reviewfilelist}" varStatus="status2">
 										   				<c:if test="${reviewfilelist.memberprofile_u_key == reviewlist.memberprofile_u_key}">
 										   				<c:if test="${reviewfilelist.r_date == reviewlist.r_date}">
-											<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:100px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>
+											<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
 											</c:if>
 											</c:if>
 											
 											</c:forEach>
 												<div style="visibility:hidden;">d</div>
 											</div>
-										   	</div>
+										   	
 										   	
 										    <div style="text-align:left;">
 										   		${reviewlist.r_content}
@@ -4116,144 +4109,122 @@ input, select, textarea {
 										  <hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
 										  	<div style="visibility:hidden;">d</div>
 										  </c:forEach>
+										  </div>
 										  </li>
 										  </ul>
 										  </div>
-										  <div style="width: 40%; ">
-										  test
+										  <div style="width: 2%; "></div>
+										  
+										  <!-- 프로필고정 -->
+										
+										  <div style="width: 40%;">
+										  <ul class="statistics " style="position: sticky; top: 15px;">
+											<li class="style6" >
+												<span class="icon fa-gem"></span>
+													<c:forEach var="filelist" items="${filelist}" varStatus="status1">
+														<c:if test="${status1.index==0}">
+													 	 	<div style="margin-left:-50px; "><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a></div>
+													    </c:if>
+													    <c:if test="${status1.index!=0}">
+													 	 	<a    href="../../../Img/${filelist.file_name}" data-lightbox="example-set"></a>
+													    </c:if>
+												 	 </c:forEach> 
+													<strong style="font-size:25px; ">${trainerprofile.tf_name} 트레이너</strong> 
+													<strong style="font-size:15px;" class="aa" onclick="Centerview(1);">${center.c_name}</strong> 
+											
+								 		<div class="vertical-align;">
+								 		
+										<c:if test="${	staraverage==1}">
+										
+										   		  <span class="starR2 on" >⭐</span>
+										   		   <span class="starR2 on" >${staraverage }.0</span>
+										   		   <span class="starR2 on" >(${reviewlistlength })</span>
+										   		
+										   	</c:if>
+										   		<c:if test="${staraverage==2}">
+										   		<span class="starR2 on" >⭐</span>
+										   		  <span class="starR2 on" >⭐</span>
+										   		   <span class="starR2 on" >${staraverage }.0</span>
+										   		   <span class="starR2 on" >(${reviewlistlength })</span>
+										   		 
+										   	</c:if>
+										   		<c:if test="${staraverage==3}">
+												<a  href="#intro" style="color:white; text-decoration:none;">
+												<span class="starR2 on" >⭐</span>
+										   		  <span class="starR2 on" >⭐</span>
+										   		   <span class="starR2 on" >⭐</span>
+										   		   <span class="starR2 on" >${staraverage }.0</span>
+										   		   <span class="starR2 on" >(${reviewlistlength })</span>
+												</a>
+										   	
+										   		
+										   		  
+										   	</c:if>
+										   		<c:if test="${staraverage==4}">
+										   	<span class="starR2 on" >⭐</span>
+										   		  <span class="starR2 on" >⭐</span>
+										   		   <span class="starR2 on" >⭐</span>
+										   		    <span class="starR on" >⭐</span>
+										   		   <span class="starR2 on" >${staraverage }.0</span>
+										   		   <span class="starR2 on" >(${reviewlistlength })</span>
+										   	</c:if>
+										   	<c:if test="${staraverage==5}">
+										   		<span class="starR2 on" >⭐</span>
+										   		  <span class="starR2 on" >⭐</span>
+										   		   <span class="starR2 on" >⭐</span>
+										   		    <span class="starR2 on" >⭐</span>
+										   		    <span class="starR2 on" >⭐</span>
+										   		   <span class="starR2 on" >${staraverage }.0</span>
+										   		   <span class="starR2 on" >(${reviewlistlength })</span>
+										   	</c:if>
+										   
+											</div>
+											<p>"${trainerprofile.tf_hanjulintro}"</p>
+												<P>전문분야 ${outputprogramsub}</P> 
+												<P>대표가격 ${trainerprofile.tf_lessonunit}당 ${trainerprofile.tf_lessonprice}원/ ${trainerprofile.tf_lessonnumber}${trainerprofile.tf_lessonunit}기준</P> 
+												
+												<sec:authorize access="hasRole('ROLE_USER')">
+										<sec:authentication property="principal" var="principal"/>  
+	<c:if test="${(principal.u_trainercheck=='0')}">
+		<sec:authorize access="hasRole('ROLE_USER')">
+		<c:if test="${fn:contains(trainerprofile.tf_consulting, principal.u_key)}">
+			<button type="button" class="btn btn-success" disabled >
+	  			<p style="color:white; margin-top:3px;">상담신청완료<p>
+			</button>
+			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelconsultingModal">
+	  			<p style="color:white; margin-top:3px;">상담신청취소<p>
+			</button>
+		</c:if>
+		<c:if test="${!(fn:contains(trainerprofile.tf_consulting, principal.u_key))}">
+			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#consultingModal">
+	  			<p style="margin-top:3px;">상담신청</p>
+			</button>		
+		</c:if>
+	</sec:authorize>
+	</c:if>		
+	</sec:authorize>			
+										</li>
+										</ul>
 										  </div>
 										</div>
 									</div>
-										
-									
 								</div>
-							</section>
-
-						<!-- First Section -->
-							<section id="first" class="main special">
-								<header class="major">
-								
-									<h2><Strong  style="color:black">센터 사진</Strong></h2>
-									
-									<c:forEach var="filelist" items="${filelist}">
-											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set5"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
-									</c:forEach>
-									
-									
-								
-								</header>
-								<ul class="features">
-									<li>
-										<span class="icon solid major style1 fa-code"></span>
-										<h5><Strong style="color:black">${center.c_inform}</Strong></h5>
-									</li>
-									<li>
-										<span class="icon major style3 fa-copy"></span>
-										<h5><Strong style="color:black">${center.c_inform}</strong></h5>
-									</li>
-									<li>
-										<span class="icon major style5 fa-gem"></span>
-										<h5><Strong style="color:black">${center.c_inform}</Strong></h5>
-									</li>
-									
-										<p style="color:black; margin-top:40px;">${trainerprofile.tf_programintro}</p>
-								</ul>
-								
-								<footer class="major">
-								
-									
-								</footer>
-							</section>
-
-						<!-- Second Section -->
-							<section id="second" class="main special">
-								<header class="major">
-								<h2 ><Strong style="color:black">운영 시간</Strong></h2>
-									
-								</header>
-								<ul class="statistics">
-									<li class="style1">
-										<span class="icon solid fa-code-branch"></span>
-										<strong>평일</strong> ${center.c_daymorning } ~  ${center.c_dayafter }
-									</li>
-									<li class="style2">
-										<span class="icon fa-folder-open"></span>
-										<strong>토요일</strong> ${center.c_satermorning } ~  ${center.c_saterafter }
-									</li>
-									<li class="style3">
-										<span class="icon solid fa-signal"></span>
-										<strong>일요일</strong> ${center.c_sunmorning } ~  ${center.c_sunafter }
-									</li>
-									<li class="style4">
-										<span class="icon solid fa-laptop"></span>
-										<strong>휴무일</strong> ${center.c_dayoff }
-									</li>
-									<li class="style5">
-										<span class="icon fa-gem"></span>
-										<strong>참고사항</strong> ${trainerprofile.tf_lessonintro }
-									</li>
-								</ul>
-							
-							</section>
-
-						<!-- Get Started -->
-							<section id="cta" class="main special">
-								<header class="major">
-							<h2 ><Strong style="color:black">오시는 길</Strong></h2>
-							
-							
-							
-							
-								<ul class="features">
-									<li>
-										<div id="map" style="width:600px; height:350px;"></div>
-									</li>
-									<li>
-								
-									</li>
-									<li>
-										<span class=""></span>
-										<h5 style="text-align:left;"><Strong style="color:black;">우편번호</Strong></h5>
-										<p style="color:black; text-align:left;">${center.c_postcode }</p>
-										<h5 style="text-align:left;"><Strong style="color:black;">도로명주소</Strong></h5>
-										<p style="color:black; text-align:left;">${center.c_loadaddress }</p>
-										<h5 style="text-align:left;"><Strong style="color:black;">지번주소</Strong></h5>
-										<p style="color:black; text-align:left;">${center.c_oldaddress }</p>
-										<h5 style="text-align:left;"><Strong style="color:black;">상세주소</Strong></h5>
-										<p style="color:black; text-align:left;">${center.c_detailaddress }</p>
-										<p style="color:black; text-align:left;">${center.c_option }</p>
-									</li>
-									
-										<p style="color:black; margin-top:40px;">${trainerprofile.tf_programintro}</p>
-								</ul>
-
-	
-	
-	
-	
-	
-	
-	
-							
-								</header>
-								<footer class="major">
-										
-								</footer>
-							</section>
-
-				
+							</section>		
 </div>
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
-							<h2>Aliquam sed mauris</h2>
-							<p>Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris. Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas velit, vitae tincidunt odio.</p>
+							<h2>Health Catch</h2>
+							<p>사업자등록번호 000-00-00000</p>
+							<p> 통신판매업신고 : 제 0000-서울마포-0000호 | 대표 : 홍길동</p>
+							<p> 주소 : 서울특별시 구로구 디지털로00길 00, 0층 000호</p>
+							<p> 고객센터 및 제휴문의 : support@healthcatch.co.kr</p>
 							<ul class="actions">
 								<li><a href="generic.html" class="button">Learn More</a></li>
 							</ul>
 						</section>
 						<section>
-							<h2>Etiam feugiat</h2>
+							<h2>고객센터</h2>
 							<dl class="alt">
 								<dt>Address</dt>
 								<dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
@@ -4272,6 +4243,7 @@ input, select, textarea {
 						</section>
 						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
 					</footer>
+
 
 			</div>
 
@@ -4341,50 +4313,6 @@ input, select, textarea {
   </div>
 </div>		
 <script>
-
-
-
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };  
-
-// 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-
-// 주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
-let tf_loadaddress = $('#tf_loadaddress').val();
-let c_name = $('#c_name').val();
-// 주소로 좌표를 검색합니다
-geocoder.addressSearch(tf_loadaddress, function(result, status) {
-	console.log("tf_loadaddress:centertest"+tf_loadaddress);
-    // 정상적으로 검색이 완료됐으면 
-     if (status === kakao.maps.services.Status.OK) {
-
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
-
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">${c_name}</div>'
-            
-        });
-        infowindow.open(map, marker);
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-    } 
-});    
-
-
-
 $('.starRev span').click(function(){
 	  $(this).parent().children('span').removeClass('on');
 	  $(this).addClass('on').prevAll('span').addClass('on');
@@ -4569,6 +4497,59 @@ function submitForm() {
       
   
 }
+
+
+
+function Centerview(test) {
+	
+	  let tf_loadaddress = $('#tf_loadaddress').val();
+	  let u_key = $('#u_key').val();
+	  
+		console.log('tf_loadaddress:test'+tf_loadaddress);
+		console.log('u_key:'+u_key);
+		$.ajax({
+			method: "POST",
+			url: "/aj-centerview2",
+			data: { tf_loadaddress: tf_loadaddress , u_key : u_key}
+		})
+		.done(function( html ) {
+			console.log(html);
+			$('#centerview').html(html);
+		     $( '.slider2' ).slick( {
+			          autoplay: true,
+			          autoplaySpeed: 1000,
+			        } );
+			     
+			   
+		});
+		
+}
+
+
+$("#reviewselect").change( function() {
+
+	console.log("셀렉트박스변경호출");
+	let trainerprofile_u_key = $('#u_key').val();
+	let memberprofile_u_key = $('#memberprofile_u_key').val(); 	
+	let select = $('#reviewselect').val();
+	console.log("select:"+select);
+	$.ajax({
+		method: "POST",
+		url: "/aj-reviewselect",
+		data: { trainer_u_key: trainerprofile_u_key , member_u_key : memberprofile_u_key,select:select}
+	})
+	.done(function( html ) {
+		console.log(html);
+		$('#reviewselectlist').html(html);
+	     $( '.slider2' ).slick( {
+		          autoplay: true,
+		          autoplaySpeed: 1000,
+		        } );
+		     
+		   
+	});
+
+});
 </script>
 <!-- 다중파일업로드 이미지 미리보기 삭제끝 -->
 </html>

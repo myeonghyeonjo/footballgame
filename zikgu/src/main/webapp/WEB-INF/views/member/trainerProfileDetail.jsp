@@ -3967,12 +3967,12 @@ input, select, textarea {
 					<nav id="nav">
 					<ul>
 			
-							<li class="aa"><a href="/trainerProfileDetail?u_key=${trainerprofile.u_key}" class="sticky_btn" style="color:black; text-decoration:none;" >Profile</a></li>      						
-      						<li onclick="Centerview(1);" class="aa" style="color:black;">Center</li>
-      						 <li onclick="review(1);" class="aa" style="color:black;">review</li>				
+							<li ><a class="aa" href="/trainerProfileDetail?u_key=${trainerprofile.u_key}"  style="color:white; background-color:black;" >Profile</a></li>      						
+      						<li  onclick="Centerview(1);"><a href="#" class="aa" style="color:black">Center</a></li>	
+      						 <li   onclick="review(1);"><a  href="#"class="aa" style="color:black">review</a></li>						
+
       						<p><input type="hidden" name="tf_loadaddress" class="sticky_btn"  value="${trainerprofile.tf_loadaddress}" id="tf_loadaddress"></p>
 							<p><input type="hidden" name="u_key" class="sticky_btn"  value="${trainerprofile.u_key}" id="u_key"></p>
-							
 						</ul>
 						<ul>
 							<li><a class="aa" href="#intro" class="active" style="color:black">트레이너 소개</a></li>
@@ -4000,13 +4000,7 @@ input, select, textarea {
 									</div>
 										<div class="slider1" style="margin-left:25px;">
 											<c:forEach var="filelist" items="${filelist}">
-											
 											  <div style="margin-left:-50px;"><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a></div>
-											  
-											  
-					
-												
-												
 											  </c:forEach> 
 		   								 </div>		
 								</div>
@@ -4466,6 +4460,7 @@ function Centerview(test) {
 	  
 		console.log('tf_loadaddress:test'+tf_loadaddress);
 		console.log('u_key:'+u_key);
+		console.log('프로필에서 센터 클릭');
 		$.ajax({
 			method: "POST",
 			url: "/aj-centerview2",

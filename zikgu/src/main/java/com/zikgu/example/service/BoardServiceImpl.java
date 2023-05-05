@@ -500,6 +500,26 @@ public class BoardServiceImpl implements BoardService {
 	public void ReviewInsert(Review review) {
 		boardmapper.ReviewInsert(review);
 	}
+	
+	@Override
+	public List<Review> gettf_reviewstarhighlist(String trainerprofile_u_key){
+		return boardmapper.gettf_reviewstarhighlist(trainerprofile_u_key);
+	}
+	
+	@Override
+	public List<Review> gettf_reviewstarhighfilelist(String trainerprofile_u_key){
+		return boardmapper.gettf_reviewstarhighfilelist(trainerprofile_u_key);
+	}
+	
+	@Override
+	public List<Review> gettf_reviewstarlowlist(String trainerprofile_u_key){
+		return boardmapper.gettf_reviewstarlowlist(trainerprofile_u_key);
+	}
+	
+	@Override
+	public List<Review> gettf_reviewstarlowfilelist(String trainerprofile_u_key){
+		return boardmapper.gettf_reviewstarlowfilelist(trainerprofile_u_key);
+	}
 
 	
 

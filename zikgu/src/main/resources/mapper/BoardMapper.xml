@@ -1385,5 +1385,73 @@
 		ORDER BY r_id DESC
     </select>
 	
+	  <!--  리뷰 별점 높은순 리스트 --> 
+	  <select id="gettf_reviewstarhighlist" resultType="Review">
+         SELECT         
+				              r_id as r_id,
+				              trainerprofile_u_key as trainerprofile_u_key,
+				              memberprofile_u_key as memberprofile_u_key,
+				         	   r_opencheck as r_opencheck,
+				         	   r_content as r_content,
+				         	   r_starR as r_starR,
+				         	   memberprofile_name as memberprofile_name,
+				         	   r_date as r_date
+		 FROM           review
+		 Where        trainerprofile_u_key = #{trainerprofile_u_key}
+		ORDER BY r_starR DESC 
+		
+    </select>
 	
+	 <!--  리뷰 별점 높은순 파일 리스트 --> 
+	  <select id="gettf_reviewstarhighfilelist" resultType="Review">
+         SELECT         
+				             
+				          
+				         	  O_NAME as O_NAME,
+				         	  FILE_NAME as FILE_NAME,
+				         	   FILE_SIZE as FILE_SIZE,
+				         	   FILE_PATH as FILE_PATH,
+				         	   r_opencheck as r_opencheck,	 
+				         	    memberprofile_name as memberprofile_name,
+				         	 memberprofile_u_key as memberprofile_u_key,
+				         	  r_date as r_date	  
+		 FROM           review_file
+		 Where        trainerprofile_u_key = #{trainerprofile_u_key} AND r_opencheck=1
+		ORDER BY r_starR DESC 
+		
+    </select>
+     <!--  리뷰 별점 낮은순 리스트 --> 
+	  <select id="gettf_reviewstarlowlist" resultType="Review">
+         SELECT         
+				              r_id as r_id,
+				              trainerprofile_u_key as trainerprofile_u_key,
+				              memberprofile_u_key as memberprofile_u_key,
+				         	   r_opencheck as r_opencheck,
+				         	   r_content as r_content,
+				         	   r_starR as r_starR,
+				         	   memberprofile_name as memberprofile_name,
+				         	   r_date as r_date
+		 FROM           review
+		 Where        trainerprofile_u_key = #{trainerprofile_u_key}
+		ORDER BY r_starR ASC
+    </select>
+     <!--  리뷰 별점 낮은순 파일 리스트 --> 
+	  <select id="gettf_reviewstarlowfilelist" resultType="Review">
+         SELECT         
+				             
+				          
+				         	  O_NAME as O_NAME,
+				         	  FILE_NAME as FILE_NAME,
+				         	   FILE_SIZE as FILE_SIZE,
+				         	   FILE_PATH as FILE_PATH,
+				         	   r_opencheck as r_opencheck,	 
+				         	    memberprofile_name as memberprofile_name,
+				         	 memberprofile_u_key as memberprofile_u_key,
+				         	  r_date as r_date	  
+		 FROM           review_file
+		 Where        trainerprofile_u_key = #{trainerprofile_u_key} AND r_opencheck=1
+		ORDER BY r_starR ASC
+    </select>
+    
+    
 </mapper>

@@ -4100,14 +4100,17 @@ input, select, textarea {
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
-							<h2>Aliquam sed mauris</h2>
-							<p>Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris. Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas velit, vitae tincidunt odio.</p>
+							<h2>Health Catch</h2>
+							<p>사업자등록번호 000-00-00000</p>
+							<p> 통신판매업신고 : 제 0000-서울마포-0000호 | 대표 : 홍길동</p>
+							<p> 주소 : 서울특별시 구로구 디지털로00길 00, 0층 000호</p>
+							<p> 고객센터 및 제휴문의 : support@healthcatch.co.kr</p>
 							<ul class="actions">
 								<li><a href="generic.html" class="button">Learn More</a></li>
 							</ul>
 						</section>
 						<section>
-							<h2>Etiam feugiat</h2>
+							<h2>고객센터</h2>
 							<dl class="alt">
 								<dt>Address</dt>
 								<dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
@@ -4126,6 +4129,7 @@ input, select, textarea {
 						</section>
 						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
 					</footer>
+
 
 			</div>
 
