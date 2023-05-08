@@ -1314,7 +1314,8 @@
 		r_opencheck,
 		r_content,
 		r_starR,
-		memberprofile_name
+		memberprofile_name,
+		review_r_id
 		
 		) VALUES (
 		#{originalfileName},
@@ -1326,7 +1327,8 @@
 		#{r_opencheck},
 		#{r_content},
 		#{r_starR},
-		#{memberprofile_name}
+		#{memberprofile_name},
+		#{review_r_id}
 		
 			)
 	</insert>
@@ -1453,5 +1455,22 @@
 		ORDER BY r_starR ASC
     </select>
     
+   <!--  최근에 등록한 리뷰 id --> 
+	  <select id="getReviewrid" resultType="int">
+        select  				MAX(r_id  ) as r_id  
+        from review
+    </select>
     
+     <!-- 리뷰 삭제 -->
+    <delete id="reviewDelete" parameterType="pt">
+    DELETE FROM review
+     WHERE r_id = #{r_id}
+    </delete> 
+     <!-- 리뷰 파일 삭제 -->
+    <delete id="reviewfiledelete" parameterType="pt">
+    DELETE FROM review_file
+     WHERE review_r_id = #{r_id}
+    </delete> 
+    
+   
 </mapper>

@@ -469,7 +469,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void ReviewfileUpload(String originalfileName, String saveFileName, long fileSize, String savePath,
 			String r_content, int r_starR, int r_opencheck,String memberprofile_u_key, String trainerprofile_u_key,
-			String memberprofile_name) {
+			String memberprofile_name,int review_r_id) {
 		HashMap<String, Object> hm = new HashMap<>();
 		hm.put("originalfileName", originalfileName);
 		hm.put("saveFileName", saveFileName);
@@ -481,6 +481,7 @@ public class BoardServiceImpl implements BoardService {
 		hm.put("memberprofile_u_key", memberprofile_u_key);
 		hm.put("trainerprofile_u_key", trainerprofile_u_key);
 		hm.put("memberprofile_name", memberprofile_name);
+		hm.put("review_r_id", review_r_id);
 		
 	
 		boardmapper.ReviewfileUpload(hm);
@@ -519,6 +520,21 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Review> gettf_reviewstarlowfilelist(String trainerprofile_u_key){
 		return boardmapper.gettf_reviewstarlowfilelist(trainerprofile_u_key);
+	}
+	
+	@Override
+	public int getReviewrid() {
+		return boardmapper.getReviewrid();
+	}
+	
+	@Override
+	public void reviewDelete(int r_id) {
+		boardmapper.reviewDelete(r_id);
+	}
+	
+	@Override
+	public void reviewfiledelete(int r_id) {
+		boardmapper.reviewfiledelete(r_id);
 	}
 
 	

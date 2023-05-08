@@ -4599,11 +4599,11 @@ input, select, textarea {
         <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">소개사진삭제</h1>
       </div>
       <div class="modal-body">
-        정말 사진을 삭제 하시겠습니까?
+        정말 사진을 삭제 하시겠습니까?2
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-outline-primary" onclick="clickDelete2(PtInfo)"data-target="#clickDelete">확인</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickDelete2()"data-target="#clickDelete">확인</button>
       </div>
     </div>
   </div>

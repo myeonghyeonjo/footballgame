@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.io.File"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=272bc96032396df76a8c8d79f886c824&libraries=services"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>		
+
+</head>
+<body>
+									 			<p style="color:#ffbc00" class="aa" data-bs-toggle="modal" data-bs-target="#reviewmodifymodal" data-rcontent="${reviewlist.r_content}">수정</p> &nbsp;
+
+</body>
+<script>
+$('#reviewmodifymodal').on('show.bs.modal', function(event) {          
+    r_content = "fdasf";
+ 	//document.getElementById("reviewcontent").innerHTML = r_content;
+    
+    console.log("r_content:"+r_content);
+   
+ })</script>
+</html>

@@ -901,6 +901,17 @@ model.addAttribute("exception", exception);
 			model.addAttribute("list",list);
 			return "/center/centermap";
 	    }
+		@RequestMapping("/aj-test")
+	    public String test( ) {
+			
+			return "/center/aj-test";
+	    }
+		@RequestMapping("/aj-test2")
+	    public String test2( ) {
+			
+			return "/center/aj-test";
+	    }
+		
 		@RequestMapping("/aj-centerview3")
 	    public String centerview3( Model model,Center center,@RequestParam("tf_loadaddress") String tf_loadaddress,@RequestParam("u_key") String u_key) {
 			System.out.println("tf_loadaddress:"+tf_loadaddress);
@@ -1822,7 +1833,7 @@ model.addAttribute("exception", exception);
 	    }
 	
 		@RequestMapping("/aj-review")
-	    public String review( Model model, Center center,PT pt,@RequestParam("trainer_u_key") int trainer_u_key,@RequestParam("member_u_key") int member_u_key,TrainerProfile trainerprofile) {
+	    public String review( Model model, Center center,PT pt,@RequestParam("trainer_u_key") int trainer_u_key,TrainerProfile trainerprofile) {
 			 trainerprofile = boardservice.trainerprofileDetail(trainer_u_key);
 			 String tf_loadaddress = trainerprofile.getTf_loadaddress();
 			 String trainerprofile_u_key = String.valueOf(trainer_u_key);
@@ -1881,7 +1892,7 @@ model.addAttribute("exception", exception);
 	    public String test2( Model model, PT pt,TrainerProfile trainerprofile) {
 		
 			
-			 return "/center/test2";
+			 return "/center/test4";
 	    }
 		@RequestMapping("/reviewInsert")
 		 public String reviewInsert( Model model,Review review,  @RequestPart(value = "test") Map<String, Object> test,MultipartHttpServletRequest mhsq, FileDto filedto,TrainerProfile trainerprofile) throws IllegalStateException, IOException {
@@ -1913,6 +1924,8 @@ model.addAttribute("exception", exception);
 			   System.out.println("memberprofile_u_key:"+memberprofile_u_key);
 			   System.out.println("trainerprofile_u_key:"+trainerprofile_u_key);
 			   boardservice.ReviewInsert(review);
+			   int review_r_id = boardservice.getReviewrid();
+			   System.out.println("review_r_id:"+review_r_id);
 			   if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
 			   } else {
 				   for (int i = 0; i < mf.size(); i++) {
@@ -1929,7 +1942,7 @@ model.addAttribute("exception", exception);
 					   long fileSize = mf.get(i).getSize(); 	
 					   // 파일 사이즈                
 					   mf.get(i).transferTo(new File(savePath)); 	// 파일 저장                 
-					   boardservice.ReviewfileUpload(originalfileName, saveFileName, fileSize,savePath,r_content,r_starR,r_opencheck,memberprofile_u_key,trainerprofile_u_key,memberprofile_name);
+					   boardservice.ReviewfileUpload(originalfileName, saveFileName, fileSize,savePath,r_content,r_starR,r_opencheck,memberprofile_u_key,trainerprofile_u_key,memberprofile_name,review_r_id);
 				   		}
 			   	}
 			
@@ -1939,7 +1952,7 @@ model.addAttribute("exception", exception);
 	    }
 		
 		@RequestMapping("/aj-reviewselect")
-	    public String reviewselect( Model model, Center center,PT pt,@RequestParam("trainer_u_key") int trainer_u_key,@RequestParam("member_u_key") int member_u_key,@RequestParam("select") String select,TrainerProfile trainerprofile) {
+	    public String reviewselect( Model model, Center center,PT pt,@RequestParam("trainer_u_key") int trainer_u_key,@RequestParam("select") String select,TrainerProfile trainerprofile) {
 			System.out.println("리뷰셀렉트옵션별 리스트 호출"); 
 			trainerprofile = boardservice.trainerprofileDetail(trainer_u_key);
 			 String tf_loadaddress = trainerprofile.getTf_loadaddress();
@@ -1965,6 +1978,49 @@ model.addAttribute("exception", exception);
 			
 			 return "/review/aj-reviewselect";
 	    }
+		
+		@RequestMapping("/reviewDelete")
+	    public String reviewDelete( Model model, Center center,PT pt,@RequestParam("r_id") int r_id,@RequestParam("trainerprofile_u_key") int trainerprofile_u_key,TrainerProfile trainerprofile) {
+			System.out.println("r_id:"+r_id); 
+			boardservice.reviewDelete(r_id);
+			boardservice.reviewfiledelete(r_id);
+			
+			int u_key = trainerprofile_u_key;
+			//리로드
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			String u_name = boardservice.getU_name2(u_key);
+			
+			String programsub = trainerprofile.getTf_programsub();
+			String[] programsub2 = programsub.split(",");
+			
+			
+			int tf_id = trainerprofile.getTf_id();
+			List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+			System.out.println(filelist.get(0).file_name);
+			List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
+			List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
+			String tf_loadaddress = trainerprofile.getTf_loadaddress();
+			System.out.println("u_key:"+u_key);
+			
+			List<PT> PT_List= boardservice.getPTdetail(u_key);
+			System.out.println("PT_List:"+PT_List);
+			List<FileDto> PT_filelist = boardservice.getPT_FileList(u_key);
+			model.addAttribute("programsub",programsub2);
+			model.addAttribute("PT_List",PT_List);
+			model.addAttribute("PT_filelist",PT_filelist);
+			model.addAttribute("tf_loadaddress",tf_loadaddress);
+			model.addAttribute("u_key",u_key);
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("u_name",u_name);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("filelist_2",filelist_2);
+			model.addAttribute("filelist_3",filelist_3);
+	     	//리로드 끝
+			
+			
+			 return "/member/trainerProfileDetail";
+	    }
+		
 		
 		
 	}

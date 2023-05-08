@@ -171,6 +171,14 @@ public interface BoardMapper {
 
 	public List<Review> gettf_reviewstarlowfilelist(String trainerprofile_u_key);
 
+	public int getReviewrid();
+
+
+
+	public void reviewfiledelete(int r_id);
+
+	public void reviewDelete(int r_id);
+
 	
 
 

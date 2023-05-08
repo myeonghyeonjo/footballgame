@@ -14,6 +14,8 @@ public class Review {
 	private String memberprofile_name;
 	private String r_date;
 	private String r_check;
+	private int review_r_id;
+	
 	public int getR_id() {
 		return r_id;
 	}
@@ -91,6 +93,12 @@ public class Review {
 	}
 	public void setR_check(String r_check) {
 		this.r_check = r_check;
+	}
+	public int getReview_r_id() {
+		return review_r_id;
+	}
+	public void setReview_r_id(int review_r_id) {
+		this.review_r_id = review_r_id;
 	}
 
 	

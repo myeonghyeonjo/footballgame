@@ -164,7 +164,7 @@ public interface BoardService {
 	public void fileUploadtest(String originalfileName, String saveFileName, long fileSize, String savePath);
 
 	public void ReviewfileUpload(String originalfileName, String saveFileName, long fileSize, String savePath,
-			String r_content, int r_starR, int r_opencheck, String memberprofile_u_key, String trainerprofile_u_key, String memberprofile_name);
+			String r_content, int r_starR, int r_opencheck, String memberprofile_u_key, String trainerprofile_u_key, String memberprofile_name, int review_r_id);
 
 	public List<Review> gettf_reviewlist(String trainerprofile_u_key);
 
@@ -179,6 +179,12 @@ public interface BoardService {
 	public List<Review> gettf_reviewstarlowlist(String trainerprofile_u_key);
 
 	public List<Review> gettf_reviewstarlowfilelist(String trainerprofile_u_key);
+
+	public int getReviewrid();
+
+	public void reviewDelete(int r_id);
+
+	public void reviewfiledelete(int r_id);
 
 	
 

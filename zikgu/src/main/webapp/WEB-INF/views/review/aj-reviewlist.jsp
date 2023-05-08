@@ -5,6 +5,7 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 
 <html>
@@ -187,7 +188,27 @@ input[type="checkbox"] {
 .starR2.on{
   text-shadow: 0 0 0 #ffbc00;
 }
+/* 각 별들의 기본 설정 */
+.starR3{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  color: transparent;
+  text-shadow: 0 0 0 #f0f0f0;
+  font-size: 1.8em;
+  box-sizing: border-box;
+  cursor: pointer;
+}
 
+/* 별 이모지에 마우스 오버 시 */
+.starR3:hover {
+  text-shadow: 0 0 0 #ccc;
+}
+
+/* 별 이모지를 클릭 후 class="on"이 되었을 경우 */
+.starR3.on{
+  text-shadow: 0 0 0 #ffbc00;
+}
 /* 각 별들의 기본 설정 */
 .open{
   display: inline-block;
@@ -3958,7 +3979,6 @@ input, select, textarea {
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<span class="logo"><img src="images/logo.svg" alt="" /></span>
 						<h1 id="c_name" style="color:white;">${trainerprofile.tf_name} 트레이너</h1>
 						
 						<p>${trainerprofile.tf_hanjulintro}<br /></p>
@@ -4024,7 +4044,7 @@ input, select, textarea {
 										   	<span class="starR2 on" >⭐</span>
 										   		  <span class="starR2 on" >⭐</span>
 										   		   <span class="starR2 on" >⭐</span>
-										   		    <span class="starR on" >⭐</span>
+										   		    <span class="starR2 on" >⭐</span>
 										   	</c:if>
 										   	<c:if test="${staraverage==5}">
 										   		<span class="starR2 on" >⭐</span>
@@ -4034,10 +4054,20 @@ input, select, textarea {
 										   		    <span class="starR2 on" >⭐</span>
 										   	</c:if>
 											<p style="font-size:13px;">${reviewlistlength }개의 후기</p>
+											
 											</div>
-											<div style="width: 40%;">
+											<div style="width: 35%;">
 											</div>
+										<sec:authorize access="hasRole('ROLE_USER')">
 										<button  type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#reviewModal" data-ptid="${PT_List.pt_id}" data-ukey="${trainerprofile.u_key}" ><p style="margin-top:3px;">리뷰 남기기</p></button>
+										</sec:authorize>
+										<!-- 로그인안한사람일 경우 -->
+										<sec:authorize access="isAnonymous()">
+										<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#reviewModalanonymous">
+										  			<p style="margin-top:3px;">리뷰 남기기</p>
+												</button>
+										</sec:authorize>
+										
 										</div>
 											</li>
 										</ul>
@@ -4057,6 +4087,96 @@ input, select, textarea {
 												<hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
 											<div id="reviewselectlist">
 										  <c:forEach var="reviewlist" items="${reviewlist}" varStatus="status1">
+										  
+										  
+										  
+										  
+										  
+										  
+										  
+										  <!-- 리뷰수정 Modal -->
+
+  <div class="modal fade" id="reviewmodifymodal${reviewlist.r_id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-80size">
+    <div class="modal-content modal-80size">
+      <div class="modal-header">
+        <h6 class="modal-title fs-5" id="exampleModalLabel" style="color:black;"><Strong style="color:black; font-size:20px;">솔직한 후기를 남겨주세요!</Strong></h6>
+      </div>
+      <div class="modal-body">
+        <h6 style="color:black;"><Strong style="color:black;">일반이용 후기 작성 요령</Strong></h6>
+        <ul>
+        <li style="font-size:15px;">해당 코치님에게 트레이닝을 받은 증빙사진이 필요합니다.
+		(PT 약정서/계약서 or 코치님과 함께 찍은 사진 등 기타)</li>
+		 <li style="font-size:15px;">증빙사진의 공개/비공개 여부를 선택할 수 있습니다.</li>
+		 <li style="font-size:15px;">증빙이 적절하지 않을 시 삭제처리 됩니다.(상시 모니터링 중)</li>
+        </ul>
+         <h6 style="color:black;"><Strong style="color:black;">별점을 선택해주세요</Strong></h6>
+   		<div class="starRev">
+  <!-- 편의 상 가장 첫번째의 별은 기본으로 class="on"이 되게 설정해주었습니다. -->
+  <span class="starR3 on" >⭐</span>
+  <span class="starR3">⭐</span>
+  <span class="starR3" >⭐</span>
+  <span class="starR3" >⭐</span>
+  <span class="starR3" >⭐</span>
+</div>
+         <p><p>					
+				
+				<div class="opencheck" style="display: flex;align-items: center;">
+         		 <h6 style="color:black;"><Strong style="color:black;">증빙사진을 올려주세요</Strong></h6><p><Strong style="color:black; font-size:12px;">( 최대 3장까지 등록가능합니다 )</Strong></p>
+				<span style="margin-top:-30px; margin-right:-10px;"class="open"  >√</span><p style="color:black;margin-top:5px;">사진공개</p>
+				</div>         
+         
+          	  <form method="POST" onsubmit="return false;" enctype="multipart/form-data">
+        <input type="file" onchange="addFile(this);" multiple />
+          
+        <div class="file-list"></div>
+  	
+   
+    </form>
+            <h6 style="color:black; margin-top:0px;"><Strong style="color:black;">내용을 작성해주세요</Strong></h6>
+            <div class="input-group has-validation">
+								<textarea style="height:200px;"cols="30" rows="10" class="form-control" id="reviewmodifycontent" name="tf_intro">${reviewlist.r_content}${reviewlist.r_id}</textarea>
+							</div>
+            
+            
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="submitForm()" data-target="#clickReviewinsert" data-bs-dismiss="modal">확인</button>
+         
+      </div>
+    </div>
+  </div>
+</div>	
+										  
+	<!-- 리뷰삭제Modal Modal -->
+<div class="modal fade" id="deletereviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">리뷰삭제확인</h1>
+      </div>
+      <div class="modal-body">
+       <p style="color:black; text-align:left; margin-bottom:-7px;"> 정말 리뷰를 삭제 하시겠습니까?</p>
+      </div>
+      <div class="modal-footer">
+      <input type="hidden" value="${reviewlist.r_id }" id="r_id">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickreviewDelete()"data-target="#clickreviewDelete" value="${reviewlist.r_id}">확인</button>
+      </div>
+    </div>
+  </div>
+</div>									  
+										  
+										  
+										  
+										  
+										  
+										  
+										  
+										  
+										  
+										  
 										  <div >
 										 	<div style="text-align:left;">
 										 <h5 style="color:white">${reviewlist.memberprofile_name}  ${reviewlist.r_date} 
@@ -4100,10 +4220,30 @@ input, select, textarea {
 											</div>
 										   	
 										   	
-										    <div style="text-align:left;">
+										    <div id="r_content${reviewlist.r_id}"style="text-align:left;">
 										   		${reviewlist.r_content}
 										   	</div>
-										   	
+										   
+										 
+										   	<div style="display: flex;">
+											   	<div style="width: 82%;">
+												</div>
+												
+									 			<sec:authorize access="hasRole('ROLE_USER')">
+									 				<sec:authentication property="principal" var="principal"/> 
+									 		
+									 			<c:if test="${principal.u_key==reviewlist.memberprofile_u_key }">
+									 			
+									 			<p style="color:#ffbc00" class="aa" data-bs-toggle="modal" data-bs-target="#reviewmodifymodal${reviewlist.r_id}" data-rcontent="${reviewlist.r_content}">수정</p> &nbsp;
+												<input type="hidden"  value="${trainerprofile.u_key }">			
+												<input type="hidden" id="r_id" value="${reviewlist.r_id}">
+												<p style="color:grey" class="aa removefileBtn" data-bs-toggle="modal" data-bs-target="#deleteFile1Modal"  data-rid="${reviewlist.r_id}">삭제</p> &nbsp;
+					
+						
+												</c:if>
+												</sec:authorize>
+											</div>
+										 
 										  	</div>
 										  	<div style="visibility:hidden;">d</div>
 										  <hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
@@ -4202,7 +4342,13 @@ input, select, textarea {
 		</c:if>
 	</sec:authorize>
 	</c:if>		
-	</sec:authorize>			
+	</sec:authorize>	
+	<!-- 로그인안한사람일 경우 -->
+	<sec:authorize access="isAnonymous()">
+	<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#consultingModalanonymous">
+	  			<p style="margin-top:3px;">상담신청</p>
+			</button>
+	</sec:authorize>		
 										</li>
 										</ul>
 										  </div>
@@ -4245,18 +4391,37 @@ input, select, textarea {
 					</footer>
 
 
+
 			</div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+	
+	
+
+	<input type="hidden" id="trainerprofile_u_key" value="${trainerprofile.u_key }">
 
 	</body>
+
+
+
+
+<!-- 트레이너 프로필 사진 1 삭제 Modal Modal -->
+<div class="modal fade" id="deleteFile1Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">소개사진삭제</h1>
+      </div>
+      <div class="modal-body">
+        정말 사진을 삭제 하시겠습니까?2
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickDelete2()"data-target="#clickDelete">확인</button>
+      </div>
+    </div>
+  </div>
+</div>			
+
 <!-- 리뷰 Modal Modal -->
 <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-80size">
@@ -4305,17 +4470,40 @@ input, select, textarea {
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
         <button type="button" class="btn btn-outline-primary" onclick="submitForm()" data-target="#clickReviewinsert" data-bs-dismiss="modal">확인</button>
+         <sec:authorize access="hasRole('ROLE_USER')">
           <sec:authentication property="principal" var="principal"/> 
      <input type="hidden"  id="memberprofile_u_key" value="${principal.u_key}">
        <input type="hidden"  id="memberprofile_name" value="${principal.uName}">
+       </sec:authorize>
       </div>
     </div>
   </div>
-</div>		
+</div>	
+
+
+
+
+
 <script>
+
+$('.removefileBtn').each(function(){
+	$(this).on('click', function(event) {
+	r_id = $(this).prev().val();
+	trainerprofile_u_key = $(this).prev().prev().val();
+})
+})
+
+
+function clickDelete2()
+{
+	 location.href='${path}	/reviewDelete?r_id='+r_id+'&trainerprofile_u_key='+trainerprofile_u_key+'';
+}
+
 $('.starRev span').click(function(){
 	  $(this).parent().children('span').removeClass('on');
 	  $(this).addClass('on').prevAll('span').addClass('on');
+	  let starR = $('.starR.on').length;
+	  console.log("starR:"+starR);
 	  return false;
 	});
 let count =0;
@@ -4488,10 +4676,10 @@ function submitForm() {
       	data: formData,
         success: function(rtn){
           $('#tf_reviewUpdateOk').html(rtn);
-          console.log("파일업로드성공: ", rtn)
+          console.log("파일업로드성공: ", rtn);
         },
         err: function(err){
-          console.log("파일업로드실패:", err)
+          console.log("파일업로드실패:", err);
         }
       })
       
@@ -4529,14 +4717,14 @@ function Centerview(test) {
 $("#reviewselect").change( function() {
 
 	console.log("셀렉트박스변경호출");
-	let trainerprofile_u_key = $('#u_key').val();
-	let memberprofile_u_key = $('#memberprofile_u_key').val(); 	
+	let trainerprofile_u_key = $('#trainerprofile_u_key').val();
+
 	let select = $('#reviewselect').val();
 	console.log("select:"+select);
 	$.ajax({
 		method: "POST",
 		url: "/aj-reviewselect",
-		data: { trainer_u_key: trainerprofile_u_key , member_u_key : memberprofile_u_key,select:select}
+		data: { trainer_u_key: trainerprofile_u_key ,select:select}
 	})
 	.done(function( html ) {
 		console.log(html);
@@ -4550,6 +4738,16 @@ $("#reviewselect").change( function() {
 	});
 
 });
+
+
+$('#reviewmodifymodal').on('show.bs.modal', function(event) {          
+    r_content = $(this).prev().prev().prev().prev().prev().prev().prev().val();
+    	
+ 	document.getElementById("reviewmodifycontent").innerHTML = r_content;
+    
+    console.log("r_content:"+r_content);
+   
+ })
 </script>
 <!-- 다중파일업로드 이미지 미리보기 삭제끝 -->
 </html>

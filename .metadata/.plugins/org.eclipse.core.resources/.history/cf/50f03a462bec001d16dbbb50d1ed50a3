@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.io.File"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+test
+</body>
+<script>
+$('#reviewmodifymodal').on('show.bs.modal', function(event) {          
+    r_content = "fdasf";
+ 	//document.getElementById("reviewcontent").innerHTML = r_content;
+    
+    console.log("r_content:"+r_content);
+   
+ })</script>
+</html>

@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<p style="color:#ffbc00" class="aa" data-bs-toggle="modal" data-bs-target="#reviewmodifymodal" data-rcontent="${reviewlist.r_content}">수정</p> &nbsp;
+
+</body>
+
+<script>
+$('#reviewmodifymodal').on('show.bs.modal', function(event) {          
+    r_content = "fdasf";
+ 	//document.getElementById("reviewcontent").innerHTML = r_content;
+    
+    console.log("r_content:"+r_content);
+   
+ })
+</script>
+</html>
