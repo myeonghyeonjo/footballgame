@@ -186,6 +186,8 @@ public interface BoardService {
 
 	public void reviewfiledelete(int r_id);
 
+	public void reviewfiledeletemodify(int file_r_id);
+
 	
 
 	

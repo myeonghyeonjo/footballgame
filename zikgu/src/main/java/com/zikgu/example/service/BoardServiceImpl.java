@@ -537,6 +537,10 @@ public class BoardServiceImpl implements BoardService {
 		boardmapper.reviewfiledelete(r_id);
 	}
 
+	@Override
+	public void reviewfiledeletemodify(int file_r_id) {
+		boardmapper.reviewfiledeletemodify(file_r_id);
+	}
 	
 
 	

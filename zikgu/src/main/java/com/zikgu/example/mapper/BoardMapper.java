@@ -180,7 +180,7 @@ public interface BoardMapper {
 	public void reviewDelete(int r_id);
 
 	
-
+	public void reviewfiledeletemodify(int file_r_id);
 
 
 

@@ -221,6 +221,28 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+.open2{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  color: transparent;
+  text-shadow: 0 0 0 #f0f0f0;
+  font-size: 1.8em;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.open3{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  color: transparent;
+  text-shadow: 0 0 0 #f0f0f0;
+  font-size: 1.8em;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
 /* 별 이모지에 마우스 오버 시 */
 .open:hover {
   text-shadow: 0 0 0 #ccc;
@@ -230,7 +252,25 @@ input[type="checkbox"] {
 .open.on{
   text-shadow: 0 0 0 #ffbc00;
 }
-    
+ /* 별 이모지에 마우스 오버 시 */
+.open2:hover {
+  text-shadow: 0 0 0 #ccc;
+}
+
+/* 별 이모지를 클릭 후 class="on"이 되었을 경우 */
+.open2.on{
+  text-shadow: 0 0 0 #ffbc00;
+}
+ /* 별 이모지에 마우스 오버 시 */
+.open3:hover {
+  text-shadow: 0 0 0 #ccc;
+}
+
+/* 별 이모지를 클릭 후 class="on"이 되었을 경우 */
+.open3.on{
+  text-shadow: 0 0 0 #ffbc00;
+}
+      
     
     
     .slider2 img {
@@ -4100,41 +4140,81 @@ input, select, textarea {
   <div class="modal-dialog modal-80size">
     <div class="modal-content modal-80size">
       <div class="modal-header">
-        <h6 class="modal-title fs-5" id="exampleModalLabel" style="color:black;"><Strong style="color:black; font-size:20px;">솔직한 후기를 남겨주세요!</Strong></h6>
-      </div>
+
+        <h6 class="modal-title fs-5" id="exampleModalLabel" style="color:black;"><Strong style="color:black; font-size:20px;">솔직한 후기를 남겨주세요!</Strong></h6>      </div>
       <div class="modal-body">
-        <h6 style="color:black;"><Strong style="color:black;">일반이용 후기 작성 요령</Strong></h6>
+       <h6 style="color:black;"><Strong style="color:black; font-size:15px; text-align:left;">일반이용 후기 작성 요령</Strong></h6>
         <ul>
-        <li style="font-size:15px;">해당 코치님에게 트레이닝을 받은 증빙사진이 필요합니다.
+         <li style="font-size:14px; color:black; text-align:left;margin-bottom:-40px;margin-top:-20px;">해당 코치님에게 트레이닝을 받은 증빙사진이 필요합니다.
 		(PT 약정서/계약서 or 코치님과 함께 찍은 사진 등 기타)</li>
-		 <li style="font-size:15px;">증빙사진의 공개/비공개 여부를 선택할 수 있습니다.</li>
-		 <li style="font-size:15px;">증빙이 적절하지 않을 시 삭제처리 됩니다.(상시 모니터링 중)</li>
+		 <li style="font-size:14px;color:black; text-align:left;margin-bottom:-40px;">증빙사진의 공개/비공개 여부를 선택할 수 있습니다.</li>
+		 <li style="font-size:14px; color:black;text-align:left;">증빙이 적절하지 않을 시 삭제처리 됩니다.(상시 모니터링 중)</li>
         </ul>
-         <h6 style="color:black;"><Strong style="color:black;">별점을 선택해주세요</Strong></h6>
-   		<div class="starRev">
+        <h6 style="color:black;"><Strong style="color:black;  text-align:left;font-size:15px;">별점을 선택해주세요</Strong></h6>
+   		<div class="starRev" style="text-align:left;">
   <!-- 편의 상 가장 첫번째의 별은 기본으로 class="on"이 되게 설정해주었습니다. -->
+  <c:if test="${reviewlist.r_starR==1 }">
   <span class="starR3 on" >⭐</span>
   <span class="starR3">⭐</span>
   <span class="starR3" >⭐</span>
   <span class="starR3" >⭐</span>
   <span class="starR3" >⭐</span>
+  </c:if>
+  
+  <c:if test="${reviewlist.r_starR==2 }">
+  <span class="starR3 on" >⭐</span>
+  <span class="starR3 on">⭐</span>
+  <span class="starR3" >⭐</span>
+  <span class="starR3" >⭐</span>
+  <span class="starR3" >⭐</span>
+  </c:if>
+  
+  <c:if test="${reviewlist.r_starR==3 }">
+  <span class="starR3 on" >⭐</span>
+  <span class="starR3 on">⭐</span>
+  <span class="starR3 on" >⭐</span>
+  <span class="starR3" >⭐</span>
+  <span class="starR3" >⭐</span>
+  </c:if>
+  
+  <c:if test="${reviewlist.r_starR==4 }">
+  <span class="starR3 on" >⭐</span>
+  <span class="starR3 on">⭐</span>
+  <span class="starR3 on" >⭐</span>
+  <span class="starR3 on" >⭐</span>
+  <span class="starR3" >⭐</span>
+  </c:if>
+  
+  <c:if test="${reviewlist.r_starR==5 }">
+  <span class="starR3 on" >⭐</span>
+  <span class="starR3 on" >⭐</span>
+  <span class="starR3 on" >⭐</span>
+  <span class="starR3 on" >⭐</span>
+  <span class="starR3 on" >⭐</span>
+  </c:if>
 </div>
          <p><p>					
 				
-				<div class="opencheck" style="display: flex;align-items: center;">
-         		 <h6 style="color:black;"><Strong style="color:black;">증빙사진을 올려주세요</Strong></h6><p><Strong style="color:black; font-size:12px;">( 최대 3장까지 등록가능합니다 )</Strong></p>
-				<span style="margin-top:-30px; margin-right:-10px;"class="open"  >√</span><p style="color:black;margin-top:5px;">사진공개</p>
+				<div class="opencheck2" style="display: flex;align-items: center;">
+ 				<h6 style="color:black;"><Strong style="color:black; font-size:15px; text-align:left;">증빙사진을 올려주세요</Strong></h6><p style="color:black;"><Strong style="color:black; font-size:12px;  text-align:left;">( 최대 3장까지 등록가능합니다 )</Strong></p>				
+				<c:if test="${reviewlist.r_opencheck==1}">
+				<span style="margin-top:-30px; margin-right:-10px;"class="open3 on"  >√</span><p style="color:black;margin-top:5px;">사진공개</p>
+				</c:if>
+				<c:if test="${reviewlist.r_opencheck==0}">
+				<span style="margin-top:-30px; margin-right:-10px;"class="open3"  >√</span><p style="color:black;margin-top:5px;">사진공개</p>
+				</c:if>
 				</div>         
-         
+         <div  style="display: flex;">
+          	
           	  <form method="POST" onsubmit="return false;" enctype="multipart/form-data">
-        <input type="file" onchange="addFile(this);" multiple />
-          
-        <div class="file-list"></div>
+        <input type="file" onchange="addFile2(this);" multiple />
+           <input type="hidden" value="${reviewlist.r_id }" />
+        <div class="file-reviewmodify-list${reviewlist.r_id }"></div>
   	
    
     </form>
-            <h6 style="color:black; margin-top:0px;"><Strong style="color:black;">내용을 작성해주세요</Strong></h6>
-            <div class="input-group has-validation">
+    </div>
+						<h6 style="color:black; margin-top:0px;"><Strong style="color:black; font-size:15px; text-align:left;">내용을 작성해주세요</Strong></h6>            <div class="input-group has-validation">
 								<textarea style="height:200px;"cols="30" rows="10" class="form-control" id="reviewmodifycontent" name="tf_intro">${reviewlist.r_content}${reviewlist.r_id}</textarea>
 							</div>
             
@@ -4142,8 +4222,8 @@ input, select, textarea {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-outline-primary" onclick="submitForm()" data-target="#clickReviewinsert" data-bs-dismiss="modal">확인</button>
-         
+        <button type="button" class="btn btn-outline-primary" onclick="submitForm2(${reviewlist.r_id })" data-target="#clickReviewinsert" data-bs-dismiss="modal">확인</button>
+         <input type="hidden" id="r_id2" value="${reviewlist.r_id }" />
       </div>
     </div>
   </div>
@@ -4195,7 +4275,7 @@ input, select, textarea {
 										   		  
 										   	</c:if>
 										   		<c:if test="${reviewlist.r_starR==4}">
-										   	<span class="starR2 on" >⭐⭐⭐⭐⭐</span>
+										   	<span class="starR2 on" >⭐⭐⭐⭐</span>
 										   		  
 										   	</c:if>
 										   	<c:if test="${reviewlist.r_starR==5}">
@@ -4210,11 +4290,13 @@ input, select, textarea {
 										   	<div style="text-align:left;">
 										   	<c:forEach var="reviewfilelist" items="${reviewfilelist}" varStatus="status2">
 										   				<c:if test="${reviewfilelist.memberprofile_u_key == reviewlist.memberprofile_u_key}">
-										   				<c:if test="${reviewfilelist.r_date == reviewlist.r_date}">
+										   				<c:if test="${reviewfilelist.review_r_id == reviewlist.r_id}">
 											<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
-											</c:if>
-											</c:if>
+											<input type="hidden" value="${reviewfilelist.file_name }" class="filename${reviewlist.r_id}">
+											<input type="hidden" value="${reviewfilelist.r_id }" class="file_r_id${reviewlist.r_id}">
 											
+											</c:if>
+											</c:if>
 											</c:forEach>
 												<div style="visibility:hidden;">d</div>
 											</div>
@@ -4234,11 +4316,12 @@ input, select, textarea {
 									 		
 									 			<c:if test="${principal.u_key==reviewlist.memberprofile_u_key }">
 									 			
-									 			<p style="color:#ffbc00" class="aa" data-bs-toggle="modal" data-bs-target="#reviewmodifymodal${reviewlist.r_id}" data-rcontent="${reviewlist.r_content}">수정</p> &nbsp;
+									 			<p style="color:#ffbc00" class="aa modifyreviewBtn" data-bs-toggle="modal" data-bs-target="#reviewmodifymodal${reviewlist.r_id}" data-rcontent="${reviewlist.r_content}">수정</p> &nbsp;
 												<input type="hidden"  value="${trainerprofile.u_key }">			
 												<input type="hidden" id="r_id" value="${reviewlist.r_id}">
 												<p style="color:grey" class="aa removefileBtn" data-bs-toggle="modal" data-bs-target="#deleteFile1Modal"  data-rid="${reviewlist.r_id}">삭제</p> &nbsp;
-					
+												
+											
 						
 												</c:if>
 												</sec:authorize>
@@ -4485,6 +4568,85 @@ input, select, textarea {
 
 
 <script>
+$('.modifyreviewBtn').each(function(){
+	$(this).on('click', function(event) {
+	r_id = $(this).next().next().val();
+	console.log("r_id:"+r_id); 
+	var filecount=0;
+	var filename1 = $('.filename'+ r_id ).eq('0').val()
+	var filename2 = $('.filename'+ r_id ).eq('1').val()
+	var filename3 = $('.filename'+ r_id ).eq('2').val()
+	
+	
+	var file_r_id1= $('.file_r_id'+ r_id ).eq('0').val()
+	var file_r_id2= $('.file_r_id'+ r_id ).eq('1').val()
+	var file_r_id3= $('.file_r_id'+ r_id ).eq('2').val()
+	
+	
+	
+	
+	console.log(filename1);
+	console.log(filename2);
+	console.log(filename3);
+	
+	console.log(file_r_id1);
+	console.log(file_r_id2);
+	console.log(file_r_id3);
+	if(filename1){
+		filecount++;
+	}
+	if(filename2){
+		filecount++;
+	}
+	if(filename3){
+		filecount++;
+	}
+	
+	console.log("filecount:"+filecount);
+	
+	filepath1 = "../../../Img/"+filename1;
+	filepath2 = "../../../Img/"+filename2;
+	filepath3 = "../../../Img/"+filename3;
+	console.log("filepath1:"+filepath1);
+	console.log("filepath2:"+filepath2);
+	console.log("filepath3:"+filepath3);
+
+	
+	
+	$('.file-reviewmodify-list'+r_id).children().remove();
+	 let htmlData2 = '';
+	 for(var j=1;j<=filecount;j++){
+         
+
+		 if(j==1){
+			 htmlData2 += '<div style="display: inline-block;   box-sizing: border-box; padding: 10px; float:left;" id="file' + file_r_id1 + '" class="filebox2'+r_id+'">';
+		        htmlData2 += '<img src="' + filepath1 + '" title="' + filename1 + '" width=100 height=100 />';
+				 htmlData2 += '  <a class="delete2" onclick="deletemodifyFile(' + file_r_id1 + ');">';
+				  htmlData2 += '  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px;  margin-left:-52px; margin-top:-210px;  cursor:pointer;" alt="Button Icon">';
+				  htmlData2 += '</div>';  
+		 }
+		    else if(j==2){
+				 htmlData2 += '<div style="display: inline-block;  box-sizing: border-box; padding: 10px; " id="file' + file_r_id2 + '" class="filebox2'+r_id+'">';
+		    	htmlData2 += '<img src="' + filepath2 + '" title="' + filename2 + '" width=100 height=100 />';
+				 htmlData2 += '  <a class="delete2" onclick="deletemodifyFile(' + file_r_id2 + ');">';
+				  htmlData2 += '  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px; margin-left:-52px; margin-top:-210px;   cursor:pointer;" alt="Button Icon">';
+				  htmlData2 += '</div>';  
+
+		    }
+		    else if(j==3){
+				 htmlData2 += '<div style="display: inline-block;  box-sizing: border-box; padding: 10px; " id="file' + file_r_id3 + '" class="filebox2'+r_id+'">';
+		    	htmlData2 += '<img src="' + filepath3 + '" title="' + filename3 + '" width=100 height=100 />';
+				 htmlData2 += '  <a class="delete2" onclick="deletemodifyFile(' + file_r_id3 + ');">';
+				  htmlData2 += '  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px; margin-left:-52px; margin-top:-210px;   cursor:pointer;" alt="Button Icon">';
+				  htmlData2 += '</div>'; 
+		    }
+         }
+	 
+     $('.file-reviewmodify-list'+r_id).append(htmlData2);
+})
+})
+
+
 
 $('.removefileBtn').each(function(){
 	$(this).on('click', function(event) {
@@ -4516,6 +4678,21 @@ $('.opencheck span').click(function(){
 		console.log("count:"+count);
 		 $(this).parent().children('span').removeClass('on');
 		count--;
+	}
+	
+	  return false;
+	});	
+	
+let count2 =0;
+$('.opencheck2 span').click(function(){
+	if(count2==0){
+		console.log("count2:"+count2);
+		  $(this).addClass('on').prevAll('span').addClass('on');
+		  count2++;
+	}else if (count2!=0){
+		console.log("count2:"+count2);
+		 $(this).parent().children('span').removeClass('on');
+		 count2--;
 	}
 	
 	  return false;
@@ -4610,6 +4787,90 @@ function addFile(obj){
     document.querySelector("input[type=file]").value = "";
 }
 
+/* 리뷰수정 모달에서 첨부파일추가 */
+function addFile2(obj){
+	var r_id = $(obj).next().val();
+    var maxFileCnt = 3;   // 첨부파일 최대 개수
+    var attFileCnt = document.querySelectorAll('.file-reviewmodify-list'+r_id).length;    // 기존 추가된 첨부파일 개수
+   // var attFileCnt = document.querySelectorAll('.filebox2'+r_id).length;    // 기존 추가된 첨부파일 개수
+   var parentElement = document.querySelector('.file-reviewmodify-list' + r_id);
+    var filebox2Elements = parentElement.querySelectorAll('.filebox2'+r_id);
+    var filebox2Count = filebox2Elements.length;
+    console.log("filebox2Count:"+filebox2Count);
+   var remainFileCnt = maxFileCnt - filebox2Count;    // 추가로 첨부가능한 개수
+    var curFileCnt = obj.files.length;  // 현재 선택된 첨부파일 개수
+	
+    
+    
+   
+    
+    
+    
+    
+    
+    
+	console.log("r_id:"+r_id);
+    console.log("maxFileCnt:"+maxFileCnt);
+    console.log("attFileCnt:"+attFileCnt);
+    console.log("remainFileCnt:"+remainFileCnt);
+    console.log("curFileCnt:"+curFileCnt);
+   
+    console.log("obj.target.value:"+event.target.value);
+    
+ 
+    // 첨부파일 개수 확인
+    if (curFileCnt > remainFileCnt) {
+        alert("첨부파일은 최대 " + maxFileCnt + "개 까지 첨부 가능합니다.");
+    } else {
+    	
+        for (const file of obj.files) {
+        	console.log("호출");
+        	 let value = URL.createObjectURL(event.target.files[0]); 
+        	 console.log("value:"+value);
+        	
+            // 첨부파일 검증
+            if (validation(file)) {
+                // 파일 배열에 담기
+                var reader = new FileReader();
+
+                reader.onload = function (event) {
+                	
+				    filesArr.push(file);
+				   
+				   
+                   
+                  
+                };
+                reader.readAsDataURL(file);
+				console.log("event.target.result:"+event.target.result);
+                // 목록 추가
+                let htmlData = '';
+				  htmlData += '<div style="display: inline-block;  box-sizing: border-box; padding: 10px; margin-left:25px;" id="file' + fileNo + '" class="filebox2'+r_id+'">';
+       			  htmlData +=  '<img src="'+value+'" title="'+file.name+'" width=100 height=100 />';
+				  htmlData += '  <a class="delete" onclick="deleteFile(' + fileNo + ');">';
+				  htmlData += '  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px; margin-left:-52px; margin-top:-210px;  cursor:pointer;" alt="Button Icon">';
+				  htmlData += '</div>';
+	
+				  
+					 
+				
+				  $('.file-reviewmodify-list'+r_id).append(htmlData);
+                
+			
+             
+			
+                
+                
+                fileNo++;
+            } else {
+                continue;
+            }
+        }
+    }
+    // 초기화
+    document.querySelector("input[type=file]").value = "";
+}
+
 /* 첨부파일 검증 */
 function validation(obj){
     const fileTypes = ['application/pdf', 'image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tif', 'application/haansofthwp', 'application/x-hwp'];
@@ -4671,6 +4932,55 @@ function submitForm() {
     $.ajax({
         type:"POST",
         url: "/reviewInsert",
+        processData: false,
+        contentType: false,
+      	data: formData,
+        success: function(rtn){
+          $('#tf_reviewUpdateOk').html(rtn);
+          console.log("파일업로드성공: ", rtn);
+        },
+        err: function(err){
+          console.log("파일업로드실패:", err);
+        }
+      })
+      
+  
+}
+
+/* 수정 모달 폼 전송 */
+function submitForm2(r_id) {
+    // 폼데이터 담기
+    
+    
+     
+    
+    
+    
+    
+    console.log("r_id는 이거입니다:"+r_id);
+    var form = document.querySelector("form");
+    var formData = new FormData(form);
+    for (var i = 0; i < filesArr.length; i++) {
+        // 삭제되지 않은 파일만 폼데이터에 담기
+        if (!filesArr[i].is_delete) {
+            formData.append("attach_file", filesArr[i]);
+        }
+    }
+
+	var test = 'test333';
+	let trainerprofile_u_key = $('#u_key').val();
+	let memberprofile_u_key = $('#memberprofile_u_key').val();
+	
+	
+	
+	var data = {   
+		    "test" : test ,"r_id":r_id, "trainerprofile_u_key":trainerprofile_u_key, "memberprofile_u_key":memberprofile_u_key
+		
+	}
+	formData.append('test', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
+    $.ajax({
+        type:"POST",
+        url: "/reviewmodifyInsert",
         processData: false,
         contentType: false,
       	data: formData,
@@ -4748,6 +5058,30 @@ $('#reviewmodifymodal').on('show.bs.modal', function(event) {
     console.log("r_content:"+r_content);
    
  })
+ 
+ 
+ 
+ /* 리뷰수정 첨부파일 삭제 */
+function deletemodifyFile(r_id) {
+	console.log("리뷰수정모달에서 파일삭제 클릭");
+	console.log("r_id:"+r_id);
+	document.querySelector("#file" + r_id).remove();
+	$.ajax({
+		method: "POST",
+		url: "/aj-reviewfiledeletemodify",
+		data: { r_id: r_id}
+	})
+	.done(function( html ) {
+	//	console.log(html);
+		//$('#reviewselectlist').html(html);
+	    
+
+		   
+	});
+	
+    //filesArr[num].is_delete = true;
+}
+
 </script>
 <!-- 다중파일업로드 이미지 미리보기 삭제끝 -->
 </html>

@@ -1975,7 +1975,7 @@ input, select, textarea {
 		font-weight: 300;
 		height: 2.75em;
 		line-height: 2.75em;
-		min-width: 9.25em;
+		
 		padding: 0 1.5em;
 		text-align: center;
 		text-decoration: none;
@@ -2042,7 +2042,7 @@ input, select, textarea {
 			input[type="button"],
 			button,
 			.button {
-				min-width: 0;
+				
 			}
 
 		}

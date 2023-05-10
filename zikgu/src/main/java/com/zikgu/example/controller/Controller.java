@@ -2021,6 +2021,109 @@ model.addAttribute("exception", exception);
 			 return "/member/trainerProfileDetail";
 	    }
 		
+		@RequestMapping("/reviewmodify")
+	    public String reviewmodify( Model model, Center center,PT pt,@RequestParam("r_id") int r_id,@RequestParam("trainerprofile_u_key") int trainerprofile_u_key,TrainerProfile trainerprofile) {
+			System.out.println("r_id:"+r_id); 
+			boardservice.reviewDelete(r_id);
+			boardservice.reviewfiledelete(r_id);
+			
+			int u_key = trainerprofile_u_key;
+			//리로드
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			String u_name = boardservice.getU_name2(u_key);
+			
+			String programsub = trainerprofile.getTf_programsub();
+			String[] programsub2 = programsub.split(",");
+			
+			
+			int tf_id = trainerprofile.getTf_id();
+			List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+			System.out.println(filelist.get(0).file_name);
+			List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
+			List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
+			String tf_loadaddress = trainerprofile.getTf_loadaddress();
+			System.out.println("u_key:"+u_key);
+			
+			List<PT> PT_List= boardservice.getPTdetail(u_key);
+			System.out.println("PT_List:"+PT_List);
+			List<FileDto> PT_filelist = boardservice.getPT_FileList(u_key);
+			model.addAttribute("programsub",programsub2);
+			model.addAttribute("PT_List",PT_List);
+			model.addAttribute("PT_filelist",PT_filelist);
+			model.addAttribute("tf_loadaddress",tf_loadaddress);
+			model.addAttribute("u_key",u_key);
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("u_name",u_name);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("filelist_2",filelist_2);
+			model.addAttribute("filelist_3",filelist_3);
+	     	//리로드 끝
+			
+			
+			 return "/member/trainerProfileDetail";
+	    }
+		
+		
+		@RequestMapping("/aj-reviewfiledeletemodify")
+	    public String reviewfiledeletemodify( Model model, Center center,PT pt,@RequestParam("r_id") int r_id,TrainerProfile trainerprofile) {
+			System.out.println("r_id:"+r_id); 
+			boardservice.reviewfiledeletemodify(r_id);
+			
+			
+			
+			 return "/member/homapage2";
+	    }
+		@RequestMapping("/reviewmodifyInsert")
+			public String reviewmodifyInsert( Model model,Review review,  @RequestPart(value = "test") Map<String, Object> test,MultipartHttpServletRequest mhsq, FileDto filedto,TrainerProfile trainerprofile) throws IllegalStateException, IOException {
+			
+			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
+			 File dir = new File(realFolder);
+			   if (!dir.isDirectory()) {
+				   dir.mkdirs();
+			   }
+			   int r_id =  (int) test.get("r_id");
+			   int review_r_id = r_id;
+			   System.out.println("r_id:"+r_id);
+			   List<MultipartFile> mf = mhsq.getFiles("attach_file");
+			  
+			   String memberprofile_u_key =   (String) test.get("memberprofile_u_key");
+			   String trainerprofile_u_key =   (String) test.get("trainerprofile_u_key");
+			
+			   review.setR_content("test");
+			   review.setR_opencheck(1);
+			   review.setR_starR(4);
+			   review.setMemberprofile_u_key( Integer.parseInt(memberprofile_u_key));
+			   review.setMemberprofile_name("test");
+			   review.setTrainerprofile_u_key(Integer.parseInt(trainerprofile_u_key));
+			  
+			   //boardservice.ReviewInsert(review);
+			   //int review_r_id = boardservice.getReviewrid();
+			  
+			   System.out.println("review_r_id:"+review_r_id);
+			   if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
+			   } else {
+				   for (int i = 0; i < mf.size(); i++) {
+					   // 파일 중복명 처리                
+					   String genId = UUID.randomUUID().toString(); 
+					   // 본래 파일명                
+					   String originalfileName = mf.get(i).getOriginalFilename();
+					 
+					   
+					   String saveFileName = genId + "." + originalfileName.substring(originalfileName.lastIndexOf(".") + 1);
+					   // 저장되는 파일 이름                
+					   String savePath = realFolder + saveFileName; 
+					   // 저장 될 파일 경로                 
+					   long fileSize = mf.get(i).getSize(); 	
+					   // 파일 사이즈                
+					   mf.get(i).transferTo(new File(savePath)); 	// 파일 저장                 
+					   boardservice.ReviewfileUpload(originalfileName, saveFileName, fileSize,savePath,"test",4,1,memberprofile_u_key,trainerprofile_u_key,"test",review_r_id);
+				   		}
+			   	}
+			
+			   List<Review> reviewlist = boardservice.gettf_reviewlist(trainerprofile_u_key);
+			   model.addAttribute("reviewlist",reviewlist);
+			 return "/member/aj-updatetf_review";
+	    }
 		
 		
 	}

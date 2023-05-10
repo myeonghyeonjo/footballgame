@@ -1373,7 +1373,7 @@
 	  <select id="gettf_reviewfilelist" resultType="Review">
          SELECT         
 				             
-				          
+				          	r_id as r_id,
 				         	  O_NAME as O_NAME,
 				         	  FILE_NAME as FILE_NAME,
 				         	   FILE_SIZE as FILE_SIZE,
@@ -1381,7 +1381,8 @@
 				         	   r_opencheck as r_opencheck,	 
 				         	    memberprofile_name as memberprofile_name,
 				         	 memberprofile_u_key as memberprofile_u_key,
-				         	  r_date as r_date	  
+				         	  r_date as r_date	,
+				         	  review_r_id as   review_r_id
 		 FROM           review_file
 		 Where        trainerprofile_u_key = #{trainerprofile_u_key} AND r_opencheck=1
 		ORDER BY r_id DESC
@@ -1471,6 +1472,13 @@
     DELETE FROM review_file
      WHERE review_r_id = #{r_id}
     </delete> 
+    
+      <!-- 리뷰 파일모달에서 수정 삭제 -->
+    <delete id="reviewfiledeletemodify" parameterType="pt">
+    DELETE FROM review_file
+     WHERE r_id = #{r_id}
+    </delete> 
+    
     
    
 </mapper>
