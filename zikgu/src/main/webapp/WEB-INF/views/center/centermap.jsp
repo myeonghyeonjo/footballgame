@@ -3922,7 +3922,7 @@ input, select, textarea {
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<span class="logo"><img src="images/logo.svg" alt="" /></span>
+						
 						<h1 id="c_name" style="color:white;">${center.c_name}</h1>
 						
 						<p>${center.c_loadaddress}<br /></p>

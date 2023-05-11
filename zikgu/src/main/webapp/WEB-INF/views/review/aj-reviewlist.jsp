@@ -4019,7 +4019,7 @@ input, select, textarea {
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<h1 id="c_name" style="color:white;">${trainerprofile.tf_name} 트레이너</h1>
+						<h1 id="c_name" style="color:white;">${trainerprofile.tf_name} 트레이너11</h1>
 						
 						<p>${trainerprofile.tf_hanjulintro}<br /></p>
 						
@@ -4041,7 +4041,6 @@ input, select, textarea {
 						</ul>
 						<ul>
 							<li><a class="aa" href="#intro" class="active" style="color:black">최근 후기</a></li>
-					
 						</ul>
 						
 					</nav>
@@ -4154,43 +4153,43 @@ input, select, textarea {
    		<div class="starRev" style="text-align:left;">
   <!-- 편의 상 가장 첫번째의 별은 기본으로 class="on"이 되게 설정해주었습니다. -->
   <c:if test="${reviewlist.r_starR==1 }">
-  <span class="starR3 on" >⭐</span>
-  <span class="starR3">⭐</span>
-  <span class="starR3" >⭐</span>
-  <span class="starR3" >⭐</span>
-  <span class="starR3" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id }">⭐</span>
+  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
   </c:if>
   
   <c:if test="${reviewlist.r_starR==2 }">
-  <span class="starR3 on" >⭐</span>
-  <span class="starR3 on">⭐</span>
-  <span class="starR3" >⭐</span>
-  <span class="starR3" >⭐</span>
-  <span class="starR3" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id } on">⭐</span>
+  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
   </c:if>
   
   <c:if test="${reviewlist.r_starR==3 }">
-  <span class="starR3 on" >⭐</span>
-  <span class="starR3 on">⭐</span>
-  <span class="starR3 on" >⭐</span>
-  <span class="starR3" >⭐</span>
-  <span class="starR3" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id } on">⭐</span>
+  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
   </c:if>
   
   <c:if test="${reviewlist.r_starR==4 }">
-  <span class="starR3 on" >⭐</span>
-  <span class="starR3 on">⭐</span>
-  <span class="starR3 on" >⭐</span>
-  <span class="starR3 on" >⭐</span>
-  <span class="starR3" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id } on">⭐</span>
+  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
   </c:if>
   
   <c:if test="${reviewlist.r_starR==5 }">
-  <span class="starR3 on" >⭐</span>
-  <span class="starR3 on" >⭐</span>
-  <span class="starR3 on" >⭐</span>
-  <span class="starR3 on" >⭐</span>
-  <span class="starR3 on" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
+  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
   </c:if>
 </div>
          <p><p>					
@@ -4198,10 +4197,10 @@ input, select, textarea {
 				<div class="opencheck2" style="display: flex;align-items: center;">
  				<h6 style="color:black;"><Strong style="color:black; font-size:15px; text-align:left;">증빙사진을 올려주세요</Strong></h6><p style="color:black;"><Strong style="color:black; font-size:12px;  text-align:left;">( 최대 3장까지 등록가능합니다 )</Strong></p>				
 				<c:if test="${reviewlist.r_opencheck==1}">
-				<span style="margin-top:-30px; margin-right:-10px;"class="open3 on"  >√</span><p style="color:black;margin-top:5px;">사진공개</p>
+				<span style="margin-top:-30px; margin-right:-10px;"class="open3 ${reviewlist.r_id } on"  >√</span><p style="color:black;margin-top:5px;">사진공개</p>
 				</c:if>
 				<c:if test="${reviewlist.r_opencheck==0}">
-				<span style="margin-top:-30px; margin-right:-10px;"class="open3"  >√</span><p style="color:black;margin-top:5px;">사진공개</p>
+				<span style="margin-top:-30px; margin-right:-10px;"class="open3 ${reviewlist.r_id }"  >√</span><p style="color:black;margin-top:5px;">사진공개</p>
 				</c:if>
 				</div>         
          <div  style="display: flex;">
@@ -4229,7 +4228,7 @@ input, select, textarea {
   </div>
 </div>	
 										  
-	<!-- 리뷰삭제Modal Modal -->
+<!--리뷰삭제Modal Modal 
 <div class="modal fade" id="deletereviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -4237,7 +4236,7 @@ input, select, textarea {
         <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">리뷰삭제확인</h1>
       </div>
       <div class="modal-body">
-       <p style="color:black; text-align:left; margin-bottom:-7px;"> 정말 리뷰를 삭제 하시겠습니까?</p>
+       <p style="color:black; text-align:left; margin-bottom:-7px;"> 정말 리뷰를 삭제 하시겠습니까22?</p>
       </div>
       <div class="modal-footer">
       <input type="hidden" value="${reviewlist.r_id }" id="r_id">
@@ -4247,7 +4246,7 @@ input, select, textarea {
     </div>
   </div>
 </div>									  
-										  
+-->									  
 										  
 										  
 										  
@@ -4291,10 +4290,11 @@ input, select, textarea {
 										   	<c:forEach var="reviewfilelist" items="${reviewfilelist}" varStatus="status2">
 										   				<c:if test="${reviewfilelist.memberprofile_u_key == reviewlist.memberprofile_u_key}">
 										   				<c:if test="${reviewfilelist.review_r_id == reviewlist.r_id}">
+										   				<c:if test="${reviewlist.r_opencheck==1}">
 											<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
 											<input type="hidden" value="${reviewfilelist.file_name }" class="filename${reviewlist.r_id}">
 											<input type="hidden" value="${reviewfilelist.r_id }" class="file_r_id${reviewlist.r_id}">
-											
+											</c:if>
 											</c:if>
 											</c:if>
 											</c:forEach>
@@ -4487,15 +4487,15 @@ input, select, textarea {
 
 
 
-<!-- 트레이너 프로필 사진 1 삭제 Modal Modal -->
+<!-- 리뷰 삭제 Modal Modal -->
 <div class="modal fade" id="deleteFile1Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">소개사진삭제</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">리뷰삭제</h1>
       </div>
       <div class="modal-body">
-        정말 사진을 삭제 하시겠습니까?2
+        정말 리뷰를 삭제 하시겠습니까?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
@@ -4793,22 +4793,13 @@ function addFile2(obj){
     var maxFileCnt = 3;   // 첨부파일 최대 개수
     var attFileCnt = document.querySelectorAll('.file-reviewmodify-list'+r_id).length;    // 기존 추가된 첨부파일 개수
    // var attFileCnt = document.querySelectorAll('.filebox2'+r_id).length;    // 기존 추가된 첨부파일 개수
-   var parentElement = document.querySelector('.file-reviewmodify-list' + r_id);
+    var parentElement = document.querySelector('.file-reviewmodify-list' + r_id);
     var filebox2Elements = parentElement.querySelectorAll('.filebox2'+r_id);
     var filebox2Count = filebox2Elements.length;
     console.log("filebox2Count:"+filebox2Count);
-   var remainFileCnt = maxFileCnt - filebox2Count;    // 추가로 첨부가능한 개수
+    var remainFileCnt = maxFileCnt - filebox2Count;    // 추가로 첨부가능한 개수
     var curFileCnt = obj.files.length;  // 현재 선택된 첨부파일 개수
-	
-    
-    
-   
-    
-    
-    
-    
-    
-    
+
 	console.log("r_id:"+r_id);
     console.log("maxFileCnt:"+maxFileCnt);
     console.log("attFileCnt:"+attFileCnt);
@@ -4833,13 +4824,8 @@ function addFile2(obj){
                 // 파일 배열에 담기
                 var reader = new FileReader();
 
-                reader.onload = function (event) {
-                	
-				    filesArr.push(file);
-				   
-				   
-                   
-                  
+                reader.onload = function (event) {	
+				    filesArr.push(file);     
                 };
                 reader.readAsDataURL(file);
 				console.log("event.target.result:"+event.target.result);
@@ -4849,19 +4835,9 @@ function addFile2(obj){
        			  htmlData +=  '<img src="'+value+'" title="'+file.name+'" width=100 height=100 />';
 				  htmlData += '  <a class="delete" onclick="deleteFile(' + fileNo + ');">';
 				  htmlData += '  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px; margin-left:-52px; margin-top:-210px;  cursor:pointer;" alt="Button Icon">';
-				  htmlData += '</div>';
-	
-				  
-					 
-				
-				  $('.file-reviewmodify-list'+r_id).append(htmlData);
-                
-			
-             
-			
-                
-                
-                fileNo++;
+				  htmlData += '</div>';	
+				  $('.file-reviewmodify-list'+r_id).append(htmlData);     
+                  fileNo++;
             } else {
                 continue;
             }
@@ -4929,15 +4905,21 @@ function submitForm() {
 		
 	}
 	formData.append('test', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
-    $.ajax({
+    
+	 
+
+	
+	$.ajax({
         type:"POST",
         url: "/reviewInsert",
         processData: false,
         contentType: false,
       	data: formData,
         success: function(rtn){
-          $('#tf_reviewUpdateOk').html(rtn);
+         // $('#main').html(rtn);
           console.log("파일업로드성공: ", rtn);
+     	 location.href='${path}	/trainerProfileDetail?u_key='+trainerprofile_u_key+'&memberprofile_u_key='+memberprofile_u_key+'';
+
         },
         err: function(err){
           console.log("파일업로드실패:", err);
@@ -4950,13 +4932,6 @@ function submitForm() {
 /* 수정 모달 폼 전송 */
 function submitForm2(r_id) {
     // 폼데이터 담기
-    
-    
-     
-    
-    
-    
-    
     console.log("r_id는 이거입니다:"+r_id);
     var form = document.querySelector("form");
     var formData = new FormData(form);
@@ -4966,15 +4941,16 @@ function submitForm2(r_id) {
             formData.append("attach_file", filesArr[i]);
         }
     }
-
 	var test = 'test333';
 	let trainerprofile_u_key = $('#u_key').val();
 	let memberprofile_u_key = $('#memberprofile_u_key').val();
-	
-	
+	let memberprofile_name = $('#memberprofile_name').val();
+	let content = $('#reviewmodifycontent').val();
+	let starR =$(".starR3." + r_id + ".on").length;
+	let opencheck = $(".open3." + r_id + ".on").length;
 	
 	var data = {   
-		    "test" : test ,"r_id":r_id, "trainerprofile_u_key":trainerprofile_u_key, "memberprofile_u_key":memberprofile_u_key
+		  "memberprofile_name":memberprofile_name,  "content":content,"starR":starR,"opencheck":opencheck, "test" : test ,"r_id":r_id, "trainerprofile_u_key":trainerprofile_u_key, "memberprofile_u_key":memberprofile_u_key
 		
 	}
 	formData.append('test', new Blob([ JSON.stringify(data) ], {type : "application/json"}));

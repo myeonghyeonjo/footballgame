@@ -542,6 +542,15 @@ public class BoardServiceImpl implements BoardService {
 		boardmapper.reviewfiledeletemodify(file_r_id);
 	}
 	
+	@Override
+	public void ReviewmodifyInsert(Review review) {
+		boardmapper.ReviewmodifyInsert(review);
+	}
+	
+	@Override
+	public Review getreviewinsetcheck(String formattedDate) {
+		return boardmapper.getreviewinsetcheck(formattedDate);
+	}
 
 	
 	

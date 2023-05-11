@@ -79,7 +79,26 @@
       } );
     </script>
     <style>
-
+.error {
+    width: 250px;
+    height: 20px;
+    height:auto;
+    position: fixed;
+    left: 50%;
+    margin-left:-125px;
+    bottom: 100px;
+    z-index: 9999;
+    background-color: #383838;
+    color: #F0F0F0;
+    font-family: Calibri;
+    font-size: 15px;
+    padding: 10px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+}
 
 
     
@@ -4297,8 +4316,8 @@ input, select, textarea {
 
 			</div>
 
-		
-
+<input type="hidden" value="${deletetoast}" id="deletetoastcheck">		
+<div class='error' style='display:none'>삭제완료</div>
 	</body>
 	</div>
 	
@@ -4579,6 +4598,11 @@ $( document ).ready( function() {
       slidesToShow: 3,
       slidesToScroll: 1,
     } );
+    var deletetoastcheck = $('#deletetoastcheck').val();
+    console.log("deletetoastcheck:"+deletetoastcheck);
+    if(deletetoastcheck==1){
+    	$('.error').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+    }
   } );
   
 function test(test) {

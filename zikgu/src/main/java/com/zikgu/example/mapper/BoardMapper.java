@@ -182,6 +182,10 @@ public interface BoardMapper {
 	
 	public void reviewfiledeletemodify(int file_r_id);
 
+	public void ReviewmodifyInsert(Review review);
+
+	public Review getreviewinsetcheck(String formattedDate);
+
 
 
 	
