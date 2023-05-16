@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.json.simple.JSONObject"/>
     <fullyQualifiedTypeName name="net.nurigo.java_sdk.exceptions.CoolsmsException"/>
     <fullyQualifiedTypeName name="com.google.inject.spi.Message"/>
     <fullyQualifiedTypeName name="org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration"/>
@@ -59,5 +58,6 @@
     <fullyQualifiedTypeName name="org.openqa.selenium.devtools.v95.page.model.OriginTrial"/>
     <fullyQualifiedTypeName name="org.springframework.aop.support.DelegatePerTargetObjectIntroductionInterceptor"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="java.lang.Override"/>
 </qualifiedTypeNameHistroy>

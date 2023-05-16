@@ -4659,6 +4659,7 @@ $('.removefileBtn').each(function(){
 function clickDelete2()
 {
 	 location.href='${path}	/reviewDelete?r_id='+r_id+'&trainerprofile_u_key='+trainerprofile_u_key+'';
+	 sessionStorage.setItem('postDeleted', 'true');
 }
 
 $('.starRev span').click(function(){
@@ -4918,8 +4919,8 @@ function submitForm() {
         success: function(rtn){
          // $('#main').html(rtn);
           console.log("파일업로드성공: ", rtn);
-     	 location.href='${path}	/trainerProfileDetail?u_key='+trainerprofile_u_key+'&memberprofile_u_key='+memberprofile_u_key+'';
-
+     	 location.href='${path}	/reviewinsertresult?u_key='+trainerprofile_u_key+'&memberprofile_u_key='+memberprofile_u_key+'';
+     	 sessionStorage.setItem('postInserted', 'true');
         },
         err: function(err){
           console.log("파일업로드실패:", err);
@@ -4961,8 +4962,9 @@ function submitForm2(r_id) {
         contentType: false,
       	data: formData,
         success: function(rtn){
-          $('#tf_reviewUpdateOk').html(rtn);
-          console.log("파일업로드성공: ", rtn);
+          console.log("파일수정업로드성공: ", rtn);
+     	 location.href='${path}	/trainerProfileDetail?u_key='+trainerprofile_u_key+'&memberprofile_u_key='+memberprofile_u_key+'&logicCheck='+'delete'+'';
+     	 sessionStorage.setItem('postModifyed', 'true');
         },
         err: function(err){
           console.log("파일업로드실패:", err);

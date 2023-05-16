@@ -778,7 +778,7 @@ model.addAttribute("exception", exception);
 	    }
 		
 		@RequestMapping("/trainerProfileDetail")
-	    public String test(Review review,Model model,PT pt,TrainerProfile trainerprofile,@RequestParam("u_key") int u_key) {
+	    public String trainerProfileDetail(Review review,Model model,PT pt,TrainerProfile trainerprofile,@RequestParam("u_key") int u_key) {
 			
 				trainerprofile = boardservice.trainerprofileDetail(u_key);
 				String u_name = boardservice.getU_name2(u_key);
@@ -808,13 +808,45 @@ model.addAttribute("exception", exception);
 				model.addAttribute("filelist",filelist);
 				model.addAttribute("filelist_2",filelist_2);
 				model.addAttribute("filelist_3",filelist_3);
-		     	
-				
-				
-				
-				
+		     
 				return "/member/trainerProfileDetail";
 	    }
+		
+		@RequestMapping("/reviewinsertresult")
+	    public String reviewinsertresult(Review review,Model model,PT pt,TrainerProfile trainerprofile,@RequestParam("u_key") int u_key) {
+				trainerprofile = boardservice.trainerprofileDetail(u_key);
+				String u_name = boardservice.getU_name2(u_key);
+				
+				String programsub = trainerprofile.getTf_programsub();
+				String[] programsub2 = programsub.split(",");
+				
+				
+				int tf_id = trainerprofile.getTf_id();
+				List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+				System.out.println(filelist.get(0).file_name);
+				List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
+				List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
+				String tf_loadaddress = trainerprofile.getTf_loadaddress();
+				System.out.println("u_key:"+u_key);
+				
+				List<PT> PT_List= boardservice.getPTdetail(u_key);
+				System.out.println("PT_List:"+PT_List);
+				List<FileDto> PT_filelist = boardservice.getPT_FileList(u_key);
+				model.addAttribute("programsub",programsub2);
+				model.addAttribute("PT_List",PT_List);
+				model.addAttribute("PT_filelist",PT_filelist);
+				model.addAttribute("tf_loadaddress",tf_loadaddress);
+				model.addAttribute("u_key",u_key);
+				model.addAttribute("trainerprofile",trainerprofile);
+				model.addAttribute("u_name",u_name);
+				model.addAttribute("filelist",filelist);
+				model.addAttribute("filelist_2",filelist_2);
+				model.addAttribute("filelist_3",filelist_3);
+				
+				model.addAttribute("toast",2);     //리뷰등록토스트
+				return "/member/trainerProfileDetail";
+	    }
+		
 		@RequestMapping("/search_All")
 	    public String search_All(Model model,@RequestParam("keyword") String keyword,TrainerProfile trainerprofile,FileDto filedto) {
 			List<TrainerProfile> list = boardservice.search_All(keyword);
@@ -2051,7 +2083,7 @@ model.addAttribute("exception", exception);
 			model.addAttribute("filelist_3",filelist_3);
 	     	//리로드 끝
 			
-			model.addAttribute("deletetoast",1);
+			model.addAttribute("toast",1);
 			 return "/member/trainerProfileDetail";
 	    }
 		

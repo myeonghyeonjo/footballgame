@@ -79,7 +79,7 @@
       } );
     </script>
     <style>
-.error {
+.error, .error2, .error3 {
     width: 250px;
     height: 20px;
     height:auto;
@@ -98,11 +98,7 @@
     -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
     -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
     box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
-}
-
-
-    
-    
+} 
     /* PT사진 슬라이드 */
     .slider10 img {
         max-width: 100%;
@@ -4316,8 +4312,10 @@ input, select, textarea {
 
 			</div>
 
-<input type="hidden" value="${deletetoast}" id="deletetoastcheck">		
+<input type="hidden" value="${toast}" id="toastcheck">		
 <div class='error' style='display:none'>삭제완료</div>
+<div class='error2' style='display:none'>등록완료</div>
+<div class='error3' style='display:none'>수정완료</div>
 	</body>
 	</div>
 	
@@ -4598,13 +4596,51 @@ $( document ).ready( function() {
       slidesToShow: 3,
       slidesToScroll: 1,
     } );
-    var deletetoastcheck = $('#deletetoastcheck').val();
-    console.log("deletetoastcheck:"+deletetoastcheck);
-    if(deletetoastcheck==1){
-    	$('.error').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
-    }
-  } );
+})
   
+
+
+
+
+
+
+window.addEventListener('load', function() {
+	  var postDeleted = sessionStorage.getItem('postDeleted');
+	  var postInserted = sessionStorage.getItem('postInserted');
+	  var postModifyed = sessionStorage.getItem('postModifyed');
+	  
+	  	  if (postDeleted) {
+		  $('.error').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+	    // 삭제 상태 제거
+	    sessionStorage.removeItem('postDeleted');
+	  }
+	  	 if (postInserted) {
+			  $('.error2').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		    // 작성 상태 제거
+		    sessionStorage.removeItem('postInserted');
+		  }
+	  	 if (postModifyed) {
+			  $('.error3').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		    // 수정 상태 제거
+		    sessionStorage.removeItem('postModifyed');
+		  }
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function test(test) {
 	
 	 
