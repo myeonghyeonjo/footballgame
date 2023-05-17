@@ -1,0 +1,141 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/3624917c4f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <title>Nav bar</title>
+    <script src="main.js" defer></script>
+</head>
+<style>
+body {
+    margin: 0;
+    
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 8px 12px;
+    height:42px;
+}
+
+.navbar__logo {
+    font-size: 30px;
+    
+}
+
+.navbar__menu {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+}
+
+.navbar__menu li {
+    padding: 8px 12px;
+}
+.navbar__menu li:hover {
+    background-color: grey;
+    border-radius: 4px;
+}
+
+.navbar__links {
+    list-style: none;
+    padding-left: 0;
+    color: teal;
+    display: flex;
+}
+
+.navbar__links li {
+    padding: 8px 12px;
+}
+
+.navbar__toggleBtn {
+    display: none;
+    position: absolute;
+    right: 32px;
+    font-size: 24px;
+}
+#logo {
+    width: 35px;
+    height: 35px;
+    border-radius: 4px;
+}
+
+@media screen and (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 24px;
+    }
+    .navbar__menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .navbar__menu li {
+        width: 100%;
+        text-align: center;
+    }
+    .navbar__links {
+        display: none;
+        justify-content: center;
+        width: 100%;
+    }
+    .navbar__toggleBtn {
+        display: block;
+    }
+
+    .navbar__menu.active,
+    .navbar__links.active {
+        display: flex;
+    }
+}
+</style>
+<body>
+    <nav class="navbar">
+        <div class="navbar__logo">
+           
+		<a class="navbar-brand" href="/"><img id="logo" src="../../../Img/´ýº§.JPG"></a>
+            <a href="">Health Catch</a>
+        </div>
+        <ul class="navbar__menu">
+            <li><a href="">È¨</a></li>
+            <li><a href="">ÇÖµô</a></li>
+            <li><a href="">Æ÷·³</a></li>
+            <li><a href="">FAQ</a></li>
+            <li><a href="">Ã¤¿ë</a></li>
+        </ul>
+        <ul class="navbar__links">
+            <li> <i class="fab fa-facebook-square"></i></li>
+            <li><i class="fab fa-instagram"></i></li>
+        </ul>
+
+        <a href="#" class="navbar__toggleBtn"><i class="fas fa-bars"></i></a>
+    </nav>
+</body>
+<script>
+const toggleBtn = document.querySelector('.navbar__toggleBtn');
+const menu = document.querySelector('.navbar__menu');
+const links = document.querySelector('.navbar__links');
+
+toggleBtn.addEventListener('click', () => {
+    menu.classList.toggle('active');
+    links.classList.toggle('active');
+})
+</script>
+</html>

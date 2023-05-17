@@ -551,6 +551,11 @@ public class BoardServiceImpl implements BoardService {
 	public Review getreviewinsetcheck(String formattedDate) {
 		return boardmapper.getreviewinsetcheck(formattedDate);
 	}
+	
+	@Override
+	public List<Review> gettreviewListALL(){
+		return boardmapper.gettreviewListALL();
+	}
 
 	
 	

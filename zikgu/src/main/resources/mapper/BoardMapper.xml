@@ -1523,5 +1523,19 @@
 		WHERE r_date =#{formattedDate}
 	</select>
 	
+	<!-- 리뷰 리스트 -->
+	<select id="gettreviewListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+		from review	
+	</select>
+	
 
 </mapper>

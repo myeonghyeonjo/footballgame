@@ -183,7 +183,7 @@ style>.image-container2 {
 }
 </style>
 <body>
-	<jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/template/banner2.jsp"></jsp:include>
 	<sec:authentication property="principal" var="principal" />
 <body class="bg-light">
 	<div style="background-color: light;">
@@ -349,13 +349,13 @@ style>.image-container2 {
 
 							<div id="rounded-rectangle1" class="bg-light">
 								<h3 style="color: black; padding: 30px;">
-									<Strong>???관리</Strong>
+									<Strong>리뷰 관리</Strong>
 								</h3>
 								<p
 									style="margin-left: 30px; margin-top: -10px; margin-right: 50px; margin-bottom: 30px;">프로필을
 									조회하거나 수정하세요.</p>
 
-								<a href="/trainerprofilelist" class="aa"
+								<a href="/reviewlist" class="aa"
 									style="color: #4169e1; margin-left: 30px; margin-top: 190px; margin-right: 50px">프로필
 									조회 ></a>
 							</div>

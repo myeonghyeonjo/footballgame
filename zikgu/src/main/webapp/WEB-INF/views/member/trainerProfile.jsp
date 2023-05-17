@@ -149,7 +149,7 @@
 <!-- Custom styles for this template -->
 <link href="form-validation.css" rel="stylesheet">
 </head>
-<jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/banner2.jsp"></jsp:include>
 <body class="bg-light">
 
 	<div class="container">

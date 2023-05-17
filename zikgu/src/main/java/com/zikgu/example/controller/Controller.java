@@ -1086,6 +1086,16 @@ model.addAttribute("exception", exception);
 			
 			return "/member/trainerprofilelist";
 	    }
+		@RequestMapping("/reviewlist")
+	    public String reviewlist( Model model,Review review) {
+			
+			List<Review> list = boardservice.gettreviewListALL();
+			
+			model.addAttribute("list",list);
+			
+			return "/review/reviewlist";
+	    }
+		
 		
 		
 		@RequestMapping("/memberDetail")

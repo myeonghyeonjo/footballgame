@@ -141,11 +141,11 @@ body {
        <div class="container-fluid px-0">
     <nav class="navbar navbar-expand-sm navbar-dark bg-black py-0 px-0">
         <a class="navbar-brand" href="/"><img id="logo" src="../../../Img/덤벨.JPG"> &nbsp;&nbsp;&nbsp;Health Catch</a>
-        <span class="v-line"></span>
+        <span class="v-line"></span>  
         <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse " id="navbarNav">
             <ul class="navbar-nav">
             	 <sec:authorize access="isAnonymous()">
                 <li class="nav-item ">
@@ -168,12 +168,9 @@ body {
                 <sec:authorize access="isAuthenticated()">    
                 <li class="nav-item">
                 <sec:authentication property="principal" var="principal"/>  
-               
-    
-              	 <a id="a" class="nav-link"  href="/user/info?u_key=${principal.u_key }">내 정보</a>
+		    	<a id="a" class="nav-link"  href="/user/info?u_key=${principal.u_key }">내 정보</a>
                 </li>
                 <li class="nav-item">
-                   
                      <a id="a" class="nav-link" href="/logout">로그아웃</a>
                 </li>
                 </sec:authorize>

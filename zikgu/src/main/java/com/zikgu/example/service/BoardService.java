@@ -192,6 +192,8 @@ public interface BoardService {
 
 	public Review getreviewinsetcheck(String formattedDate);
 
+	public List<Review> gettreviewListALL();
+
 	
 
 	

@@ -186,6 +186,8 @@ public interface BoardMapper {
 
 	public Review getreviewinsetcheck(String formattedDate);
 
+	public List<Review> gettreviewListALL();
+
 
 
 	
