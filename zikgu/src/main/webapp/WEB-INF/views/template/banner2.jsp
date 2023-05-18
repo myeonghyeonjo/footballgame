@@ -77,14 +77,37 @@
     height: 30px;
     border-radius: 4px;
 }
+.navbar{
+	padding:14px;
+}
+.nav-link{
+	pading:10px;
+}
+li{
+	margin-right:18px;
+}
+#nav-link3{
+	margin-right:14px;
+}
+.navbar__logo{
+	margin-left:2px;
+}
+#bannertitle{
+	margin-left:-2px;
+	letter-spacing: -0.1px;
+	word-spacing:-1px;
+}
+
+
+
 </style>
 
 </head>
 <body>
    <nav class="navbar">
         <div class="navbar__logo">
-            <i class="fa"><img id="logo" src="../../../Img/덤벨.JPG"></i>
-            <a href="/">Health Catch</a>
+            <i class="fa"><a href="/"><img id="logo" src="../../../Img/덤벨.JPG"></a></i>
+            <a id="bannertitle" href="/">Health Catch</a>
         </div>
         <div class="navbar__menu">
         </div>
@@ -92,22 +115,22 @@
         <div class="navber__links">
            
               <li><div class="dropdown">
-                  <span style="color:white;" class="nav-link">회원가입</span>
+                  <span style="color:white;" id="nav-link1"class="nav-link">회원가입</span>
                   <div class="dropdown-content">
                     <a href="beforeSignup">회원가입(일반)</a>
                     <a href="beforeSignuptrainer">회원가입(트레이너)</a>
                   </div>
                 </div>
               </li>
-               <li><a style="color:white;" class="nav-link" href="signin">로그인</a></li>
+               <li><a style="color:white;" class="nav-link"id="nav-link2" href="signin">로그인</a></li>
         </div>
         </sec:authorize>
 
         <sec:authorize access="isAuthenticated()">
                 <div class="navber__links">
                 <sec:authentication property="principal" var="principal"/>  
-		    	  <li><a  style="color:white;" class="nav-link"  href="/user/info?u_key=${principal.u_key }">내정보</a></li>
-                  <li><a  style="color:white;" class="nav-link" href="/logout">로그아웃</a></li>
+		    	  <li><a  style="color:white;" class="nav-link" id="nav-link3" href="/user/info?u_key=${principal.u_key }">내정보</a></li>
+                  <li><a  style="color:white;" class="nav-link" id="nav-link4" href="/logout">로그아웃</a></li>
                 </div>
         </sec:authorize>
    </nav>

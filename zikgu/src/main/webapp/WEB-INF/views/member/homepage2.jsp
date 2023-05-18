@@ -43,6 +43,7 @@
 
 
     <style>
+    
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -149,6 +150,20 @@
 .d-flex h4:not(:last-child) {
   margin-right: 2px; /* 요소 사이의 간격 조절 */
 }
+    
+    
+.navbar{
+	padding:0px;
+}
+.nav-link{
+	pading:10px;
+}
+
+.navbar__logo{
+	margin-left:2px;
+	margin-bottom:10px;
+	margin-right:2px;
+}
     </style>
 
     
@@ -161,7 +176,22 @@
     
 <header>
 <jsp:include page="/WEB-INF/views/template/banner2.jsp"></jsp:include>
-  
+<style>
+   #bannertitle{
+	margin-left:0px;
+	letter-spacing: 0px;
+	word-spacing:0px;
+}
+li{
+	margin-right:2px;
+}
+#nav-link3{
+	margin-right:-2px;
+}
+.navber__links{
+	margin-top:-9px;
+}
+</style>
 
 </header>
 
