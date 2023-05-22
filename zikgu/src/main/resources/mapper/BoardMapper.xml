@@ -786,9 +786,26 @@
 		u_key as u_key
 
 		FROM trainerprofile
+		LIMIT 			#{pageNum}, 10 
 
 	</select>
+	<!--트레이너 리스트(검토완료) -->
+	<select id="gettrainerprofileListcomplete"
+		resultType="trainerprofile">
+		SELECT
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
 
+		FROM trainerprofile
+		WHERE tf_check = '완료'
+		LIMIT 			#{pageNum}, 10 
+
+	</select>
 
 
 	<!-- 일반회원 프로필 리스트(모든) -->
@@ -964,7 +981,24 @@
 		concat('%',#{keyword},'%') OR tf_name like concat('%',#{keyword},'%')
 
 	</select>
+	
+		<!-- 트레이너 모든 검색 -->
+	<select id="gettrainerprofilesearchList" resultType="TrainerProfile">
+		SELECT 
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
 
+		FROM trainerprofile
+
+		WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like
+		concat('%',#{keyword},'%') 
+		LIMIT 			#{pageNum}, 10 
+	</select>
 
 
 
@@ -1537,5 +1571,65 @@
 		from review	
 	</select>
 	
+	<!--트레이너 리스트(검토완료) -->
+	<select id="gettrainerprofilecompleteList"
+		resultType="trainerprofile">
+		SELECT
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
 
+		FROM trainerprofile
+		WHERE tf_check = '완료'
+	</select>
+		<!--트레이너 리스트(검토대기) -->
+	<select id="gettrainerprofileListwaite"
+		resultType="trainerprofile">
+		SELECT
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
+
+		FROM trainerprofile
+		WHERE tf_check = '대기'
+	</select>
+	
+	
+  <!-- 트레이너 프로필 갯수 카운트 -->
+	<select id="gettrainerprofileCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+	</select>
+	
+	 <!-- 트레이너 프로필 갯수(검토완료) 카운트 -->
+	<select id="gettrainerprofileCountcomplete" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				 WHERE tf_check = '완료'
+	</select>
+		 <!-- 트레이너 프로필 갯수(검토대기) 카운트 -->
+	<select id="gettrainerprofileCountwaite" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				 WHERE tf_check = '대기'
+	</select>
+	
+		 <!-- 트레이너 프로필 갯수(검색) 카운트 -->
+	<select id="gettrainerprofileSearchCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like
+		concat('%',#{keyword},'%') 
+	</select>
+	
+	
+	
 </mapper>

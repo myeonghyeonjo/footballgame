@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.io.File"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!doctype html>
 <html lang="ko">
   <head>
@@ -14,7 +17,7 @@
     <title>Dashboard Template · Bootstrap v5.2</title>
 
     <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/dashboard/">
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.2/cerulean/bootstrap.min.css" rel="stylesheet" >
     
@@ -29,7 +32,21 @@
 <link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
 <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
 <meta name="theme-color" content="#712cf9">
+	<style>
+	
+	
 
+	li2 {
+		list-style:none;
+		width:50px;
+		line-height:50px;
+		border:1px solid #ededed;
+		float:left;
+		text-align:center;
+		margin:0 5px;
+		border-radius:5px;
+	}
+</style>
 
     <style>
       .bd-placeholder-img {
@@ -82,6 +99,26 @@
         white-space: nowrap;
         -webkit-overflow-scrolling: touch;
       }
+      
+        @media (min-width: 768px){
+      	.headermenu2{
+      		display:none;
+      	}
+      }
+       @media (max-width: 768px){
+      	.headermenu1{
+      		display:none;
+      	}
+      	.headermenu2{
+      		font-size:15px; 
+      		padding:10px;
+      	}
+        @media (max-width: 568px){
+      	.headermenu2{ 		
+      		font-size:12.5px; 
+      		padding:10px;
+      	}	
+      }  
     </style>
     
     
@@ -95,16 +132,21 @@
   <body>
     
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Company name</a>
-  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
-  <div class="navbar-nav">
-    <div class="nav-item text-nowrap">
-      
-    </div>
-  </div>
+  <a class="navbar-brand headermenu1 col-md-3 col-lg-2 me-0 px-3 fs-6" >검색</a>
+
+		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  col-lg-3 " href="/memberprofilelist">회원 프로필 관리	 
+		</a>
+		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " href="/trainerprofilelist">트레이너 프로필 관리
+		</a>
+		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3 " href="/centerlist">센터 관리
+		</a>
+		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " href="#">리뷰 관리
+		</a>
+       	<form action="trainer_search_All" method="post" style="width:1200px;" >
+		          <input class="form-control form-control-dark  rounded-0 border-0"  aria-label="Search" type="text" name="keyword" placeholder="번호,회원명 검색" value="${keyword }">
+		          <a href="trainer_search_All?keyword=${keyword}" class="search_icon" ><i class="fas fa-search"></i></a>
+          	</form>
+   
 </header>
 
 <div class="container-fluid">
@@ -185,18 +227,33 @@
       </div>
     </nav>
 
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <main style="margin-top:5px;" class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2" style="color:black;">트레이너목록</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+         <div class="btn-group me-2">
+       		<c:if test="${sort == '전체' }">
+	            <button type="button" style="background-color:#c0c0c0;"onclick="allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
+	            <button type="button"  onclick="completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
+	             <button type="button" onclick="waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+            </c:if>
+         	<c:if test="${sort == '완료' }">
+	            <button type="button" onclick="allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
+	            <button type="button" style="background-color:#c0c0c0;" onclick="completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
+	             <button type="button" onclick="waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+            </c:if>
+            <c:if test="${sort == '대기' }">
+	            <button type="button" onclick="allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
+	            <button type="button"  onclick="completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
+	             <button type="button" style="background-color:#c0c0c0;" onclick="waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+            </c:if>
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar" class="align-text-bottom"></span>
-            This week
-          </button>
+       <select class="form-select" name="tf_certificate" id="reviewselect" style="flex: 0.85;" required>
+										<option selected>정렬</option>
+										<option value="starhigh">평점높은순</option>
+										<option value="starlow">평점낮은순</option>
+		</select>
+          
         </div>
       </div>
 
@@ -204,39 +261,76 @@
 
     
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th scope="col">번호</th>
               <th scope="col">회원명</th>
               <th scope="col">거주지</th>
-              <th scope="col">우편번호</th>
-              <th scope="col">성별</th>
-              <th scope="col">검토</th>
+              <th scope="col">우편번호</th>  
+               <th scope="col">성별</th>
+              <th scope="col">검토</th>  
             </tr>
           </thead>
+          <sec:authentication property="principal" var="principal" />
           <tbody>
-           	<c:forEach var="list" items="${list }">
-           		<tr>
-		              <td>${list.tf_id }</td>
-		              <td><a href="trainerProfileDetail?u_key=${list.u_key }">${list.tf_name }</a></td>
-		              <td>${list.tf_loadaddress }</td>
-		              <td>${list.tf_postcode }</td>
-		               <td>${list.tf_gender }</td>
-		                <c:if test="${(list.tf_check=='대기')}">
-				 			  <td style="color:red;">${list.tf_check }</td>
-				  		</c:if>
-				  		 <c:if test="${(list.tf_check=='완료')}">
-				 			  <td style="color:green;">${list.tf_check }</td>
-				  		</c:if>
-		             
-		             
-		             
-	            </tr>
-			</c:forEach>
+		        <c:forEach var="list" items="${list }">
+		           		<tr onclick="location.href='trainerProfileDetail?u_key=${list.u_key }&memberprofile_u_key=0'" style="cursor:pointer">
+				              <td>${list.tf_id }</td>
+				              <td>${list.tf_name }</td>
+				              <td>${list.tf_loadaddress }</td>
+				               <td>${list.tf_postcode }</td>
+				              <td>${list.tf_gender }</td>
+				                <c:if test="${(list.tf_check=='완료')}">
+						 			  <td style="color:green;">완료</td>
+						  		</c:if>
+						  		 <c:if test="${(list.tf_check=='대기')}">
+						 			  <td style="color:red;">대기</td>
+						  		</c:if>
+			            </tr>
+					</c:forEach>
           </tbody>
         </table>
       </div>
+      
+      
+  <!-- 페이지네이션 -->    
+	<div>
+		<ul>
+			 <c:choose>
+				<c:when test="${ pagination.prevPage >= 1}">
+					<li2>
+						<a style="color:black;" href="trainerprofilelist?page=${pagination.prevPage}">
+						◀
+						</a>
+					</li2>
+				</c:when>
+			</c:choose> 
+			<c:forEach var="i" begin="${pagination.startPage}" end="${pagination.endPage}" step="1">
+				
+					<c:choose>
+						<c:when test="${ pagination.page eq i }">
+							
+							<li2 style="background-color:#ededed;">
+								<span  style="color:black;" >${i}</span>
+							</li2>
+						</c:when>
+						<c:when test="${ pagination.page ne i }">
+							<li2>
+								<a  style="color:black;"  href="trainerprofilelist?page=${i}">${i} </a>
+							</li2>
+						</c:when>
+					</c:choose>
+			</c:forEach>
+			 <c:choose>
+				<c:when test="${ pagination.nextPage le pagination.lastPage }">
+					<li2 style="">
+						<a  style="color:black;"  href="trainerprofilelist?page=${pagination.nextPage}">▶</a>
+					</li2>
+				</c:when>
+			</c:choose> 
+		</ul>
+	</div>
     </main>
   </div>
 </div>
@@ -284,5 +378,22 @@ function clickConfirmCancelconsulting(formName) {
 		crossorigin="anonymous"></script>
 
 	<script src="form-validation.js"></script>  
+	
+<script>
+function allbutton_click() {
+	
+	console.log("전체버튼을 누르셨습니다.");
+	location.href='${path}	/trainerprofilelist';
+
+}
+function completebutton_click() {
+	console.log("완료버튼을 누르셨습니다.");
+	location.href='${path}	/trainerprofilelistcomplete';
+}
+function waitebutton_click() {
+	console.log("대기버튼을 누르셨습니다.");
+	location.href='${path}	/trainerprofilelistwaite';
+}
+</script>	
   </body>
 </html>

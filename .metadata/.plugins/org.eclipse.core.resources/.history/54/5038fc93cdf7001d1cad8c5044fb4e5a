@@ -1,0 +1,51 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: junsu
+  Date: 2023/05/10
+  Time: 4:59 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>$Title$</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $.ajax({
+            url: "http://127.0.0.1:5000",
+            type: "GET",
+            success: function(response) {
+                for (const prop in response) {
+                    console.log(prop + ": " + response[prop]);
+                    // const item = $("<li>").text(prop + ": " + response[prop]);
+                    // $("ul").append(item);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    </script>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="sidebar.module.css">
+<%--    <%@ include file="../index.jsp" %>--%>
+</head>
+
+<body>
+<%--<h1>SERVER DATA</h1>--%>
+<%--<p>문제점: 파이썬 스크래퍼 사용으로 인한... Flask 서버 이용..</p>--%>
+<div class="menu">
+<%--    <label for="expand-menu"><div>메뉴</div></label><input type="checkbox" id="expand-menu" name="expand-menu">--%>
+<%--    <input type="checkbox" id="expand-menu" name="expand-menu">--%>
+    <ul>
+        <li><a href="../index.jsp" class="item"><div>Dashboard</div></a></li>
+        <li><a href="../Account.jsp" class="item"><div>회계</div></a></li>
+        <li><a href="../myeonghyeonpersondetail.jsp" class="item"><div>인사</div></a></li>
+        <li><a href="../detail1.jsp" class="item"><div>영업</div></a></li>
+        <li><a href="#" class="item"><div>설정</div></a></li>
+    </ul>
+</div>
+
+</body>
+</html>

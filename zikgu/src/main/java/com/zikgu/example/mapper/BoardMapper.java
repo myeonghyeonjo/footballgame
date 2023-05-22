@@ -9,6 +9,7 @@ import com.zikgu.example.domain.Center;
 import com.zikgu.example.domain.FileDto;
 import com.zikgu.example.domain.MemberProfile;
 import com.zikgu.example.domain.PT;
+import com.zikgu.example.domain.Pagination;
 import com.zikgu.example.domain.Review;
 import com.zikgu.example.domain.SelectedPT;
 import com.zikgu.example.domain.TrainerProfile;
@@ -85,7 +86,7 @@ public interface BoardMapper {
 
 	public MemberProfile getmemberprofiledetail(String m_id);
 
-	public List<TrainerProfile> gettrainerprofileListALL();
+	public List<TrainerProfile> gettrainerprofileListALL(Pagination pagination);
 
 	public void trainerprofilecheck(int u_key);
 
@@ -187,6 +188,24 @@ public interface BoardMapper {
 	public Review getreviewinsetcheck(String formattedDate);
 
 	public List<Review> gettreviewListALL();
+
+	public List<TrainerProfile> gettrainerprofilecompleteList();
+
+	public List<TrainerProfile> gettrainerprofilewaiteList();
+
+	public int gettrainerprofileCount();
+
+	public List<TrainerProfile> gettrainerprofileListcomplete(Pagination pagination);
+
+	public int gettrainerprofileCountcomplete();
+
+	public int gettrainerprofileCountwaite();
+
+	public List<TrainerProfile> gettrainerprofileListwaite(Pagination pagination);
+
+	public List<TrainerProfile> gettrainerprofilesearchList(Pagination pagination);
+
+	public int gettrainerprofileSearchCount(String keyword);
 
 
 

@@ -13,6 +13,7 @@ import com.zikgu.example.domain.Center;
 import com.zikgu.example.domain.FileDto;
 import com.zikgu.example.domain.MemberProfile;
 import com.zikgu.example.domain.PT;
+import com.zikgu.example.domain.Pagination;
 import com.zikgu.example.domain.Review;
 import com.zikgu.example.domain.SelectedPT;
 import com.zikgu.example.domain.TrainerProfile;
@@ -262,8 +263,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<TrainerProfile> gettrainerprofileListALL(){
-		return boardmapper.gettrainerprofileListALL();
+	public List<TrainerProfile> gettrainerprofileListALL(Pagination pagination){
+		return boardmapper.gettrainerprofileListALL(pagination);
 	}
 	
 	@Override
@@ -555,6 +556,51 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Review> gettreviewListALL(){
 		return boardmapper.gettreviewListALL();
+	}
+	
+	@Override
+	public List<TrainerProfile> gettrainerprofilecompleteList(){
+		return boardmapper.gettrainerprofilecompleteList();
+	}
+	
+	@Override
+	public List<TrainerProfile> gettrainerprofilewaiteList(){
+		return boardmapper.gettrainerprofilewaiteList();
+	}
+	
+	@Override
+	public int gettrainerprofileCount() {
+		return boardmapper.gettrainerprofileCount();
+	}
+	
+	@Override
+	public List<TrainerProfile> gettrainerprofileListcomplete(Pagination pagination){
+		return boardmapper.gettrainerprofileListcomplete(pagination);
+	}
+	
+	@Override
+	public int gettrainerprofileCountcomplete() {
+		return boardmapper.gettrainerprofileCountcomplete();
+	}
+	
+	@Override
+	public int gettrainerprofileCountwaite() {
+		return boardmapper.gettrainerprofileCountwaite();
+	}
+	
+	@Override
+	public List<TrainerProfile> gettrainerprofileListwaite(Pagination pagination){
+		return boardmapper.gettrainerprofileListwaite(pagination);
+	}
+	
+	@Override
+	public List<TrainerProfile> gettrainerprofilesearchList(Pagination pagination){
+		return boardmapper.gettrainerprofilesearchList(pagination);
+	}
+	
+	@Override
+	public int gettrainerprofileSearchCount(String keyword) {
+		return boardmapper.gettrainerprofileSearchCount(keyword);
 	}
 
 	

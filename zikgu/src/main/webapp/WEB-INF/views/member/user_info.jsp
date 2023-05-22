@@ -80,7 +80,7 @@ button:hover {
 }
 </style>
 <body>
-	<jsp:include page="/WEB-INF/views/template/banner2.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>
 	<sec:authentication property="principal" var="principal" />
 <body class="bg-light">
 	<div style="background-color: light;">

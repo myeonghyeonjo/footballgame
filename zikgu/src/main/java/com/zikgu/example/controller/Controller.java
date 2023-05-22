@@ -48,6 +48,7 @@ import com.zikgu.example.domain.FileDto;
 import com.zikgu.example.domain.MemberProfile;
 import com.zikgu.example.domain.News;
 import com.zikgu.example.domain.PT;
+import com.zikgu.example.domain.Pagination;
 import com.zikgu.example.domain.Player;
 import com.zikgu.example.domain.Review;
 import com.zikgu.example.domain.SelectedPT;
@@ -68,7 +69,7 @@ public class Controller {
 	 private final JavaMailSender mailSender;
 	    private static final String ADMIN_ADDRESS = "ektour0914@naver.com";
 	
-	
+	int page=1;
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	UserService userservice;
@@ -897,6 +898,28 @@ model.addAttribute("exception", exception);
 			return "/member/searchList";
 	    }
 		
+		@RequestMapping("/trainer_search_All")
+	    public String trainer_search_All(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,TrainerProfile trainerprofile) {
+			System.out.println("keyword:"+keyword);
+			
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.gettrainerprofileSearchCount(keyword);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			pagination.setKeyword(keyword);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","전체");
+			
+			List<TrainerProfile> list = boardservice.gettrainerprofilesearchList(pagination);
+			model.addAttribute("list",list);
+			return "/member/trainerprofilelist";
+	    }
+		
+		
 		@RequestMapping("/aj-centerview")
 	    public String centerview( Model model,Center center,@RequestParam("tf_loadaddress") String tf_loadaddress) {
 			System.out.println("tf_loadaddress:"+tf_loadaddress);
@@ -1071,21 +1094,59 @@ model.addAttribute("exception", exception);
 			
 			model.addAttribute("memberprofile",memberprofile);
 			model.addAttribute("phone",phone);
-			
-			
-			
 			return "/member/memberprofiledetail";
 	    }
 		
+		
 		@RequestMapping("/trainerprofilelist")
-	    public String trainerprofilelist( Model model,TrainerProfile trainerprofile) {
-			
-			List<TrainerProfile> list = boardservice.gettrainerprofileListALL();
-			
+	    public String trainerprofilelist(Pagination pagination,HttpServletRequest request, Model model,TrainerProfile trainerprofile) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.gettrainerprofileCount();
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			List<TrainerProfile> list = boardservice.gettrainerprofileListALL(pagination);
+			model.addAttribute("pagination",pagination);
 			model.addAttribute("list",list);
+			model.addAttribute("sort","전체");
+			return "/member/trainerprofilelist";
+	    }
+		
+		@RequestMapping("/trainerprofilelistcomplete")
+	    public String trainerprofilelistcomplete(Pagination pagination,HttpServletRequest request, Model model,TrainerProfile trainerprofile) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.gettrainerprofileCountcomplete();
+				pagination.setCount(listcount);	
+				pagination.setPage(page);		
+				pagination.init();		
+			List<TrainerProfile> list = boardservice.gettrainerprofileListcomplete(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("list",list);
+			model.addAttribute("sort","완료");
 			
 			return "/member/trainerprofilelist";
 	    }
+		@RequestMapping("/trainerprofilelistwaite")
+	    public String trainerprofilelistwaite(Pagination pagination,HttpServletRequest request, Model model,TrainerProfile trainerprofile) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.gettrainerprofileCountwaite();
+				pagination.setCount(listcount);	
+				pagination.setPage(page);		
+				pagination.init();		
+			List<TrainerProfile> list = boardservice.gettrainerprofileListwaite(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("list",list);
+			model.addAttribute("sort","대기");
+			
+			return "/member/trainerprofilelist";
+	    }
+		
 		@RequestMapping("/reviewlist")
 	    public String reviewlist( Model model,Review review) {
 			
@@ -2205,21 +2266,6 @@ model.addAttribute("exception", exception);
 			   List<Review> reviewlist = boardservice.gettf_reviewlist(trainerprofile_u_key);
 			   model.addAttribute("reviewlist",reviewlist);
 			 
-			   
-			   
-			   
-			   
-			   
-			   
-			   
-			   
-			   
-			   
-			   
-			   
-			   
-			   
-			   
 			   trainerprofile = boardservice.trainerprofileDetail(Integer.parseInt(trainerprofile_u_key));
 				 String tf_loadaddress = trainerprofile.getTf_loadaddress();
 				
@@ -2291,6 +2337,70 @@ model.addAttribute("exception", exception);
 				 model.addAttribute("trainerprofile",trainerprofile);			   
 			   
 			 return "/member/aj-updatereview";
+	    }
+		
+		@RequestMapping("/sidebar")
+	    public String sidebar( ) {
+			
+			 return "/template/sidebar";
+	    }
+		@RequestMapping("/aj-trainerprofilelist")
+	    public String trainerprofilelist(Model model,Pagination pagination,HttpServletRequest request ,@RequestParam("waitecount") int waitecount,@RequestParam("allcount") int allcount,@RequestParam("completecount") int completecount) {
+			System.out.println("waitecount:"+waitecount);
+			System.out.println("allcount:"+allcount);
+			System.out.println("completecount:"+completecount);
+			if(allcount==1) {
+				String reqPage1 = request.getParameter("page");	  
+				   if(reqPage1 != null)
+						page = Integer.parseInt(reqPage1);
+					int listcount = boardservice.gettrainerprofileCount();
+					pagination.setPage(page);
+					pagination.setCount(listcount);
+					pagination.init();		
+
+		
+					pagination.setPage(page);		
+					pagination.init();		
+				
+				List<TrainerProfile> list = boardservice.gettrainerprofileListALL(pagination);
+				model.addAttribute("list",list);
+				model.addAttribute("pagination",pagination);
+			} else if(completecount ==1 ){
+				String reqPage1 = request.getParameter("page");	  
+				   if(reqPage1 != null)
+						page = Integer.parseInt(reqPage1);
+					int listcount = boardservice.gettrainerprofileCount();
+					pagination.setPage(page);
+					pagination.setCount(listcount);
+					pagination.init();		
+
+		
+					pagination.setPage(page);		
+					pagination.init();		
+				
+				List<TrainerProfile> list = boardservice.gettrainerprofilecompleteList();
+				model.addAttribute("list",list);
+				model.addAttribute("pagination",pagination);
+			} else if(waitecount ==1 ){
+				String reqPage1 = request.getParameter("page");	  
+				   if(reqPage1 != null)
+						page = Integer.parseInt(reqPage1);
+					int listcount = boardservice.gettrainerprofileCount();
+					pagination.setPage(page);
+					pagination.setCount(listcount);
+					pagination.init();		
+
+		
+					pagination.setPage(page);		
+					pagination.init();		
+				
+				List<TrainerProfile> list = boardservice.gettrainerprofilewaiteList();
+				model.addAttribute("list",list);
+				model.addAttribute("pagination",pagination);
+			}
+			
+			
+			 return "/member/aj-trainerprofilecompletelist";
 	    }
 		
 		

@@ -175,7 +175,7 @@
   <body>
     
 <header>
-<jsp:include page="/WEB-INF/views/template/banner2.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>
 <style>
    #bannertitle{
 	margin-left:0px;

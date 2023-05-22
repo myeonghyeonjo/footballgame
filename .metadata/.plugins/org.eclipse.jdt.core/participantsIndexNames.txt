@@ -1,4 +1,6 @@
 INDEX VERSION 1.131
+C:\Users\조명현\zikgu2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3569698942.index
+\zikgu\src\main\java
 C:\Users\조명현\zikgu2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1139903167.index
 \zikgu\src\main\java
 C:\Users\조명현\zikgu2\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3492208084.index
