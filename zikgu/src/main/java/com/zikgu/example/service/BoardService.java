@@ -61,7 +61,7 @@ public interface BoardService {
 	public void fileUpload2_1(String originalfileName, String saveFileName, long fileSize, String savePath, int tf_id,
 			String tf_certificatetitle2);
 
-	public List<Center> getcenterListALL();
+	public List<Center> getcenterListALL(Pagination pagination);
 
 	
 
@@ -87,7 +87,7 @@ public interface BoardService {
 
 	public List<TrainerProfile> trainerList();
 
-	public List<MemberProfile> getmemberprofileListALL();
+	public List<MemberProfile> getmemberprofileListALL(Pagination pagination);
 
 	public MemberProfile getmemberprofiledetail(String m_id);
 
@@ -212,6 +212,14 @@ public interface BoardService {
 	public List<TrainerProfile> gettrainerprofilesearchList(Pagination pagination);
 
 	public int gettrainerprofileSearchCount(String keyword);
+
+	public int getmemberprofilelistCount();
+
+	public int getmemberprofileSearchCount(String keyword);
+
+	public List<MemberProfile> getmemberprfilesearchList(Pagination pagination);
+
+	public int getcenterCount();
 
 	
 

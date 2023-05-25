@@ -33,9 +33,6 @@
 <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
 <meta name="theme-color" content="#712cf9">
 	<style>
-	
-	
-
 	li2 {
 		list-style:none;
 		width:50px;
@@ -127,7 +124,24 @@
 
     <jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>
     <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
+    <style>
+    .sidemenu:hover{
+      	border-bottom: 2px solid #e87a72;
+      	
+      }
+    .headermenu2:hover{
+    	border-bottom: 2px solid #e87a72;
+    	color:#e87a72;
+    }
+    #nav_link_trainerprofile{
+    	 	border-bottom: 2px solid #e87a72;
+    	 	color:#2683B9;
+    }
+     #nav_link_trainerprofile2{
+    	 	border-bottom: 2px solid #e87a72;
+    	 	color:#e87a72;
+    }
+    </style>
   </head>
   <body>
     
@@ -136,11 +150,11 @@
 
 		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  col-lg-3 " href="/memberprofilelist">회원 프로필 관리	 
 		</a>
-		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " href="/trainerprofilelist">트레이너 프로필 관리
+		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " id="nav_link_trainerprofile2" href="/trainerprofilelist">트레이너 프로필 관리
 		</a>
 		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3 " href="/centerlist">센터 관리
 		</a>
-		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " href="#">리뷰 관리
+		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " href="/reviewlist">리뷰 관리
 		</a>
        	<form action="trainer_search_All" method="post" style="width:1200px;" >
 		          <input class="form-control form-control-dark  rounded-0 border-0"  aria-label="Search" type="text" name="keyword" placeholder="번호,회원명 검색" value="${keyword }">
@@ -151,31 +165,30 @@
 
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+    <nav id="sidebarMenu"class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
+            <a class="nav-link sidemenu active" aria-current="page" href="/memberprofilelist">
               <span data-feather="home" class="align-text-bottom"></span>
-              Dashboard
+              회원목록
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link sidemenu" id="nav_link_trainerprofile" href="/trainerprofilelist">
+              트레이너목록
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file" class="align-text-bottom"></span>
-              Orders
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link sidemenu" href="/centerlist">
               <span data-feather="shopping-cart" class="align-text-bottom"></span>
-              Products
+              센터목록
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link sidemenu" href="/reviewlist">
               <span data-feather="users" class="align-text-bottom"></span>
-              Customers
+              리뷰관리
             </a>
           </li>
           <li class="nav-item">

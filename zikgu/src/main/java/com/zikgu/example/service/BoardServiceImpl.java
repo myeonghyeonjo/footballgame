@@ -196,8 +196,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<Center> getcenterListALL() {
-		return boardmapper.getcenterListALL();
+	public List<Center> getcenterListALL(Pagination pagination) {
+		return boardmapper.getcenterListALL(pagination);
 	}
 
 	
@@ -253,8 +253,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<MemberProfile> getmemberprofileListALL(){
-		return boardmapper.getmemberprofileListALL();
+	public List<MemberProfile> getmemberprofileListALL(Pagination pagination){
+		return boardmapper.getmemberprofileListALL(pagination);
 	}
 	
 	@Override
@@ -601,6 +601,26 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int gettrainerprofileSearchCount(String keyword) {
 		return boardmapper.gettrainerprofileSearchCount(keyword);
+	}
+	
+	@Override
+	public int getmemberprofilelistCount() {
+		return boardmapper.getmemberprofilelistCount();
+	}
+	
+	@Override
+	public int getmemberprofileSearchCount(String keyword) {
+		return boardmapper.getmemberprofileSearchCount(keyword);
+	}
+	
+	@Override
+	public List<MemberProfile> getmemberprfilesearchList(Pagination pagination){
+		return boardmapper.getmemberprfilesearchList(pagination);
+	}
+	
+	@Override
+	public int getcenterCount() {
+		return boardmapper.getcenterCount();
 	}
 
 	

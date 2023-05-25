@@ -824,6 +824,7 @@
 		u_key as u_key,
 		m_likegender as m_likegender
 		FROM memberprofile
+		LIMIT 			#{pageNum}, 10 
 	</select>
 
 	<!-- 상담신청한 일반회원 프로필 리스트 -->
@@ -999,7 +1000,27 @@
 		concat('%',#{keyword},'%') 
 		LIMIT 			#{pageNum}, 10 
 	</select>
+	<!-- 일반회원 모든 검색 -->
+	<select id="getmemberprfilesearchList" resultType="MemberProfile">
+		SELECT 
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender
+		FROM memberprofile
 
+		WHERE m_id like concat('%',#{keyword},'%') OR m_name like
+		concat('%',#{keyword},'%') 
+		LIMIT 			#{pageNum}, 10 
+	</select>
 
 
 
@@ -1615,6 +1636,13 @@
 				 FROM            trainerprofile
 				 WHERE tf_check = '완료'
 	</select>
+	
+	 <!-- 일반회원 프로필 갯수 카운트 -->
+	<select id="getmemberprofilelistCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				 
+	</select>
 		 <!-- 트레이너 프로필 갯수(검토대기) 카운트 -->
 	<select id="gettrainerprofileCountwaite" resultType="int">
 				 SELECT       count(*)                
@@ -1630,6 +1658,20 @@
 		concat('%',#{keyword},'%') 
 	</select>
 	
+		 <!-- 일반회원 프로필 갯수(검색) 카운트 -->
+	<select id="getmemberprofileSearchCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				WHERE m_id like concat('%',#{keyword},'%') OR m_name like
+		concat('%',#{keyword},'%') 
+	</select>
+			 <!-- 센터  프로필 갯수(검색) 카운트 -->
+	<select id="getcenterCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				
+		
+	</select>
 	
 	
 </mapper>

@@ -60,7 +60,7 @@ public interface BoardMapper {
 
 	public void fileUpload2_1(HashMap<String, Object> hm);
 
-	public List<Center> getcenterListALL();
+	public List<Center> getcenterListALL(Pagination pagination);
 
 	public void centerConfirm(Center center);
 
@@ -82,7 +82,7 @@ public interface BoardMapper {
 
 	public List<TrainerProfile> trainerList();
 
-	public List<MemberProfile> getmemberprofileListALL();
+	public List<MemberProfile> getmemberprofileListALL(Pagination pagination);
 
 	public MemberProfile getmemberprofiledetail(String m_id);
 
@@ -206,6 +206,14 @@ public interface BoardMapper {
 	public List<TrainerProfile> gettrainerprofilesearchList(Pagination pagination);
 
 	public int gettrainerprofileSearchCount(String keyword);
+
+	public int getmemberprofilelistCount();
+
+	public int getmemberprofileSearchCount(String keyword);
+
+	public List<MemberProfile> getmemberprfilesearchList(Pagination pagination);
+
+	public int getcenterCount();
 
 
 

@@ -734,8 +734,21 @@ model.addAttribute("exception", exception);
 	    }
 		
 		@RequestMapping("/centerlist")
-	    public String centerlist(Center center,Model model) {
-			List<Center> list = boardservice.getcenterListALL();
+	    public String centerlist(Center center,Model model,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getcenterCount();
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			List<Center> list = boardservice.getcenterListALL(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("list",list);
+			model.addAttribute("sort","전체");
+			
+			
+			
 			model.addAttribute("list",list);
 			return "/center/centerlist";
 	    }
@@ -918,6 +931,26 @@ model.addAttribute("exception", exception);
 			model.addAttribute("list",list);
 			return "/member/trainerprofilelist";
 	    }
+		@RequestMapping("/member_search_All")
+	    public String member_search_All(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,MemberProfile memberprofile) {
+			System.out.println("keyword:"+keyword);
+			
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getmemberprofileSearchCount(keyword);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			pagination.setKeyword(keyword);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			
+			List<MemberProfile> list = boardservice.getmemberprfilesearchList(pagination);
+			model.addAttribute("list",list);
+			return "/member/memberprofilelist";
+	    }
+		
 		
 		
 		@RequestMapping("/aj-centerview")
@@ -1075,12 +1108,20 @@ model.addAttribute("exception", exception);
 	    }
 		
 		@RequestMapping("/memberprofilelist")
-	    public String memberprofilelist( Model model,MemberProfile memberprofile) {
-			
-			List<MemberProfile> list = boardservice.getmemberprofileListALL();
-			
+	    public String memberprofilelist( Model model,Pagination pagination,HttpServletRequest request,MemberProfile memberprofile) {
+			String reqPage1 = request.getParameter("page");	  
+		    if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+		    int listcount = boardservice.getmemberprofilelistCount();
+			pagination.setPage(page);
+			pagination.setCount(listcount);
+			pagination.init();		
+			pagination.setPage(page);		
+			pagination.init();		
+			List<MemberProfile> list = boardservice.getmemberprofileListALL(pagination);
+
 			model.addAttribute("list",list);
-			
+			model.addAttribute("pagination",pagination);
 			return "/member/memberprofilelist";
 	    }
 		
