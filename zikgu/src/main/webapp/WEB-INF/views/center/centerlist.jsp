@@ -159,9 +159,9 @@
 		</a>
 		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " href="/reviewlist">리뷰 관리
 		</a>
-       	<form action="member_search_All" method="post" style="width:1200px;" >
-		          <input class="form-control form-control-dark  rounded-0 border-0"  aria-label="Search" type="text" name="keyword" placeholder="번호,회원명 검색" value="${keyword }">
-		          <a href="member_search_All?keyword=${keyword}" class="search_icon" ><i class="fas fa-search"></i></a>
+       	<form action="center_search_All" method="post" style="width:1200px;" >
+		          <input class="form-control form-control-dark  rounded-0 border-0"  aria-label="Search" type="text" name="keyword" placeholder="센터명,센터주소 검색" value="${keyword }">
+		          <a href="center_search_All?keyword=${keyword}" class="search_icon" ><i class="fas fa-search"></i></a>
           	</form>
    
 </header>
@@ -291,7 +291,7 @@
           <sec:authentication property="principal" var="principal" />
           <tbody>
 		        <c:forEach var="list" items="${list }">
-		           		<tr onclick="location.href='memberprofiledetail?m_id=${list.c_id }'" style="cursor:pointer">
+		           		<tr onclick="location.href='centerDetail2?c_id=${list.c_id }'" style="cursor:pointer">
 				               <td>${list.c_id }</td>
 		              <td>${list.c_name }</td>
 		              <td>${list.c_loadaddress }</td>
@@ -349,7 +349,22 @@
     </main>
   </div>
 </div>
+<script>
+function allbutton_click() {
+	
+	console.log("전체버튼을 누르셨습니다.");
+	location.href='${path}	/centerlist';
 
+}
+function completebutton_click() {
+	console.log("완료버튼을 누르셨습니다.");
+	location.href='${path}	/centerlistcomplete';
+}
+function waitebutton_click() {
+	console.log("대기버튼을 누르셨습니다.");
+	location.href='${path}	/centerlistwaite';
+}
+</script>	
 
   </body>
 </html>

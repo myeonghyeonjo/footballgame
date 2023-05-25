@@ -622,7 +622,51 @@ public class BoardServiceImpl implements BoardService {
 	public int getcenterCount() {
 		return boardmapper.getcenterCount();
 	}
+	
+	@Override
+	public int getcentercompelteCount() {
+		return boardmapper.getcentercompelteCount();
+	}
+	
+	@Override
+	public List<Center> getcentercompleteList(Pagination pagination){
+		return boardmapper.getcentercompleteList(pagination);
+	}
+	
+	@Override
+	public int getcenterwaiteCount() {
+		return boardmapper.getcenterwaiteCount();
+	}
 
+	@Override
+	public List<Center> getcenterwaiteList(Pagination pagination){
+		return boardmapper.getcenterwaiteList(pagination);
+	}
+	
+	@Override
+	public Center getcenterDetail3(int c_id) {
+		return boardmapper.getcenterDetail3(c_id);
+	}
+	
+	@Override
+	public int getcenterSearchCount(String keyword) {
+		return boardmapper.getcenterSearchCount(keyword);
+	}
+	
+	@Override
+	public List<Center> getcentersearchList(Pagination pagination){
+		return boardmapper.getcentersearchList(pagination);
+	}
+	
+	@Override
+	public int gettrainerprofileSearchcompelteCount(String keyword) {
+		return boardmapper.gettrainerprofileSearchcompelteCount(keyword);
+	}
+	
+	@Override
+	public List<TrainerProfile> gettrainerprofilesearchcompleteList(Pagination pagination){
+		return boardmapper.gettrainerprofilesearchcompleteList(pagination);
+	}
 	
 	
 

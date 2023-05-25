@@ -157,7 +157,7 @@
 		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " href="/reviewlist">리뷰 관리
 		</a>
        	<form action="trainer_search_All" method="post" style="width:1200px;" >
-		          <input class="form-control form-control-dark  rounded-0 border-0"  aria-label="Search" type="text" name="keyword" placeholder="번호,회원명 검색" value="${keyword }">
+		          <input class="form-control form-control-dark  rounded-0 border-0"  aria-label="Search" type="text" name="keyword" id="keyword" placeholder="번호,회원명 검색" value="${keyword }">
 		          <a href="trainer_search_All?keyword=${keyword}" class="search_icon" ><i class="fas fa-search"></i></a>
           	</form>
    
@@ -244,23 +244,45 @@
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2" style="color:black;">트레이너목록</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
-         <div class="btn-group me-2">
-       		<c:if test="${sort == '전체' }">
-	            <button type="button" style="background-color:#c0c0c0;"onclick="allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
-	            <button type="button"  onclick="completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
-	             <button type="button" onclick="waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
-            </c:if>
-         	<c:if test="${sort == '완료' }">
-	            <button type="button" onclick="allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
-	            <button type="button" style="background-color:#c0c0c0;" onclick="completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
-	             <button type="button" onclick="waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
-            </c:if>
-            <c:if test="${sort == '대기' }">
-	            <button type="button" onclick="allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
-	            <button type="button"  onclick="completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
-	             <button type="button" style="background-color:#c0c0c0;" onclick="waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
-            </c:if>
-          </div>
+         <c:set var="keywordLength" value="${fn:length(keyword)}" />
+		  <c:if test="${keywordLength == 0}">
+	         <div class="btn-group me-2">
+	       		<c:if test="${sort == '전체' }">
+		            <button type="button" style="background-color:#c0c0c0;"onclick="allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
+		            <button type="button"  onclick="completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
+		             <button type="button" onclick="waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+	            </c:if>
+	         	<c:if test="${sort == '완료' }">
+		            <button type="button" onclick="allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
+		            <button type="button" style="background-color:#c0c0c0;" onclick="completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
+		             <button type="button" onclick="waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+	            </c:if>
+	            <c:if test="${sort == '대기' }">
+		            <button type="button" onclick="allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
+		            <button type="button"  onclick="completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
+		             <button type="button" style="background-color:#c0c0c0;" onclick="waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+	            </c:if>
+	          </div>
+          </c:if>
+          <c:if test="${keywordLength > 0}">
+	         <div class="btn-group me-2">
+	       		<c:if test="${sort == '전체' }">
+		            <button type="button" style="background-color:#c0c0c0;"onclick="search_allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체2</button>
+		            <button type="button"  onclick="search_completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
+		             <button type="button" onclick="search_waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+	            </c:if>
+	         	<c:if test="${sort == '완료' }">
+		            <button type="button" onclick="search_allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
+		            <button type="button" style="background-color:#c0c0c0;" onclick="search_completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
+		             <button type="button" onclick="search_waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+	            </c:if>
+	            <c:if test="${sort == '대기' }">
+		            <button type="button" onclick="search_allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
+		            <button type="button"  onclick="search_completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
+		             <button type="button" style="background-color:#c0c0c0;" onclick="search_waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+	            </c:if>
+	          </div>
+          </c:if>
        <select class="form-select" name="tf_certificate" id="reviewselect" style="flex: 0.85;" required>
 										<option selected>정렬</option>
 										<option value="starhigh">평점높은순</option>
@@ -394,10 +416,8 @@ function clickConfirmCancelconsulting(formName) {
 	
 <script>
 function allbutton_click() {
-	
 	console.log("전체버튼을 누르셨습니다.");
 	location.href='${path}	/trainerprofilelist';
-
 }
 function completebutton_click() {
 	console.log("완료버튼을 누르셨습니다.");
@@ -407,6 +427,26 @@ function waitebutton_click() {
 	console.log("대기버튼을 누르셨습니다.");
 	location.href='${path}	/trainerprofilelistwaite';
 }
-</script>	
+</script>
+<script>
+function search_allbutton_click() {
+	console.log("전체버튼을 누르셨습니다.");
+	var keyword = $('#keyword').val();
+	var path = '/trainer_search_All';
+	var url = path + '?keyword=' + encodeURIComponent(keyword);
+	location.href = url;
+}
+function search_completebutton_click() {
+	console.log("완료버튼을 누르셨습니다.");
+	var keyword = $('#keyword').val();
+	var path = '/trainer_search_complete';
+	var url = path + '?keyword=' + encodeURIComponent(keyword);
+	location.href = url;
+}
+function search_waitebutton_click() {
+	console.log("대기버튼을 누르셨습니다.");
+	location.href='${path}	/trainerprofilelistwaite';
+}
+</script>		
   </body>
 </html>

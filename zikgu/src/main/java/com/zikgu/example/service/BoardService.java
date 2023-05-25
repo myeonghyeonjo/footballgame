@@ -221,6 +221,24 @@ public interface BoardService {
 
 	public int getcenterCount();
 
+	public int getcentercompelteCount();
+
+	public List<Center> getcentercompleteList(Pagination pagination);
+
+	public int getcenterwaiteCount();
+
+	public List<Center> getcenterwaiteList(Pagination pagination);
+
+	public Center getcenterDetail3(int c_id);
+
+	public int getcenterSearchCount(String keyword);
+
+	public List<Center> getcentersearchList(Pagination pagination);
+
+	public int gettrainerprofileSearchcompelteCount(String keyword);
+
+	public List<TrainerProfile> gettrainerprofilesearchcompleteList(Pagination pagination);
+
 	
 
 	

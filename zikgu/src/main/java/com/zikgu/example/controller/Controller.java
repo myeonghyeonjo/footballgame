@@ -732,6 +732,27 @@ model.addAttribute("exception", exception);
 			model.addAttribute("c_id",c_id);
 			return "/center/centerDetail";
 	    }
+		@RequestMapping("/centerDetail2")
+	    public String centerDetail2(Center center,Model model,@RequestParam("c_id") int c_id) {
+			
+			List<Center> list = boardservice.getcenterDetail(c_id);
+			model.addAttribute("list",list);
+			center = boardservice.getcenterDetail3(c_id);		
+			List<FileDto> filelist = boardservice.getcenterFileList(c_id);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("c_id",c_id);
+			String tf_loadaddress = center.getC_loadaddress();
+			center = boardservice.getcenterDetail2(tf_loadaddress);		
+			String c_name = center.getC_name();	
+			model.addAttribute("center",center);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("c_id",c_id);
+			model.addAttribute("c_name",c_name);
+			model.addAttribute("u_key",1111);
+			model.addAttribute("tf_loadaddress",tf_loadaddress);	
+			model.addAttribute("list",list);
+			return "/center/centerDetail2";
+	    }
 		
 		@RequestMapping("/centerlist")
 	    public String centerlist(Center center,Model model,Pagination pagination,HttpServletRequest request) {
@@ -746,12 +767,39 @@ model.addAttribute("exception", exception);
 			model.addAttribute("pagination",pagination);
 			model.addAttribute("list",list);
 			model.addAttribute("sort","전체");
-			
-			
-			
-			model.addAttribute("list",list);
 			return "/center/centerlist";
 	    }
+		@RequestMapping("/centerlistcomplete")
+	    public String centerlistcomplete(Center center,Model model,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getcentercompelteCount();
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			List<Center> list = boardservice.getcentercompleteList(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("list",list);
+			model.addAttribute("sort","완료");
+			return "/center/centerlist";
+	    }
+		@RequestMapping("/centerlistwaite")
+	    public String centerlistwaite(Center center,Model model,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getcenterwaiteCount();
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			List<Center> list = boardservice.getcenterwaiteList(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("list",list);
+			model.addAttribute("sort","대기");
+			return "/center/centerlist";
+	    }
+	
 		@RequestMapping("/centerconfirmlist")
 	    public String centerconfirmlist(Center center,Model model,@RequestParam("u_key") int u_key) {
 			List<Center> list = boardservice.getcenterListOne(u_key);
@@ -762,33 +810,42 @@ model.addAttribute("exception", exception);
 		
 		@RequestMapping("/centerConfirm")
 	    public String centerConfirm(Center center,Model model) {
-			int c_id = center.getC_id();
-			
-			boardservice.centerConfirm(center);
-			
-			
-			List<Center> list = boardservice.getcenterDetail(c_id);
-			model.addAttribute("list",list);
-			
+			int c_id = center.getC_id();	
+			boardservice.centerConfirm(center);		
+			List<Center> list = boardservice.getcenterDetail(c_id);	
 			List<FileDto> filelist = boardservice.getcenterFileList(c_id);
+			center = boardservice.getcenterDetail3(c_id);		
+			String tf_loadaddress = center.getC_loadaddress();
+			center = boardservice.getcenterDetail2(tf_loadaddress);		
+			String c_name = center.getC_name();	
+			model.addAttribute("center",center);
 			model.addAttribute("filelist",filelist);
 			model.addAttribute("c_id",c_id);
-			return "/center/centerDetail";
+			model.addAttribute("c_name",c_name);
+			model.addAttribute("u_key",1111);
+			model.addAttribute("tf_loadaddress",tf_loadaddress);	
+			model.addAttribute("list",list);
+			return "/center/centerDetail2";
 	    }
 		
 		@RequestMapping("/centerConfirmCancel")
 	    public String centerConfirmCancel(Center center,Model model) {
 			int c_id = center.getC_id();
-			model.addAttribute("c_id",c_id);
 			boardservice.centerConfirmCancel(c_id);
-			
-			List<Center> list = boardservice.getcenterDetail(c_id);
-			model.addAttribute("list",list);
-			
+			List<Center> list = boardservice.getcenterDetail(c_id);	
 			List<FileDto> filelist = boardservice.getcenterFileList(c_id);
+			center = boardservice.getcenterDetail3(c_id);		
+			String tf_loadaddress = center.getC_loadaddress();
+			center = boardservice.getcenterDetail2(tf_loadaddress);		
+			String c_name = center.getC_name();	
+			model.addAttribute("center",center);
 			model.addAttribute("filelist",filelist);
-			
-			return "/center/centerDetail";
+			model.addAttribute("c_id",c_id);
+			model.addAttribute("c_name",c_name);
+			model.addAttribute("u_key",1111);
+			model.addAttribute("tf_loadaddress",tf_loadaddress);	
+			model.addAttribute("list",list);
+			return "/center/centerDetail2";
 	    }
 		
 		@RequestMapping("/trainerProfileDetail")
@@ -926,11 +983,30 @@ model.addAttribute("exception", exception);
 			model.addAttribute("pagination",pagination);
 			model.addAttribute("keyword",keyword);
 			model.addAttribute("sort","전체");
-			
 			List<TrainerProfile> list = boardservice.gettrainerprofilesearchList(pagination);
 			model.addAttribute("list",list);
 			return "/member/trainerprofilelist";
 	    }
+		@RequestMapping("/trainer_search_complete")
+	    public String trainer_search_complete(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,TrainerProfile trainerprofile) {
+			System.out.println("keyword:"+keyword);
+			
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.gettrainerprofileSearchcompelteCount(keyword);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			pagination.setKeyword(keyword);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","완료");
+			List<TrainerProfile> list = boardservice.gettrainerprofilesearchcompleteList(pagination);
+			model.addAttribute("list",list);
+			return "/member/trainerprofilelist";
+	    }
+		
 		@RequestMapping("/member_search_All")
 	    public String member_search_All(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,MemberProfile memberprofile) {
 			System.out.println("keyword:"+keyword);
@@ -950,9 +1026,24 @@ model.addAttribute("exception", exception);
 			model.addAttribute("list",list);
 			return "/member/memberprofilelist";
 	    }
-		
-		
-		
+		@RequestMapping("/center_search_All")
+	    public String center_search_All(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,Center center) {
+			System.out.println("keyword:"+keyword);
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getcenterSearchCount(keyword);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			pagination.setKeyword(keyword);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			
+			List<Center> list = boardservice.getcentersearchList(pagination);
+			model.addAttribute("list",list);
+			return "/center/centerlist";
+	    }
 		@RequestMapping("/aj-centerview")
 	    public String centerview( Model model,Center center,@RequestParam("tf_loadaddress") String tf_loadaddress) {
 			System.out.println("tf_loadaddress:"+tf_loadaddress);

@@ -677,6 +677,31 @@
 		where c_loadaddress = #{tf_loadaddress}
 		Limit 1
 	</select>
+	<select id="getcenterDetail3" resultType="center">
+
+		select c_name,
+		c_postcode,
+		c_loadaddress,
+		c_oldaddress,
+		c_detailaddress,
+		c_option,
+		c_inform,
+		c_daymorning,
+		c_dayafter,
+		c_satermorning,
+		c_saterafter,
+		c_sunmorning,
+		c_sunafter,
+		c_dayoff,
+		c_confirm,
+		c_id,
+		u_key,
+		c_intro
+
+		from center
+		where c_id = #{c_id}
+	</select>
+	
 
 
 
@@ -770,8 +795,34 @@
 		c_loadaddress as c_loadaddress,
 		c_confirm as c_confirm
 		FROM center
-
+		LIMIT 			#{pageNum}, 10 
 	</select>
+	<!-- 센터 리스트(완료) -->
+	<select id="getcentercompleteList" resultType="center">
+		SELECT
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+		WHERE c_confirm = '1'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 센터 리스트(대기) -->
+	<select id="getcenterwaiteList" resultType="center">
+		SELECT
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+		WHERE c_confirm = '0'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	
+	
 
 	<!--트레이너 리스트(모든) -->
 	<select id="gettrainerprofileListALL"
@@ -1000,6 +1051,24 @@
 		concat('%',#{keyword},'%') 
 		LIMIT 			#{pageNum}, 10 
 	</select>
+		<!-- 트레이너 모든 검색 + 완료 -->
+	<select id="gettrainerprofilesearchcompleteList" resultType="TrainerProfile">
+		SELECT 
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
+
+		FROM trainerprofile
+
+		WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like
+		concat('%',#{keyword},'%')  AND tf_check ='완료'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	
 	<!-- 일반회원 모든 검색 -->
 	<select id="getmemberprfilesearchList" resultType="MemberProfile">
 		SELECT 
@@ -1021,7 +1090,20 @@
 		concat('%',#{keyword},'%') 
 		LIMIT 			#{pageNum}, 10 
 	</select>
+<!-- 일반회원 모든 검색 -->
+	<select id="getcentersearchList" resultType="Center">
+		SELECT 
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
 
+		WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') 
+		LIMIT 			#{pageNum}, 10 
+	</select>
 
 
 
@@ -1657,6 +1739,14 @@
 				WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like
 		concat('%',#{keyword},'%') 
 	</select>
+		 <!-- 트레이너 프로필 갯수(검색) 카운트 -->
+	<select id="gettrainerprofileSearchcompelteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like concat('%',#{keyword},'%') 
+				AND tf_check='완료'
+	</select>
+	
 	
 		 <!-- 일반회원 프로필 갯수(검색) 카운트 -->
 	<select id="getmemberprofileSearchCount" resultType="int">
@@ -1665,12 +1755,30 @@
 				WHERE m_id like concat('%',#{keyword},'%') OR m_name like
 		concat('%',#{keyword},'%') 
 	</select>
-			 <!-- 센터  프로필 갯수(검색) 카운트 -->
+	 <!-- 센터 갯수(검색) 카운트 -->
+	<select id="getcenterSearchCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') 
+	</select>
+	
+			 <!-- 센터  프로필 갯수() 카운트 -->
 	<select id="getcenterCount" resultType="int">
 				 SELECT       count(*)                
 				 FROM            center
-				
-		
+	</select>
+			 <!-- 센터  프로필 갯수(완료) 카운트 -->
+	<select id="getcentercompelteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				 WHERE c_confirm = '1'
+	</select>
+			 <!-- 센터  프로필 갯수(대기) 카운트 -->
+	<select id="getcenterwaiteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				 WHERE c_confirm = '0'
 	</select>
 	
 	
