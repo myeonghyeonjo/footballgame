@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="centerlist"/>
+		<item key="selection" value="gettrainerprofilesearchList"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="centerlist"/>
-			<item value="trainerprofilelist"/>
-			<item value="정렬"/>
-			<item value="완료"/>
-			<item value="searchl"/>
-			<item value="memberprofilelist"/>
-			<item value="memberprofilel"/>
-			<item value="memberprofile"/>
-			<item value="search"/>
-			<item value="rfilesearchList"/>
-			<item value="count"/>
-			<item value="seach"/>
-			<item value="seachco"/>
-			<item value="trainer_search_All"/>
-			<item value="getmemberprofileListALL"/>
+			<item value="gettrainerprofilesearchList"/>
+			<item value="gettrainerprofileSearchCount"/>
+			<item value="전체"/>
+			<item value="keyword"/>
+			<item value="completebutton_click"/>
+			<item value="getcentersea"/>
+			<item value="getcetnersea"/>
+			<item value="c_id as c_id,"/>
+			<item value="getcenterlist"/>
+			<item value="searchList"/>
+			<item value="Count"/>
+			<item value="getmemberprofileCount"/>
+			<item value="member_search_All"/>
+			<item value="u_key"/>
+			<item value="${u_key}"/>
 		</list>
 		<list key="replacehistory">
 		</list>

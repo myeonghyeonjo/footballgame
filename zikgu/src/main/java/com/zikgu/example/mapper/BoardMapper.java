@@ -187,7 +187,7 @@ public interface BoardMapper {
 
 	public Review getreviewinsetcheck(String formattedDate);
 
-	public List<Review> gettreviewListALL();
+	public List<Review> gettreviewListALL(Pagination pagination);
 
 	public List<TrainerProfile> gettrainerprofilecompleteList();
 
@@ -232,6 +232,40 @@ public interface BoardMapper {
 	public int gettrainerprofileSearchcompelteCount(String keyword);
 
 	public List<TrainerProfile> gettrainerprofilesearchcompleteList(Pagination pagination);
+
+	public int gettrainerprofileSearchwaiteCount(String keyword);
+
+	public List<TrainerProfile> gettrainerprofilesearchwaiteList(Pagination pagination);
+
+	public int getcenterSearchcompleteCount(String keyword);
+
+	public List<Center> getcentersearchcompelteList(Pagination pagination);
+
+	public int getcenterSearchwaiteCount(String keyword);
+
+	public List<Center> getcentersearchwaiteList(Pagination pagination);
+
+	public int getreviewCount();
+
+	public int getreviewcompleteCount();
+
+	public List<Review> gettreviewcompleteListALL(Pagination pagination);
+
+	public int getreviewwaiteCount();
+
+	public List<Review> gettreviewwaiteListALL(Pagination pagination);
+
+	public int getreviewSearchCount(String keyword);
+
+	public List<MemberProfile> getreviewsearchList(Pagination pagination);
+
+	public int getreviewSearchcompleteCount(String keyword);
+
+	public List<MemberProfile> getreviewsearchcompleteList(Pagination pagination);
+
+	public int getreviewSearchwaiteCount(String keyword);
+
+	public List<MemberProfile> getreviewsearchwaiteList(Pagination pagination);
 
 
 

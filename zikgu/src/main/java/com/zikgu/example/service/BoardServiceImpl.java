@@ -554,8 +554,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<Review> gettreviewListALL(){
-		return boardmapper.gettreviewListALL();
+	public List<Review> gettreviewListALL(Pagination pagination){
+		return boardmapper.gettreviewListALL(pagination);
 	}
 	
 	@Override
@@ -668,8 +668,88 @@ public class BoardServiceImpl implements BoardService {
 		return boardmapper.gettrainerprofilesearchcompleteList(pagination);
 	}
 	
+	@Override
+	public int gettrainerprofileSearchwaiteCount(String keyword) {
+		return boardmapper.gettrainerprofileSearchwaiteCount(keyword);
+	}
 	
+	@Override
+	public List<TrainerProfile> gettrainerprofilesearchwaiteList(Pagination pagination){
+		return boardmapper.gettrainerprofilesearchwaiteList(pagination);
+	}
+	
+	@Override
+	public int getcenterSearchcompleteCount(String keyword) {
+		return boardmapper.getcenterSearchcompleteCount(keyword);
+	}
+	
+	@Override
+	public List<Center> getcentersearchcompelteList(Pagination pagination){
+		return boardmapper.getcentersearchcompelteList(pagination);
+	}
+	
+	@Override
+	public int getcenterSearchwaiteCount(String keyword) {
+		return boardmapper.getcenterSearchwaiteCount(keyword);
+	}
+	
+	@Override
+	public List<Center> getcentersearchwaiteList(Pagination pagination){
+		return boardmapper.getcentersearchwaiteList(pagination);
+	}
+	@Override
+	public int getreviewCount() {
+		return boardmapper.getreviewCount();
+	}
+	@Override
+	public int getreviewcompleteCount() {
+		return boardmapper.getreviewcompleteCount();
+	}
+	
+	@Override
+	public List<Review> gettreviewcompleteListALL(Pagination pagination){
+		return boardmapper.gettreviewcompleteListALL(pagination);
+	}
+	
+	@Override
+	public int getreviewwaiteCount() {
+		return boardmapper.getreviewwaiteCount();
+	}
+	
+	@Override
+	public List<Review> gettreviewwaiteListALL(Pagination pagination){
+		return boardmapper.gettreviewwaiteListALL(pagination);
+	}
+	
+	@Override
+	public int getreviewSearchCount(String keyword) {
+		return boardmapper.getreviewSearchCount(keyword);
+	}
+	
+	@Override
+	public List<MemberProfile> getreviewsearchList(Pagination pagination){
+		return boardmapper.getreviewsearchList(pagination);
+	}
+	
+	@Override
+	public int getreviewSearchcompleteCount(String keyword) {
+		return boardmapper.getreviewSearchcompleteCount(keyword);
+	}
+	
+	@Override
+	public List<MemberProfile> getreviewsearchcompleteList(Pagination pagination){
+		return boardmapper.getreviewsearchcompleteList(pagination);
+	}
+	
+	@Override
+	public int getreviewSearchwaiteCount(String keyword) {
+		return boardmapper.getreviewSearchwaiteCount(keyword);
+	}
 
+	@Override
+	public List<MemberProfile> getreviewsearchwaiteList(Pagination pagination){
+		return boardmapper.getreviewsearchwaiteList(pagination);
+	}
 }
 
 

@@ -267,7 +267,7 @@
           <c:if test="${keywordLength > 0}">
 	         <div class="btn-group me-2">
 	       		<c:if test="${sort == '전체' }">
-		            <button type="button" style="background-color:#c0c0c0;"onclick="search_allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체2</button>
+		            <button type="button" style="background-color:#c0c0c0;"onclick="search_allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
 		            <button type="button"  onclick="search_completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
 		             <button type="button" onclick="search_waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
 	            </c:if>
@@ -300,8 +300,8 @@
           <thead>
             <tr>
               <th scope="col">번호</th>
-              <th scope="col">회원명</th>
-              <th scope="col">거주지</th>
+              <th scope="col">트레이너명</th>
+              <th scope="col">근무주소</th>
               <th scope="col">우편번호</th>  
                <th scope="col">성별</th>
               <th scope="col">검토</th>  
@@ -445,7 +445,10 @@ function search_completebutton_click() {
 }
 function search_waitebutton_click() {
 	console.log("대기버튼을 누르셨습니다.");
-	location.href='${path}	/trainerprofilelistwaite';
+	var keyword = $('#keyword').val();
+	var path = '/trainer_search_waite';
+	var url = path + '?keyword=' + encodeURIComponent(keyword);
+	location.href = url;
 }
 </script>		
   </body>

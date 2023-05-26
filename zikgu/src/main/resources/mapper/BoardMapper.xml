@@ -1051,6 +1051,74 @@
 		concat('%',#{keyword},'%') 
 		LIMIT 			#{pageNum}, 10 
 	</select>
+	<!-- 리뷰 모든 검색 -->
+	<select id="getreviewsearchList" resultType="Review">
+		SELECT 
+				r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+
+		FROM review
+
+		WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like
+		concat('%',#{keyword},'%') 
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 리뷰  검색+완료 -->
+	<select id="getreviewsearchcompleteList" resultType="Review">
+		SELECT 
+				r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+
+		FROM review
+
+		WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like concat('%',#{keyword},'%') 
+		AND r_check ='1'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 리뷰  검색+대기 -->
+	<select id="getreviewsearchwaiteList" resultType="Review">
+		SELECT 
+				r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+
+		FROM review
+
+		WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like concat('%',#{keyword},'%') 
+		AND r_check ='0'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	
+	
+	<!-- 리뷰  검색+대기 -->
+	<select id="getreviewSearchwaiteCount" resultType="int">
+		 SELECT       count(*)                
+				 FROM            review
+				WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like
+		concat('%',#{keyword},'%') AND r_check ='0' 
+	</select>
+	
+	
 		<!-- 트레이너 모든 검색 + 완료 -->
 	<select id="gettrainerprofilesearchcompleteList" resultType="TrainerProfile">
 		SELECT 
@@ -1066,6 +1134,23 @@
 
 		WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like
 		concat('%',#{keyword},'%')  AND tf_check ='완료'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 트레이너 모든 검색 + 대기 -->
+	<select id="gettrainerprofilesearchwaiteList" resultType="TrainerProfile">
+		SELECT 
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
+
+		FROM trainerprofile
+
+		WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like
+		concat('%',#{keyword},'%')  AND tf_check ='대기'
 		LIMIT 			#{pageNum}, 10 
 	</select>
 	
@@ -1090,7 +1175,7 @@
 		concat('%',#{keyword},'%') 
 		LIMIT 			#{pageNum}, 10 
 	</select>
-<!-- 일반회원 모든 검색 -->
+<!-- 센터 모든 검색 -->
 	<select id="getcentersearchList" resultType="Center">
 		SELECT 
 		c_id as c_id,
@@ -1105,7 +1190,33 @@
 		LIMIT 			#{pageNum}, 10 
 	</select>
 
+<!-- 센터  검색+완료 -->
+	<select id="getcentersearchcompelteList" resultType="Center">
+		SELECT 
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
 
+		WHERE c_confirm = '1' AND c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%') 
+		
+		LIMIT 			#{pageNum}, 10 
+	</select>
+<!-- 센터  검색+대기 -->
+	<select id="getcentersearchwaiteList" resultType="Center">
+		SELECT 
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+		WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%') 	
+		AND c_confirm = '0'
+		LIMIT 			#{pageNum}, 10 
+	</select>	
 
 	<!-- 회원 프로필 등록 -->
 	<insert id="memberProfileinsert" parameterType="memberprofile">
@@ -1672,6 +1783,37 @@
 				memberprofile_name as memberprofile_name,
 				r_date as r_date
 		from review	
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 리뷰 완료 리스트 -->
+	<select id="gettreviewcompleteListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+		from review	
+		WHERE r_check = '1'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 리뷰 대기 리스트 -->
+	<select id="gettreviewwaiteListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+		from review	
+		WHERE r_check = '0'
+		LIMIT 			#{pageNum}, 10 
 	</select>
 	
 	<!--트레이너 리스트(검토완료) -->
@@ -1688,6 +1830,7 @@
 
 		FROM trainerprofile
 		WHERE tf_check = '완료'
+		LIMIT 			#{pageNum}, 10 
 	</select>
 		<!--트레이너 리스트(검토대기) -->
 	<select id="gettrainerprofileListwaite"
@@ -1703,6 +1846,7 @@
 
 		FROM trainerprofile
 		WHERE tf_check = '대기'
+		LIMIT 			#{pageNum}, 10 
 	</select>
 	
 	
@@ -1710,6 +1854,23 @@
 	<select id="gettrainerprofileCount" resultType="int">
 				 SELECT       count(*)                
 				 FROM            trainerprofile
+	</select>
+	 <!-- 리뷰 갯수 카운트 -->
+	<select id="getreviewCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+	</select>
+	 <!-- 리뷰 (완료)갯수 카운트 -->
+	<select id="getreviewcompleteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE r_check = '1'
+	</select>
+	 <!-- 리뷰 (대기)갯수 카운트 -->
+	<select id="getreviewwaiteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE r_check = '0'
 	</select>
 	
 	 <!-- 트레이너 프로필 갯수(검토완료) 카운트 -->
@@ -1739,13 +1900,36 @@
 				WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like
 		concat('%',#{keyword},'%') 
 	</select>
-		 <!-- 트레이너 프로필 갯수(검색) 카운트 -->
+	 <!-- 리뷰 갯수(검색) 카운트 -->
+	<select id="getreviewSearchCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like
+		concat('%',#{keyword},'%') 
+	</select>
+	 <!-- 리뷰 갯수(검색+완료) 카운트 -->
+	<select id="getreviewSearchcompleteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like concat('%',#{keyword},'%') 
+				AND r_check='1'
+	</select>
+	
+		 <!-- 트레이너 프로필 갯수(검색+완료) 카운트 -->
 	<select id="gettrainerprofileSearchcompelteCount" resultType="int">
 				 SELECT       count(*)                
 				 FROM            trainerprofile
 				WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like concat('%',#{keyword},'%') 
 				AND tf_check='완료'
 	</select>
+		 <!-- 트레이너 프로필 갯수(검색+대기) 카운트 -->
+	<select id="gettrainerprofileSearchwaiteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like concat('%',#{keyword},'%') 
+				AND tf_check='대기'
+	</select>
+	
 	
 	
 		 <!-- 일반회원 프로필 갯수(검색) 카운트 -->
@@ -1761,6 +1945,20 @@
 				 FROM            center
 				WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like
 		concat('%',#{keyword},'%') 
+	</select>
+		 <!-- 센터 갯수(검색+완료) 카운트 -->
+	<select id="getcenterSearchcompleteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') AND c_confirm = '1'
+	</select>
+		 <!-- 센터 갯수(검색+대기) 카운트 -->
+	<select id="getcenterSearchwaiteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') AND c_confirm = '0'
 	</select>
 	
 			 <!-- 센터  프로필 갯수() 카운트 -->

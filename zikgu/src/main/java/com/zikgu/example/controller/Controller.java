@@ -1006,7 +1006,83 @@ model.addAttribute("exception", exception);
 			model.addAttribute("list",list);
 			return "/member/trainerprofilelist";
 	    }
+		@RequestMapping("/trainer_search_waite")
+	    public String trainer_search_waite(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,TrainerProfile trainerprofile) {
+			System.out.println("keyword:"+keyword);
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.gettrainerprofileSearchwaiteCount(keyword);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			pagination.setKeyword(keyword);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","대기");
+			List<TrainerProfile> list = boardservice.gettrainerprofilesearchwaiteList(pagination);
+			model.addAttribute("list",list);
+			return "/member/trainerprofilelist";
+	    }
 		
+		@RequestMapping("/review_search_All")
+	    public String review_search_All(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,MemberProfile memberprofile) {
+			System.out.println("keyword:"+keyword);
+			
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getreviewSearchCount(keyword);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			pagination.setKeyword(keyword);
+			List<MemberProfile> list = boardservice.getreviewsearchList(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","전체");
+			model.addAttribute("list",list);
+			return "/review/reviewlist";
+	    }
+		@RequestMapping("/review_search_complete")
+	    public String review_search_complete(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,MemberProfile memberprofile) {
+			System.out.println("keyword:"+keyword);
+			
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getreviewSearchcompleteCount(keyword);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			pagination.setKeyword(keyword);
+			List<MemberProfile> list = boardservice.getreviewsearchcompleteList(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","완료");
+			model.addAttribute("list",list);
+			return "/review/reviewlist";
+	    }
+		@RequestMapping("/review_search_waite")
+	    public String review_search_waite(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,MemberProfile memberprofile) {
+			System.out.println("keyword:"+keyword);
+			
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getreviewSearchwaiteCount(keyword);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			pagination.setKeyword(keyword);
+			List<MemberProfile> list = boardservice.getreviewsearchwaiteList(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","대기");
+			model.addAttribute("list",list);
+			return "/review/reviewlist";
+	    }
+
 		@RequestMapping("/member_search_All")
 	    public String member_search_All(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,MemberProfile memberprofile) {
 			System.out.println("keyword:"+keyword);
@@ -1039,11 +1115,48 @@ model.addAttribute("exception", exception);
 			pagination.setKeyword(keyword);
 			model.addAttribute("pagination",pagination);
 			model.addAttribute("keyword",keyword);
-			
+			model.addAttribute("sort","전체");
 			List<Center> list = boardservice.getcentersearchList(pagination);
 			model.addAttribute("list",list);
 			return "/center/centerlist";
 	    }
+		@RequestMapping("/center_search_complete")
+	    public String center_search_complete(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,Center center) {
+			System.out.println("keyword:"+keyword);
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getcenterSearchcompleteCount(keyword);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			pagination.setKeyword(keyword);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","완료");
+			List<Center> list = boardservice.getcentersearchcompelteList(pagination);
+			model.addAttribute("list",list);
+			return "/center/centerlist";
+	    }
+		@RequestMapping("/center_search_waite")
+	    public String center_search_waite(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,Center center) {
+			System.out.println("keyword:"+keyword);
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getcenterSearchwaiteCount(keyword);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			pagination.setKeyword(keyword);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","대기");
+			List<Center> list = boardservice.getcentersearchwaiteList(pagination);
+			model.addAttribute("list",list);
+			return "/center/centerlist";
+	    }
+		
 		@RequestMapping("/aj-centerview")
 	    public String centerview( Model model,Center center,@RequestParam("tf_loadaddress") String tf_loadaddress) {
 			System.out.println("tf_loadaddress:"+tf_loadaddress);
@@ -1280,16 +1393,50 @@ model.addAttribute("exception", exception);
 	    }
 		
 		@RequestMapping("/reviewlist")
-	    public String reviewlist( Model model,Review review) {
-			
-			List<Review> list = boardservice.gettreviewListALL();
-			
+	    public String reviewlist( Model model,Review review,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getreviewCount();
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+				List<Review> list = boardservice.gettreviewListALL(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("sort","전체");
 			model.addAttribute("list",list);
-			
 			return "/review/reviewlist";
 	    }
-		
-		
+		@RequestMapping("/reviewlistcomplete")
+	    public String reviewlistcomplete( Model model,Review review,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getreviewcompleteCount();
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+				List<Review> list = boardservice.gettreviewcompleteListALL(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("sort","완료");
+			model.addAttribute("list",list);
+			return "/review/reviewlist";
+	    }
+		@RequestMapping("/reviewlistwaite")
+	    public String reviewlistwaite( Model model,Review review,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getreviewwaiteCount();
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+				List<Review> list = boardservice.gettreviewwaiteListALL(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("sort","대기");
+			model.addAttribute("list",list);
+			return "/review/reviewlist";
+	    }
 		
 		@RequestMapping("/memberDetail")
 	    public String memberDetail(TrainerProfile trainerprofile,User user, Model model,@RequestParam("memberprofile_u_key") int memberprofile_u_key,@RequestParam("trainerprofile_u_key") int trainerprofile_u_key, MemberProfile memberprofile) {
