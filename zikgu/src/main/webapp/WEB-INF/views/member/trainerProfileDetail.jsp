@@ -3475,9 +3475,20 @@ input, select, textarea {
 				}
 
 		@media screen and (max-width: 736px) {
-
+			.aa{
+			font-size:15px;
+			}
+			.slick-active{
+			margin-top:50px;
+			}
 			#nav {
-				display: none;
+				display: ;
+				background-color:white;
+				border-bottom:1px solid black;
+				margin-left:15px;
+			}
+			#nav_2{
+				display:none;
 			}
 
 				#nav + #main {
@@ -3985,12 +3996,10 @@ input, select, textarea {
 							<li ><a class="aa" href="/trainerProfileDetail?u_key=${trainerprofile.u_key}"  style="color:white; background-color:black;" >Profile</a></li>      						
       						<li  onclick="Centerview(1);"><a href="#" class="aa" style="color:black">Center</a></li>	
       						 <li   onclick="review(1);"><a  href="#"class="aa" style="color:black">review</a></li>						
-      						 <li   onclick="test(1);"><a  href="#"class="aa" style="color:black">test</a></li>						
-
       						<p><input type="hidden" name="tf_loadaddress" class="sticky_btn"  value="${trainerprofile.tf_loadaddress}" id="tf_loadaddress"></p>
 							<p><input type="hidden" name="u_key" class="sticky_btn"  value="${trainerprofile.u_key}" id="u_key"></p>
 						</ul>
-						<ul>
+						<ul id="nav_2">
 							<li><a class="aa" href="#intro" class="active" style="color:black">트레이너 소개</a></li>
 							<li><a class="aa" style="color:black" href="#first">프로그램</a></li>
 							<li><a class="aa" style="color:black" href="#second">레슨 스케쥴</a></li>
