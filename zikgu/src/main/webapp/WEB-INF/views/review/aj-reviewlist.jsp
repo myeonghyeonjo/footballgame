@@ -4906,10 +4906,6 @@ function submitForm() {
 		
 	}
 	formData.append('test', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
-    
-	 
-
-	
 	$.ajax({
         type:"POST",
         url: "/reviewInsert",

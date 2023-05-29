@@ -99,11 +99,11 @@ public class Controller {
 	public String home(Model model) {
 		// List<Board> list = boardservice.selectBoardList();
 		// model.addAttribute("list", list);
-		logger.debug("debug");
-		logger.info("info");
-		logger.error("error");
+		//logger.debug("debug");
+		//logger.info("info");
+		//logger.error("error");
 		
-		List<TrainerProfile> list = boardservice.trainerList();
+		/*List<TrainerProfile> list = boardservice.trainerList();
 		List<String> centernameList = new ArrayList<>();
 		
 		for (int i = 0; i < list.size(); i++) {
@@ -132,7 +132,8 @@ public class Controller {
 			  model.addAttribute("filelistAll", filelistAll);
 			  model.addAttribute("centerfilelistAll", centerfilelistAll);
 			  model.addAttribute("centernameList", centernameList);
-		}
+		}*/
+		
 		return "/member/homepage2";
 	}
 
@@ -753,6 +754,15 @@ model.addAttribute("exception", exception);
 			model.addAttribute("list",list);
 			return "/center/centerDetail2";
 	    }
+		@RequestMapping("/reviewdetail")
+	    public String reviewdetail(Review review,Model model,@RequestParam("r_id") int r_id) {	
+			List<Review> list  = boardservice.getreviewDetail(r_id);
+			List<FileDto> filelist = boardservice.getreviewFileList(r_id);
+			model.addAttribute("reviewfilelist",filelist);
+			model.addAttribute("r_id",r_id);	
+			model.addAttribute("reviewlist",list);
+			return "/review/reviewdetail";
+	    }
 		
 		@RequestMapping("/centerlist")
 	    public String centerlist(Center center,Model model,Pagination pagination,HttpServletRequest request) {
@@ -827,7 +837,21 @@ model.addAttribute("exception", exception);
 			model.addAttribute("list",list);
 			return "/center/centerDetail2";
 	    }
-		
+		@RequestMapping("/reviewConfirm")
+	    public String reviewConfirm(Review review,Model model) {
+			int r_id = review.getR_id();	
+			boardservice.reviewConfirm(review);		
+			List<Review> list = boardservice.getreviewDetail(r_id);	
+			List<FileDto> filelist = boardservice.getreviewFileList(r_id);	
+			model.addAttribute("review",review);
+			model.addAttribute("reviewfilelist",filelist);
+			model.addAttribute("r_id",r_id);
+			model.addAttribute("u_key",1111);	
+			model.addAttribute("reviewlist",list);
+			model.addAttribute("toast",2);     //리뷰등록토스트
+			return "/review/reviewdetail";
+	    }
+
 		@RequestMapping("/centerConfirmCancel")
 	    public String centerConfirmCancel(Center center,Model model) {
 			int c_id = center.getC_id();
@@ -846,6 +870,18 @@ model.addAttribute("exception", exception);
 			model.addAttribute("tf_loadaddress",tf_loadaddress);	
 			model.addAttribute("list",list);
 			return "/center/centerDetail2";
+	    }
+		@RequestMapping("/reviewConfirmCancel")
+	    public String reviewConfirmCancel(Review review,Model model) {
+			int r_id = review.getR_id();
+			boardservice.reviewConfirmCancel(r_id);
+			List<Review> list = boardservice.getreviewDetail(r_id);	
+			List<FileDto> filelist = boardservice.getreviewFileList(r_id);
+			model.addAttribute("reviewfilelist",filelist);
+			model.addAttribute("r_id",r_id);	
+			model.addAttribute("u_key",1111);
+			model.addAttribute("reviewlist",list);
+			return "/review/reviewdetail";
 	    }
 		
 		@RequestMapping("/trainerProfileDetail")
@@ -913,7 +949,6 @@ model.addAttribute("exception", exception);
 				model.addAttribute("filelist",filelist);
 				model.addAttribute("filelist_2",filelist_2);
 				model.addAttribute("filelist_3",filelist_3);
-				
 				model.addAttribute("toast",2);     //리뷰등록토스트
 				return "/member/trainerProfileDetail";
 	    }

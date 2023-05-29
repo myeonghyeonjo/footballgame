@@ -267,6 +267,16 @@ public interface BoardMapper {
 
 	public List<MemberProfile> getreviewsearchwaiteList(Pagination pagination);
 
+	public List<Review> getreviewDetail(int r_id);
+
+	public List<FileDto> getreviewFileList(int r_id);
+
+	public void reviewConfirm(Review review);
+
+	public void reviewConfirmCancel(int r_id);
+
+	
+
 
 
 	

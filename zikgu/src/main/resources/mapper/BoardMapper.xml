@@ -983,7 +983,13 @@
 		WHERE c_id = #{c_id}
 	</update>
 
+<!-- 리뷰 승인확정 -->
+	<update id="reviewConfirm" parameterType="review">
+		UPDATE review SET
+		r_check = 1
 
+		WHERE r_id = #{r_id}
+	</update>
 
 	<!-- 센터 승인취소 -->
 	<update id="centerConfirmCancel" parameterType="center">
@@ -991,7 +997,12 @@
 		c_confirm = 0
 		WHERE c_id = #{c_id}
 	</update>
-
+<!-- 리뷰 승인취소 -->
+	<update id="reviewConfirmCancel" parameterType="center">
+		UPDATE review SET
+		r_check = 0
+		WHERE r_id = #{r_id}
+	</update>
 
 	<!-- 트레이너 프로필 검토확인확정 -->
 	<update id="trainerprofilecheck" parameterType="trainerprofile">
@@ -1108,7 +1119,24 @@
 		AND r_check ='0'
 		LIMIT 			#{pageNum}, 10 
 	</select>
+	<!-- 리뷰 디테일 -->
+	<select id="getreviewDetail" resultType="Review">
+		SELECT 
+				r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+
+		FROM review
+
+		WHERE r_id = #{r_id}
 	
+	</select>
 	
 	<!-- 리뷰  검색+대기 -->
 	<select id="getreviewSearchwaiteCount" resultType="int">
@@ -1621,7 +1649,7 @@
 		#{r_content},
 		#{r_starR},
 		#{memberprofile_name},
-		0
+		1
 		)
 	</insert>
 
@@ -1638,7 +1666,7 @@
 		memberprofile_name as memberprofile_name,
 		r_date as r_date
 		FROM review
-		Where trainerprofile_u_key = #{trainerprofile_u_key}
+		Where trainerprofile_u_key = #{trainerprofile_u_key} AND r_check = 1
 		ORDER BY r_id DESC
 	</select>
 	<!-- 리뷰 파일 리스트 -->
@@ -1978,6 +2006,24 @@
 				 FROM            center
 				 WHERE c_confirm = '0'
 	</select>
+			 <!-- 리뷰 파일 리스트 -->
+	<select id="getreviewFileList" resultType="Review">
+				SELECT
+
+		r_id as r_id,
+		O_NAME as O_NAME,
+		FILE_NAME as FILE_NAME,
+		FILE_SIZE as FILE_SIZE,
+		FILE_PATH as FILE_PATH,
+		r_opencheck as r_opencheck,
+		memberprofile_name as memberprofile_name,
+		memberprofile_u_key as memberprofile_u_key,
+		r_date as r_date ,
+		review_r_id as review_r_id
+		FROM review_file
+		Where review_r_id = #{r_id}
+	</select>
+	
 	
 	
 </mapper>

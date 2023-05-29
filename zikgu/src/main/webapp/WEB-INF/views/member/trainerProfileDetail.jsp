@@ -4192,31 +4192,31 @@ input, select, textarea {
 							<h2 ><Strong style="color:black">레슨 이용 가격</Strong></h2>
 
 							<div id="sectionbox" class="form-control"
-								style="padding: 10px; margin-top:10px; margin-left:45px; background-color: black; width:800px;">
+								style="padding: 10px; margin-top:10px; background-color: black; ">
 					<p style="text-align: center;  margin-top:10px; margin-bottom:0.5px"><strong style="color:white;">&nbsp;&nbsp;· ${trainerprofile.tf_lessontitle }</strong></p>
 								<hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
-								
-								<p style=" margin-left:30px; margin-top:20px; text-align:left;">${trainerprofile.tf_lessonnumber }${trainerprofile.tf_lessonunit }</p>                    
-								<p style=" margin-left:530px; margin-top:-50px; "> ${trainerprofile.tf_lessonunit }당 <Strong style="color:white;">${trainerprofile.tf_lessonprice }원</Strong></p>
-								<p style=" margin-left:530px; margin-top:-19px; margin-bottom:6px; font-size:12px;"> ${trainerprofile.tf_lessonnumber*trainerprofile.tf_lessonprice }원</p>
+								<p style=" margin-left:30px; margin-top:20px; text-align:left;">${trainerprofile.tf_lessonnumber }${trainerprofile.tf_lessonunit }</p>   
+								<p style="margin-top:-50px; margin-right:30px; float:right;"> ${trainerprofile.tf_lessonunit }당 <Strong style="color:white;">${trainerprofile.tf_lessonprice }원</Strong></p>
+								<p style="margin-top:-19px;  margin-right:30px;margin-bottom:6px; font-size:12px; float:right;"> ${trainerprofile.tf_lessonnumber*trainerprofile.tf_lessonprice }원</p>	   
 								<hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
 								<p style=" margin-left:30px; margin-top:20px; text-align:left; ">${trainerprofile.tf_lessonnumber2 }${trainerprofile.tf_lessonunit }</p>                    
-								<p style=" margin-left:530px; margin-top:-50px;"> ${trainerprofile.tf_lessonunit }당 <Strong style="color:white;">${trainerprofile.tf_lessonprice2 }원</Strong></p>
-								<p style=" margin-left:530px; margin-top:-19px; margin-bottom:6px; font-size:12px;"> ${trainerprofile.tf_lessonnumber2*trainerprofile.tf_lessonprice2 }원</p>
+								<p style="float:right;  margin-right:30px; margin-top:-50px;"> ${trainerprofile.tf_lessonunit }당 <Strong style="color:white;">${trainerprofile.tf_lessonprice2 }원</Strong></p>
+								<p style="float:right;  margin-right:30px;margin-top:-19px; margin-bottom:6px; font-size:12px;"> ${trainerprofile.tf_lessonnumber2*trainerprofile.tf_lessonprice2 }원</p>
 								<hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
 								<p style=" margin-left:30px; margin-top:20px; text-align:left;">${trainerprofile.tf_lessonnumber3 }${trainerprofile.tf_lessonunit }</p>                    
-								<p style=" margin-left:530px; margin-top:-50px;"> ${trainerprofile.tf_lessonunit }당 <Strong style="color:white;">${trainerprofile.tf_lessonprice3 }원</Strong></p>
-								<p style=" margin-left:530px; margin-top:-19px; margin-bottom:6px; font-size:12px;"> ${trainerprofile.tf_lessonnumber3*trainerprofile.tf_lessonprice3 }원</p>
+								<p style="float:right; margin-right:30px;margin-top:-50px;"> ${trainerprofile.tf_lessonunit }당 <Strong style="color:white;">${trainerprofile.tf_lessonprice3 }원</Strong></p>
+								<p style="float:right; margin-right:30px; margin-top:-19px; margin-bottom:6px; font-size:12px;"> ${trainerprofile.tf_lessonnumber3*trainerprofile.tf_lessonprice3 }원</p>
 							<hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
 								<p style=" margin-left:30px; margin-top:20px; text-align:left;">${trainerprofile.tf_lessonnumber4 }${trainerprofile.tf_lessonunit }</p>                    
-								<p style=" margin-left:530px; margin-top:-50px;"> ${trainerprofile.tf_lessonunit }당 <Strong style="color:white;">${trainerprofile.tf_lessonprice4 }원</Strong></p>
-								<p style=" margin-left:530px; margin-top:-19px; margin-bottom:6px; font-size:12px;"> ${trainerprofile.tf_lessonnumber4*trainerprofile.tf_lessonprice4 }원</p>
+								<p style="float:right; margin-right:30px;margin-top:-50px;"> ${trainerprofile.tf_lessonunit }당 <Strong style="color:white;">${trainerprofile.tf_lessonprice4 }원</Strong></p>
+								<p style="float:right; margin-right:30px; margin-top:-19px; margin-bottom:6px; font-size:12px;"> ${trainerprofile.tf_lessonnumber4*trainerprofile.tf_lessonprice4 }원</p>
 								<hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
 								
-								
+									<div>
 									<P >ㆍ 레슨 1회에 ${ trainerprofile.tf_lessontime} 진행됩니다.</P> 
 									<P style="margin-top:-20px;">ㆍ ${ trainerprofile.tf_lessonoption}</P>
 									<P style="margin-top:-20px;">ㆍ ${ trainerprofile.tf_lessonintro}</P>  
+									</div>
 								</div>
 								</header>
 								<footer class="major">

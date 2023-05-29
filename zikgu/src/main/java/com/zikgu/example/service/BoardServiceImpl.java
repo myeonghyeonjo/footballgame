@@ -750,6 +750,26 @@ public class BoardServiceImpl implements BoardService {
 	public List<MemberProfile> getreviewsearchwaiteList(Pagination pagination){
 		return boardmapper.getreviewsearchwaiteList(pagination);
 	}
+	
+	@Override
+	public List<Review> getreviewDetail(int r_id){
+		return boardmapper.getreviewDetail(r_id);
+	}
+	
+	@Override
+	public List<FileDto> getreviewFileList(int r_id){
+		return boardmapper.getreviewFileList(r_id);
+	}
+	
+	@Override
+	public void reviewConfirm(Review review) {
+		 boardmapper.reviewConfirm(review);
+	}
+	
+	@Override
+	public void reviewConfirmCancel(int r_id) {
+		boardmapper.reviewConfirmCancel(r_id);
+	}
 }
 
 

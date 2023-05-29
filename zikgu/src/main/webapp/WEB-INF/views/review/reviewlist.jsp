@@ -308,7 +308,7 @@
           <sec:authentication property="principal" var="principal" />
           <tbody>
 		        <c:forEach var="list" items="${list }">
-		           		<tr onclick="location.href='trainerProfileDetail?u_key=${list.r_id }&memberprofile_u_key=0'" style="cursor:pointer">
+		           		<tr onclick="location.href='reviewdetail?r_id=${list.r_id }'" style="cursor:pointer">
 				              <td>${list.r_id }</td>
 				              <td>${list.memberprofile_name }</td>
 				              <td>${list.r_date }</td>

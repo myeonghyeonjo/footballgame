@@ -71,12 +71,19 @@ button {
 button:hover {
 	text-decoration: underline; /* 마우스 올리면 밑줄 추가 */
 }
-
-
-
-
-
-
+@media (max-width:767px) {
+    #admin_p1, #admin_p2{
+    	    margin-bottom: 10px;
+    margin-top: -20px;
+    margin-left: 30px;
+    }
+}
+@media (min-width:767px) {
+    #admin_p1, #admin_p2{
+    	margin-left:30px;
+    	margin-bottom:30px;
+    }
+}
 }
 </style>
 <body>
@@ -197,6 +204,7 @@ button:hover {
 
 
 
+
 			<c:if test="${(principal.u_trainercheck=='0')}">
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<div class="container">
@@ -206,11 +214,11 @@ button:hover {
 								<h3 style="color: black; padding: 30px;">
 									<Strong>회원 프로필 관리</Strong>
 								</h3>
-								<p
-									style="margin-left: 30px; margin-top: -10px; margin-right: 50px; margin-bottom: 30px;">프로필을
+								<p id="admin_p1"
+									>프로필을
 									조회하거나 수정하세요.</p>
 
-								<a href="/memberprofilelist" class="aa"
+								<a href="/memberprofilelist" class="aa" id="member_list"
 									style="color: #4169e1; margin-left: 30px; margin-top: 190px; margin-right: 50px">프로필
 									조회 ></a>
 							</div>
@@ -220,11 +228,11 @@ button:hover {
 								<h3 style="color: black; padding: 30px;">
 									<Strong>트레이너 프로필 관리</Strong>
 								</h3>
-								<p
-									style="margin-left: 30px; margin-top: -10px; margin-right: 50px; margin-bottom: 30px;">프로필을
+								<p id="admin_p2"
+									>프로필을
 									조회하거나 수정하세요.</p>
 
-								<a href="/trainerprofilelist" class="aa"
+								<a href="/trainerprofilelist" class="aa" id="trainer_list"
 									style="color: #4169e1; margin-left: 30px; margin-top: 190px; margin-right: 50px">프로필
 									조회 ></a>
 							</div>
