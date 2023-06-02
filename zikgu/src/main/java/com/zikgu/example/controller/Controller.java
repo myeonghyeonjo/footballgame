@@ -97,13 +97,13 @@ public class Controller {
 	
 	@RequestMapping("/")
 	public String home(Model model) {
-		// List<Board> list = boardservice.selectBoardList();
+		 //List<Board> list = boardservice.selectBoardList();
 		// model.addAttribute("list", list);
 		//logger.debug("debug");
 		//logger.info("info");
 		//logger.error("error");
 		
-		/*List<TrainerProfile> list = boardservice.trainerList();
+		List<TrainerProfile> list = boardservice.trainerList();
 		List<String> centernameList = new ArrayList<>();
 		
 		for (int i = 0; i < list.size(); i++) {
@@ -132,7 +132,7 @@ public class Controller {
 			  model.addAttribute("filelistAll", filelistAll);
 			  model.addAttribute("centerfilelistAll", centerfilelistAll);
 			  model.addAttribute("centernameList", centernameList);
-		}*/
+		}
 		
 		return "/member/homepage2";
 	}

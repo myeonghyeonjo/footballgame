@@ -109,6 +109,7 @@
     margin-bottom: auto;
     margin-top: auto;
     height: 60px;
+    width:55%;
     background-color: black;
     border-radius: 30px;
     padding: 10px;
@@ -119,13 +120,64 @@
     border: 0;
     outline: 0;
     background: none;
-    width: 450px;
      caret-color:red;
     line-height: 40px;
+    width:90%;
    transition: width 0.4s linear;
      padding: 0 10px;
     }
-
+@media (max-width: 992px){
+     .searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    width:55%;
+    background-color: black;
+    border-radius: 30px;
+    padding: 10px;
+    }
+    .search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+     caret-color:red;
+    line-height: 40px;
+    width:80%;
+   transition: width 0.4s linear;
+     padding: 0 10px;
+     font-size:15px;
+    }
+    
+}
+@media (max-width: 441px){
+     .searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    width:55%;
+    background-color: black;
+    border-radius: 30px;
+    padding: 10px;
+    }
+    .search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+     caret-color:red;
+    line-height: 40px;
+    width:70%;
+   transition: width 0.4s linear;
+     padding: 0 10px;
+      font-size:12px;
+    }
+}
+@media (max-width: 375px){
+   img{
+   	width:175px;
+   }
+}
     .search_icon{
     height: 40px;
     width: 40px;
@@ -215,8 +267,8 @@ li{
 
 
 <div class="container h-100">
-      <div class="d-flex justify-content-center h-100" style="margin: auto; margine-left:500px;">
-        <div class="searchbar" style="margin: auto; margine-left:500px;">
+      <div class="d-flex justify-content-center h-100" style=" ">
+        <div class="searchbar" style="">
         	<form action="search_All" method="post">
 		          <input class="search_input" type="text" name="keyword" placeholder="지역,선생님 검색" value="${keyword }">
 		          <a href="search_All?keyword=${keyword}" class="search_icon" ><i class="fas fa-search"></i></a>
@@ -261,23 +313,28 @@ li{
 		
         <div class="col">
           <div class="card shadow-sm">
+         
           <sec:authorize access="hasRole('ROLE_USER')">
           <sec:authentication property="principal" var="principal"/>
-          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=${principal.u_key}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="180" height="175"   alt=""
-			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="180" height="175"   alt=""
+          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=${principal.u_key}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="50%" height="200px"   alt=""
+			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="50%" height="200px"   alt=""
 						 ></a>			 
 			</sec:authorize>
 			 <sec:authorize access="hasRole('ROLE_ADMIN')">
           <sec:authentication property="principal" var="principal"/>
-          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="180" height="175"   alt=""
-			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="180" height="175"   alt=""
+          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="100%" height="100%"   alt=""
+			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="100%" height="100%"   alt=""
 						 ></a>			 
 			</sec:authorize>
 			 <sec:authorize access="isAnonymous()">
-		<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="180" height="175"   alt=""
-			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="180" height="175"   alt=""
-						 ></a>	
+			<div style="display:flex;"><a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set">
+			<img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="100%" height="100%"   alt=""
+			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set">
+			 <img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="100%" height="100%"   alt=""
+			 ></a></div>	
 			</sec:authorize>
+			
+			
             <div onclick="location.href='/trainerProfileDetail?u_key=${list.u_key}';" style="cursor: pointer; padding:10px;">
               <p class="card-text" style=" margin-bottom:1px; margin-left:1px"><Strong>${list.tf_name }선생님</Strong></p>
               <p class="card-text" style=" margin-bottom:4px;">${list.tf_hanjulintro }</p>
