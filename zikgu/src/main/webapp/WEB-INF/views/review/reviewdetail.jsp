@@ -16,10 +16,7 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=272bc96032396df76a8c8d79f886c824&libraries=services"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>		
 
 <!-- 버튼모달 -->		
 <link
@@ -72,6 +69,8 @@
 
 
     <style>
+   
+    
  .error, .error2, .error3 {
     width: 250px;
     height: 20px;
@@ -3633,9 +3632,9 @@ input, select, textarea {
 		#main .button {
 			background-color: transparent;
 			box-shadow: inset 0 0 0 1px #dddddd;
-			color: ;
-			
+			color: ;	
 		}
+
 
 			#main input[type="submit"]:hover,
 			#main input[type="reset"]:hover,
@@ -4048,7 +4047,7 @@ input, select, textarea {
 					<nav id="nav">
 				
 						<ul>
-							<li><a class="aa" href="#intro" class="active" style="color:black">리뷰 디테일</a></li>
+							<li><a class="aa" href="#intro" class="active" style="color:white; background-color:black;">리뷰 디테일</a></li>
 						</ul>
 						
 					</nav>
@@ -4265,11 +4264,21 @@ input, select, textarea {
 												  			승인취소
 														</button>
 													</c:if>
-													
+													<c:if test="${(reviewlist.r_check=='2')}">
+														<button type="button" class="btn btn-success" disabled >
+												  			반려완료
+														</button>
+														<button type="button" style="color:white;" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelModal">
+												  			반려취소
+														</button>
+													</c:if>
 													<c:if test="${(reviewlist.r_check=='0')}">
 													
 														<button type="button" style="border-color:white; color:white;" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-												  			승인하기
+												  			승인
+														</button>
+														<button type="button" style="border-color:white; color:white;" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#rejectModal">
+												  			반려
 														</button>												
 													</c:if>
 									 			</sec:authorize>
@@ -4281,7 +4290,7 @@ input, select, textarea {
         <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">리뷰 검토</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div style="color:black;"class="modal-body">
+      <div style="color:black; text-align:left;" class="modal-body">
         정말 승인하시겠습니까?
       </div>
       <div class="modal-footer">
@@ -4291,6 +4300,25 @@ input, select, textarea {
     </div>
   </div>
 </div>
+<!-- 리뷰승인거절모달 -->
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">리뷰 검토</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div style="color:black; text-align:left;"class="modal-body">
+        정말 반려 하시겠습니까? 확인을 누르시면 반려상태로 변경됩니다. (반려상태는 리뷰리스트에 노출X) 
+      </div>
+      <div class="modal-footer">
+        <button type="button" style="color:black;"class="btn btn-outline-dark" data-bs-dismiss="modal">취소하기</button>
+        <button type="button" style="color:#2fa4e7;" class="btn btn-outline-primary" onclick="clickreject(reviewInfo)">반려하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- 승인취소 Modal -->
 <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -4299,8 +4327,8 @@ input, select, textarea {
         <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">리뷰 검토</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div style="color:black;"class="modal-body">
-        정말 승인을 취소하시겠습니까? 확인을 누르면 승인대기상태로 변경됩니다.
+      <div style="color:black;text-align:left;"class="modal-body">
+        정말 취소하시겠습니까? 확인을 누르면 승인대기상태로 변경됩니다.
       </div>
       <div class="modal-footer">
         <button type="button" style="color:black;"class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
@@ -4961,19 +4989,33 @@ function deletemodifyFile(r_id) {
 <script>
 	function clickConfirm(formName) {
 		formName.action = "/reviewConfirm";
+		sessionStorage.setItem('postModifyed', 'true');
+		formName.method = "post";
+		formName.submit();
+	}
+</script>
+<!-- 반려하기 누르면 발생 -->
+<script>
+	function clickreject(formName) {
+		formName.action = "/reviewreject";
+		sessionStorage.setItem('postModifyed', 'true');
 		formName.method = "post";
 		formName.submit();
 	}
 </script>
 
+
 <!-- 승인취소하기 누르면 발생 -->
 <script>
 	function clickConfirmCancel(formName) {
 		formName.action = "/reviewConfirmCancel";
+		sessionStorage.setItem('postModifyed', 'true');
 		formName.method = "post";
 		formName.submit();
 	}
 </script>
+
+
 
 <script>
 window.addEventListener('load', function() {

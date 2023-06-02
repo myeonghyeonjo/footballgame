@@ -3911,6 +3911,26 @@ input, select, textarea {
 		-ms-transform: none;
 		transform: none;
 	}
+	.error, .error2, .error3, .error4, .error5 {
+    width: 250px;
+    height: 20px;
+    height:auto;
+    position: fixed;
+    left: 50%;
+    margin-left:-125px;
+    bottom: 100px;
+    z-index: 9999;
+    background-color: #383838;
+    color: #F0F0F0;
+    font-family: Calibri;
+    font-size: 15px;
+    padding: 10px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+} 
 </style>
 
 <jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>
@@ -4092,6 +4112,29 @@ input, select, textarea {
 		
 	</c:if>
 </sec:authorize>
+<sec:authorize access="hasRole('ROLE_USER')">
+	<c:if test="${(center.c_loadaddress==trainerprofile.tf_loadaddress)}">
+		<button type="button" class="btn btn-success" disabled >
+  			센터프로필저장완료
+		</button>
+		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#centerprofilecancelModal">
+  			센터프로필취소
+		</button>
+	</c:if>
+	
+	<c:if test="${(center.c_loadaddress!=trainerprofile.tf_loadaddress)}">
+		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#centerprofileconfirmModal">
+  			센터프로필저장
+		</button>
+		
+	</c:if>
+</sec:authorize>
+<input type="hidden" value="${toast}" id="toastcheck">		
+<div class='error' style='display:none'>삭제완료</div>
+<div class='error2' style='display:none'>등록완료</div>
+<div class='error3' style='display:none'>수정완료</div>	
+<div class='error4' style='display:none'>저장완료</div>
+<div class='error5' style='display:none'>취소완료</div>	
 
 <!-- 승인하기 Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -4111,6 +4154,25 @@ input, select, textarea {
     </div>
   </div>
 </div>
+<!-- 센터프로필저장 Modal -->
+<div class="modal fade" id="centerprofileconfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">센터 저장</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="text-align:left">
+        정말 해당센터를 센터프로필로 저장하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark"" data-bs-dismiss="modal">취소하기</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickcenterprofileConfirm(centerInfo)">승인하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- 승인취소 Modal -->
 <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -4129,11 +4191,33 @@ input, select, textarea {
     </div>
   </div>
 </div>
+<!-- 센터프로필취소 Modal -->
+<div class="modal fade" id="centerprofilecancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">센터 저장</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="text-align:left">
+        정말 센터프로필 저장을 취소하시겠습니까? 확인을 누르면 등록된 센터프로필이 삭제됩니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickcenterprofileCancel(centerInfo)">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- 승인하기 누르면 넘어갈 데이타 -->
 <form name="centerInfo">
 	<input type="hidden" name="c_id" value="${center.c_id}">
-</form>
+	<input type="hidden" name="c_loadaddress" value="${center.c_loadaddress}">
+	<sec:authentication property="principal" var="principal" />
+	<input type="hidden" name="trainerprofile_u_key" value="${principal.u_key}">
 	
+</form>
+
 	
 	
 	
@@ -4141,9 +4225,7 @@ input, select, textarea {
 	
 							
 								</header>
-								<footer class="major">
-										
-								</footer>
+
 							</section>
 
 				
@@ -4196,7 +4278,38 @@ input, select, textarea {
 	</body>
 	
 <script>
-
+window.addEventListener('load', function() {
+	  var postDeleted = sessionStorage.getItem('postDeleted');
+	  var postInserted = sessionStorage.getItem('postInserted');
+	  var postModifyed = sessionStorage.getItem('postModifyed');
+	  var postconfirm = sessionStorage.getItem('postconfirm');
+	  var postconfirmcancel = sessionStorage.getItem('postconfirmcancel');
+	  	  if (postDeleted) {
+		  $('.error').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+	    // 삭제 상태 제거
+	    sessionStorage.removeItem('postDeleted');
+	  }
+	  	 if (postInserted) {
+			  $('.error2').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		    // 작성 상태 제거
+		    sessionStorage.removeItem('postInserted');
+		  }
+	  	 if (postModifyed) {
+			  $('.error3').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		    // 수정 상태 제거
+		    sessionStorage.removeItem('postModifyed');
+		  }
+	  	if (postconfirm) {
+			  $('.error4').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		   
+		    sessionStorage.removeItem('postconfirm');
+		  }
+		if (postconfirmcancel) {
+			  $('.error5').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		   
+		    sessionStorage.removeItem('postconfirmcancel');
+		  }
+	});
 
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -4268,6 +4381,25 @@ function Centerview(test) {
 <script>
 	function clickConfirm(formName) {
 		formName.action = "/centerConfirm";
+		sessionStorage.setItem('postconfirm', 'true');
+		formName.method = "post";
+		formName.submit();
+	}
+</script>
+<!-- 센터프로필 저장하기 누르면 발생 -->
+<script>
+	function clickcenterprofileConfirm(formName) {
+		formName.action = "/clickcenterprofileConfirm";
+		sessionStorage.setItem('postconfirm', 'true');
+		formName.method = "post";
+		formName.submit();
+	}
+</script>
+<!-- 센터프로필 취소하기 누르면 발생 -->
+<script>
+	function clickcenterprofileCancel(formName) {
+		formName.action = "/clickcenterprofileCancel";
+		sessionStorage.setItem('postconfirmcancel', 'true');
 		formName.method = "post";
 		formName.submit();
 	}
@@ -4277,6 +4409,7 @@ function Centerview(test) {
 <script>
 	function clickConfirmCancel(formName) {
 		formName.action = "/centerConfirmCancel";
+		sessionStorage.setItem('postModifyed', 'true');
 		formName.method = "post";
 		formName.submit();
 	}

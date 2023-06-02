@@ -275,6 +275,20 @@ public interface BoardMapper {
 
 	public void reviewConfirmCancel(int r_id);
 
+	public void signupptInsert(int u_key);
+
+	public void trainerprofileaddressupdate(TrainerProfile trainerprofile);
+
+	public void reviewReject(Review review);
+
+	public int getreviewrejectCount();
+
+	public List<Review> gettreviewrejectListALL(Pagination pagination);
+
+	public int getreviewSearchrejectCount(String keyword);
+
+	public List<MemberProfile> getreviewsearchwrejectList(Pagination pagination);
+
 	
 
 

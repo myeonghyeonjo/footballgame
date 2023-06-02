@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="user_info"/>
+		<item key="selection" value="#nav_2"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="user_info"/>
-			<item value="info"/>
-			<item value="getreviewsearchwaiteList"/>
-			<item value="getreviewSearchwaiteCount"/>
-			<item value="getreviewSearchCount"/>
-			<item value="getreviewsearchList"/>
-			<item value="review_search_All"/>
-			<item value="search_allbutton_click"/>
-			<item value="회원명"/>
-			<item value="reviewsearch"/>
-			<item value="reviewlistsearch"/>
-			<item value="reviewlist"/>
-			<item value="searchList"/>
-			<item value="SearchCount"/>
-			<item value="search_All"/>
+			<item value="#nav_2"/>
+			<item value="#nar"/>
+			<item value="#nar_2"/>
+			<item value="aj-centerview2"/>
+			<item value="Centerview"/>
+			<item value="center"/>
+			<item value="@media screen and (max-width: 736px) {"/>
+			<item value="test"/>
+			<item value="#nav"/>
+			<item value="트레이너"/>
+			<item value=" slick-slider"/>
+			<item value="slider1 slick-initialized slick-slider"/>
+			<item value="레슨 스케"/>
+			<item value="#nav{"/>
+			<item value="#nav { "/>
 		</list>
 		<list key="replacehistory">
 		</list>

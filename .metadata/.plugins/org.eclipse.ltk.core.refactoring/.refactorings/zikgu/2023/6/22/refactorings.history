@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;centerlist.jsp&apos; to &apos;centerlist.jsp&apos;&#x0D;&#x0A;- Original project: &apos;zikgu&apos;&#x0D;&#x0A;- Destination element: &apos;centerlist.jsp&apos;&#x0D;&#x0A;- Original element: &apos;centerlist.jsp&apos;" description="Copy file" element1="src/main/webapp/WEB-INF/views/center/centerlist.jsp" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1685630835252" target="/zikgu/src/main/webapp/WEB-INF/views/center/centerlist.jsp" units="0" version="1.0"/>
+</session>

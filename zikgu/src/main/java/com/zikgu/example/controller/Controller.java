@@ -206,7 +206,7 @@ model.addAttribute("exception", exception);
 		int u_key=user.getU_key();
 		System.out.println("u_key:"+u_key);
 		// 유저 권한 생성
-		
+		boardservice.signupptInsert(u_key);
 		boardservice.createTrainerProfile(u_key);
 
 		return "/login";
@@ -754,6 +754,28 @@ model.addAttribute("exception", exception);
 			model.addAttribute("list",list);
 			return "/center/centerDetail2";
 	    }
+		@RequestMapping("/selectcenterDetail")
+	    public String selectcenterDetail(TrainerProfile trainerprofile,Center center,Model model,@RequestParam("c_id") int c_id,@RequestParam("u_key") int u_key) {
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			List<Center> list = boardservice.getcenterDetail(c_id);
+			model.addAttribute("list",list);
+			center = boardservice.getcenterDetail3(c_id);		
+			List<FileDto> filelist = boardservice.getcenterFileList(c_id);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("c_id",c_id);
+			String tf_loadaddress = center.getC_loadaddress();
+			center = boardservice.getcenterDetail2(tf_loadaddress);		
+			String c_name = center.getC_name();	
+			model.addAttribute("center",center);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("c_id",c_id);
+			model.addAttribute("c_name",c_name);
+			model.addAttribute("u_key",1111);
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("tf_loadaddress",tf_loadaddress);	
+			model.addAttribute("list",list);
+			return "/center/centerDetail2";
+	    }
 		@RequestMapping("/reviewdetail")
 	    public String reviewdetail(Review review,Model model,@RequestParam("r_id") int r_id) {	
 			List<Review> list  = boardservice.getreviewDetail(r_id);
@@ -793,6 +815,21 @@ model.addAttribute("exception", exception);
 			model.addAttribute("list",list);
 			model.addAttribute("sort","완료");
 			return "/center/centerlist";
+	    }
+		@RequestMapping("/centerlistcomplete2")
+	    public String centerlistcomplete2(Center center,Model model,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getcentercompelteCount();
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			List<Center> list = boardservice.getcentercompleteList(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("list",list);
+			model.addAttribute("sort","완료");
+			return "/center/centerlistcomplete2";
 	    }
 		@RequestMapping("/centerlistwaite")
 	    public String centerlistwaite(Center center,Model model,Pagination pagination,HttpServletRequest request) {
@@ -837,6 +874,53 @@ model.addAttribute("exception", exception);
 			model.addAttribute("list",list);
 			return "/center/centerDetail2";
 	    }
+		@RequestMapping("/clickcenterprofileConfirm")
+	    public String clickcenterprofileConfirm(TrainerProfile trainerprofile,Center center,Model model,@RequestParam("trainerprofile_u_key") int trainerprofile_u_key) {
+			int c_id = center.getC_id();
+			String loadaddress= center.getC_loadaddress();
+			trainerprofile.setTf_loadaddress(loadaddress);
+			trainerprofile.setU_key(trainerprofile_u_key);
+			boardservice.trainerprofileaddressupdate(trainerprofile);	
+			List<Center> list = boardservice.getcenterDetail(c_id);	
+			List<FileDto> filelist = boardservice.getcenterFileList(c_id);
+			center = boardservice.getcenterDetail3(c_id);		
+			String tf_loadaddress = center.getC_loadaddress();
+			center = boardservice.getcenterDetail2(tf_loadaddress);		
+			String c_name = center.getC_name();	
+			model.addAttribute("center",center);
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("c_id",c_id);
+			model.addAttribute("c_name",c_name);
+			model.addAttribute("u_key",1111);
+			model.addAttribute("tf_loadaddress",tf_loadaddress);	
+			model.addAttribute("list",list);
+			return "/center/centerDetail2";
+	    }
+		@RequestMapping("/clickcenterprofileCancel")
+	    public String clickcenterprofileCancel(TrainerProfile trainerprofile,Center center,Model model,@RequestParam("trainerprofile_u_key") int trainerprofile_u_key) {
+			int c_id = center.getC_id();
+			String loadaddress= "샘플 주소입니다";
+			trainerprofile.setTf_loadaddress(loadaddress);
+			trainerprofile.setU_key(trainerprofile_u_key);
+			boardservice.trainerprofileaddressupdate(trainerprofile);	
+			List<Center> list = boardservice.getcenterDetail(c_id);	
+			List<FileDto> filelist = boardservice.getcenterFileList(c_id);
+			center = boardservice.getcenterDetail3(c_id);		
+			String tf_loadaddress = center.getC_loadaddress();
+			center = boardservice.getcenterDetail2(tf_loadaddress);		
+			String c_name = center.getC_name();	
+			model.addAttribute("center",center);
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("c_id",c_id);
+			model.addAttribute("c_name",c_name);
+			model.addAttribute("u_key",1111);
+			model.addAttribute("tf_loadaddress",tf_loadaddress);	
+			model.addAttribute("list",list);
+			return "/center/centerDetail2";
+	    }
+		
 		@RequestMapping("/reviewConfirm")
 	    public String reviewConfirm(Review review,Model model) {
 			int r_id = review.getR_id();	
@@ -851,7 +935,21 @@ model.addAttribute("exception", exception);
 			model.addAttribute("toast",2);     //리뷰등록토스트
 			return "/review/reviewdetail";
 	    }
-
+		@RequestMapping("/reviewreject")
+	    public String reviewreject(Review review,Model model) {
+			int r_id = review.getR_id();	
+			boardservice.reviewReject(review);		
+			List<Review> list = boardservice.getreviewDetail(r_id);	
+			List<FileDto> filelist = boardservice.getreviewFileList(r_id);	
+			model.addAttribute("review",review);
+			model.addAttribute("reviewfilelist",filelist);
+			model.addAttribute("r_id",r_id);
+			model.addAttribute("u_key",1111);	
+			model.addAttribute("reviewlist",list);
+			model.addAttribute("toast",2);     //리뷰등록토스트
+			return "/review/reviewdetail";
+	    }
+		
 		@RequestMapping("/centerConfirmCancel")
 	    public String centerConfirmCancel(Center center,Model model) {
 			int c_id = center.getC_id();
@@ -1117,7 +1215,26 @@ model.addAttribute("exception", exception);
 			model.addAttribute("list",list);
 			return "/review/reviewlist";
 	    }
-
+		@RequestMapping("/review_search_reject")
+	    public String review_search_reject(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,MemberProfile memberprofile) {
+			System.out.println("keyword:"+keyword);
+			
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getreviewSearchrejectCount(keyword);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			pagination.setKeyword(keyword);
+			List<MemberProfile> list = boardservice.getreviewsearchwrejectList(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","반려");
+			model.addAttribute("list",list);
+			return "/review/reviewlist";
+	    }
+		
 		@RequestMapping("/member_search_All")
 	    public String member_search_All(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,MemberProfile memberprofile) {
 			System.out.println("keyword:"+keyword);
@@ -1172,6 +1289,46 @@ model.addAttribute("exception", exception);
 			List<Center> list = boardservice.getcentersearchcompelteList(pagination);
 			model.addAttribute("list",list);
 			return "/center/centerlist";
+	    }
+		@RequestMapping("/center_search_complete2")
+	    public String center_search_complete2(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,Center center) {
+			System.out.println("keyword:"+keyword);
+			if(keyword=="") {
+				System.out.println("키워드가 없습니다.");
+				String reqPage1 = request.getParameter("page");	  
+				   if(reqPage1 != null)
+						page = Integer.parseInt(reqPage1);
+					int listcount = boardservice.getcentercompelteCount();
+					pagination.setPage(page);
+					pagination.setCount(listcount);
+					pagination.init();			
+				List<Center> list = boardservice.getcentercompleteList(pagination);
+				model.addAttribute("pagination",pagination);
+				model.addAttribute("list",list);
+				model.addAttribute("sort","완료");
+				return "/center/centerlistcomplete2";
+			} else {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getcenterSearchcompleteCount(keyword);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			pagination.setKeyword(keyword);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","완료");
+			List<Center> list = boardservice.getcentersearchcompelteList(pagination);
+			String listcheck = "";
+			if(listcount==0) {
+				System.out.println("찾으시는 센터가 없습니다.");
+				listcheck="없음";
+			}
+			model.addAttribute("listcheck",listcheck);
+			model.addAttribute("list",list);
+			return "/center/centerlistcomplete2";
+			}
 	    }
 		@RequestMapping("/center_search_waite")
 	    public String center_search_waite(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,Center center) {
@@ -1469,6 +1626,21 @@ model.addAttribute("exception", exception);
 				List<Review> list = boardservice.gettreviewwaiteListALL(pagination);
 			model.addAttribute("pagination",pagination);
 			model.addAttribute("sort","대기");
+			model.addAttribute("list",list);
+			return "/review/reviewlist";
+	    }
+		@RequestMapping("/reviewlistreject")
+	    public String reviewlistreject( Model model,Review review,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getreviewrejectCount();
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+				List<Review> list = boardservice.gettreviewrejectListALL(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("sort","반려");
 			model.addAttribute("list",list);
 			return "/review/reviewlist";
 	    }
@@ -1868,53 +2040,47 @@ model.addAttribute("exception", exception);
 		@RequestMapping("/trainerProfileDetailModify")
 	    public String trainerProfileDetailModify(Model model,PT pt,TrainerProfile trainerprofile,@RequestParam("u_key") int u_key) {
 				trainerprofile = boardservice.trainerprofileDetail(u_key);
-				int tf_lessonprice = trainerprofile.getTf_lessonprice();
-			
-				String u_name = boardservice.getU_name2(u_key);
+				//int tf_lessonprice = trainerprofile.getTf_lessonprice();
 				
-				String programsub = trainerprofile.getTf_programsub();
-				String[] programsub2 = programsub.split(",");
-				
-				
-				int tf_id = trainerprofile.getTf_id();
-				List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
-				//System.out.println(filelist.get(0).file_name);
-				List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
-				List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
-				String tf_loadaddress = trainerprofile.getTf_loadaddress();
-				//System.out.println("u_key:"+u_key);
-				
-				List<PT> PT_List= boardservice.getPTdetail(u_key);
-				//System.out.println("PT_List:"+PT_List);
-				List<FileDto> PT_filelist = boardservice.getPT_FileList(u_key);
-				model.addAttribute("programsub",programsub2);
-				model.addAttribute("PT_List",PT_List);
-				model.addAttribute("PT_filelist",PT_filelist);
-				model.addAttribute("tf_loadaddress",tf_loadaddress);
-				model.addAttribute("u_key",u_key);
-				model.addAttribute("trainerprofile",trainerprofile);
-				model.addAttribute("u_name",u_name);
-				if(filelist==null) {
-					model.addAttribute("filelist","");
-				} else if(filelist!=null){
-				model.addAttribute("filelist",filelist);
-				}
-				if(filelist_2==null) {
-					model.addAttribute("filelist_2","");
-				} else if(filelist_2!=null){
-				model.addAttribute("filelist_2",filelist_2);
-				}
-				if(filelist_3==null) {
-					model.addAttribute("filelist_3","");
-				} else if(filelist_3!=null){
-				model.addAttribute("filelist_3",filelist_3);
-				}
-			
-		     	
-				
-				
-				
-				
+					String u_name = boardservice.getU_name2(u_key);
+					
+					String programsub = trainerprofile.getTf_programsub();
+					String[] programsub2 = programsub.split(",");
+					
+					
+					int tf_id = trainerprofile.getTf_id();
+					List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+					//System.out.println(filelist.get(0).file_name);
+					List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
+					List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
+					String tf_loadaddress = trainerprofile.getTf_loadaddress();
+					//System.out.println("u_key:"+u_key);
+					
+					List<PT> PT_List= boardservice.getPTdetail(u_key);
+					//System.out.println("PT_List:"+PT_List);
+					List<FileDto> PT_filelist = boardservice.getPT_FileList(u_key);
+					model.addAttribute("programsub",programsub2);
+					model.addAttribute("PT_List",PT_List);
+					model.addAttribute("PT_filelist",PT_filelist);
+					model.addAttribute("tf_loadaddress",tf_loadaddress);
+					model.addAttribute("u_key",u_key);
+					model.addAttribute("trainerprofile",trainerprofile);
+					model.addAttribute("u_name",u_name);
+					if(filelist==null) {
+						model.addAttribute("filelist","");
+					} else if(filelist!=null){
+					model.addAttribute("filelist",filelist);
+					}
+					if(filelist_2==null) {
+						model.addAttribute("filelist_2","");
+					} else if(filelist_2!=null){
+					model.addAttribute("filelist_2",filelist_2);
+					}
+					if(filelist_3==null) {
+						model.addAttribute("filelist_3","");
+					} else if(filelist_3!=null){
+					model.addAttribute("filelist_3",filelist_3);
+					}	
 			return "/member/trainerProfileDetailModify";
 	    }
 		

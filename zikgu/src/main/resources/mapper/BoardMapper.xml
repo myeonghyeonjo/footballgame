@@ -990,6 +990,13 @@
 
 		WHERE r_id = #{r_id}
 	</update>
+	<!-- 리뷰 반려 -->
+	<update id="reviewReject" parameterType="review">
+		UPDATE review SET
+		r_check = 2
+
+		WHERE r_id = #{r_id}
+	</update>
 
 	<!-- 센터 승인취소 -->
 	<update id="centerConfirmCancel" parameterType="center">
@@ -1119,6 +1126,26 @@
 		AND r_check ='0'
 		LIMIT 			#{pageNum}, 10 
 	</select>
+		<!-- 리뷰  검색+반려 -->
+	<select id="getreviewsearchwrejectList" resultType="Review">
+		SELECT 
+				r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+
+		FROM review
+
+		WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like concat('%',#{keyword},'%') 
+		AND r_check ='2'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	
 	<!-- 리뷰 디테일 -->
 	<select id="getreviewDetail" resultType="Review">
 		SELECT 
@@ -1232,6 +1259,8 @@
 		
 		LIMIT 			#{pageNum}, 10 
 	</select>
+	
+	
 <!-- 센터  검색+대기 -->
 	<select id="getcentersearchwaiteList" resultType="Center">
 		SELECT 
@@ -1317,6 +1346,26 @@
 		)
 
 	</insert>
+	<!-- 회원가입시 초기 PT 프로그램 등록 -->
+	<insert id="signupptInsert" parameterType="memberprofile">
+		INSERT INTO pt (
+		u_key,
+		pt_title,
+		pt_programsub1,
+		pt_programsub2,
+		pt_programsub3,
+		pt_programintro
+
+		) VALUES (
+		#{u_key},
+		"PT제목을 입력해주세요",
+		"PT전문분야를 선택해주세요",
+		"PT전문분야를 선택해주세요",
+		"PT전문분야를 선택해주세요",
+		"PT소개글을 입력해주세요",
+		)
+
+	</insert>
 
 	<!-- 트레이너 pt id정보 -->
 	<select id="getpt_id" resultType="int">
@@ -1381,6 +1430,13 @@
 		tf_name = #{tf_name}
 
 		WHERE tf_id = #{tf_id}
+	</update>
+	<!-- 트레이너 주소 수정 -->
+	<update id="trainerprofileaddressupdate" parameterType="trainerprofile">
+		UPDATE trainerprofile SET
+		tf_loadaddress = #{tf_loadaddress}
+
+		WHERE u_key = #{u_key}
 	</update>
 
 	<!-- 트레이너 한줄소개 수정 -->
@@ -1542,13 +1598,13 @@
 		0,
 		0,
 		0,
-		0,
+		"회",
 		0,
 		"참고사항을 입력해주세요",
 		"한줄 소개글을 입력해주세요",
 		"휴무일을 입력해주세요",
 		#{u_key},
-		0,
+		"샘플 주소입니다",
 		0,
 		0,
 		0,
@@ -1649,7 +1705,7 @@
 		#{r_content},
 		#{r_starR},
 		#{memberprofile_name},
-		1
+		0
 		)
 	</insert>
 
@@ -1666,7 +1722,7 @@
 		memberprofile_name as memberprofile_name,
 		r_date as r_date
 		FROM review
-		Where trainerprofile_u_key = #{trainerprofile_u_key} AND r_check = 1
+		Where trainerprofile_u_key = #{trainerprofile_u_key} AND r_check = 0 OR r_check = 1
 		ORDER BY r_id DESC
 	</select>
 	<!-- 리뷰 파일 리스트 -->
@@ -1843,6 +1899,21 @@
 		WHERE r_check = '0'
 		LIMIT 			#{pageNum}, 10 
 	</select>
+		<!-- 리뷰 반려 리스트 -->
+	<select id="gettreviewrejectListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+		from review	
+		WHERE r_check = '2'
+		LIMIT 			#{pageNum}, 10 
+	</select>
 	
 	<!--트레이너 리스트(검토완료) -->
 	<select id="gettrainerprofilecompleteList"
@@ -1900,6 +1971,13 @@
 				 FROM            review
 				 WHERE r_check = '0'
 	</select>
+	 <!-- 리뷰 (반려)갯수 카운트 -->
+	<select id="getreviewrejectCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE r_check = '2'
+	</select>
+	
 	
 	 <!-- 트레이너 프로필 갯수(검토완료) 카운트 -->
 	<select id="gettrainerprofileCountcomplete" resultType="int">
@@ -1942,6 +2020,14 @@
 				WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like concat('%',#{keyword},'%') 
 				AND r_check='1'
 	</select>
+	 <!-- 리뷰 갯수(검색+반려) 카운트 -->
+	<select id="getreviewSearchrejectCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like concat('%',#{keyword},'%') 
+				AND r_check='2'
+	</select>
+	
 	
 		 <!-- 트레이너 프로필 갯수(검색+완료) 카운트 -->
 	<select id="gettrainerprofileSearchcompelteCount" resultType="int">

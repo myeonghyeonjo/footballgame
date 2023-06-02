@@ -4652,11 +4652,11 @@ input, select, textarea {
      
      
 	 <div class="modal-body">
-        정말 센터를 변경하시겠습니까?
+        정말 센터를 변경하시겠습니까? 확인 버튼을 누르시면 센터목록으로 이동됩니다.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-outline-primary" onclick="clickDelete(PtInfo)"data-target="#clickDelete">확인</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickcenterchange(PtInfo)"data-target="#clickDelete">확인</button>
       </div>
     </div>
   </div>
@@ -5251,6 +5251,12 @@ var u_key= "";
       
 
     	 location.href='${path}	/PtDelete?pt_id='+pt_id+'&u_key='+u_key+'';
+    }
+    function clickcenterchange()
+    {
+      
+
+    	 location.href='${path}	/centerlistcomplete2';
     }
     
   

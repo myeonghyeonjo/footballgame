@@ -770,6 +770,41 @@ public class BoardServiceImpl implements BoardService {
 	public void reviewConfirmCancel(int r_id) {
 		boardmapper.reviewConfirmCancel(r_id);
 	}
+	
+	@Override
+	public void signupptInsert(int u_key) {
+		boardmapper.signupptInsert(u_key);
+	}
+	
+	@Override
+	public void trainerprofileaddressupdate(TrainerProfile trainerprofile) {
+		boardmapper.trainerprofileaddressupdate(trainerprofile);
+	}
+	
+	@Override
+	public void reviewReject(Review review) {
+		boardmapper.reviewReject(review);
+	}
+	
+	@Override
+	public int getreviewrejectCount() {
+		return boardmapper.getreviewrejectCount();
+	}
+	
+	@Override
+	public List<Review> gettreviewrejectListALL(Pagination pagination){
+		return boardmapper.gettreviewrejectListALL(pagination);
+	}
+	
+	@Override
+	public int getreviewSearchrejectCount(String keyword) {
+		return boardmapper.getreviewSearchrejectCount(keyword);
+	}
+	
+	@Override
+	public List<MemberProfile> getreviewsearchwrejectList(Pagination pagination){
+		return boardmapper.getreviewsearchwrejectList(pagination);
+	}
 }
 
 
