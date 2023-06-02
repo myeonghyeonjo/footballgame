@@ -377,7 +377,8 @@
 		tf_consulting as tf_consulting,
 		tf_name as tf_name,
 		tf_consulting as tf_consulting,
-		tf_consultingconfirm as tf_consultingconfirm
+		tf_consultingconfirm as tf_consultingconfirm,
+		tf_rejectreason as tf_rejectreason
 
 
 		from trainerprofile where u_key = #{u_key}
@@ -1038,13 +1039,21 @@
 
 		WHERE u_key = #{u_key}
 	</update>
+	<!-- 트레이너 프로필 검토확인확정 -->
+	<update id="trainerprofilereject" parameterType="trainerprofile">
+		UPDATE trainerprofile SET
+		tf_check = '반려',
+		tf_rejectreason = #{tf_rejectreason}
+		
+		WHERE u_key = #{u_key}
+	</update>
 
 	<!-- 트레이너 프로필 검토확인 취소 -->
 	<update id="trainerprofilecheckcancel"
 		parameterType="trainerprofile">
 		UPDATE trainerprofile SET
-		tf_check = '대기'
-
+		tf_check = '대기',
+		tf_rejectreason = ''
 		WHERE u_key = #{u_key}
 	</update>
 
@@ -1234,6 +1243,23 @@
 		concat('%',#{keyword},'%')  AND tf_check ='대기'
 		LIMIT 			#{pageNum}, 10 
 	</select>
+		<!-- 트레이너 모든 검색 + 반려 -->
+	<select id="gettrainerprofilesearchrejectList" resultType="TrainerProfile">
+		SELECT 
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
+
+		FROM trainerprofile
+
+		WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like
+		concat('%',#{keyword},'%')  AND tf_check ='반려'
+		LIMIT 			#{pageNum}, 10 
+	</select>
 	
 	<!-- 일반회원 모든 검색 -->
 	<select id="getmemberprfilesearchList" resultType="MemberProfile">
@@ -1399,7 +1425,7 @@
 		"PT전문분야를 선택해주세요",
 		"PT전문분야를 선택해주세요",
 		"PT전문분야를 선택해주세요",
-		"PT소개글을 입력해주세요",
+		"PT소개글을 입력해주세요"
 		)
 
 	</insert>
@@ -1990,6 +2016,22 @@
 		WHERE tf_check = '대기'
 		LIMIT 			#{pageNum}, 10 
 	</select>
+			<!--트레이너 리스트(반려) -->
+	<select id="gettrainerprofileListreject"
+		resultType="trainerprofile">
+		SELECT
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
+
+		FROM trainerprofile
+		WHERE tf_check = '반려'
+		LIMIT 			#{pageNum}, 10 
+	</select>
 	
 	
   <!-- 트레이너 프로필 갯수 카운트 -->
@@ -2041,6 +2083,12 @@
 				 FROM            trainerprofile
 				 WHERE tf_check = '대기'
 	</select>
+		 <!-- 트레이너 프로필 갯수(반려) 카운트 -->
+	<select id="gettrainerprofileCountreject" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				 WHERE tf_check = '반려'
+	</select>
 	
 		 <!-- 트레이너 프로필 갯수(검색) 카운트 -->
 	<select id="gettrainerprofileSearchCount" resultType="int">
@@ -2086,7 +2134,13 @@
 				WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like concat('%',#{keyword},'%') 
 				AND tf_check='대기'
 	</select>
-	
+		 <!-- 트레이너 프로필 갯수(검색+반려) 카운트 -->
+	<select id="gettrainerprofileSearchrejectCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like concat('%',#{keyword},'%') 
+				AND tf_check='반려'
+	</select>
 	
 	
 		 <!-- 일반회원 프로필 갯수(검색) 카운트 -->

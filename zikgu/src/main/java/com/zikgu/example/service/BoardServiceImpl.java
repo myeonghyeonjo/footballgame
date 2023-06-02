@@ -840,6 +840,31 @@ public class BoardServiceImpl implements BoardService {
 	public int getcenterListcount(int u_key) {
 		return boardmapper.getcenterListcount(u_key);
 	}
+	
+	@Override
+	public void trainerprofilereject(TrainerProfile trainerprofile) {
+		boardmapper.trainerprofilereject(trainerprofile);
+	}
+	
+	@Override
+	public int gettrainerprofileCountreject() {
+		return boardmapper.gettrainerprofileCountreject();
+	}
+	
+	@Override
+	public List<TrainerProfile> gettrainerprofileListreject(Pagination pagination){
+		return boardmapper.gettrainerprofileListreject(pagination);
+	}
+	
+	@Override
+	public int gettrainerprofileSearchrejectCount(String keyword) {
+		return boardmapper.gettrainerprofileSearchrejectCount(keyword);
+	}
+	
+	@Override
+	public List<TrainerProfile> gettrainerprofilesearchrejectList(Pagination pagination){
+		return boardmapper.gettrainerprofilesearchrejectList(pagination);
+	}
 }
 
 

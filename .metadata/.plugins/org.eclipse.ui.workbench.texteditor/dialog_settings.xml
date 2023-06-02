@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="#nav_2"/>
+		<item key="selection" value="search"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="#nav_2"/>
-			<item value="#nar"/>
-			<item value="#nar_2"/>
-			<item value="aj-centerview2"/>
-			<item value="Centerview"/>
-			<item value="center"/>
-			<item value="@media screen and (max-width: 736px) {"/>
-			<item value="test"/>
-			<item value="#nav"/>
-			<item value="트레이너"/>
-			<item value=" slick-slider"/>
-			<item value="slider1 slick-initialized slick-slider"/>
-			<item value="레슨 스케"/>
-			<item value="#nav{"/>
-			<item value="#nav { "/>
+			<item value="search"/>
+			<item value="page2"/>
+			<item value="search_All"/>
+			<item value="선생님"/>
+			<item value="찾으시는"/>
+			<item value="centerlistcomplete2"/>
+			<item value="trainersign"/>
+			<item value="trainersing"/>
+			<item value="beforeSignuptrainer"/>
+			<item value="signupptInsert"/>
+			<item value="&quot;PT제목을 입력해주세요&quot;,"/>
+			<item value="&quot;PT제목을 입력해주세요&quot;, "/>
+			<item value="&quot;PT제목을 입력해주세요&quot;, &quot;PT전문분야를 선택해주세요&quot;, &quot;P"/>
+			<item value="createTrainerProfile"/>
+			<item value="trainersi"/>
 		</list>
 		<list key="replacehistory">
 		</list>

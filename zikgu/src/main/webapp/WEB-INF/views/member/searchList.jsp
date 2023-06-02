@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-	
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 
 
 <!doctype html>
@@ -24,8 +23,8 @@
 
     <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/album/">
 
+    
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
 
 <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -39,10 +38,12 @@
 <link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
+  
+<meta name="theme-color" content="#712cf9">
 
 
     <style>
+    
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -108,7 +109,8 @@
     margin-bottom: auto;
     margin-top: auto;
     height: 60px;
-    background-color: #c0c0c0;
+    width:55%;
+    background-color: black;
     border-radius: 30px;
     padding: 10px;
     }
@@ -118,13 +120,64 @@
     border: 0;
     outline: 0;
     background: none;
-    width: 450px;
      caret-color:red;
     line-height: 40px;
+    width:90%;
    transition: width 0.4s linear;
      padding: 0 10px;
     }
-
+@media (max-width: 992px){
+     .searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    width:55%;
+    background-color: black;
+    border-radius: 30px;
+    padding: 10px;
+    }
+    .search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+     caret-color:red;
+    line-height: 40px;
+    width:80%;
+   transition: width 0.4s linear;
+     padding: 0 10px;
+     font-size:15px;
+    }
+    
+}
+@media (max-width: 441px){
+     .searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    width:55%;
+    background-color: black;
+    border-radius: 30px;
+    padding: 10px;
+    }
+    .search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+     caret-color:red;
+    line-height: 40px;
+    width:70%;
+   transition: width 0.4s linear;
+     padding: 0 10px;
+      font-size:12px;
+    }
+}
+@media (max-width: 375px){
+   img{
+   	width:175px;
+   }
+}
     .search_icon{
     height: 40px;
     width: 40px;
@@ -138,42 +191,7 @@
     background: white;
     }
     
-    
-   .parent {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.child {
-  flex: 1;
-}
-
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-#item {
-  flex-basis: calc(33.33% - 20px);
-  margin: 10px;
-}
-
- .searchbar{
-    margin-bottom: auto;
-    margin-top: auto;
-    height: 60px;
-    background-color: black;
-    border-radius: 30px;
-    padding: 10px;
-    }
-    
-    h1, p {
-  white-space: nowrap;
- 
-}
-
-  .d-flex {
+   .d-flex {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -184,7 +202,20 @@
 .d-flex h4:not(:last-child) {
   margin-right: 2px; /* 요소 사이의 간격 조절 */
 }
-    </style>
+    
+    
+.navbar{
+	padding:0px;
+}
+.nav-link{
+	pading:10px;
+}
+
+.navbar__logo{
+	margin-left:2px;
+	margin-bottom:10px;
+	margin-right:2px;
+}
     </style>
 
     
@@ -197,18 +228,35 @@
     
 <header>
 <jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>
-  
+<style>
+   #bannertitle{
+	margin-left:0px;
+	letter-spacing: 0px;
+	word-spacing:0px;
+}
+li{
+	margin-right:2px;
+}
+#nav-link3{
+	margin-right:-2px;
+}
+.navber__links{
+	margin-top:-9px;
+}
+</style>
 
 </header>
 
 <main>
+<sec:authentication property="principal" var="principal"/>
+           
 
 
   <section class="py-5 text-center container">
-    <div class="row py-lg-11">
-       <div class="col-lg-6 col-md-8 mx-auto" >
-        <h1 class="fw-light" style="color:black; margin-left:121.5px;  margin-top: 48px; "><Strong>당신의 운동 시작을 응원해요!</Strong></h1>
-        <p class="lead text-muted"  style="color:black;  margin-left: 125px;  margin-top: 8px; margin-bottom:64px;">내가 신뢰할 수 있는 선생님을 Health Catch에서 찾아보세요</p>
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light" style="color:black;"><Strong>당신의 운동 시작을 응원해요!</Strong></h1>
+        <p class="lead text-muted"  style="color:black;">내가 신뢰할 수 있는 선생님을 Health Catch에서 찾아보세요</p>
        
       </div>
     </div>
@@ -219,64 +267,79 @@
 
 
 <div class="container h-100">
-      <div class="d-flex justify-content-center h-100" style="margin: auto; margine-left:500px;">
-        <div class="searchbar" style="margin: auto; margine-left:500px;">
+      <div class="d-flex justify-content-center h-100" style=" ">
+        <div class="searchbar" style="">
         	<form action="search_All" method="post">
 		          <input class="search_input" type="text" name="keyword" placeholder="지역,선생님 검색" value="${keyword }">
-		          <a href="search_All?keyword=${keyword }" class="search_icon" ><i class="fas fa-search"></i></a>
+		          <a href="search_All?keyword=${keyword}" class="search_icon" ><i class="fas fa-search"></i></a>
           	</form>
         </div>
       </div>
     </div>
-     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="album py-5 bg-light">
+    <div class="container">
    
 
-
-
-
-
-
-
-
-
-
-
-	<div class="album py-5 bg-light">
-    <div class="container">
-		<div class="d-flex align-items-center">
+<div class="d-flex align-items-center">
   <h4 class="fw-light mb-0" style="color:black;"><strong>Health Catch 트레이너.</strong></h4>
   <h4 class="lead text-muted mb-0" style="color:black;">언제든, 당신에게 맞는 방식으로.</h4>
 </div>
-	<c:if test="${listlength == 1}">
-      <div style="margin-right:500px;"class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-1">
-      </c:if>
-      <c:if test="${listlength == 2}">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
-      </c:if>
-    <c:if test="${listlength > 2 }">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      </c:if>  
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+       
+        
+       
    <c:forEach var="filelistAll" items="${filelistAll}" varStatus="status" >
-  	
+  
    <c:forEach var="centerfilelistAll" items="${centerfilelistAll}" varStatus="status1">
 
-   <c:forEach var="list" items="${list}" varStatus="status2">       
-	
-   <c:forEach var="centernameList" items="${centernameList}" varStatus="status3">           
+   <c:forEach var="list" items="${list}" varStatus="status2">       	
+         
+   <c:forEach var="centernameList" items="${centernameList}" varStatus="status3">          
 			<c:if test="${status.index == status1.index && status.index == status2.index && status.index == status3.index}">
 		
         <div class="col">
           <div class="card shadow-sm">
-						<a  href="/trainerProfileDetail?u_key=${list.u_key}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" loading="lazy" width="180" height="175"   alt=""
-							 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" loading="lazy" width="180" height="175"   alt=""
+         
+          <sec:authorize access="hasRole('ROLE_USER')">
+          <sec:authentication property="principal" var="principal"/>
+          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=${principal.u_key}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="50%" height="200px"   alt=""
+			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="50%" height="200px"   alt=""
 						 ></a>			 
-		
+			</sec:authorize>
+			 <sec:authorize access="hasRole('ROLE_ADMIN')">
+          <sec:authentication property="principal" var="principal"/>
+          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="50%" height="200px"    alt=""
+			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="50%" height="200px"    alt=""
+			></a>			 
+			</sec:authorize>
+			 <sec:authorize access="isAnonymous()">
+			<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set">
+			<img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="50%" height="200px"    alt=""
+			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}"width="50%" height="200px"   alt=""
+			 ></a>	
+			</sec:authorize>
+			
+			
             <div onclick="location.href='/trainerProfileDetail?u_key=${list.u_key}';" style="cursor: pointer; padding:10px;">
               <p class="card-text" style=" margin-bottom:1px; margin-left:1px"><Strong>${list.tf_name }선생님</Strong></p>
               <p class="card-text" style=" margin-bottom:4px;">${list.tf_hanjulintro }</p>
-              	<p class="card-text" style="font-size: 8px; margin-bottom:1px;"><Strong>${list.tf_lessonnumber }${list.tf_lessonunit }</Strong> 기준 ${list.tf_lessonunit }당 <Strong>${list.tf_lessonprice }원</Strong></p>
+              	<p class="card-text" style="font-size: 8px; margin-bottom:1px;"><Strong>${list.tf_lessonnumber }${list.tf_lessonunit }</Strong> 기준 ${list.tf_lessonunit }당 <strong>${list.tf_lessonprice }원</Strong></p>
                   <p class="card-text" style="font-size: 8px;">${list.tf_loadaddress }</p>
-                  <p class="card-text" style="font-size: 8px;">${centernameList}</p>
+        			<p class="card-text" style="font-size: 8px;">${centernameList }</p>
                   </div>
                    </div>
      
@@ -289,22 +352,6 @@
    </div>
         </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </main>
 
 <footer class="text-muted py-5">
@@ -322,5 +369,4 @@
 
       
   </body>
- 
 </html>

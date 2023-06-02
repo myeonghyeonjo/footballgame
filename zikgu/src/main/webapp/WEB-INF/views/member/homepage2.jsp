@@ -322,16 +322,15 @@ li{
 			</sec:authorize>
 			 <sec:authorize access="hasRole('ROLE_ADMIN')">
           <sec:authentication property="principal" var="principal"/>
-          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="100%" height="100%"   alt=""
-			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="100%" height="100%"   alt=""
-						 ></a>			 
+          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="50%" height="200px"    alt=""
+			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="50%" height="200px"    alt=""
+			></a>			 
 			</sec:authorize>
 			 <sec:authorize access="isAnonymous()">
-			<div style="display:flex;"><a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set">
-			<img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="100%" height="100%"   alt=""
-			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set">
-			 <img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="100%" height="100%"   alt=""
-			 ></a></div>	
+			<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set">
+			<img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="50%" height="200px"    alt=""
+			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}"width="50%" height="200px"   alt=""
+			 ></a>	
 			</sec:authorize>
 			
 			

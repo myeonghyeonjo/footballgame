@@ -4475,10 +4475,7 @@ function Centerview(test) {
 		formName.method = "post";
 		formName.submit();
 			    // 여기에 추가적인 동작을 원하는 대로 작성하세요.
-			  }
-		
-		
-		
+			  }	
 	}
 </script>
 

@@ -79,7 +79,7 @@
       } );
     </script>
     <style>
-.error, .error2, .error3 {
+.error, .error2, .error3, .error4, .error5 {
     width: 250px;
     height: 20px;
     height:auto;
@@ -238,6 +238,8 @@ input, select, textarea {
 		}
 
 	}
+	
+	
 
 	html {
 		box-sizing: border-box;
@@ -447,7 +449,7 @@ input, select, textarea {
 	}
 
 	input, select, textarea {
-		color: #ffffff;
+		color: #000000;
 	}
 
 	a:hover {
@@ -2154,7 +2156,7 @@ input, select, textarea {
 		appearance: none;
 		border-radius: 8px;
 		border: solid 1px;
-		color: inherit;
+	
 		display: block;
 		outline: 0;
 		padding: 0 1em;
@@ -3543,9 +3545,7 @@ input, select, textarea {
 		#main input[type="button"],
 		#main button,
 		#main .button {
-			background-color: transparent;
-		
-			color: #636363 !important;
+			color: #000000 !important;
 			
 		}
 
@@ -3963,6 +3963,7 @@ input, select, textarea {
 		-ms-transform: none;
 		transform: none;
 	}
+
 </style>
 
 
@@ -4265,7 +4266,7 @@ input, select, textarea {
 				
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
 	<c:if test="${(trainerprofile.tf_check=='완료')}">
-		<button type="button" class="btn btn-success" disabled>
+		<button type="button" style="margin-right:10px;"class="btn btn-success" disabled>
   			검토완료
 		</button>
 		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelModal">
@@ -4274,10 +4275,30 @@ input, select, textarea {
 	</c:if>
 	
 	<c:if test="${(trainerprofile.tf_check=='대기')}">
-		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+		<button type="button" style="margin-right:10px;"class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
   			검토완료
 		</button>
-		
+		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#rejectModal">
+  			검토반려
+		</button>
+	</c:if>
+	
+	<c:if test="${(trainerprofile.tf_check=='반려')}">
+		<button type="button" style="background-color:red; margin-right:10px;" class="btn" disabled>
+  			검토반려
+		</button>
+		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelModal">
+  			반려취소
+		</button>
+		<style>
+		@media (min-width: 481px) {
+		h5 {
+			margin-left:-190px;
+			margin-top:50px;
+			}
+		}
+		</style>
+		<h5 style="text-align:; "><Strong style="color:red;">반려사유 : ${trainerprofile.tf_rejectreason}</Strong></h5>
 	</c:if>
 </sec:authorize>
 									</ul>	
@@ -4325,6 +4346,8 @@ input, select, textarea {
 <div class='error' style='display:none'>삭제완료</div>
 <div class='error2' style='display:none'>등록완료</div>
 <div class='error3' style='display:none'>수정완료</div>
+<div class='error4' style='display:none'>취소완료</div>
+<div class='error5' style='display:none'>반려완료</div>
 	</body>
 	</div>
 	
@@ -4366,6 +4389,29 @@ input, select, textarea {
     </div>
   </div>
 </div>	
+<!-- 검토반려 Modal -->
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">검토확인</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        정말 검토반려 하시겠습니까? 확인을 누르시면 반려상태로 변경됩니다. (반려상태는 트레이너 리스트에 노출X)
+      </div>
+      <label for="myTextarea" class="form-label" style="font-size: 15px; text-align:left; margin-left:15px; margin-bottom:-10px"><Strong style="color:black;">반려사유를 상세히 작성해주세요.</Strong></label>
+			<div class="input-group has-validation" style="padding:10px; color:black;">
+				<textarea  class="form-control" style="color:black;"name="tf_programintro" id="rejectreason" placeholder="반려사유를 입력해주세요"></textarea>
+			</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickReject(centerInfo)">확인</button>
+      </div>
+    </div>
+  </div>
+</div>	
+
 <!-- 상담신청 Modal -->
 <div class="modal fade" id="consultingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -4438,7 +4484,7 @@ input, select, textarea {
         <button  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        정말 검토를 취소하시겠습니까? 확인을 누르면 검토대기상태로 변경됩니다.
+        정말 취소하시겠습니까? 확인을 누르면 검토대기상태로 변경됩니다.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
@@ -4468,6 +4514,7 @@ input, select, textarea {
 <!-- 검토완료하기 누르면 넘어갈 데이타 -->
 <form name="centerInfo">
 	<input type="hidden" name="u_key" value="${trainerprofile.u_key}">
+	<input type="hidden" name="tf_rejectreason" id="tf_rejectreason">
 </form>
 
 <!-- 상담완료하기 누르면 넘어갈 데이타 -->
@@ -4552,11 +4599,43 @@ function review(test) {
 
 	function clickConfirm(formName) {
 		formName.action = "/trainerprofilecheck";
+		sessionStorage.setItem('postconfirm', 'true');
 		formName.method = "post";
 		formName.submit();
 	}
 </script>
+<script>
+function clickReject(formName) {
+	 var textarea = document.getElementById("rejectreason");
+	  var text = textarea.value;
+	//반려사유가 필수로 입력되어야하는 조건
+	  if (text.trim() === "") {
+		    // 값이 입력되지 않은 경우에 대한 처리
+		    console.log("값이 입력되지 않았습니다.");
+		    alert("반려사유를 입력해주세요.")
+		    // 여기에 추가적인 동작을 원하는 대로 작성하세요.
+		  } else {
+		    // 값이 입력된 경우에 대한 처리
+		   formName.action = "/trainerprofilereject";
+	sessionStorage.setItem('postreject', 'true');
+	formName.method = "post";
+	formName.submit();
+		    // 여기에 추가적인 동작을 원하는 대로 작성하세요.
+		  }	
+}
+</script>
+<script>
+function handleInputChange() {
+	  var textarea = document.getElementById("rejectreason");
+	  var text = textarea.value;
+	  var tf_rejectreason = document.getElementById("tf_rejectreason");
+	  tf_rejectreason.value=text;
+	  console.log("tf_rejectreason:"+text);
+	}
 
+	var textarea = document.getElementById("rejectreason");
+	textarea.addEventListener("input", handleInputChange);
+</script>
 <script>
 <!-- 로그인창 이동 완료하기 누르면 발생 -->
 function clickConfirmlogin(formName) {
@@ -4579,6 +4658,7 @@ function clickConfirmlogin(formName) {
 <script>
 	function clickConfirmCancel(formName) {
 		formName.action = "/trainerprofilecheckcancel";
+		sessionStorage.setItem('postcancel', 'true');
 		formName.method = "post";
 		formName.submit();
 	}
@@ -4617,7 +4697,9 @@ window.addEventListener('load', function() {
 	  var postDeleted = sessionStorage.getItem('postDeleted');
 	  var postInserted = sessionStorage.getItem('postInserted');
 	  var postModifyed = sessionStorage.getItem('postModifyed');
-	  
+	  var postconfirm = sessionStorage.getItem('postconfirm');
+	  var postcancel = sessionStorage.getItem('postcancel');
+	  var postreject = sessionStorage.getItem('postreject');
 	  	  if (postDeleted) {
 		  $('.error').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
 	    // 삭제 상태 제거
@@ -4632,6 +4714,21 @@ window.addEventListener('load', function() {
 			  $('.error3').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
 		    // 수정 상태 제거
 		    sessionStorage.removeItem('postModifyed');
+		  }
+		 if (postconfirm) {
+			  $('.error3').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		    // 수정 상태 제거
+		    sessionStorage.removeItem('postconfirm');
+		  }
+		 if (postcancel) {
+			  $('.error4').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		    // 수정 상태 제거
+		    sessionStorage.removeItem('postcancel');
+		  }
+		 if (postreject) {
+			  $('.error5').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		    // 수정 상태 제거
+		    sessionStorage.removeItem('postreject');
 		  }
 	});
 

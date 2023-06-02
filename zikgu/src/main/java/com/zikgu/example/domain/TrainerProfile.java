@@ -51,6 +51,7 @@ public class TrainerProfile {
 	private String tf_consulting;
 	private String tf_consultingconfirm;
 	private String tf_option;
+	private String tf_rejectreason;
 	
 	public String getTf_lessonpotion() {
 		return tf_lessonpotion;
@@ -328,6 +329,12 @@ public class TrainerProfile {
 	}
 	public void setTf_option(String tf_option) {
 		this.tf_option = tf_option;
+	}
+	public String getTf_rejectreason() {
+		return tf_rejectreason;
+	}
+	public void setTf_rejectreason(String tf_rejectreason) {
+		this.tf_rejectreason = tf_rejectreason;
 	}
 	
 	

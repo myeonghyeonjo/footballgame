@@ -309,6 +309,16 @@ public interface BoardService {
 
 	public int getcenterListcount(int u_key);
 
+	public void trainerprofilereject(TrainerProfile trainerprofile);
+
+	public int gettrainerprofileCountreject();
+
+	public List<TrainerProfile> gettrainerprofileListreject(Pagination pagination);
+
+	public int gettrainerprofileSearchrejectCount(String keyword);
+
+	public List<TrainerProfile> gettrainerprofilesearchrejectList(Pagination pagination);
+
 	
 
 	

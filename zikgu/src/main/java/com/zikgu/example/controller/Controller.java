@@ -1104,7 +1104,43 @@ model.addAttribute("exception", exception);
 		
 		@RequestMapping("/search_All")
 	    public String search_All(Model model,@RequestParam("keyword") String keyword,TrainerProfile trainerprofile,FileDto filedto) {
-			List<TrainerProfile> list = boardservice.search_All(keyword);
+			
+			
+			
+			if(keyword=="") {
+				System.out.println("키워드가 없습니다.");
+				List<TrainerProfile> list = boardservice.trainerList();
+				List<String> centernameList = new ArrayList<>();
+				
+				for (int i = 0; i < list.size(); i++) {
+				    TrainerProfile trainerProfile = list.get(i);
+				    String loadaddress =  trainerProfile.getTf_loadaddress();
+				    Center center = boardservice.getcenterDetail2(loadaddress);
+				    String centername = center.getC_name();
+				    centernameList.add(centername);
+				    // trainerProfile 변수를 이용해 해당 요소의 필드에 접근하고 작업을 수행합니다.
+				}
+				System.out.println("list:"+list);
+				List<FileDto> filelistAll = new ArrayList<>();
+				List<FileDto> centerfilelistAll = new ArrayList<>();
+				for (TrainerProfile profile : list) {
+					  int tfId = profile.getTf_id();
+					 
+					  List<FileDto> filelist  = boardservice.getprofileFileList2(profile.getTf_id());
+					  List<FileDto> centerfilelist  = boardservice.getcenterFileList2(profile.getTf_loadaddress());
+					  filelistAll.addAll(filelist);
+					  centerfilelistAll.addAll(centerfilelist);
+					  //centerfilelistAll.addAll(centerfilelist);
+					  //fileListMap2.put("filelistAll", filelistAll);
+					  //fileListMap2.put("filelist", centerfilelist);
+					  
+					  model.addAttribute("list", list);
+					  model.addAttribute("filelistAll", filelistAll);
+					  model.addAttribute("centerfilelistAll", centerfilelistAll);
+					  model.addAttribute("centernameList", centernameList);
+				}
+				return "/member/searchList";
+			} else {List<TrainerProfile> list = boardservice.search_All(keyword);
 			int listlength = list.size();
 			System.out.println("listlength:"+listlength);
 			List<String> centernameList = new ArrayList<>();
@@ -1150,6 +1186,7 @@ model.addAttribute("exception", exception);
 			System.out.println("centerfilelistAll:"+centerfilelistAll);
 			
 			return "/member/searchList";
+			}
 	    }
 		
 		@RequestMapping("/trainer_search_All")
@@ -1205,6 +1242,24 @@ model.addAttribute("exception", exception);
 			model.addAttribute("keyword",keyword);
 			model.addAttribute("sort","대기");
 			List<TrainerProfile> list = boardservice.gettrainerprofilesearchwaiteList(pagination);
+			model.addAttribute("list",list);
+			return "/member/trainerprofilelist";
+	    }
+		@RequestMapping("/trainer_search_reject")
+	    public String trainer_search_reject(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,TrainerProfile trainerprofile) {
+			System.out.println("keyword:"+keyword);
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.gettrainerprofileSearchrejectCount(keyword);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			pagination.setKeyword(keyword);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","반려");
+			List<TrainerProfile> list = boardservice.gettrainerprofilesearchrejectList(pagination);
 			model.addAttribute("list",list);
 			return "/member/trainerprofilelist";
 	    }
@@ -1652,6 +1707,22 @@ model.addAttribute("exception", exception);
 			
 			return "/member/trainerprofilelist";
 	    }
+		@RequestMapping("/trainerprofilelistreject")
+	    public String trainerprofilelistreject(Pagination pagination,HttpServletRequest request, Model model,TrainerProfile trainerprofile) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.gettrainerprofileCountreject();
+				pagination.setCount(listcount);	
+				pagination.setPage(page);		
+				pagination.init();		
+			List<TrainerProfile> list = boardservice.gettrainerprofileListreject(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("list",list);
+			model.addAttribute("sort","반려");
+			
+			return "/member/trainerprofilelist";
+	    }
 		
 		@RequestMapping("/reviewlist")
 	    public String reviewlist( Model model,Review review,Pagination pagination,HttpServletRequest request) {
@@ -1766,6 +1837,27 @@ model.addAttribute("exception", exception);
 			
 			return "/member/trainerProfileDetail";
 	    }
+		@RequestMapping("/trainerprofilereject")
+	    public String trainerprofilereject( Model model,TrainerProfile trainerprofile,@RequestParam("u_key") int u_key) {	
+			boardservice.trainerprofilereject(trainerprofile);
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			String u_name = boardservice.getU_name2(u_key);
+			String programsub = trainerprofile.getTf_programsub();
+			String[] programsub2 = programsub.split(",");
+			int tf_id = trainerprofile.getTf_id();
+			List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+			List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
+			List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
+			model.addAttribute("programsub",programsub2);
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("u_name",u_name);
+			model.addAttribute("filelist",filelist);
+			model.addAttribute("filelist_2",filelist_2);
+			model.addAttribute("filelist_3",filelist_3);
+			
+			return "/member/trainerProfileDetail";
+	    }
+		
 		
 		@RequestMapping("/trainerprofilecheckcancel")
 	    public String trainerprofilecheckcancel( Model model,TrainerProfile trainerprofile,@RequestParam("u_key") int u_key) {

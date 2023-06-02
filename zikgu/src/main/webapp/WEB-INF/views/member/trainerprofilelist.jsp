@@ -251,16 +251,25 @@
 		            <button type="button" style="background-color:#c0c0c0;"onclick="allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
 		            <button type="button"  onclick="completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
 		             <button type="button" onclick="waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+	        		 <button type="button" onclick="rejectbutton_click();" id="rejectbutton" class="btn btn-sm btn-outline-secondary">반려</button>
 	            </c:if>
 	         	<c:if test="${sort == '완료' }">
 		            <button type="button" onclick="allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
 		            <button type="button" style="background-color:#c0c0c0;" onclick="completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
 		             <button type="button" onclick="waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+	          	     <button type="button" onclick="rejectbutton_click();" id="rejectbutton" class="btn btn-sm btn-outline-secondary">반려</button>
 	            </c:if>
 	            <c:if test="${sort == '대기' }">
 		            <button type="button" onclick="allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
 		            <button type="button"  onclick="completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
 		             <button type="button" style="background-color:#c0c0c0;" onclick="waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+	           	    <button type="button" onclick="rejectbutton_click();" id="rejectbutton" class="btn btn-sm btn-outline-secondary">반려</button>
+	            </c:if>
+	            <c:if test="${sort == '반려' }">
+		            <button type="button" onclick="allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
+		            <button type="button"  onclick="completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
+		             <button type="button"  onclick="waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+	           	    <button type="button" style="background-color:#c0c0c0;" "onclick="rejectbutton_click();" id="rejectbutton" class="btn btn-sm btn-outline-secondary">반려</button>
 	            </c:if>
 	          </div>
           </c:if>
@@ -270,16 +279,25 @@
 		            <button type="button" style="background-color:#c0c0c0;"onclick="search_allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
 		            <button type="button"  onclick="search_completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
 		             <button type="button" onclick="search_waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+	            	<button type="button" onclick="search_rejectbutton_click();" id="rejectbutton" class="btn btn-sm btn-outline-secondary">반려</button>
 	            </c:if>
 	         	<c:if test="${sort == '완료' }">
 		            <button type="button" onclick="search_allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
 		            <button type="button" style="background-color:#c0c0c0;" onclick="search_completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
 		             <button type="button" onclick="search_waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+	          	    <button type="button" onclick="search_rejectbutton_click();" id="rejectbutton" class="btn btn-sm btn-outline-secondary">반려</button>
 	            </c:if>
 	            <c:if test="${sort == '대기' }">
 		            <button type="button" onclick="search_allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
 		            <button type="button"  onclick="search_completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
 		             <button type="button" style="background-color:#c0c0c0;" onclick="search_waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+	          	    <button type="button" onclick="search_rejectbutton_click();" id="rejectbutton" class="btn btn-sm btn-outline-secondary">반려</button>
+	            </c:if>
+	            <c:if test="${sort == '반려' }">
+		            <button type="button" onclick="search_allbutton_click();" id="allbutton" class="btn btn-sm btn-outline-secondary">전체</button>
+		            <button type="button"  onclick="search_completebutton_click();" id="completebutton" class="btn btn-sm btn-outline-secondary">완료</button>
+		             <button type="button"  onclick="search_waitebutton_click();" id="waitebutton" class="btn btn-sm btn-outline-secondary">대기</button>
+	          	    <button type="button" style="background-color:#c0c0c0;" onclick="search_rejectbutton_click();" id="rejectbutton" class="btn btn-sm btn-outline-secondary">반려</button>
 	            </c:if>
 	          </div>
           </c:if>
@@ -320,7 +338,10 @@
 						 			  <td style="color:green;">완료</td>
 						  		</c:if>
 						  		 <c:if test="${(list.tf_check=='대기')}">
-						 			  <td style="color:red;">대기</td>
+						 			  <td style="color:blue;">대기</td>
+						  		</c:if>
+						  		<c:if test="${(list.tf_check=='반려')}">
+						 			  <td style="color:red;">반려</td>
 						  		</c:if>
 			            </tr>
 					</c:forEach>
@@ -427,6 +448,11 @@ function waitebutton_click() {
 	console.log("대기버튼을 누르셨습니다.");
 	location.href='${path}	/trainerprofilelistwaite';
 }
+function rejectbutton_click() {
+	console.log("반려버튼을 누르셨습니다.");
+	location.href='${path}	/trainerprofilelistreject';
+}
+
 </script>
 <script>
 function search_allbutton_click() {
@@ -450,6 +476,14 @@ function search_waitebutton_click() {
 	var url = path + '?keyword=' + encodeURIComponent(keyword);
 	location.href = url;
 }
+function search_rejectbutton_click() {
+	console.log("반려버튼을 누르셨습니다.");
+	var keyword = $('#keyword').val();
+	var path = '/trainer_search_reject';
+	var url = path + '?keyword=' + encodeURIComponent(keyword);
+	location.href = url;
+}
+
 </script>		
   </body>
 </html>
