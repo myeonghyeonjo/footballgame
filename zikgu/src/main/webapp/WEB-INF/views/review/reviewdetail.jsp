@@ -4265,7 +4265,7 @@ input, select, textarea {
 														</button>
 													</c:if>
 													<c:if test="${(reviewlist.r_check=='2')}">
-														<button type="button" class="btn btn-success" disabled >
+														<button type="button" class="btn btn-reject" style="background-color:red;"disabled >
 												  			반려완료
 														</button>
 														<button type="button" style="color:white;" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelModal">

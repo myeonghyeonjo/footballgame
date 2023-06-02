@@ -289,6 +289,20 @@ public interface BoardMapper {
 
 	public List<MemberProfile> getreviewsearchwrejectList(Pagination pagination);
 
+	public void centerReject(Center center);
+
+	public int getcenterrejectCount();
+
+	public List<Center> getcenterrejectList(Pagination pagination);
+
+	public int getcenterSearchrejectCount(String keyword);
+
+	public List<Center> getcentersearchrejectList(Pagination pagination);
+
+	public void clickcenterprofileDelete(Center center);
+
+	public int getcenterListcount(int u_key);
+
 	
 
 

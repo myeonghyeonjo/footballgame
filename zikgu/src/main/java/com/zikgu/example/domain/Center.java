@@ -21,6 +21,7 @@ public class Center {
 	private String c_hardness;
 	private String c_latitude;
 	private String c_intro;
+	private String c_rejectreason;
 	
 
 	public String getC_name() {
@@ -181,6 +182,14 @@ public class Center {
 
 	public void setC_intro(String c_intro) {
 		this.c_intro = c_intro;
+	}
+
+	public String getC_rejectreason() {
+		return c_rejectreason;
+	}
+
+	public void setC_rejectreason(String c_rejectreason) {
+		this.c_rejectreason = c_rejectreason;
 	}
 
 }

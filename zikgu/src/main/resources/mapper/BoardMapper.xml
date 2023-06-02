@@ -671,7 +671,8 @@
 		c_confirm,
 		c_id,
 		u_key,
-		c_intro
+		c_intro,
+		c_rejectreason
 
 		from center
 		where c_loadaddress = #{tf_loadaddress}
@@ -821,7 +822,18 @@
 		WHERE c_confirm = '0'
 		LIMIT 			#{pageNum}, 10 
 	</select>
-	
+		<!-- 센터 리스트(반려) -->
+	<select id="getcenterrejectList" resultType="center">
+		SELECT
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+		WHERE c_confirm = '2'
+		LIMIT 			#{pageNum}, 10 
+	</select>
 	
 
 	<!--트레이너 리스트(모든) -->
@@ -982,6 +994,13 @@
 
 		WHERE c_id = #{c_id}
 	</update>
+	<!-- 센터 반려확정 -->
+	<update id="centerReject" parameterType="center">
+		UPDATE center SET
+		c_confirm = 2,
+		c_rejectreason = #{c_rejectreason}
+		WHERE c_id = #{c_id}
+	</update>
 
 <!-- 리뷰 승인확정 -->
 	<update id="reviewConfirm" parameterType="review">
@@ -998,10 +1017,11 @@
 		WHERE r_id = #{r_id}
 	</update>
 
-	<!-- 센터 승인취소 -->
+	<!-- 센터 취소 -->
 	<update id="centerConfirmCancel" parameterType="center">
 		UPDATE center SET
-		c_confirm = 0
+		c_confirm = 0,
+		c_rejectreason = ' '
 		WHERE c_id = #{c_id}
 	</update>
 <!-- 리뷰 승인취소 -->
@@ -1173,6 +1193,12 @@
 		concat('%',#{keyword},'%') AND r_check ='0' 
 	</select>
 	
+	<!-- 등록요청한 센터 갯수 -->
+	<select id="getcenterListcount" resultType="int">
+		 SELECT       count(*)                
+		 FROM            center
+		 WHERE u_key =${u_key} 
+	</select>
 	
 		<!-- 트레이너 모든 검색 + 완료 -->
 	<select id="gettrainerprofilesearchcompleteList" resultType="TrainerProfile">
@@ -1270,8 +1296,19 @@
 		c_loadaddress as c_loadaddress,
 		c_confirm as c_confirm
 		FROM center
-		WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%') 	
-		AND c_confirm = '0'
+		WHERE c_confirm = '0' AND c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>	
+	<!-- 센터  검색+반려 -->
+	<select id="getcentersearchrejectList" resultType="Center">
+		SELECT 
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+		WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%') AND c_confirm = '2'
 		LIMIT 			#{pageNum}, 10 
 	</select>	
 
@@ -1475,6 +1512,12 @@
 	<delete id="deletePt" parameterType="pt">
 		DELETE FROM pt
 		WHERE pt_id = #{pt_id}
+
+	</delete>
+	<!-- center 삭제 -->
+	<delete id="clickcenterprofileDelete" parameterType="pt">
+		DELETE FROM center
+		WHERE c_id = #{c_id}
 
 	</delete>
 
@@ -2074,6 +2117,13 @@
 				WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like
 		concat('%',#{keyword},'%') AND c_confirm = '0'
 	</select>
+	 <!-- 센터 갯수(검색+반려) 카운트 -->
+	<select id="getcenterSearchrejectCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') AND c_confirm = '2'
+	</select>
 	
 			 <!-- 센터  프로필 갯수() 카운트 -->
 	<select id="getcenterCount" resultType="int">
@@ -2092,6 +2142,13 @@
 				 FROM            center
 				 WHERE c_confirm = '0'
 	</select>
+			 <!-- 센터  프로필 갯수(반려) 카운트 -->
+	<select id="getcenterrejectCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				 WHERE c_confirm = '2'
+	</select>
+	
 			 <!-- 리뷰 파일 리스트 -->
 	<select id="getreviewFileList" resultType="Review">
 				SELECT

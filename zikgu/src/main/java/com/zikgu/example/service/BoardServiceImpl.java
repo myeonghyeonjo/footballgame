@@ -805,6 +805,41 @@ public class BoardServiceImpl implements BoardService {
 	public List<MemberProfile> getreviewsearchwrejectList(Pagination pagination){
 		return boardmapper.getreviewsearchwrejectList(pagination);
 	}
+	
+	@Override
+	public void centerReject(Center center) {
+		boardmapper.centerReject(center);
+	}
+	
+	@Override
+	public int getcenterrejectCount() {
+		return boardmapper.getcenterrejectCount();
+	}
+	
+	@Override
+	public List<Center> getcenterrejectList(Pagination pagination){
+		return boardmapper.getcenterrejectList(pagination);
+	}
+	
+	@Override
+	public int getcenterSearchrejectCount(String keyword) {
+		return boardmapper.getcenterSearchrejectCount(keyword);
+	}
+	
+	@Override
+	public List<Center> getcentersearchrejectList(Pagination pagination){
+		return boardmapper.getcentersearchrejectList(pagination);
+	}
+	
+	@Override
+	public void clickcenterprofileDelete(Center center) {
+		boardmapper.clickcenterprofileDelete(center);
+	}
+	
+	@Override
+	public int getcenterListcount(int u_key) {
+		return boardmapper.getcenterListcount(u_key);
+	}
 }
 
 

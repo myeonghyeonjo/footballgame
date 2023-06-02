@@ -3491,9 +3491,9 @@ input, select, textarea {
 		#main input[type="button"],
 		#main button,
 		#main .button {
-			background-color: transparent;
+			
 			box-shadow: inset 0 0 0 1px #dddddd;
-			color: #636363 !important;
+			color: #000000 !important;
 			
 		}
 
@@ -3911,7 +3911,7 @@ input, select, textarea {
 		-ms-transform: none;
 		transform: none;
 	}
-	.error, .error2, .error3, .error4, .error5 {
+	.error, .error2, .error3, .error4, .error5, .error6 {
     width: 250px;
     height: 20px;
     height:auto;
@@ -4104,15 +4104,28 @@ input, select, textarea {
   			승인취소
 		</button>
 	</c:if>
+	<c:if test="${(center.c_confirm=='2')}">
+		<button type="button" class="btn btn" style="background-color:red;" disabled  >
+  			반려완료
+		</button>
+		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelModal">
+  			반려취소
+		</button>
+		<h5 style="text-align:center;"><Strong style="color:red;">반려사유 : ${center.c_rejectreason}</Strong></h5>
+		
+	</c:if>
 	
 	<c:if test="${(center.c_confirm=='0')}">
 		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  			승인하기
+  			승인
 		</button>
-		
+		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#rejectModal">
+  			반려
+		</button>
 	</c:if>
 </sec:authorize>
 <sec:authorize access="hasRole('ROLE_USER')">
+<c:if test="${center.c_confirm==1}">
 	<c:if test="${(center.c_loadaddress==trainerprofile.tf_loadaddress)}">
 		<button type="button" class="btn btn-success" disabled >
   			센터프로필저장완료
@@ -4126,30 +4139,64 @@ input, select, textarea {
 		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#centerprofileconfirmModal">
   			센터프로필저장
 		</button>
-		
+	</c:if>
+</c:if>	
+<c:if test="${center.c_confirm==0 || center.c_confirm==2}">
+		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#centerprofiledeleteModal">
+  			삭제
+		</button>
+</c:if>
+	<sec:authentication property="principal" var="principal" />	
+	<c:if test="${(center.u_key==principal.u_key)}">
+		<c:if test="${center.c_confirm==2}">		
+			<h5 style="text-align:center;"><Strong style="color:red;">반려사유 : ${center.c_rejectreason}</Strong></h5>
+		</c:if>
 	</c:if>
 </sec:authorize>
 <input type="hidden" value="${toast}" id="toastcheck">		
 <div class='error' style='display:none'>삭제완료</div>
 <div class='error2' style='display:none'>등록완료</div>
-<div class='error3' style='display:none'>수정완료</div>	
-<div class='error4' style='display:none'>저장완료</div>
+<div class='error3' style='display:none'>취소완료</div>	
+<div class='error4' style='display:none'>승인완료</div>
 <div class='error5' style='display:none'>취소완료</div>	
+<div class='error6' style='display:none'>반려완료</div>
 
 <!-- 승인하기 Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">센터 검토</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="text-align:left;">
         정말 승인하시겠습니까?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark"" data-bs-dismiss="modal">취소하기</button>
         <button type="button" class="btn btn-outline-primary" onclick="clickConfirm(centerInfo)">승인하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 반려하기 Modal -->
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">센터 검토</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="text-align:left;">
+          정말 반려 하시겠습니까? 확인을 누르시면 반려상태로 변경됩니다. (반려상태는 센터리스트에 노출X) 
+      </div>
+      <label for="myTextarea" class="form-label" style="font-size: 15px; text-align:left; margin-left:15px; margin-bottom:-10px"><Strong>반려사유 상세히 작성해주세요.</Strong></label>
+			<div class="input-group has-validation" style="padding:10px;">
+				<textarea  class="form-control" name="tf_programintro" id="rejectreason" placeholder="반려사유를 입력해주세요"></textarea>
+			</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark"" data-bs-dismiss="modal">취소하기</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickReject(centerInfo)">반려하기</button>
       </div>
     </div>
   </div>
@@ -4172,17 +4219,35 @@ input, select, textarea {
     </div>
   </div>
 </div>
+<!-- 센터프로필 삭제 Modal -->
+<div class="modal fade" id="centerprofiledeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">센터 삭제</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="text-align:left">
+        정말 해당센터를 삭제하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark"" data-bs-dismiss="modal">취소하기</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickcenterprofileDelete(centerInfo)">삭제하기</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- 승인취소 Modal -->
 <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">센터 검토</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        정말 승인을 취소하시겠습니까? 확인을 누르면 승인대기상태로 변경됩니다.
+      <div class="modal-body" style="text-align:left;">
+        정말 취소하시겠습니까? 확인을 누르면 승인대기상태로 변경됩니다.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
@@ -4212,10 +4277,10 @@ input, select, textarea {
 <!-- 승인하기 누르면 넘어갈 데이타 -->
 <form name="centerInfo">
 	<input type="hidden" name="c_id" value="${center.c_id}">
+	<input type="hidden" name="c_rejectreason" id="c_rejectreason">
 	<input type="hidden" name="c_loadaddress" value="${center.c_loadaddress}">
 	<sec:authentication property="principal" var="principal" />
 	<input type="hidden" name="trainerprofile_u_key" value="${principal.u_key}">
-	
 </form>
 
 	
@@ -4283,6 +4348,7 @@ window.addEventListener('load', function() {
 	  var postInserted = sessionStorage.getItem('postInserted');
 	  var postModifyed = sessionStorage.getItem('postModifyed');
 	  var postconfirm = sessionStorage.getItem('postconfirm');
+	  var postreject = sessionStorage.getItem('postreject');
 	  var postconfirmcancel = sessionStorage.getItem('postconfirmcancel');
 	  	  if (postDeleted) {
 		  $('.error').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
@@ -4308,6 +4374,11 @@ window.addEventListener('load', function() {
 			  $('.error5').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
 		   
 		    sessionStorage.removeItem('postconfirmcancel');
+		  }
+		if (postreject) {
+			  $('.error6').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		   
+		    sessionStorage.removeItem('postreject');
 		  }
 	});
 
@@ -4386,6 +4457,31 @@ function Centerview(test) {
 		formName.submit();
 	}
 </script>
+<!-- 반려하기 누르면 발생 -->
+<script>
+	function clickReject(formName) {
+		 var textarea = document.getElementById("rejectreason");
+		  var text = textarea.value;
+		//반려사유가 필수로 입력되어야하는 조건
+		  if (text.trim() === "") {
+			    // 값이 입력되지 않은 경우에 대한 처리
+			    console.log("값이 입력되지 않았습니다.");
+			    alert("반려사유를 입력해주세요.")
+			    // 여기에 추가적인 동작을 원하는 대로 작성하세요.
+			  } else {
+			    // 값이 입력된 경우에 대한 처리
+			   formName.action = "/centerReject";
+		sessionStorage.setItem('postreject', 'true');
+		formName.method = "post";
+		formName.submit();
+			    // 여기에 추가적인 동작을 원하는 대로 작성하세요.
+			  }
+		
+		
+		
+	}
+</script>
+
 <!-- 센터프로필 저장하기 누르면 발생 -->
 <script>
 	function clickcenterprofileConfirm(formName) {
@@ -4395,6 +4491,15 @@ function Centerview(test) {
 		formName.submit();
 	}
 </script>
+<!-- 센터프로필 삭제하기 누르면 발생 -->
+<script>
+	function clickcenterprofileDelete(formName) {
+		formName.action = "/clickcenterprofileDelete";
+		formName.method = "post";
+		formName.submit();
+	}
+</script>
+
 <!-- 센터프로필 취소하기 누르면 발생 -->
 <script>
 	function clickcenterprofileCancel(formName) {
@@ -4413,5 +4518,17 @@ function Centerview(test) {
 		formName.method = "post";
 		formName.submit();
 	}
+</script>
+
+<script>
+function handleInputChange() {
+	  var textarea = document.getElementById("rejectreason");
+	  var text = textarea.value;
+	  var c_rejectreason = document.getElementById("c_rejectreason");
+	  c_rejectreason.value=text;
+	}
+
+	var textarea = document.getElementById("rejectreason");
+	textarea.addEventListener("input", handleInputChange);
 </script>
 </html>
