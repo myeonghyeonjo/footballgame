@@ -33,6 +33,8 @@ public interface UserMapper {
 
 		public User getUserdetail2();
 
+		public void memberprofileinsertcheckupdate(int u_key);
+
 	
 }
 

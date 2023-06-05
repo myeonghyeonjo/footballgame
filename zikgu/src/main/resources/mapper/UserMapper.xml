@@ -40,7 +40,8 @@
 			                 u_isEnabled          				    as isEnabled,
 			                 u_key                                  as u_key,
 			                 u_trainercheck                         as u_trainercheck,
-			                 u_phone                                 as phone
+			                 u_phone                                 as phone,
+			                 u_memberprofileinsertcheck as u_memberprofileinsertcheck
       FROM         lc_user
      
       WHERE            u_key   =   #{u_key}
@@ -117,7 +118,13 @@
 			    
 			    WHERE u_key = #{u_key}
     		</update>
-    		
+    	  <!-- 유저 프로필 등록 여부 수정 -->
+	        <update id="memberprofileinsertcheckupdate" parameterType="center">
+			    UPDATE lc_user  SET
+			    u_memberprofileinsertcheck =  1
+			    
+			    WHERE u_key = #{u_key}
+    		</update>	
     		
       <!-- 유저 이름 수정 -->
 	        <update id="usernameModify" parameterType="center">

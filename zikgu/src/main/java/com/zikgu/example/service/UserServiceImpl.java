@@ -80,6 +80,11 @@ public class UserServiceImpl implements UserService {
    public User getUserdetail2() {
 	   return userMapper.getUserdetail2();
    }
+   
+   @Override
+   public void memberprofileinsertcheckupdate(int u_key) {
+	   userMapper.memberprofileinsertcheckupdate(u_key);
+   }
 
   
 

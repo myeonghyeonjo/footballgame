@@ -1559,14 +1559,40 @@ model.addAttribute("exception", exception);
 		
 		@RequestMapping("/memberProfileinsert")
 	    public String memberProfileinsert( Model model,User user,MemberProfile memberprofile) {
+			System.out.println("멤버프로필입력");
 			boardservice.memberProfileinsert(memberprofile);
 			int m_id = boardservice.getm_id(memberprofile); 
 			memberprofile = boardservice.getmemberprofiledetail(String.valueOf(m_id));
 			int u_key=memberprofile.getU_key();
 			user =  userservice.getUserdetail(String.valueOf(u_key));
 			String phone =  user.getPhone();
+			userservice.memberprofileinsertcheckupdate(u_key);
 			model.addAttribute("phone",phone);
 			model.addAttribute("memberprofile",memberprofile);
+			return "/member/memberprofiledetail";
+	    }
+		@RequestMapping("/memberprofilemodify")
+	    public String memberprofilemodify( Model model,User user,MemberProfile memberprofile,@RequestParam("m_id") int m_id) {
+	
+			
+			memberprofile = boardservice.getmemberprofiledetail(String.valueOf(m_id));
+			int u_key=memberprofile.getU_key();
+			user =  userservice.getUserdetail(String.valueOf(u_key));
+			String phone =  user.getPhone();
+			model.addAttribute("phone",phone);
+			model.addAttribute("memberprofile",memberprofile);
+			return "/member/memberprofilemodify";
+	    }
+		@RequestMapping("/memberProfilemodifyinsert")
+	    public String memberProfilemodifyinsert( Model model,User user,MemberProfile memberprofile,@RequestParam("m_id") int m_id) {
+			boardservice.memberProfilemodifyinsert(memberprofile);
+			memberprofile = boardservice.getmemberprofiledetail(String.valueOf(m_id));
+			int u_key=memberprofile.getU_key();
+			user =  userservice.getUserdetail(String.valueOf(u_key));
+			String phone =  user.getPhone();
+			model.addAttribute("phone",phone);
+			model.addAttribute("memberprofile",memberprofile);
+	
 			return "/member/memberprofiledetail";
 	    }
 		
@@ -2403,6 +2429,7 @@ model.addAttribute("exception", exception);
 	    public String trainerProfileFileInsert( Model model,MultipartHttpServletRequest mhsq,@RequestParam("u_key") int u_key, FileDto filedto,@RequestParam("tf_id") int tf_id,@RequestParam("file_group") int file_group,TrainerProfile trainerprofile) throws IllegalStateException, IOException {
 		
 			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
+			//String realFolder = "C:/healthcatchfile/Img/";  //파일저장위치
 			 File dir = new File(realFolder);
 			   if (!dir.isDirectory()) {
 				   dir.mkdirs();

@@ -319,6 +319,8 @@ public interface BoardService {
 
 	public List<TrainerProfile> gettrainerprofilesearchrejectList(Pagination pagination);
 
+	public void memberProfilemodifyinsert(MemberProfile memberprofile);
+
 	
 
 	

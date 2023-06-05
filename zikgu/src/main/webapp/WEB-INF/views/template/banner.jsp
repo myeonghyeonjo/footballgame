@@ -80,9 +80,12 @@ body {
       		padding:10px;
       	}
       	#a{
-  font-size:12.5px; 
+ 		 font-size:12.5px; 
+ 		 width:50px;
 }
 }
+
+
 #a{
   
   top: 3px;

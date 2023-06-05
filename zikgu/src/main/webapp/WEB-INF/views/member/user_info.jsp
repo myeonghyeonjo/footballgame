@@ -37,7 +37,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 </head>
 <style>
-#rounded-rectangle1, #rounded-rectangle2 {
+#rounded-rectangle1, #rounded-rectangle2 ,#user_rounded-rectangle1{
 	border-radius: 20px; /* 모서리 둥글기 값 지정 */
 	width: 470px; /* 너비 지정 */
 	height: 210px; /* 높이 지정 */
@@ -52,12 +52,51 @@
 .aa:hover {
 	text-decoration: underline
 }
+@media (min-width: 992px){
 
-.wrapper {
-	display: flex;
-	justify-content: space-between;;
+    #user_a2{
+    	 margin-left: 30px;
+    	 margin-right: 50px
+    }
 }
-
+@media (max-width: 768px){
+    #user_a2{
+    	 margin-left: 30px;
+    	 margin-right: 50px
+    }
+}
+.wrapper{
+	display: flex;
+	justify-content: space-between;
+}
+@media (max-width:590px) {
+   .wrapper {
+	display: block;
+}
+	#rounded-rectangle1, #rounded-rectangle2{
+		width:100%;
+		height:150px;
+	}
+	#admin_p3, #admin_p3{
+		margin-top:-10px;
+		margin-bottom:-10px;
+	}
+	#user_rounded-rectangle1{
+		height:180px;
+		width:100%;
+	}
+}
+@media (max-width:435px) {
+	#user_a2{
+		margin-right:0px;
+		margin-left:-10px;
+	}
+}
+@media (max-width:590px) {
+    #admin_p1, #admin_p2{
+    margin-left: 30px;
+    }
+}
 button {
 	background-color: transparent;
 	border: none;
@@ -72,18 +111,45 @@ button:hover {
 	text-decoration: underline; /* 마우스 올리면 밑줄 추가 */
 }
 @media (max-width:767px) {
-    #admin_p1, #admin_p2{
-    	    margin-bottom: 10px;
+    #admin_p1, #admin_p2, #admin_p3, #admin_p4{
+    margin-bottom: 10px;
     margin-top: -20px;
     margin-left: 30px;
     }
+    #trainer_p1, #trainer_p2, #trainer_p3{
+		margin-top:-30px;
+		margin-right:20px;	
+		 margin-bottom:4px;
+	}
+	#trainer_a1{
+		margin-right:50px;
+	}
+	#trainer_a2{
+		margin-right:30px;
+	}
+	#trainer_a3{
+		margin-right:80px;
+	}
+	
 }
 @media (min-width:767px) {
-    #admin_p1, #admin_p2{
+    #admin_p1, #admin_p2, #admin_p3, #admin_p4{
     	margin-left:30px;
     	margin-bottom:30px;
     }
 }
+}
+@media (min-width:768px) {
+	#trainer_p1, #trainer_p2, #trainer_p3{
+		margin-left: 30px;
+    margin-top: -10px;
+    margin-right: 50px;
+    margin-bottom:4px;
+}
+
+@media (max-width:426px) {
+	
+    
 }
 </style>
 <body>
@@ -127,7 +193,7 @@ button:hover {
 
 
 
-
+			<p id="pbox" style="margin-bottom:-25px;">&nbsp</p>
 			<c:if test="${(principal.u_trainercheck=='1')}">
 				<div class="container">
 					<div class="wrapper">
@@ -136,14 +202,14 @@ button:hover {
 							<h3 style="color: black; padding: 30px;">
 								<Strong>트레이너 프로필 관리</Strong>
 							</h3>
-							<p
-								style="margin-left: 30px; margin-top: -10px; margin-right: 50px">프로필을
+							<p id="trainer_p1"
+								style="margin-left: 30px; ">프로필을
 								등록하고, 조회하거나 수정하세요.</p>
-							<a href="/trainerProfile?u_key=${u_key}" class="aa"
-								style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">프로필
+							<a href="/trainerProfile?u_key=${u_key}" class="aa" id="trainer_a1"
+								style="color: #4169e1; margin-left: 30px; margin-top: -10px;">프로필
 								등록 ></a> 
 								<a href="/trainerProfileDetailModify?u_key=${u_key}" class="aa"
-								style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">프로필
+								style="color: #4169e1; margin-left: 30px; margin-top: -10px; ">프로필
 								조회 ></a>
 						</div>
 
@@ -152,13 +218,13 @@ button:hover {
 							<h3 style="color: black; padding: 30px;">
 								<Strong>센터 관리</Strong>
 							</h3>
-							<p
-								style="margin-left: 30px; margin-top: -10px; margin-right: 50px">근무중인
+							<p id="trainer_p2"
+								style="margin-left: 30px;">근무중인
 								센터가 없으신가요? 센터 등록을 요청하세요</p>
-							<a href="/centerinsert?u_key=${u_key}" class="aa"
-								style="color: #4169e1; margin-left: 30px; margin-top: -20px; margin-right: 50px">센터
+							<a href="/centerinsert?u_key=${u_key}" class="aa" id="trainer_a2"
+								style="color: #4169e1; margin-left: 30px; margin-top: -20px;">센터
 								등록 요청 ></a> <a href="/centerconfirmlist?u_key=${u_key}" class="aa"
-								style="color: #4169e1; margin-left: 30px; margin-top: -20px; margin-right: 50px">요청
+								style="color: #4169e1; margin-left: 30px;margin-top: -20px; ">요청
 								조회 ></a>
 						</div>
 					</div>
@@ -183,12 +249,12 @@ button:hover {
 							<h3 style="color: black; padding: 30px;">
 								<Strong>PT 관리</Strong>
 							</h3>
-							<p
-								style="margin-left: 30px; margin-top: -10px; margin-right: 50px">PT를 등록하고, 수정하세요</p>
-							<a href="/trainerPT?u_key=${u_key}" class="aa"
-								style="color: #4169e1; margin-left: 30px; margin-top: -20px; margin-right: 50px">PT 등록 ></a> 
+							<p id="trainer_p3"
+								style="margin-left: 30px; ">PT를 등록하고, 수정하세요</p>
+							<a href="/trainerPT?u_key=${u_key}" class="aa" id="trainer_a3"
+								style="color: #4169e1; margin-left: 30px; margin-top: -20px; ">PT 등록 ></a> 
 							<a href="/trainerconsultinglist?u_key=${u_key}" class="aa"
-								style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">PT 요청
+								style="color: #4169e1; margin-left: 30px; margin-top: -10px; ">PT 요청
 								조회 ></a>
 						</div>
 					</div>
@@ -200,7 +266,7 @@ button:hover {
 
 
 
-
+		<p id="pbox" style="margin-bottom:-25px;">&nbsp</p>
 
 
 
@@ -239,25 +305,26 @@ button:hover {
 						</div>
 
 						<div class="wrapper" style="margin-top: 30px;">
-							<div id="rounded-rectangle1" class="bg-light">
+							<div id="rounded-rectangle1" class="bg-light" >
 								<h3 style="color: black; padding: 30px;">
 									<Strong>센터 관리</Strong>
 								</h3>
-								<p
-									style="margin-left: 30px; margin-top: -10px; margin-right: 50px; margin-bottom: 30px;">센터를
+								<p id="admin_p3"
+									>센터를
 									조회하거나 수정하세요.</p>
 
 								<a href="/centerlist" class="aa"
 									style="color: #4169e1; margin-left: 30px; margin-top: 190px; margin-right: 50px">센터
 									조회 ></a>
 							</div>
+							<p id="pbox" style="margin-bottom:10px;">&nbsp</p>
 
 							<div id="rounded-rectangle1" class="bg-light">
 								<h3 style="color: black; padding: 30px;">
 									<Strong>리뷰 관리</Strong>
 								</h3>
-								<p
-									style="margin-left: 30px; margin-top: -10px; margin-right: 50px; margin-bottom: 30px;">프로필을
+								<p id="admin_p4"
+									>프로필을
 									조회하거나 수정하세요.</p>
 
 								<a href="/reviewlist" class="aa"
@@ -274,25 +341,29 @@ button:hover {
 					<sec:authorize access="hasRole('ROLE_USER')">
 						<div class="container">
 							<div class="wrapper">
-								<div id="rounded-rectangle1" class="bg-light"
+								<div id="user_rounded-rectangle1" class="bg-light"
 									style="margin-top: 30px;">
-									<h3 style="color: black; padding: 30px;">
+									<h3 style="color: black; padding: 30px;">	
 										<Strong>회원 프로필</Strong>
 									</h3>
 									<p
-										style="margin-left: 30px; margin-top: -10px; margin-right: 50px">프로필을
+										style="margin-left: 30px; margin-top: -8px; margin-right: 30px">프로필을
 										등록하고, 조회하거나 수정하세요.</p>
-
+									<c:if test="${user.u_memberprofileinsertcheck == 0 }">
 									<a href="/memberProfile?u_key=${u_key}" class="aa"
 										style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">프로필
-										등록 ></a> <a
+										등록 ></a> 
+										</c:if>
+										<c:if test="${user.u_memberprofileinsertcheck == 1 }">
+										<a
 										href="/memberDetail?memberprofile_u_key=${u_key}&trainerprofile_u_key=0"
-										class="aa"
-										style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">프로필
+										class="aa" id="user_a2"
+										style="color: #4169e1; margin-top: -10px; ">프로필
 										조회 ></a>
+										</c:if>
 								</div>
 
-								<div id="rounded-rectangle1" class="bg-light"
+								<div id="user_rounded-rectangle1" class="bg-light"
 									style="margin-top: 30px;">
 									<h3 style="color: black; padding: 30px;">
 										<Strong>상담 관리</Strong>

@@ -313,6 +313,8 @@ public interface BoardMapper {
 
 	public List<TrainerProfile> gettrainerprofilesearchrejectList(Pagination pagination);
 
+	public void memberProfilemodifyinsert(MemberProfile memberprofile);
+
 	
 
 

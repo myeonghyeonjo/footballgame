@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="search"/>
+		<item key="selection" value="rounded-rectangle1"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="search"/>
-			<item value="page2"/>
-			<item value="search_All"/>
-			<item value="선생님"/>
-			<item value="찾으시는"/>
-			<item value="centerlistcomplete2"/>
-			<item value="trainersign"/>
-			<item value="trainersing"/>
-			<item value="beforeSignuptrainer"/>
-			<item value="signupptInsert"/>
-			<item value="&quot;PT제목을 입력해주세요&quot;,"/>
-			<item value="&quot;PT제목을 입력해주세요&quot;, "/>
-			<item value="&quot;PT제목을 입력해주세요&quot;, &quot;PT전문분야를 선택해주세요&quot;, &quot;P"/>
-			<item value="createTrainerProfile"/>
-			<item value="trainersi"/>
+			<item value="rounded-rectangle1"/>
+			<item value="user_rounded-rectangle1"/>
+			<item value="프로필을 등록하고, 조회하거나 수정하세요."/>
+			<item value="프로필을 "/>
+			<item value="프로필을 등록하고"/>
+			<item value="#a"/>
+			<item value="회원 프로필 관리"/>
+			<item value="block "/>
+			<item value="wrapper"/>
+			<item value="trainerProfileFileInsert"/>
+			<item value="trainerProfileFileInsert3"/>
+			<item value="trainerprofiledetail"/>
+			<item value="trainerprofilede"/>
+			<item value="trainerprofile"/>
+			<item value="realFolder"/>
 		</list>
 		<list key="replacehistory">
 		</list>

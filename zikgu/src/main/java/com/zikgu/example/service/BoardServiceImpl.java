@@ -865,6 +865,11 @@ public class BoardServiceImpl implements BoardService {
 	public List<TrainerProfile> gettrainerprofilesearchrejectList(Pagination pagination){
 		return boardmapper.gettrainerprofilesearchrejectList(pagination);
 	}
+	
+	@Override
+	public void memberProfilemodifyinsert(MemberProfile memberprofile) {
+		boardmapper.memberProfilemodifyinsert(memberprofile);
+	}
 }
 
 

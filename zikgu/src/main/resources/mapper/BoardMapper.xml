@@ -580,7 +580,7 @@
 		m_dayafter,
 		m_saterafter,
 		m_saterdaymorning,
-		m_saterday,
+		m_saterafter,
 		m_sunday,
 		m_sundaymorning,
 		m_sundayafter,
@@ -1389,6 +1389,34 @@
 
 		)
 	</insert>
+	
+	<!-- 멤버 프로필  수정 -->
+	<update id="memberProfilemodifyinsert" parameterType="memberprofile">
+		UPDATE memberprofile SET
+		
+		m_name = #{m_name},
+		m_programsub= #{m_programsub},
+		m_oldaddress= #{m_oldaddress},
+		m_detailaddress = #{m_detailaddress},
+		m_optionaddress = #{m_optionaddress},
+		m_gender = #{m_gender},
+		m_intro = #{m_intro},
+		m_postcode = #{m_postcode},
+		m_loadaddress = #{m_loadaddress},
+		m_likegender = #{m_likegender},
+		m_day = #{m_day},
+		m_daymorning = #{m_daymorning},
+		m_dayafter = #{m_dayafter},
+		m_saterafter = #{m_saterafter},
+		m_saterdaymorning = #{m_saterdaymorning},
+		m_saterday = #{m_saterday},
+		m_sunday = #{m_sunday},
+		m_sundaymorning = #{m_sundaymorning},
+		m_sundayafter = #{m_sundayafter},
+		m_schedureintro = #{m_schedureintro}
+		WHERE m_id = #{m_id}
+	</update>
+	
 	<!-- PT 프로그램 등록 -->
 	<insert id="ptInsert" parameterType="memberprofile">
 		INSERT INTO pt (
@@ -1494,6 +1522,8 @@
 
 		WHERE tf_id = #{tf_id}
 	</update>
+	
+	
 	<!-- 트레이너 주소 수정 -->
 	<update id="trainerprofileaddressupdate" parameterType="trainerprofile">
 		UPDATE trainerprofile SET
