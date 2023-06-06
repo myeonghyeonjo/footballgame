@@ -509,7 +509,7 @@ $("#phone").blur(function(){
 		    	})
 		    	.done(function( html ) {
 		    		console.log(html);
-		    		 $('#signupComplete').html(html);
+		    		  window.location.href = '/login';
 		    	});
 	   
 		    }else{	alert("회원가입을 완료할 수 없습니다. 다시한번 확인해주십시오.");

@@ -15,6 +15,7 @@ public class User implements UserDetails {
 	private String uDateTime;	//u_datetime
 	private String phone;
 	private int u_key;
+	private int u_memberprofileinsertcheck;
 	private int u_trainercheck;
 	//security 관련
 	private Collection<? extends GrantedAuthority> authorities;
@@ -23,7 +24,7 @@ public class User implements UserDetails {
 	private boolean isAccountNonLocked;
 	private boolean isCredentialsNonExpired;
 	private boolean isEnabled;
-	private int u_memberprofileinsertcheck;
+	
 	
 
 	public String getuName() {
@@ -113,7 +114,7 @@ public class User implements UserDetails {
 
 	@Override 
 	public String toString() {
-		return "User [u_memberprofileinsertcheck=" + u_memberprofileinsertcheck + ", username=" + username + ",  password=" + password + ", u_trainercheck=" + u_trainercheck + ", u_key=" + u_key + ", uName=" + uName + ", uDateTime=" + uDateTime
+		return "User [ username=" + username + ",  password=" + password + ", u_trainercheck=" + u_trainercheck + ", u_key=" + u_key +", u_memberprofileinsertcheck=" + u_memberprofileinsertcheck +", uName=" + uName + ", uDateTime=" + uDateTime
 				+ ", authorities=" + authorities + ", isAccountNonExpired=" + isAccountNonExpired
 				+ ", isAccountNonLocked=" + isAccountNonLocked + ", isCredentialsNonExpired=" + isCredentialsNonExpired
 				+ ", isEnabled=" + isEnabled + "]";
@@ -134,15 +135,6 @@ public class User implements UserDetails {
 	public void setU_key(int u_key) {
 		this.u_key = u_key;
 	}
-
-	public int getU_trainercheck() {
-		return u_trainercheck;
-	}
-
-	public void setU_trainercheck(int u_trainercheck) {
-		this.u_trainercheck = u_trainercheck;
-	}
-
 	public int getU_memberprofileinsertcheck() {
 		return u_memberprofileinsertcheck;
 	}
@@ -150,12 +142,13 @@ public class User implements UserDetails {
 	public void setU_memberprofileinsertcheck(int u_memberprofileinsertcheck) {
 		this.u_memberprofileinsertcheck = u_memberprofileinsertcheck;
 	}
-
 	
+	public int getU_trainercheck() {
+		return u_trainercheck;
+	}
 
-
-	
-
-
+	public void setU_trainercheck(int u_trainercheck) {
+		this.u_trainercheck = u_trainercheck;
+	}
 }
 

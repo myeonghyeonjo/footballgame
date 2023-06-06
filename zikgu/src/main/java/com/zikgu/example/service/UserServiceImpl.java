@@ -85,6 +85,11 @@ public class UserServiceImpl implements UserService {
    public void memberprofileinsertcheckupdate(int u_key) {
 	   userMapper.memberprofileinsertcheckupdate(u_key);
    }
+   
+   @Override
+   public void memberprofileinsertcheckdelete(int u_key) {
+	   userMapper.memberprofileinsertcheckdelete(u_key);
+   }
 
   
 

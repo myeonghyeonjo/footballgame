@@ -205,9 +205,9 @@ button:hover {
 							<p id="trainer_p1"
 								style="margin-left: 30px; ">프로필을
 								등록하고, 조회하거나 수정하세요.</p>
-							<a href="/trainerProfile?u_key=${u_key}" class="aa" id="trainer_a1"
+							<!-- <a href="/trainerProfile?u_key=${u_key}" class="aa" id="trainer_a1"
 								style="color: #4169e1; margin-left: 30px; margin-top: -10px;">프로필
-								등록 ></a> 
+								등록 ></a>  -->
 								<a href="/trainerProfileDetailModify?u_key=${u_key}" class="aa"
 								style="color: #4169e1; margin-left: 30px; margin-top: -10px; ">프로필
 								조회 ></a>

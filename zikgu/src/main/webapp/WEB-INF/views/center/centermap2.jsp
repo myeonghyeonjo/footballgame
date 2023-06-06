@@ -3935,6 +3935,7 @@ input, select, textarea {
 							<li class="aa"><a href="/trainerProfileDetail?u_key=${u_key}" class="sticky_btn" style="color:black; text-decoration:none;" >Profile</a></li>
       						<li class="aa" ><a href="#" class="sticky_btn" style="color:black; text-decoration:none;">Review</a></li>
       						<li onclick="Centerview(1);" class="aa" style="color:black;">Center</li>
+      						
       						<p><input type="hidden" name="tf_loadaddress" class="sticky_btn"  value="${tf_loadaddress}" id="tf_loadaddress"></p>
 							<p><input type="hidden" name="c_name" class="sticky_btn"  value="${c_name}" id="c_name"></p>
 							

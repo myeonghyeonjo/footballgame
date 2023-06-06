@@ -209,54 +209,145 @@
     							<input type="hidden" id="successprogramChk"/>
 										<br>
 									<div style="display: flex;">
-										<input type="checkbox" style="flex: 0.3;" name="m_programsub"
+										<c:if test="${fn:contains(memberprofile.m_programsub, '벌크업')}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" checked
 											class="btn-check" id="btn-check-outlined" autocomplete="off" value="벌크업">
 										<label class="btn btn-outline-dark" for="btn-check-outlined">벌크업</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="m_programsub"
+										</c:if>
+										<c:if test="${!(fn:contains(memberprofile.m_programsub, '벌크업'))}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" 
+											class="btn-check" id="btn-check-outlined" autocomplete="off" value="벌크업">
+										<label class="btn btn-outline-dark" for="btn-check-outlined">벌크업</label><br>
+										</c:if>
+										<c:if test="${fn:contains(memberprofile.m_programsub, '식단관리')}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" checked
 											class="btn-check" id="btn-check-outlined2" autocomplete="off" value="식단관리">
 										<label class="btn btn-outline-dark" for="btn-check-outlined2">식단관리</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="m_programsub"
+										</c:if>
+										<c:if test="${!(fn:contains(memberprofile.m_programsub, '식단관리'))}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" 
+											class="btn-check" id="btn-check-outlined2" autocomplete="off" value="식단관리">
+										<label class="btn btn-outline-dark" for="btn-check-outlined2">식단관리</label><br>
+										</c:if>
+										<c:if test="${fn:contains(memberprofile.m_programsub, '기능개선')}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" checked
 											class="btn-check" id="btn-check-outlined3" autocomplete="off" value="기능개선">
 										<label class="btn btn-outline-dark" for="btn-check-outlined3">기능개선</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="m_programsub"
+										</c:if>
+										<c:if test="${!(fn:contains(memberprofile.m_programsub, '기능개선'))}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" 
+											class="btn-check" id="btn-check-outlined3" autocomplete="off" value="기능개선">
+										<label class="btn btn-outline-dark" for="btn-check-outlined3">기능개선</label><br>
+										</c:if>
+										<c:if test="${fn:contains(memberprofile.m_programsub, '바른체형')}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" checked
 											class="btn-check" id="btn-check-outlined4" autocomplete="off" value="바른체형">
 										<label class="btn btn-outline-dark" for="btn-check-outlined4">바른체형</label><br>
+										</c:if>
+										<c:if test="${!(fn:contains(memberprofile.m_programsub, '바른체형'))}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" 
+											class="btn-check" id="btn-check-outlined4" autocomplete="off" value="바른체형">
+										<label class="btn btn-outline-dark" for="btn-check-outlined4">바른체형</label><br>
+										</c:if>
+										<c:if test="${fn:contains(memberprofile.m_programsub, '다이어트')}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" checked
+											class="btn-check" id="btn-check-outlined5" autocomplete="off" value="다이어트">
+										<label class="btn btn-outline-dark" for="btn-check-outlined5">다이어트</label><br>
+										</c:if>
+										<c:if test="${!(fn:contains(memberprofile.m_programsub, '다이어트'))}">
 										<input type="checkbox" style="flex: 0.3;" name="m_programsub"
 											class="btn-check" id="btn-check-outlined5" autocomplete="off" value="다이어트">
 										<label class="btn btn-outline-dark" for="btn-check-outlined5">다이어트</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="m_programsub"
+										</c:if>
+										<c:if test="${fn:contains(memberprofile.m_programsub, '하체라인')}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" checked
 											class="btn-check" id="btn-check-outlined6" autocomplete="off" value="하체라인">
 										<label class="btn btn-outline-dark" for="btn-check-outlined6">하체라인</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="m_programsub"
+										</c:if>
+										<c:if test="${!(fn:contains(memberprofile.m_programsub, '하체라인'))}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" 
+											class="btn-check" id="btn-check-outlined6" autocomplete="off" value="하체라인">
+										<label class="btn btn-outline-dark" for="btn-check-outlined6">하체라인</label><br>
+										</c:if>
+										<c:if test="${fn:contains(memberprofile.m_programsub, '기초체력')}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" checked
 											class="btn-check" id="btn-check-outlined7" autocomplete="off" value="기초체력">
 										<label class="btn btn-outline-dark" for="btn-check-outlined7">기초체력</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="m_programsub"
+										</c:if>
+										<c:if test="${!(fn:contains(memberprofile.m_programsub, '기초체력'))}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" 
+											class="btn-check" id="btn-check-outlined7" autocomplete="off" value="기초체력">
+										<label class="btn btn-outline-dark" for="btn-check-outlined7">기초체력</label><br>
+										</c:if>
+										<c:if test="${fn:contains(memberprofile.m_programsub, '근력향상')}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" checked
 											class="btn-check" id="btn-check-outlined8" autocomplete="off" value="근력향상">
 										<label class="btn btn-outline-dark" for="btn-check-outlined8">근력향상</label><br>
+										</c:if>
+										<c:if test="${!(fn:contains(memberprofile.m_programsub, '근력향상'))}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" 
+											class="btn-check" id="btn-check-outlined8" autocomplete="off" value="근력향상">
+										<label class="btn btn-outline-dark" for="btn-check-outlined8">근력향상</label><br>
+										</c:if>
 									</div>
 									<div style="display: flex;">
-										<input type="checkbox" style="flex: 0.3;" name="m_programsub"
+										<c:if test="${fn:contains(memberprofile.m_programsub, '대회준비')}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" checked
 											class="btn-check" id="btn-check-outlined9" autocomplete="off" value="대회준비">
 										<label class="btn btn-outline-dark" for="btn-check-outlined9">대회준비</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="m_programsub	"
+										</c:if>
+										<c:if test="${!(fn:contains(memberprofile.m_programsub, '대회준비'))}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" 
+											class="btn-check" id="btn-check-outlined9" autocomplete="off" value="대회준비">
+										<label class="btn btn-outline-dark" for="btn-check-outlined9">대회준비</label><br>
+										</c:if>
+										<c:if test="${fn:contains(memberprofile.m_programsub, '산전산후케어')}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" checked
 											class="btn-check" id="btn-check-outlined10" value="산전산후케어"
 											autocomplete="off"> <label
 											class="btn btn-outline-dark" for="btn-check-outlined10">산전산후케어</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="m_programsub"
+											</c:if>
+												<c:if test="${!(fn:contains(memberprofile.m_programsub, '산전산후케어'))}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" 
+											class="btn-check" id="btn-check-outlined10" value="산전산후케어"
+											autocomplete="off"> <label
+											class="btn btn-outline-dark" for="btn-check-outlined10">산전산후케어</label><br>
+											</c:if>
+										<c:if test="${fn:contains(memberprofile.m_programsub, '바디프로필')}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" checked
 											class="btn-check" id="btn-check-outlined11" value="바디프로필"
 											autocomplete="off"> <label
 											class="btn btn-outline-dark" for="btn-check-outlined11">바디프로필</label><br>
+										</c:if>
+										<c:if test="${!(fn:contains(memberprofile.m_programsub, '바디프로필'))}">
+										<input type="checkbox" style="flex: 0.3;" name="m_programsub" 
+											class="btn-check" id="btn-check-outlined11" value="바디프로필"
+											autocomplete="off"> <label
+											class="btn btn-outline-dark" for="btn-check-outlined11">바디프로필</label><br>
+										</c:if>
 									</div>
 									
 									<label for="username2" class="form-label"
 										style="font-size: 15px;">성별을 선택해주세요</label><br>
 										<div style="display: flex;">
+											<c:if test="${fn:contains(memberprofile.m_gender, '남성')}">
 										    <input type="checkbox" style="flex: 0.3;" name="m_gender" class="btn-check" id="btn-check-outlined12" autocomplete="off" value="남성" onchange="handleCheckboxChange(this)" checked>
 										    <label class="btn btn-outline-dark" for="btn-check-outlined12">남성</label><br>
-										    <input type="checkbox" style="flex: 0.3; " name="m_gender" class="btn-check" id="btn-check-outlined13" value="여성" autocomplete="off" onchange="handleCheckboxChange(this)">
+										    </c:if>
+										    <c:if test="${!(fn:contains(memberprofile.m_gender, '남성'))}">
+										    <input type="checkbox" style="flex: 0.3;" name="m_gender" class="btn-check" id="btn-check-outlined12" autocomplete="off" value="남성" onchange="handleCheckboxChange(this)" >
+										    <label class="btn btn-outline-dark" for="btn-check-outlined12">남성</label><br>
+										    </c:if>
+										    <c:if test="${fn:contains(memberprofile.m_gender, '여성')}">
+										    <input type="checkbox" style="flex: 0.3; " name="m_gender" class="btn-check" id="btn-check-outlined13" value="여성" autocomplete="off" onchange="handleCheckboxChange(this)" checked>
 										    <label class="btn btn-outline-dark" for="btn-check-outlined13">여성</label><br>
+											</c:if>
+											<c:if test="${!(fn:contains(memberprofile.m_gender, '여성'))}">
+										    <input type="checkbox" style="flex: 0.3; " name="m_gender" class="btn-check" id="btn-check-outlined13" value="여성" autocomplete="off" onchange="handleCheckboxChange(this)" >
+										    <label class="btn btn-outline-dark" for="btn-check-outlined13">여성</label><br>
+											</c:if>
 										</div>
-									
+										
 									<label for="username2" class="form-label"
 										style="font-size: 15px;">선호하시는 트레이너분의 성별을 선택해주세요</label><br>
 										<div style="display: flex;">
@@ -331,11 +422,11 @@
 								<div style="display: flex;">
 									<input type="hidden" id="scales" name="m_saterday" value="1">&nbsp;
 									<p style="text-align: left; padding-top: 10px;">토요일</p>
-									&nbsp;&nbsp;&nbsp; <input type="text" id="timeInput" name="m_saterdaymorning" value="${memberprofile.m_saterafter }"
+									&nbsp;&nbsp;&nbsp; <input type="text" id="timeInput" name="m_saterdaymorning" value="${memberprofile.m_saterdaymorning }"
 										style="width: 140px; flex: 0.2; height: 40px;"
 										class="form-control numberOnly" oninput="formatTime(this)" maxlength="4" placeholder="00:00">~
 									<input type="text" id="timeInput" name="m_saterafter"
-										style="width: 140px; flex: 0.2; height: 40px;" value="${memberprofile.m_saterdaymorning }"
+										style="width: 140px; flex: 0.2; height: 40px;" value="${memberprofile.m_saterafter }"
 										class="form-control numberOnly" oninput="formatTime(this)" maxlength="4" placeholder="00:00">
 										<span class="point successsaterdaymorningChk"></span>
     							<input type="hidden" id="saterdaymorningDoubleChk"/>
@@ -874,9 +965,9 @@
 	        var m_likegender = $('input[name="m_likegender"]').val();
 	        var m_daymorning = $('input[name="m_daymorning"]').val();
 	        var m_dayafter = $('input[name="m_dayafter"]').val();
-	        var m_saterday = $('input[name="m_saterday"]').val();
+	        var m_saterdaymorning = $('input[name="m_saterdaymorning"]').val();
 	        var m_saterafter = $('input[name="m_saterafter"]').val();
-	        var m_sundaymorning = $('input[name="m_sunday"]').val();
+	        var m_sundaymorning = $('input[name="m_sundaymorning"]').val();
 	        var m_sundayafter = $('input[name="m_sundayafter"]').val();
 	        var m_schedureintro = $('input[name="m_schedureintro"]').val();
 	        var m_programsub= checkedValues.join(",");
@@ -888,13 +979,13 @@
 	        var m_optionaddress = $("#sample4_extraAddress").val();
 	        var m_intro =  $("#m_intro").val();
 	        var m_id = $("#m_id").val();
-	      
+	        sessionStorage.setItem('postmemberprofilemodify', 'true');
 	        //$('#text-output').text("You typed: " + input);
 	        $.ajax({
 	    		method: "POST",
 	    		url: "/memberProfilemodifyinsert",
 	    		data: {m_id:m_id,m_programsub:m_programsub,m_intro:m_intro, m_name : m_name , m_gender:m_gender, m_likegender:m_likegender, m_daymorning:m_daymorning,m_dayafter:m_dayafter
-	    			,m_saterday:m_saterday,m_saterafter:m_saterafter,m_sundaymorning:m_sundaymorning,m_sundayafter:m_sundayafter,m_schedureintro:m_schedureintro
+	    			,m_saterdaymorning:m_saterdaymorning,m_saterafter:m_saterafter,m_sundaymorning:m_sundaymorning,m_sundayafter:m_sundayafter,m_schedureintro:m_schedureintro
 	    			,m_postcode:m_postcode,m_loadaddress:m_loadaddress,m_oldaddress:m_oldaddress,m_detailaddress:m_detailaddress,m_optionaddress:m_optionaddress}
 	    	})
 	    	.done(function( html ) {
@@ -961,6 +1052,14 @@
 	    	return false
 	    }    	    	
     });
+    
+    window.addEventListener('load', function() {
+        // 커서를 위치시킬 요소 선택
+        var m_name = document.getElementById('username');
+        
+        // 커서 위치 설정
+        m_name.focus();
+      });
 </script>
 </body>
 </html>

@@ -2266,18 +2266,18 @@ input, select, textarea {
 
 			input[type="checkbox"] + label:before,
 			input[type="radio"] + label:before {
-				border-radius: 8px;
+				border-radius: 0px;
 				border: solid 1px;
 				content: '';
-				display: inline-block;
-				font-size: 0.8em;
-				height: 2.0625em;
+				display: none;
+				font-size: 0em;
+				height: 0em;
 				left: 0;
-				line-height: 2.0625em;
+				line-height:0em;
 				position: absolute;
-				text-align: center;
+				text-align: right;
 				top: 0;
-				width: 2.0625em;
+				width: 0px;
 			}
 
 		input[type="checkbox"]:checked + label:before,
@@ -3656,6 +3656,7 @@ input, select, textarea {
 		#main input[type="checkbox"] + label,
 		#main input[type="radio"] + label {
 			color: #636363;
+			padding:19px;
 		}
 
 			#main input[type="checkbox"] + label:before,
@@ -4019,9 +4020,10 @@ input, select, textarea {
 					<nav id="nav">
 					<ul>
 			
-							<li class="aa"><a href="/trainerProfileDetailModify?u_key=${trainerprofile.u_key}" class="sticky_btn" style="color:black; text-decoration:none;" >Profile</a></li>
-      						<li class="aa" ><a href="#" class="sticky_btn" style="color:black; text-decoration:none;">Review</a></li>
-      						<li onclick="Centerview2(1);" class="aa" style="color:black;">Center</li>
+							<li class="aa"><a href="/trainerProfileDetailModify?u_key=${trainerprofile.u_key}" class="sticky_btn" style="color:white; text-decoration:none;background-color:black;">Profile</a></li>
+      						<li class="aa" ><a href="#" onclick="Centerview2(1);" class="sticky_btn" style="color:black;text-decoration:none;">Center</a></li>
+      						
+						    <li   onclick="review(1);"><a  href="#"class="aa" style="color:black;text-decoration:none;" >Review</a></li>	
       						<p><input type="hidden" name="tf_loadaddress" class="sticky_btn"  value="${trainerprofile.tf_loadaddress}" id="tf_loadaddress"></p>
 							<p><input type="hidden" name="u_key" class="sticky_btn"  value="${trainerprofile.u_key}" id="u_key"></p>
 							
@@ -4233,6 +4235,7 @@ input, select, textarea {
 								</header>
 								
 								<ul class="features">
+								
 									<li>
 										<span class="icon solid major style1 fa-code"></span>
 										<h5><Strong style="color:black">${PT_List.pt_programsub1}</Strong></h5>
@@ -4241,31 +4244,146 @@ input, select, textarea {
 										<span class="icon major style3 fa-copy"></span>
 										<h5><Strong style="color:black">${PT_List.pt_programsub2}</strong></h5>
 									</li>
-									<li>
+									<li >
 										<span class="icon major style5 fa-gem"></span>
 										<h5><Strong style="color:black">${PT_List.pt_programsub3}</Strong></h5>
 									</li>
 									
-									<p id="pt_programintroUpdateOk${PT_List.pt_id}" style="color:black; margin-top:40px;">${PT_List.pt_programintro}</p>
+									<div style="display:none;">
+										<h4><Strong style="color:black">전문분야(3개를 선택해주세요)</Strong></h4>
+										<div style="display: flex; margin-right:300px; margin-left:300px;">
+												<c:if test="${PT_List.pt_programsub1=='벌크업' || PT_List.pt_programsub2=='벌크업' || PT_List.pt_programsub3=='벌크업'}">
+												<input type="checkbox" style="" name="PT_programsub" checked
+													class="btn-check" id="btn-check-outlined" autocomplete="off" value="벌크업">
+												<label class="btn btn-outline-dark" for="btn-check-outlined">벌크업</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1!='벌크업' && PT_List.pt_programsub2!='벌크업' && PT_List.pt_programsub3!='벌크업'}">
+												<input type="checkbox" style="" name="PT_programsub"
+													class="btn-check" id="btn-check-outlined" autocomplete="off" value="벌크업">
+												<label class="btn btn-outline-dark" for="btn-check-outlined">벌크업</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1=='식단관리' || PT_List.pt_programsub2=='식단관리' || PT_List.pt_programsub3=='식단관리'}">
+												<input type="checkbox" style="" name="PT_programsub" checked
+													class="btn-check" id="btn-check-outlined2" autocomplete="off" value="식단관리">
+												<label class="btn btn-outline-dark" for="btn-check-outlined2">식단관리</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1!='식단관리' && PT_List.pt_programsub2!='식단관리' && PT_List.pt_programsub3!='식단관리'}">
+												<input type="checkbox" style="" name="PT_programsub" 
+													class="btn-check" id="btn-check-outlined2" autocomplete="off" value="식단관리">
+												<label class="btn btn-outline-dark" for="btn-check-outlined2">식단관리</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1=='기능개선' || PT_List.pt_programsub2=='기능개선' || PT_List.pt_programsub3=='기능개선'}">
+												<input type="checkbox" style="" name="PT_programsub" checked
+													class="btn-check" id="btn-check-outlined3" autocomplete="off" value="기능개선">
+												<label class="btn btn-outline-dark" for="btn-check-outlined3">기능개선</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1!='기능개선' && PT_List.pt_programsub2!='기능개선' && PT_List.pt_programsub3!='기능개선'}">
+												<input type="checkbox" style="" name="PT_programsub" 
+													class="btn-check" id="btn-check-outlined3" autocomplete="off" value="기능개선">
+												<label class="btn btn-outline-dark" for="btn-check-outlined3">기능개선</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1=='바른체형' || PT_List.pt_programsub2=='바른체형' || PT_List.pt_programsub3=='바른체형'}">
+												<input type="checkbox" style="" name="PT_programsub" checked
+													class="btn-check" id="btn-check-outlined4" autocomplete="off" value="바른체형">
+												<label class="btn btn-outline-dark" for="btn-check-outlined4">바른체형</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1!='바른체형' && PT_List.pt_programsub2!='바른체형' && PT_List.pt_programsub3!='바른체형'}">
+												<input type="checkbox" style="" name="PT_programsub"
+													class="btn-check" id="btn-check-outlined4" autocomplete="off" value="바른체형">
+												<label class="btn btn-outline-dark" for="btn-check-outlined4">바른체형</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1=='다이어트' || PT_List.pt_programsub2=='다이어트' || PT_List.pt_programsub3=='다이어트'}">
+												<input type="checkbox" style="" name="PT_programsub" checked
+													class="btn-check" id="btn-check-outlined5" autocomplete="off" value="다이어트">
+												<label class="btn btn-outline-dark" for="btn-check-outlined5">다이어트</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1!='다이어트' && PT_List.pt_programsub2!='다이어트' && PT_List.pt_programsub3!='다이어트'}">
+												<input type="checkbox" style="" name="PT_programsub"
+													class="btn-check" id="btn-check-outlined5" autocomplete="off" value="다이어트">
+												<label class="btn btn-outline-dark" for="btn-check-outlined5">다이어트</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1=='하체라인' || PT_List.pt_programsub2=='하체라인' || PT_List.pt_programsub3=='하체라인'}">
+												<input type="checkbox" style="" name="PT_programsub" checked
+													class="btn-check" id="btn-check-outlined6" autocomplete="off" value="하체라인">
+												<label class="btn btn-outline-dark" for="btn-check-outlined6">하체라인</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1!='하체라인' && PT_List.pt_programsub2!='하체라인' && PT_List.pt_programsub3!='하체라인'}">
+												<input type="checkbox" style="" name="PT_programsub"
+													class="btn-check" id="btn-check-outlined6" autocomplete="off" value="하체라인">
+												<label class="btn btn-outline-dark" for="btn-check-outlined6">하체라인</label><br>
+												</c:if>
+															</div>
+											<div style="display: flex;margin-right:300px; margin-left:300px;"">
+											<c:if test="${PT_List.pt_programsub1=='기초체력' || PT_List.pt_programsub2=='기초체력' || PT_List.pt_programsub3=='기초체력'}">
+											<input type="checkbox" style="" name="PT_programsub" checked
+													class="btn-check" id="btn-check-outlined7" autocomplete="off" value="기초체력">
+												<label class="btn btn-outline-dark" for="btn-check-outlined7">기초체력</label><br>
+												</c:if>
+													<c:if test="${PT_List.pt_programsub1!='기초체력' && PT_List.pt_programsub2!='기초체력' && PT_List.pt_programsub3!='기초체력'}">
+											<input type="checkbox" style="" name="PT_programsub" 
+													class="btn-check" id="btn-check-outlined7" autocomplete="off" value="기초체력">
+												<label class="btn btn-outline-dark" for="btn-check-outlined7">기초체력</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1=='근력향상' || PT_List.pt_programsub2=='근력향상' || PT_List.pt_programsub3=='근력향상'}">
+												<input type="checkbox" style="" name="PT_programsub" checked
+													class="btn-check" id="btn-check-outlined8" autocomplete="off" value="근력향상">
+												<label class="btn btn-outline-dark" for="btn-check-outlined8">근력향상</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1!='근력향상' && PT_List.pt_programsub2!='근력향상' && PT_List.pt_programsub3!='근력향상'}">
+												<input type="checkbox" style="" name="PT_programsub" 
+													class="btn-check" id="btn-check-outlined8" autocomplete="off" value="근력향상">
+												<label class="btn btn-outline-dark" for="btn-check-outlined8">근력향상</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1=='대회준비' || PT_List.pt_programsub2=='대회준비' || PT_List.pt_programsub3=='대회준비'}">
+												<input type="checkbox" style="" name="PT_programsub" checked
+													class="btn-check" id="btn-check-outlined9" autocomplete="off" value="대회준비">
+												<label class="btn btn-outline-dark" for="btn-check-outlined9">대회준비</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1!='대회준비' && PT_List.pt_programsub2!='대회준비' && PT_List.pt_programsub3!='대회준비'}">
+												<input type="checkbox" style="" name="PT_programsub" 
+													class="btn-check" id="btn-check-outlined9" autocomplete="off" value="대회준비">
+												<label class="btn btn-outline-dark" for="btn-check-outlined9">대회준비</label><br>
+												</c:if>
+												<c:if test="${PT_List.pt_programsub1=='산전산후케어' || PT_List.pt_programsub2=='산전산후케어' || PT_List.pt_programsub3=='산전산후케어'}">
+												<input type="checkbox" style="" name="PT_programsub" checked
+													class="btn-check" id="btn-check-outlined10" value="산전산후케어"
+													autocomplete="off"> <label
+													class="btn btn-outline-dark" for="btn-check-outlined10">산전산후케어</label><br>
+													</c:if>
+											<c:if test="${PT_List.pt_programsub1!='산전산후케어' && PT_List.pt_programsub2!='산전산후케어' && PT_List.pt_programsub3!='산전산후케어'}">
+												<input type="checkbox" style="" name="PT_programsub" 
+													class="btn-check" id="btn-check-outlined10" value="산전산후케어"
+													autocomplete="off"> <label
+													class="btn btn-outline-dark" for="btn-check-outlined10">산전산후케어</label><br>
+													</c:if>
+													<c:if test="${PT_List.pt_programsub1=='바디프로필' || PT_List.pt_programsub2=='바디프로필' || PT_List.pt_programsub3=='바디프로필'}">
+												<input type="checkbox" style=";" name="PT_programsub" checked
+													class="btn-check" id="btn-check-outlined11" value="바디프로필"
+													autocomplete="off"> <label
+													class="btn btn-outline-dark" for="btn-check-outlined11">바디프로필</label><br>
+													</c:if>
+												<c:if test="${PT_List.pt_programsub1!='바디프로필' && PT_List.pt_programsub2!='바디프로필' && PT_List.pt_programsub3!='바디프로필'}">
+												<input type="checkbox" style=";" name="PT_programsub" 
+													class="btn-check" id="btn-check-outlined11" value="바디프로필"
+													autocomplete="off"> <label
+													class="btn btn-outline-dark" for="btn-check-outlined11">바디프로필</label><br>
+													</c:if>
+											</div>
+										</div>
+										<button	style="display: none;"  id="tf_PTprogrammodifyBtnOK" tf_id="${trainerprofile.tf_id}" class="btn btn-outline-dark">등록</button>
+										<button  	style="display: none;"  id="tf_PTprogramBtnCancel" class="btn btn-outline-dark" >취소</button>
+										<button style="display:on; margin-top:20px;" type="button" id="tf_PTprogrammodifyBtn" class="btn btn-outline-dark">수정</button>		
+										<button type="button" style="display:none; margin-top:20px;"class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#deleteModal" data-ptid="${PT_List.pt_id}" data-ukey="${trainerprofile.u_key}" >삭제</button>
+										<input type="hidden" name="pt_id" value="${PT_List.pt_id}">
+							
+											
 								</ul>
-								
+									<p id="pt_programintroUpdateOk${PT_List.pt_id}" style="color:black; margin-top:40px;">${PT_List.pt_programintro}</p>
 								<footer class="major">
 								
 									
 								</footer>
 							<ul style="display: none;" class="features">
-									<li>
-										<span class="icon solid major style1 fa-code"></span>
-										<h5><Strong style="color:black">${PT_List.pt_programsub1}</Strong></h5>
-									</li>
-									<li>
-										<span class="icon major style3 fa-copy"></span>
-										<h5><Strong style="color:black">${PT_List.pt_programsub2}</strong></h5>
-									</li>
-									<li>
-										<span class="icon major style5 fa-gem"></span>
-										<h5><Strong style="color:black">${PT_List.pt_programsub3}</Strong></h5>
-									</li>
 									
 								<textarea  style=" color:black; height: 300px; " rows="2" cols="120" name="" >${PT_List.pt_programintro}</textarea>
 								</ul>	
@@ -4936,10 +5054,6 @@ $(document).on('click', '#tf_PTmodifyBtnOK', function () {
 	$(this).next().css("display", "none");
 	$(this).next().next().css("display", "");
 	$(this).prev().css("display", "none");
-	
-	
-	
-	
 	$(this).css("display", "none");
 	let pt_id = $(this).next().next().next().next().val();
 	let pt_programintro = $(this).prev().children('textarea').val();
@@ -4949,8 +5063,43 @@ $(document).on('click', '#tf_PTmodifyBtnOK', function () {
 		data: { pt_id: pt_id,  pt_programintro: pt_programintro }
 	})
 	.done(function( html ) {
-		//console.log(html);
+		console.log(html);
 		$('#pt_programintroUpdateOk'+pt_id).html(html);
+	});
+});
+$(document).on('click', '#tf_PTprogrammodifyBtnOK', function () {
+	$(this).prev().prev().prev().prev().prev().css("display", "");
+	$(this).prev().prev().prev().prev().css("display", "");
+	$(this).prev().prev().prev().css("display", "");
+	$(this).prev().prev().css("display", "");
+	$(this).prev().css("display", "none");
+	$(this).next().css("display", "none");
+	$(this).next().next().css("display", "");
+	$(this).next().next().next().css("display", "");
+	$(this).css("display", "none");
+	let pt_id = $(this).next().next().next().next().val();
+	
+	var u_key = $('#u_key').val();
+	
+	var checkboxes = document.getElementsByName('PT_programsub');
+	var pt_programsub = [];
+	for (var i = 0; i < checkboxes.length; i++) {
+	    if (checkboxes[i].checked) {
+	    	pt_programsub.push(checkboxes[i].value);
+	    }
+	}
+	var pt_programsubString = pt_programsub.join(',');  // 쉼표로 구분된 문자열 생성
+	console.log(pt_programsubString);
+	console.log(pt_programsub);
+	$.ajax({
+		method: "POST",
+		url: "aj-updatept_programsub",
+		data: { pt_programsub: pt_programsubString,  pt_id: pt_id }
+	})
+	.done(function( html ) {
+		//console.log(html);
+		//$('#testtest').html(html);
+		location.href='${path}	/trainerProfileDetailModify?u_key='+u_key+'';
 	});
 });
 
@@ -4983,6 +5132,22 @@ $(document).on('click', '#tf_PTmodifyBtn', function () {
 	$(this).prev().css("display", "");
 	$(this).prev().prev().css("display", "");
 	$(this).prev().prev().prev().css("display", "");
+	//$(this).prev().prev().prev().prev().prev().children('p').css("display", "none");
+	$(this).prev().prev().prev().prev().prev().css("display", "none");
+	
+	$(this).css("display", "none");
+	//$(this).parent().parent().css("display", "none");
+});
+$(document).on('click', '#tf_PTprogrammodifyBtn', function () {
+	$(this).next().css("display", "none");
+	$(this).prev().css("display", "");
+	$(this).prev().prev().css("display", "");
+	$(this).prev().prev().prev().css("display", "");
+	$(this).prev().prev().prev().prev().css("display", "none");
+	$(this).prev().prev().prev().prev().prev().css("display", "none");
+	$(this).prev().prev().prev().prev().prev().prev().css("display", "none");
+	$(this).prev().prev().prev().prev().prev().prev().prev().css("display", "none");
+	
 	//$(this).prev().prev().prev().prev().prev().children('p').css("display", "none");
 	$(this).prev().prev().prev().prev().prev().css("display", "none");
 	
@@ -5057,6 +5222,17 @@ $(document).on('click', '#tf_PTBtnCancel', function () {
 	$(this).prev().css("display", "none");
 	$(this).css("display", "none");
 	$(this).next().css("display", "");
+});
+$(document).on('click', '#tf_PTprogramBtnCancel', function () {
+	$(this).prev().prev().prev().prev().css("display", "");
+	$(this).prev().prev().prev().prev().prev().css("display", "");
+	$(this).prev().prev().prev().prev().prev().prev().css("display", "");
+	$(this).prev().prev().prev().css("display", "");
+	$(this).prev().prev().css("display", "none");
+	$(this).prev().css("display", "none");
+	$(this).css("display", "none");
+	$(this).next().css("display", "");
+	$(this).next().next().css("display", "none");
 });
 
 $(document).on('click', '#tf_pttitleBtn', function () {
@@ -5294,7 +5470,46 @@ $('#deleteFile2Modal').on('show.bs.modal', function(event) {
  }
 
 
+function review(test) {
+	
+	  let trainer_u_key = $('#u_key').val();
+	  
+	 let member_u_key = $('#member_u_key').val();
+		console.log("trainer_u_key:"+trainer_u_key);
+		console.log("member_u_key:"+member_u_key);
+		$.ajax({
+			method: "POST",
+			url: "/aj-review_trainerprofilemodify",
+			data: {  trainer_u_key: trainer_u_key}
+		})
+		.done(function( html ) {
+			
+			$('#centerview').html(html);
+		     $( '.slider2' ).slick( {
+			          autoplay: true,
+			          autoplaySpeed: 1000,
+			        });
+			     
+			   
+		});
+		
+}
+var limit = 3;
 
+//체크박스 요소들을 가져온다
+var checkboxes = document.getElementsByName("PT_programsub");
 
+//체크박스 요소들의 변경 이벤트를 모니터링한다
+for (var i = 0; i < checkboxes.length; i++) {
+checkboxes[i].addEventListener('change', function() {
+// 현재 선택된 체크박스 갯수를 가져온다
+var checkedCount = document.querySelectorAll('input[name=PT_programsub]:checked').length;
+
+// 만약 선택된 체크박스 갯수가 제한된 갯수를 초과하면 체크박스 선택을 취소한다
+if (checkedCount > limit) {
+ this.checked = false;
+}
+});
+}
 </script>
 </html>

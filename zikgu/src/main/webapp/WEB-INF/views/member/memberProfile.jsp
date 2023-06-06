@@ -672,21 +672,19 @@
     function handleCheckboxChange(checkbox) {
         var checkboxes = document.getElementsByName("m_gender");
         for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i] !== checkbox) {
-                checkboxes[i].checked = false;
-            }
-        }
+            checkboxes[i].checked = false;
+          }
+          checkbox.checked = true;
     }
     
     //체크박스 성별선호도 중복선택불가
     
     function handleCheckboxChange2(checkbox) {
-        var checkboxes2 = document.getElementsByName("m_likegender");
-        for (var i = 0; i < checkboxes2.length; i++) {
-            if (checkboxes2[i] !== checkbox) {
-                checkboxes2[i].checked = false;
-            }
-        }
+        var checkboxes = document.getElementsByName("m_likegender");
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = false;
+          }
+          checkbox.checked = true;
     }
   //input 숫자만 입력
     $(".numberOnly").on("keyup", function(event) {
@@ -885,9 +883,10 @@
 	        var m_optionaddress = $("#sample4_extraAddress").val();
 	        var m_intro =  $("#m_intro").val();
 	        
-	      
+	        sessionStorage.setItem('postmemberprofile', 'true');
 	        //$('#text-output').text("You typed: " + input);
 	        $.ajax({
+	        	
 	    		method: "POST",
 	    		url: "/memberProfileinsert",
 	    		data: {m_programsub:m_programsub,m_intro:m_intro, m_name : m_name ,m_program:m_program, m_gender:m_gender, m_likegender:m_likegender, m_daymorning:m_daymorning,m_dayafter:m_dayafter
@@ -946,13 +945,11 @@
 	    		$(".successpostcodeChk").text("주소를 입력해주세요. :)");
 				$(".successpostcodeChk").css("color", "red");	
 	    	}
-	    	
-	    	
-	    	
-	    	
 	    	return false
 	    }    	    	
     });
+ 
+
 </script>
 </body>
 </html>

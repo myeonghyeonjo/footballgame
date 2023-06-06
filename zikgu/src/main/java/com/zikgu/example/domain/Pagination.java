@@ -12,6 +12,7 @@ public class Pagination {
 	public static final int pageUnit=5;  // 한번에 불러 올 pagination 수
 	public static final int perPage=10;   // 한번에 불러 올 Count 수
 	private String keyword;
+	private int u_key;
 	
 	
 	public void init() {
@@ -85,6 +86,14 @@ public class Pagination {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+
+	public int getU_key() {
+		return u_key;
+	}
+
+	public void setU_key(int u_key) {
+		this.u_key = u_key;
 	}
 	
 }

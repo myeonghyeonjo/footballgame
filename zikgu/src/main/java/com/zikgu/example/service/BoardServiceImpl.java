@@ -870,6 +870,82 @@ public class BoardServiceImpl implements BoardService {
 	public void memberProfilemodifyinsert(MemberProfile memberprofile) {
 		boardmapper.memberProfilemodifyinsert(memberprofile);
 	}
+	
+	@Override
+	public void memberProfiledelete(MemberProfile memberprofile) {
+		boardmapper.memberProfiledelete(memberprofile);
+	}
+	
+	@Override
+	public int getmemberprofileU_key(MemberProfile memberprofile) {
+		return boardmapper.getmemberprofileU_key(memberprofile);
+	}
+	
+	@Override
+	public int gettrainerprofileconsultingcompleteCount(int u_key) {
+		return boardmapper.gettrainerprofileconsultingcompleteCount(u_key);
+	}
+	
+	@Override
+	public List<TrainerProfile> trainerprofileconsultingcomplete(int u_key){
+		return boardmapper.trainerprofileconsultingcomplete(u_key);
+	}
+	
+	@Override
+	public int gettrainerprofileconsultingCount(int u_key) {
+		return boardmapper.gettrainerprofileconsultingCount(u_key);
+	}
+	
+	@Override
+	public int gettrainerprofileconsultingwaiteCount(int u_key) {
+		return boardmapper.gettrainerprofileconsultingwaiteCount(u_key);
+	}
+	
+	@Override
+	public List<TrainerProfile> trainerprofileconsultingwaite(int u_key){
+		return boardmapper.trainerprofileconsultingwaite(u_key);
+	}
+	
+	@Override
+	public int getconsultingSearchCount(Pagination pagination) {
+		return boardmapper.getconsultingSearchCount(pagination);
+	}
+	
+	@Override
+	public List<TrainerProfile> gettconsultingsearchList(Pagination pagination){
+		return boardmapper.gettconsultingsearchList(pagination);
+	}
+	
+	@Override
+	public int getconsultingSearchcompleteCount(Pagination pagination) {
+		return boardmapper.getconsultingSearchcompleteCount(pagination);
+	}
+	
+	@Override
+	public List<TrainerProfile> gettconsultingcompletesearchList(Pagination pagination){
+		return boardmapper.gettconsultingcompletesearchList(pagination);
+	}
+	
+	@Override
+	public int getconsultingSearchwaiteCount(Pagination pagination) {
+		return boardmapper.getconsultingSearchwaiteCount(pagination);
+	}
+	
+	@Override
+	public List<TrainerProfile> gettconsultingwaitesearchList(Pagination pagination){
+		return boardmapper.gettconsultingwaitesearchList(pagination);
+	}
+	
+	@Override
+	public int getmemberprofilecountcheck(int memberprofile_u_key) {
+		return boardmapper.getmemberprofilecountcheck(memberprofile_u_key);
+	}
+	
+	@Override
+	public void updatept_programsub(PT pt) {
+		boardmapper.updatept_programsub(pt);
+	}
+
 }
 
 

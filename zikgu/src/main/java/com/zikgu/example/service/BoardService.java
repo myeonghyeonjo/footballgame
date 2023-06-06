@@ -321,6 +321,36 @@ public interface BoardService {
 
 	public void memberProfilemodifyinsert(MemberProfile memberprofile);
 
+	public void memberProfiledelete(MemberProfile memberprofile);
+
+	public int getmemberprofileU_key(MemberProfile memberprofile);
+
+	public int gettrainerprofileconsultingcompleteCount(int u_key);
+
+	public List<TrainerProfile> trainerprofileconsultingcomplete(int u_key);
+
+	public int gettrainerprofileconsultingCount(int u_key);
+
+	public int gettrainerprofileconsultingwaiteCount(int u_key);
+
+	public List<TrainerProfile> trainerprofileconsultingwaite(int u_key);
+
+	public int getconsultingSearchCount(Pagination pagination);
+
+	public List<TrainerProfile> gettconsultingsearchList(Pagination pagination);
+
+	public int getconsultingSearchcompleteCount(Pagination pagination);
+
+	public List<TrainerProfile> gettconsultingcompletesearchList(Pagination pagination);
+
+	public int getconsultingSearchwaiteCount(Pagination pagination);
+
+	public List<TrainerProfile> gettconsultingwaitesearchList(Pagination pagination);
+
+	public int getmemberprofilecountcheck(int memberprofile_u_key);
+
+	public void updatept_programsub(PT pt);
+
 	
 
 	

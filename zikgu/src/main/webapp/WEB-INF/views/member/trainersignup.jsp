@@ -515,7 +515,7 @@ $("#phone").blur(function(){
 		    	})
 		    	.done(function( html ) {
 		    		console.log(html);
-		    		 $('#signupComplete').html(html);
+		    		window.location.href = '/login';
 		    	});
 	   
 	   

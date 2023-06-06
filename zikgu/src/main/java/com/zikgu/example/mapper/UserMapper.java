@@ -35,6 +35,8 @@ public interface UserMapper {
 
 		public void memberprofileinsertcheckupdate(int u_key);
 
+		public void memberprofileinsertcheckdelete(int u_key);
+
 	
 }
 

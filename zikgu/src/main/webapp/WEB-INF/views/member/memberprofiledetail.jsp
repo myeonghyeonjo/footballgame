@@ -56,6 +56,27 @@
 
 
 <style>
+.error, .error2{
+    width: 250px;
+    height: 20px;
+    height:auto;
+    position: fixed;
+    left: 50%;
+    margin-left:-125px;
+    bottom: 100px;
+    z-index: 9999;
+    background-color: #383838;
+    color: #F0F0F0;
+    font-family: Calibri;
+    font-size: 15px;
+    padding: 10px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+} 
+
 .image-container {
 	width: 200px; /* 원하는 가로 크기로 지정 */
 	height: 200px; /* 원하는 세로 크기로 지정 */
@@ -296,7 +317,9 @@ style>.image-container2 {
 					
 							</div>
 
-
+	<input type="hidden" value="${toast}" id="toastcheck">		
+<div class='error' style='display:none'>등록완료</div>
+<div class='error2' style='display:none'>수정완료</div>
 
 
 
@@ -311,9 +334,9 @@ style>.image-container2 {
 			<button type="button" onclick="modifyClick()" style="width:100px; margin-right:10px;"class="btn btn-outline-dark" >
 	  			수정
 			</button> 
-		<button type="button" style="width:100px;"class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#consultingcheckModal">
+		<!-- <button type="button" style="width:100px;"class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#deleteModal">
 	  			삭제
-			</button> 
+			</button> -->   
 		</c:if>
 		</sec:authorize>
  <c:if test="${((fn:contains(trainerprofile.tf_consulting,memberprofile.u_key)))}">
@@ -334,9 +357,26 @@ style>.image-container2 {
 	  			상담완료
 			</button>
 		</c:if>
-	
-	
 
+
+<!-- 삭제 Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">프로필 삭제</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        정말 프로필을 삭제 하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark"" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickDelete(consultingInfo)">확인</button>
+      </div>
+    </div>
+  </div>
+</div>	
 <!-- 상담완료 Modal -->
 <div class="modal fade" id="consultingcheckModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -378,6 +418,7 @@ style>.image-container2 {
 <sec:authentication property="principal" var="principal"/>  
 	<input type="hidden" name="trainerprofile_u_key" value="${principal.u_key}">
 	<input type="hidden" name="memberprofile_u_key" value="${memberprofile.u_key}">
+	<input type="hidden" name="u_key" value="${memberprofile.u_key}">
 	<input type="hidden" name="m_id" id="m_id"value="${memberprofile.m_id}">
 </form>					
 						</div>
@@ -407,7 +448,14 @@ style>.image-container2 {
 		formName.submit();
 	}
 </script>
-
+<!-- 삭제하기 누르면 발생 -->
+<script>
+	function clickDelete(formName) {
+		formName.action = "/memberprofiledelete";
+		formName.method = "post";
+		formName.submit();
+	}
+</script>
 <!-- 상담완료 취소하기 누르면 발생 -->
 <script>
 	function clickConfirmCancel(formName) {
@@ -523,6 +571,21 @@ function modifyClick(formName) {
 }
 
 
+window.addEventListener('load', function() {
+	  var postmemberprofile = sessionStorage.getItem('postmemberprofile');
+	  var postmemberprofilemodify = sessionStorage.getItem('postmemberprofilemodify');
+	  
+	  if (postmemberprofile) {
+		  $('.error').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+	    // 상태 제거
+	    sessionStorage.removeItem('postmemberprofile');
+	  }
+	  if (postmemberprofilemodify) {
+		  $('.error2').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+	    // 상태 제거
+	    sessionStorage.removeItem('postmemberprofilemodify');
+	  }
+	});
 
 
 </script>

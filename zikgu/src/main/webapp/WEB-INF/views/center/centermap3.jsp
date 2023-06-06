@@ -3918,6 +3918,7 @@ input, select, textarea {
 <jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>
 	
 	<body class="is-preload">
+		<p><input type="hidden" name="u_key" class="sticky_btn"  value="${u_key}" id="u_key"></p>
 	
 		<!-- Wrapper -->
 			<div id="wrapper">
@@ -3926,7 +3927,7 @@ input, select, textarea {
 					<header id="header" class="alt">
 						<span class="logo"><img src="images/logo.svg" alt="" /></span>
 						<h1 id="c_name" style="color:white;">${center.c_name}</h1>
-						<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#centerModal" data-ptid="${PT_List.pt_id}" data-ukey="${trainerprofile.u_key}" >센터변경</button>
+						<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#centerModal" data-ptid="${PT_List.pt_id}" data-ukey="${trainerprofile.u_key}" style="color:white;">센터변경</button>
 						
 						
 						
@@ -3937,9 +3938,10 @@ input, select, textarea {
 					<nav id="nav">
 					<ul>
 			
-							<li class="aa"><a href="/trainerProfileDetailModify?u_key=${u_key}" class="sticky_btn" style="color:black; text-decoration:none;" >Profile</a></li>
-      						<li class="aa" ><a href="#" class="sticky_btn" style="color:black; text-decoration:none;">Review2</a></li>
-      						<li onclick="Centerview(1);" class="aa" style="color:black;">Center</li>
+							<li class="aa"><a href="/trainerProfileDetailModify?u_key=${u_key}" class="sticky_btn" style="color:black; text-decoration:none;" >Profile</a></li>	
+      						<li class="aa" ><a href="#" onclick="Centerview(1);" class="sticky_btn" style="color:white; background-color:black; text-decoration:none;">Center</a></li>
+      						<li   onclick="review(1);"><a  href="#"class="aa" style="color:black;text-decoration:none;" >Review</a></li>	
+      					
       						<p><input type="hidden" name="tf_loadaddress" class="sticky_btn"  value="${tf_loadaddress}" id="tf_loadaddress"></p>
 							<p><input type="hidden" name="c_name" class="sticky_btn"  value="${c_name}" id="c_name"></p>
 							
@@ -4172,6 +4174,30 @@ geocoder.addressSearch(tf_loadaddress, function(result, status) {
     } 
 });    
 
+function review(test) {
+	
+	  let trainer_u_key = $('#u_key').val();
+	  
+	 let member_u_key = $('#member_u_key').val();
+		console.log("trainer_u_key:"+trainer_u_key);
+		console.log("member_u_key:"+member_u_key);
+		$.ajax({
+			method: "POST",
+			url: "/aj-review_trainerprofilemodify",
+			data: {  trainer_u_key: trainer_u_key}
+		})
+		.done(function( html ) {
+			
+			$('#centerview').html(html);
+		     $( '.slider2' ).slick( {
+			          autoplay: true,
+			          autoplaySpeed: 1000,
+			        });
+			     
+			   
+		});
+		
+}
 
 </script>
 </html>
