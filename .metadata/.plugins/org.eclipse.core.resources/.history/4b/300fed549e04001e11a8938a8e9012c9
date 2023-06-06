@@ -1562,7 +1562,6 @@ model.addAttribute("exception", exception);
 		@RequestMapping("/aj-centerview2")
 	    public String centerview2( Model model,Center center,@RequestParam("tf_loadaddress") String tf_loadaddress,@RequestParam("u_key") String u_key) {
 			System.out.println("tf_loadaddress:"+tf_loadaddress);
-			System.out.println("u_key:"+u_key);
 			center = boardservice.getcenterDetail2(tf_loadaddress);
 			int c_id = center.getC_id();
 			

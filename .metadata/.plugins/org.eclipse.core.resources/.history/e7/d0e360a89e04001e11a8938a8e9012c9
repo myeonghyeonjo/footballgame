@@ -3995,15 +3995,8 @@ input, select, textarea {
 					<ul>
 							<sec:authorize access="hasRole('ROLE_USER')">
 							<sec:authentication property="principal" var="principal"/>  			
-							<li ><a class="aa" href="/trainerProfileDetail?u_key=${trainerprofile.u_key}&memberprofile_u_key=${principal.u_key}"  style="color:white; background-color:black;" >Profile</a></li>      
-							</sec:authorize>	
-							<sec:authorize access="hasRole('ROLE_ADMIN')">
-							<sec:authentication property="principal" var="principal"/>  			
-							<li ><a class="aa" href="/trainerProfileDetail?u_key=${trainerprofile.u_key}&memberprofile_u_key=${principal.u_key}"  style="color:white; background-color:black;" >Profile</a></li>      
-							</sec:authorize>	
-							<sec:authorize access="isAnonymous()">
-							<li ><a class="aa" href="/trainerProfileDetail?u_key=${trainerprofile.u_key}&memberprofile_u_key=0"  style="color:white; background-color:black;" >Profile</a></li>      				
-      						</sec:authorize>
+							<li ><a class="aa" href="/trainerProfileDetail?u_key=${trainerprofile.u_key}&memberprofile_u_key=32"  style="color:white; background-color:black;" >Profile</a></li>      
+							</sec:authorize>						
       						<li  onclick="Centerview(1);"><a href="#" class="aa" style="color:black">Center</a></li>	
       						 <li   onclick="review(1);"><a  href="#"class="aa" style="color:black">review</a></li>						
       						<p><input type="hidden" name="tf_loadaddress" class="sticky_btn"  value="${trainerprofile.tf_loadaddress}" id="tf_loadaddress"></p>

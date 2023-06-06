@@ -3931,9 +3931,14 @@ input, select, textarea {
 				<!-- Nav -->
 					<nav id="nav">
 					<ul>
-																<sec:authentication property="principal" var="principal"/>  			
-			
+							<sec:authorize access="isAuthenticated()">
+							<sec:authentication property="principal" var="principal"/>  			
 							<li ><a class="aa" href="/trainerProfileDetail?u_key=${u_key}&memberprofile_u_key=${principal.u_key}"  style="color:black; " >Profile</a></li>      						
+      						</sec:authorize>
+      						<sec:authorize access="isAnonymous()">
+							<sec:authentication property="principal" var="principal"/>  			
+							<li ><a class="aa" href="/trainerProfileDetail?u_key=${u_key}&memberprofile_u_key=0"  style="color:black; " >Profile</a></li>      						
+      						</sec:authorize>
       						<li  ><a href="#" class="aa" style="color:white; background-color:black;">Center</a></li>	
       						 <li   onclick="review(1);"><a  href="#"class="aa" style="color:black; ">review</a></li>		
 
