@@ -3983,14 +3983,38 @@ input, select, textarea {
 									</div>
 										
 								</div>
-								
+								<style>
+									@media ( max-width : 650px) {
+										.btn-outline-dark {
+											
+											
+											font-size:10px;
+										}
+									}
+									@media ( max-width : 505px) {
+										.dynamic_programsub2{
+											display:flex;
+										}
+										.dynamic_programsub1{
+											display:none;
+										}
+									}
+									@media ( min-width : 505px) {
+										.dynamic_programsub2{
+											display:none;
+										}
+										.dynamic_programsub1{
+											display:flex;
+										}
+									}
+								</style>
 								<h4><Strong style="color:black">전문분야(최대 3개까지 선택가능)</Strong></h4>
-								<div style="display: flex;">
+								<div style="display: ;" class="dynamic_programsub1">
 										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
 											class="btn-check" id="btn-check-outlined" autocomplete="off" value="벌크업">
 										<label class="btn btn-outline-dark" for="btn-check-outlined">벌크업</label><br>
 										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
-											`class="btn-check" id="btn-check-outlined2" autocomplete="off" value="식단관리">
+											class="btn-check" id="btn-check-outlined2" autocomplete="off" value="식단관리">
 										<label class="btn btn-outline-dark" for="btn-check-outlined2">식단관리</label><br>
 										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
 											class="btn-check" id="btn-check-outlined3" autocomplete="off" value="기능개선">
@@ -4002,16 +4026,54 @@ input, select, textarea {
 											class="btn-check" id="btn-check-outlined5" autocomplete="off" value="다이어트">
 										<label class="btn btn-outline-dark" for="btn-check-outlined5">다이어트</label><br>
 										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
+											class="btn-check" id="btn-check-outlined8" autocomplete="off" value="근력향상">
+										<label class="btn btn-outline-dark" for="btn-check-outlined8">근력향상</label><br>
+									</div>
+									<div style="display: ;" class="dynamic_programsub2">
+										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
+											class="btn-check" id="btn-check-outlined" autocomplete="off" value="벌크업">
+										<label class="btn btn-outline-dark" for="btn-check-outlined">벌크업</label><br>
+										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
+											class="btn-check" id="btn-check-outlined2" autocomplete="off" value="식단관리">
+										<label class="btn btn-outline-dark" for="btn-check-outlined2">식단관리</label><br>
+										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
+											class="btn-check" id="btn-check-outlined3" autocomplete="off" value="기능개선">
+										<label class="btn btn-outline-dark" for="btn-check-outlined3">기능개선</label><br>
+										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
+											class="btn-check" id="btn-check-outlined4" autocomplete="off" value="바른체형">
+										<label class="btn btn-outline-dark" for="btn-check-outlined4">바른체형</label><br>
+										
+									</div >
+									<div style="display: ;" class="dynamic_programsub2">
+									
+										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
+											class="btn-check" id="btn-check-outlined5" autocomplete="off" value="다이어트">
+										<label class="btn btn-outline-dark" for="btn-check-outlined5">다이어트</label><br>
+										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
+											class="btn-check" id="btn-check-outlined8" autocomplete="off" value="근력향상">
+										<label class="btn btn-outline-dark" for="btn-check-outlined8">근력향상</label><br>
+										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
+											class="btn-check" id="btn-check-outlined9" autocomplete="off" value="대회준비">
+										<label class="btn btn-outline-dark" for="btn-check-outlined9">대회준비</label><br>
+										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
+											class="btn-check" id="btn-check-outlined10" value="산전산후케어"
+											autocomplete="off"> <label
+											class="btn btn-outline-dark" for="btn-check-outlined10">산전산후케어</label><br>
+									</div >
+									<div style="display: ;" class="dynamic_programsub2">
+									<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
+											class="btn-check" id="btn-check-outlined11" value="바디프로필"
+											autocomplete="off"> <label
+											class="btn btn-outline-dark" for="btn-check-outlined11">바디프로필</label><br>
+											<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
 											class="btn-check" id="btn-check-outlined6" autocomplete="off" value="하체라인">
 										<label class="btn btn-outline-dark" for="btn-check-outlined6">하체라인</label><br>
 										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
 											class="btn-check" id="btn-check-outlined7" autocomplete="off" value="기초체력">
 										<label class="btn btn-outline-dark" for="btn-check-outlined7">기초체력</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
-											class="btn-check" id="btn-check-outlined8" autocomplete="off" value="근력향상">
-										<label class="btn btn-outline-dark" for="btn-check-outlined8">근력향상</label><br>
-									</div>
-									<div style="display: flex;">
+										
+									</div >
+									<div style="display: ;"  class="dynamic_programsub1">
 										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
 											class="btn-check" id="btn-check-outlined9" autocomplete="off" value="대회준비">
 										<label class="btn btn-outline-dark" for="btn-check-outlined9">대회준비</label><br>
@@ -4023,6 +4085,13 @@ input, select, textarea {
 											class="btn-check" id="btn-check-outlined11" value="바디프로필"
 											autocomplete="off"> <label
 											class="btn btn-outline-dark" for="btn-check-outlined11">바디프로필</label><br>
+											<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
+											class="btn-check" id="btn-check-outlined6" autocomplete="off" value="하체라인">
+										<label class="btn btn-outline-dark" for="btn-check-outlined6">하체라인</label><br>
+										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
+											class="btn-check" id="btn-check-outlined7" autocomplete="off" value="기초체력">
+										<label class="btn btn-outline-dark" for="btn-check-outlined7">기초체력</label><br>
+										
 									</div>
 									
 			
