@@ -5,12 +5,12 @@
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 
 <html>
-		<head>
-		<title>Stellar by HTML5 UP</title>
+	<head>
+		<title>트레이너 프로필</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -70,210 +70,53 @@
 
 	</head>
 
-
+    <script>
+      $( document ).ready( function() {
+        $( '.slider1' ).slick( {
+          autoplay: true,
+          autoplaySpeed: 1000,
+        } );
+      } );
+    </script>
     <style>
- 
-    
-    
-input[type="checkbox"] {
-  /* 체크박스의 기본 스타일을 제거합니다. */
- 
-  -moz-appearance: none;
-  appearance: none;
-  /* 체크박스의 크기를 지정합니다. */
-  width: 161px;
-  height: 161px;
-  /* 체크박스의 테두리, 배경색, 그림자 등을 스타일링합니다. */
-  border: 10px  black;
-  background-color:black;
-
-}
-  
-    
-    
-.insert {
-    padding: 20px 30px;
-    display: block;
-    width: 600px;
-    margin: 5vh auto;
-    height: 90vh;
-    border: 1px solid #dbdbdb;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-.insert .file-list {
-    height: 200px;
-    overflow: auto;
-    border: 1px solid #989898;
+.error, .error2, .error3, .error4, .error5 {
+    width: 250px;
+    height: 20px;
+    height:auto;
+    position: fixed;
+    left: 50%;
+    margin-left:-125px;
+    bottom: 100px;
+    z-index: 9999;
+    background-color: #383838;
+    color: #F0F0F0;
+    font-family: Calibri;
+    font-size: 15px;
     padding: 10px;
-}
-.insert .file-list .filebox p {
-    font-size: 14px;
-    margin-top: 10px;
-    display: inline-block;
-}
-.insert .file-list .filebox .delete i{
-    color: #ff5353;
-    margin-left: 5px;
-}
-
- 
- 
- 
-   
-.modal-dialog.modal-80size {
- 
-  
-}
-
-.modal-content.modal-80size {
-  width: 500px;
-  height: 860px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
 } 
-    
-
-.image-container {
-	width: 200px; /* 원하는 가로 크기로 지정 */
-	height: 200px; /* 원하는 세로 크기로 지정 */
-	text-align: left;
-}
-
-.image-container img {
-	width: 33%;
-	height: 33%;
-	object-fit: cover;
-}    
-    
-    
-/* 각 별들의 기본 설정 */
-.starR{
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  color: transparent;
-  text-shadow: 0 0 0 #f0f0f0;
-  font-size: 1.8em;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-
-/* 별 이모지에 마우스 오버 시 */
-.starR:hover {
-  text-shadow: 0 0 0 #ccc;
-}
-
-/* 별 이모지를 클릭 후 class="on"이 되었을 경우 */
-.starR.on{
-  text-shadow: 0 0 0 #ffbc00;
-}
-/* 각 별들의 기본 설정 */
-.starR2{
-  display: inline-block;
-  width: 15px;
-  height: 30px;
-  color: transparent;
-  text-shadow: 0 0 0 #f0f0f0;
-  font-size: 1.0em;
-  box-sizing: border-box;
-
-}
-
-/* 별 이모지에 마우스 오버 시 */
-.starR2:hover {
-  text-shadow: 0 0 0 #ccc;
-}
-
-/* 별 이모지를 클릭 후 class="on"이 되었을 경우 */
-.starR2.on{
-  text-shadow: 0 0 0 #ffbc00;
-}
-/* 각 별들의 기본 설정 */
-.starR3{
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  color: transparent;
-  text-shadow: 0 0 0 #f0f0f0;
-  font-size: 1.8em;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-
-/* 별 이모지에 마우스 오버 시 */
-.starR3:hover {
-  text-shadow: 0 0 0 #ccc;
-}
-
-/* 별 이모지를 클릭 후 class="on"이 되었을 경우 */
-.starR3.on{
-  text-shadow: 0 0 0 #ffbc00;
-}
-/* 각 별들의 기본 설정 */
-.open{
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  color: transparent;
-  text-shadow: 0 0 0 #f0f0f0;
-  font-size: 1.8em;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-
-.open2{
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  color: transparent;
-  text-shadow: 0 0 0 #f0f0f0;
-  font-size: 1.8em;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-
-.open3{
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  color: transparent;
-  text-shadow: 0 0 0 #f0f0f0;
-  font-size: 1.8em;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-
-/* 별 이모지에 마우스 오버 시 */
-.open:hover {
-  text-shadow: 0 0 0 #ccc;
-}
-
-/* 별 이모지를 클릭 후 class="on"이 되었을 경우 */
-.open.on{
-  text-shadow: 0 0 0 #ffbc00;
-}
- /* 별 이모지에 마우스 오버 시 */
-.open2:hover {
-  text-shadow: 0 0 0 #ccc;
-}
-
-/* 별 이모지를 클릭 후 class="on"이 되었을 경우 */
-.open2.on{
-  text-shadow: 0 0 0 #ffbc00;
-}
- /* 별 이모지에 마우스 오버 시 */
-.open3:hover {
-  text-shadow: 0 0 0 #ccc;
-}
-
-/* 별 이모지를 클릭 후 class="on"이 되었을 경우 */
-.open3.on{
-  text-shadow: 0 0 0 #ffbc00;
-}
-      
+    /* PT사진 슬라이드 */
+    .slider10 img {
+        max-width: 100%;
+        height: auto;
+      }
+      .slider10 {
+        width: 900px;
+        margin: 0px auto;
+      }
+      .slider10 .slick-slide {
+        margin: 10px;
+      }
+     
+   
     
     
-    .slider2 img {
+    
+    .slider1 img {
         max-width: 100%;
         height: 250px;
          border-radius: 95%;
@@ -281,7 +124,7 @@ input[type="checkbox"] {
          
          
       }
-      .slider2 {
+      .slider1 {
         width: 300px;
         margin: 0px auto; 
       }
@@ -304,21 +147,6 @@ input[type="checkbox"] {
     
     </style>
 <style>
-input[type=file]::file-selector-button {
-  width: 150px;
-  height: 30px;
-  background: #fff;
-  border: 1px solid rgb(77,77,77);
-  border-radius: 10px;
-  cursor: pointer;
-  &:hover {
-    background: rgb(77,77,77);
-    color: #fff;
-  }
-}
-
-
-
 @import url(fontawesome-all.min.css);
 @import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400';
 
@@ -334,7 +162,7 @@ pre, a, abbr, acronym, address, big, cite,
 code, del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var, b,
 u, i, center, dl, dt, dd, ol, ul, li, fieldset,
-form, legend, table, caption, tbody,
+form, label, legend, table, caption, tbody,
 tfoot, thead, tr, th, td, article, aside,
 canvas, details, embed, figure, figcaption,
 footer, header, hgroup, menu, nav, output, ruby,
@@ -387,7 +215,10 @@ input::-moz-focus-inner {
 }
 
 input, select, textarea {
-
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
 }
 
 /* Basic */
@@ -407,6 +238,8 @@ input, select, textarea {
 		}
 
 	}
+	
+	
 
 	html {
 		box-sizing: border-box;
@@ -616,7 +449,7 @@ input, select, textarea {
 	}
 
 	input, select, textarea {
-		
+		color: #000000;
 	}
 
 	a:hover {
@@ -2145,7 +1978,7 @@ input, select, textarea {
 	button,
 	.button {
 		-moz-appearance: none;
-		
+		-webkit-appearance: none;
 		-ms-appearance: none;
 		appearance: none;
 		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
@@ -2159,7 +1992,7 @@ input, select, textarea {
 		font-weight: 300;
 		height: 2.75em;
 		line-height: 2.75em;
-		min-width: 9.25em;
+		
 		padding: 0 1.5em;
 		text-align: center;
 		text-decoration: none;
@@ -2226,7 +2059,7 @@ input, select, textarea {
 			input[type="button"],
 			button,
 			.button {
-				min-width: 0;
+				
 			}
 
 		}
@@ -2237,7 +2070,7 @@ input, select, textarea {
 	button,
 	.button {
 		background-color: transparent;
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+		
 		color: black;
 	}
 
@@ -2306,7 +2139,7 @@ input, select, textarea {
 	}
 
 	label {
-	
+		display: block;
 		font-size: 0.9em;
 		font-weight: 400;
 		margin: 0 0 1em 0;
@@ -2318,11 +2151,12 @@ input, select, textarea {
 	select,
 	textarea {
 		-moz-appearance: none;
+		-webkit-appearance: none;
 		-ms-appearance: none;
 		appearance: none;
 		border-radius: 8px;
 		border: solid 1px;
-		color: inherit;
+	
 		display: block;
 		outline: 0;
 		padding: 0 1em;
@@ -2366,7 +2200,74 @@ input, select, textarea {
 		padding: 0.75em 1em;
 	}
 
-	
+	input[type="checkbox"],
+	input[type="radio"] {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		display: block;
+		float: left;
+		margin-right: -2em;
+		opacity: 0;
+		width: 1em;
+		z-index: -1;
+	}
+
+		input[type="checkbox"] + label,
+		input[type="radio"] + label {
+			text-decoration: none;
+			cursor: pointer;
+			display: inline-block;
+			font-size: 1em;
+			font-weight: 300;
+			padding-left: 2.4em;
+			padding-right: 0.75em;
+			position: relative;
+		}
+
+			input[type="checkbox"] + label:before,
+			input[type="radio"] + label:before {
+				-moz-osx-font-smoothing: grayscale;
+				-webkit-font-smoothing: antialiased;
+				display: inline-block;
+				font-style: normal;
+				font-variant: normal;
+				text-rendering: auto;
+				line-height: 1;
+				text-transform: none !important;
+				font-family: 'Font Awesome 5 Free';
+				font-weight: 900;
+			}
+
+			input[type="checkbox"] + label:before,
+			input[type="radio"] + label:before {
+				border-radius: 8px;
+				border: solid 1px;
+				content: '';
+				display: inline-block;
+				font-size: 0.8em;
+				height: 2.0625em;
+				left: 0;
+				line-height: 2.0625em;
+				position: absolute;
+				text-align: center;
+				top: 0;
+				width: 2.0625em;
+			}
+
+		input[type="checkbox"]:checked + label:before,
+		input[type="radio"]:checked + label:before {
+			content: '\f00c';
+		}
+
+	input[type="checkbox"] + label:before {
+		border-radius: 8px;
+	}
+
+	input[type="radio"] + label:before {
+		border-radius: 100%;
+	}
 
 	::-webkit-input-placeholder {
 		opacity: 1.0;
@@ -2384,7 +2285,9 @@ input, select, textarea {
 		opacity: 1.0;
 	}
 
-
+	label {
+		color: #ffffff;
+	}
 
 	input[type="text"],
 	input[type="password"],
@@ -2413,7 +2316,29 @@ input, select, textarea {
 			background: #935d8c;
 		}
 
-	
+	input[type="checkbox"] + label,
+	input[type="radio"] + label {
+		color: rgba(255, 255, 255, 0.65);
+	}
+
+		input[type="checkbox"] + label:before,
+		input[type="radio"] + label:before {
+			background: rgba(255, 255, 255, 0.075);
+			border-color: rgba(255, 255, 255, 0.35);
+		}
+
+	input[type="checkbox"]:checked + label:before,
+	input[type="radio"]:checked + label:before {
+		background-color: #ffffff;
+		border-color: #ffffff;
+		color: #935d8c;
+	}
+
+	input[type="checkbox"]:focus + label:before,
+	input[type="radio"]:focus + label:before {
+		border-color: #8cc9f0;
+		box-shadow: 0 0 0 1px #8cc9f0;
+	}
 
 	::-webkit-input-placeholder {
 		color: rgba(255, 255, 255, 0.5) !important;
@@ -2530,9 +2455,6 @@ input, select, textarea {
 		.icon.style5 {
 			color: #8cc9f0;
 		}
-		.icon.style6 {
-			color: black;
-		}
 
 		@media screen and (max-width: 1680px) {
 
@@ -2598,8 +2520,8 @@ input, select, textarea {
 		.image img {
 			border-radius: 8px;
 			display: block;
-			width:130px;
-		height:130px;
+			width:200px;
+		height:200px;
 		}
 
 		.image.left, .image.right {
@@ -3002,7 +2924,10 @@ input, select, textarea {
 	
 	.aa { text-decoration:none }
 
-.aa:hover{ text-decoration: underline }
+.aa:hover{ text-decoration: underline ;
+			text-decoration-color : black;
+			
+}
 
 		table tbody tr:nth-child(2n + 1) {
 			background-color: rgba(255, 255, 255, 0.075);
@@ -3133,9 +3058,6 @@ input, select, textarea {
 
 			.statistics li.style5 {
 				background-color: #8cc9f0;
-			}
-			.statistics li.style6 {
-				background-color: black;
 			}
 
 			.statistics li strong, .statistics li b {
@@ -3623,9 +3545,7 @@ input, select, textarea {
 		#main input[type="button"],
 		#main button,
 		#main .button {
-			background-color: transparent;
-			box-shadow: inset 0 0 0 1px #dddddd;
-			color: #636363 !important;
+			color: #000000 !important;
 			
 		}
 
@@ -3687,7 +3607,9 @@ input, select, textarea {
 					color: #ffffff !important;
 				}
 
-		
+		#main label {
+			color: #636363;
+		}
 
 		#main input[type="text"],
 		#main input[type="password"],
@@ -3716,7 +3638,29 @@ input, select, textarea {
 				background: #ffffff;
 			}
 
-		
+		#main input[type="checkbox"] + label,
+		#main input[type="radio"] + label {
+			color: #636363;
+		}
+
+			#main input[type="checkbox"] + label:before,
+			#main input[type="radio"] + label:before {
+				background: rgba(222, 222, 222, 0.25);
+				border-color: #dddddd;
+			}
+
+		#main input[type="checkbox"]:checked + label:before,
+		#main input[type="radio"]:checked + label:before {
+			background-color: #636363;
+			border-color: #636363;
+			color: #ffffff;
+		}
+
+		#main input[type="checkbox"]:focus + label:before,
+		#main input[type="radio"]:focus + label:before {
+			border-color: #8cc9f0;
+			box-shadow: 0 0 0 1px #8cc9f0;
+		}
 
 		#main ::-webkit-input-placeholder {
 			color: rgba(99, 99, 99, 0.25) !important;
@@ -4019,46 +3963,58 @@ input, select, textarea {
 		-ms-transform: none;
 		transform: none;
 	}
+
 </style>
 
+
+<script>
+      $( document ).ready( function() {
+        $( '.slider2' ).slick( {
+          autoplay: true,
+          autoplaySpeed: 1000,
+        } );
+      } );
+    </script>
+<div id="centerview">	
 <jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>
-	
 	<body class="is-preload">
-	
+		
 		<!-- Wrapper -->
 			<div id="wrapper">
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<h1 id="c_name" style="color:white;">${trainerprofile.tf_name} 트레이너</h1>
+					
+						<h1 style="color:white;">${trainerprofile.tf_name} 트레이너</h1>
 						
 						<p>${trainerprofile.tf_hanjulintro}<br /></p>
-						
 					</header>
 
 				<!-- Nav -->
 					<nav id="nav">
 					<ul>
-							<sec:authorize access="isAuthenticated()">
+							<sec:authorize access="hasRole('ROLE_USER')">
 							<sec:authentication property="principal" var="principal"/>  			
-			
-							<li ><a class="aa" href="/trainerProfileDetail?u_key=${trainerprofile.u_key}&memberprofile_u_key=${principal.u_key}"  style="color:black; " >Profile</a></li>      						      						<li  onclick="Centerview(1);"><a href="#" class="aa" style="color:black">Center</a></li>	
-      						 </sec:authorize>
-      						 <sec:authorize access="isAnonymous()">
+							<li ><a class="aa" href="/trainerProfileDetail?u_key=${trainerprofile.u_key}&memberprofile_u_key=${principal.u_key}"  style="color:white; background-color:black;" >Profile</a></li>      
+							</sec:authorize>	
+							<sec:authorize access="hasRole('ROLE_ADMIN')">
 							<sec:authentication property="principal" var="principal"/>  			
-			
-							<li ><a class="aa" href="/trainerProfileDetail?u_key=${trainerprofile.u_key}&memberprofile_u_key=0"  style="color:black; " >Profile</a></li>      						      						<li  onclick="Centerview(1);"><a href="#" class="aa" style="color:black">Center</a></li>	
-      						 </sec:authorize>
-      						 <li ><a  href="#"class="aa" style="color:white;background-color:black; ">review</a></li>						
-
-
+							<li ><a class="aa" href="/trainerProfileDetail?u_key=${trainerprofile.u_key}&memberprofile_u_key=${principal.u_key}"  style="color:white; background-color:black;" >Profile</a></li>      
+							</sec:authorize>	
+							<sec:authorize access="isAnonymous()">
+							<li ><a class="aa" href="/trainerProfileDetail?u_key=${trainerprofile.u_key}&memberprofile_u_key=0"  style="color:white; background-color:black;" >Profile</a></li>      				
+      						</sec:authorize>
+      						<li  onclick="Centerview(1);"><a href="#" class="aa" style="color:black">Center2</a></li>	
+      						 <li   onclick="review(1);"><a  href="#"class="aa" style="color:black">review</a></li>						
       						<p><input type="hidden" name="tf_loadaddress" class="sticky_btn"  value="${trainerprofile.tf_loadaddress}" id="tf_loadaddress"></p>
-							<p><input type="hidden" name="c_name" class="sticky_btn"  value="${c_name}" id="c_name"></p>
 							<p><input type="hidden" name="u_key" class="sticky_btn"  value="${trainerprofile.u_key}" id="u_key"></p>
-							
 						</ul>
 						<ul id="nav_2">
-							<li><a class="aa" href="#intro" class="active" style="color:black">최근 후기</a></li>
+							<li><a class="aa" href="#intro" class="active" style="color:black">트레이너 소개</a></li>
+							<li><a class="aa" style="color:black" href="#first">프로그램</a></li>
+							<li><a class="aa" style="color:black" href="#second">레슨 스케쥴</a></li>
+							<li><a class="aa" style="color:black" href="#cta">레슨 이용 가격</a></li>
+					
 						</ul>
 						
 					</nav>
@@ -4068,399 +4024,305 @@ input, select, textarea {
 
 						<!-- Introduction -->
 							<section id="intro" class="main">
-								<div class="spotlight" style="display: flex;">
-									<div class="content" style=" display: flex;">
-									<div id="tf_reviewUpdateOk" style=" display: flex; ">
-									<div style="width: 60%;">
+								<div class="spotlight">
+									<div class="content">
 										<header class="major">
 										
-											<h2 ><Strong style="color:black">최근 후기</Strong></h2>
+											<h2><Strong style="color:black">트레이너 소개</Strong></h2>
 										</header>
-										<ul class="statistics" style="position:relative">
-											<li class="style6">
-												<span class="icon fa-gem"></span>
-												<div style=" display: flex;">
-												<strong style="font-size:55px; margin-top:-10px; margin-right:5px;">${staraverage }.0</strong> 
-								 		<div class="vertical-align;" >
-										<c:if test="${	staraverage==1}">
-										   		  <span class="starR2 on" >⭐</span>
-										   		
-										   	</c:if>
-										   		<c:if test="${staraverage==2}">
-										   		<span class="starR2 on" >⭐</span>
-										   		  <span class="starR2 on" >⭐</span>
-										   		 
-										   	</c:if>
-										   		<c:if test="${staraverage==3}">
-										   		<span class="starR2 on" >⭐</span>
-										   		  <span class="starR2 on" >⭐</span>
-										   		   <span class="starR2 on" >⭐</span>
-										   		  
-										   	</c:if>
-										   		<c:if test="${staraverage==4}">
-										   	<span class="starR2 on" >⭐</span>
-										   		  <span class="starR2 on" >⭐</span>
-										   		   <span class="starR2 on" >⭐</span>
-										   		    <span class="starR2 on" >⭐</span>
-										   	</c:if>
-										   	<c:if test="${staraverage==5}">
-										   		<span class="starR2 on" >⭐</span>
-										   		  <span class="starR2 on" >⭐</span>
-										   		   <span class="starR2 on" >⭐</span>
-										   		    <span class="starR2 on" >⭐</span>
-										   		    <span class="starR2 on" >⭐</span>
-										   	</c:if>
-											<p style="font-size:13px;">${reviewlistlength }개의 후기</p>
-											
-											</div>
-											<div style="width: 35%;">
-											</div>
-										<sec:authorize access="hasRole('ROLE_USER')">
-										<sec:authentication property="principal" var="principal"/> 
-										<c:if test="${trainerprofile.u_key != principal.u_key}">
-										<button  type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#reviewModal" data-ptid="${PT_List.pt_id}" data-ukey="${trainerprofile.u_key}" ><p style="margin-top:3px;">리뷰 남기기</p></button>
-										</c:if>
-										</sec:authorize>
-										<!-- 로그인안한사람일 경우 -->
-										<sec:authorize access="isAnonymous()">
-										<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#reviewModalanonymous">
-										  			<p style="margin-top:3px;">리뷰 남기기</p>
-												</button>
-										</sec:authorize>
+										<p style="color:black">${trainerprofile.tf_intro}</p>
 										
-										</div>
-											</li>
-										</ul>
-										<ul class="statistics" style="position:relative">
-											<li class="style6">
-												<span class="icon fa-gem"></span>
-												<div style=" display: flex;">
-											  <h4 style="color:white;">생생한 후기를 확인하세요!</h4>
-											  <div style="visibility:hidden; width:10%;"> 빈칸차지용
-											  </div>
-									<select class="form-select" name="tf_certificate" id="reviewselect" style="flex: 0.85; color:white;" required>
-										<option value="new">최신순</option>
-										<option value="starhigh">평점높은순</option>
-										<option value="starlow">평점낮은순</option>
-									</select>
-												</div>
-												<hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
-											<div id="reviewselectlist">
-										  <c:forEach var="reviewlist" items="${reviewlist}" varStatus="status1">
-										  
-										  
-										  
-										  
-										  
-										  
-										  
-										  <!-- 리뷰수정 Modal -->
+									</div>
+										<div class="slider1" style="margin-left:25px;">
+											<c:forEach var="filelist" items="${filelist}">
+											  <div style="margin-left:-50px;"><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a></div>
+											  </c:forEach> 
+		   								 </div>		
+								</div>
+								
+								<h4><Strong style="color:black">자격사항</Strong></h4>
+								<c:forEach var="filelist" items="${filelist_2}">
+											<a class="aa" style="text-decoration-color : white;"   href="../../../Img/${filelist.file_name}"  data-lightbox="example-set2"><input type="text" class="form-control" style="flex: 0.5; color:white; background-color:black; " name="tf_certificatetitle"
+												id="address2" placeholder="내용을 입력해주세요" value="${filelist.tf_certificatetitle }"readonly></a>
+								
+								</c:forEach>
+							</section>
 
-  <div class="modal fade" id="reviewmodifymodal${reviewlist.r_id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-80size">
-    <div class="modal-content modal-80size">
-      <div class="modal-header">
-
-        <h6 class="modal-title fs-5" id="exampleModalLabel" style="color:black;"><Strong style="color:black; font-size:20px;">솔직한 후기를 남겨주세요!</Strong></h6>      </div>
-      <div class="modal-body">
-       <h6 style="color:black;"><Strong style="color:black; font-size:15px; text-align:left;">일반이용 후기 작성 요령</Strong></h6>
-        <ul>
-         <li style="font-size:14px; color:black; text-align:left;margin-bottom:-40px;margin-top:-20px;">해당 코치님에게 트레이닝을 받은 증빙사진이 필요합니다.
-		(PT 약정서/계약서 or 코치님과 함께 찍은 사진 등 기타)</li>
-		 <li style="font-size:14px;color:black; text-align:left;margin-bottom:-40px;">증빙사진의 공개/비공개 여부를 선택할 수 있습니다.</li>
-		 <li style="font-size:14px; color:black;text-align:left;">증빙이 적절하지 않을 시 삭제처리 됩니다.(상시 모니터링 중)</li>
-        </ul>
-        <h6 style="color:black;"><Strong style="color:black;  text-align:left;font-size:15px;">별점을 선택해주세요</Strong></h6>
-   		<div class="starRev" style="text-align:left;">
-  <!-- 편의 상 가장 첫번째의 별은 기본으로 class="on"이 되게 설정해주었습니다. -->
-  <c:if test="${reviewlist.r_starR==1 }">
-  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id }">⭐</span>
-  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
-  </c:if>
-  
-  <c:if test="${reviewlist.r_starR==2 }">
-  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id } on">⭐</span>
-  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
-  </c:if>
-  
-  <c:if test="${reviewlist.r_starR==3 }">
-  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id } on">⭐</span>
-  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
-  </c:if>
-  
-  <c:if test="${reviewlist.r_starR==4 }">
-  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id } on">⭐</span>
-  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id }" >⭐</span>
-  </c:if>
-  
-  <c:if test="${reviewlist.r_starR==5 }">
-  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
-  <span class="starR3 ${reviewlist.r_id } on" >⭐</span>
-  </c:if>
-</div>
-         <p><p>					
-				
-				<div class="opencheck2" style="display: flex;align-items: center;">
- 				<h6 style="color:black;"><Strong style="color:black; font-size:15px; text-align:left;">증빙사진을 올려주세요</Strong></h6><p style="color:black;"><Strong style="color:black; font-size:12px;  text-align:left;">( 최대 3장까지 등록가능합니다 )</Strong></p>				
-				<c:if test="${reviewlist.r_opencheck==1}">
-				<span style="margin-top:-30px; margin-right:-10px;"class="open3 ${reviewlist.r_id } on"  >√</span><p style="color:black;margin-top:5px;">사진공개</p>
-				</c:if>
-				<c:if test="${reviewlist.r_opencheck==0}">
-				<span style="margin-top:-30px; margin-right:-10px;"class="open3 ${reviewlist.r_id }"  >√</span><p style="color:black;margin-top:5px;">사진공개</p>
-				</c:if>
-				</div>         
-         <div  style="display: flex;">
-          	
-          	  <form method="POST" onsubmit="return false;" enctype="multipart/form-data">
-        <input type="file" onchange="addFile2(this);" multiple />
-           <input type="hidden" value="${reviewlist.r_id }" />
-        <div class="file-reviewmodify-list${reviewlist.r_id }"></div>
-  	
-   
-    </form>
-    </div>
-						<h6 style="color:black; margin-top:0px;"><Strong style="color:black; font-size:15px; text-align:left;">내용을 작성해주세요</Strong></h6>            <div class="input-group has-validation">
-								<textarea style="height:200px;"cols="30" rows="10" class="form-control" id="reviewmodifycontent" name="tf_intro">${reviewlist.r_content}${reviewlist.r_id}</textarea>
-							</div>
-            
-            
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-outline-primary" onclick="submitForm2(${reviewlist.r_id })" data-target="#clickReviewinsert" data-bs-dismiss="modal">확인</button>
-         <input type="hidden" id="r_id2" value="${reviewlist.r_id }" />
-      </div>
-    </div>
-  </div>
-</div>	
-										  
-<!--리뷰삭제Modal Modal 
-<div class="modal fade" id="deletereviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">리뷰삭제확인</h1>
-      </div>
-      <div class="modal-body">
-       <p style="color:black; text-align:left; margin-bottom:-7px;"> 정말 리뷰를 삭제 하시겠습니까22?</p>
-      </div>
-      <div class="modal-footer">
-      <input type="hidden" value="${reviewlist.r_id }" id="r_id">
-        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-outline-primary" onclick="clickreviewDelete()"data-target="#clickreviewDelete" value="${reviewlist.r_id}">확인</button>
-      </div>
-    </div>
-  </div>
-</div>									  
--->									  
-										  
-										  
-										  
-										  
-										  
-										  
-										  
-										  
-										  
-										  <div >
-										 	<div style="text-align:left;">
-										 <h5 style="color:white">${reviewlist.memberprofile_name}  ${reviewlist.r_date} 
-										 <c:if test="${reviewlist.r_starR==1}">
-										   		  <span class="starR2 on" >⭐</span>
-										   		  
-										   	</c:if>
-										   		<c:if test="${reviewlist.r_starR==2}">
-										   		<span class="starR2 on" >⭐⭐</span>
-										   		
-										   		 
-										   	</c:if>
-										   		<c:if test="${reviewlist.r_starR==3}">
-										   		<span class="starR2 on" >⭐⭐⭐</span>
-										   		
-										   		  
-										   	</c:if>
-										   		<c:if test="${reviewlist.r_starR==4}">
-										   	<span class="starR2 on" >⭐⭐⭐⭐</span>
-										   		  
-										   	</c:if>
-										   	<c:if test="${reviewlist.r_starR==5}">
-										   		<span class="starR2 on" >⭐⭐⭐⭐⭐</span>
-										   		 
-										   	</c:if></h5>  
-										   	
-										   	
-										  	
-										   	</div>
-										   
-										   	<div style="text-align:left;">
-										   	<c:forEach var="reviewfilelist" items="${reviewfilelist}" varStatus="status2">
-										   				<c:if test="${reviewfilelist.memberprofile_u_key == reviewlist.memberprofile_u_key}">
-										   				<c:if test="${reviewfilelist.review_r_id == reviewlist.r_id}">
-										   				<c:if test="${reviewlist.r_opencheck==1}">
-											<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
-											<input type="hidden" value="${reviewfilelist.file_name }" class="filename${reviewlist.r_id}">
-											<input type="hidden" value="${reviewfilelist.r_id }" class="file_r_id${reviewlist.r_id}">
-											</c:if>
-											</c:if>
-											</c:if>
-											</c:forEach>
-												<div style="visibility:hidden;">d</div>
-											</div>
-										   	
-										   	
-										    <div id="r_content${reviewlist.r_id}"style="text-align:left;">
-										   		${reviewlist.r_content}
-										   	</div>
-										   
-										 
-										   	<div style="display: flex;">
-											   	<div style="width: 82%;">
-												</div>
-												
-									 			<sec:authorize access="hasRole('ROLE_USER')">
-									 				<sec:authentication property="principal" var="principal"/> 
-									 		
-									 			<c:if test="${principal.u_key==reviewlist.memberprofile_u_key }">
-									 			
-									 			<p style="color:#ffbc00" class="aa modifyreviewBtn" data-bs-toggle="modal" data-bs-target="#reviewmodifymodal${reviewlist.r_id}" data-rcontent="${reviewlist.r_content}">수정</p> &nbsp;
-												<input type="hidden"  value="${trainerprofile.u_key }">			
-												<input type="hidden" id="r_id" value="${reviewlist.r_id}">
-												<p style="color:grey" class="aa removefileBtn" data-bs-toggle="modal" data-bs-target="#deleteFile1Modal"  data-rid="${reviewlist.r_id}">삭제</p> &nbsp;
-												
-											
+						<!-- First Section PT프로그램
+							<section id="first" class="main special">
+								<header class="major">
+								
+									<h2><Strong  style="color:black">${trainerprofile.tf_programtitle }</Strong></h2>
+									
+									<c:forEach var="filelist" items="${filelist_3}">
+											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set3"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
+									</c:forEach>
+									
+								
+									
+								
+								</header>
+								<ul class="features">
+									<li>
+										<span class="icon solid major style1 fa-code"></span>
+										<h5><Strong style="color:black">${trainerprofile.tf_programsub}</Strong></h5>
+									</li>
+									<li>
+										<span class="icon major style3 fa-copy"></span>
+										<h5><Strong style="color:black">${trainerprofile.tf_programsub}</strong></h5>
+									</li>
+									<li>
+										<span class="icon major style5 fa-gem"></span>
+										<h5><Strong style="color:black">${trainerprofile.tf_programsub}</Strong></h5>
+									</li>
+									
+										<p style="color:black; margin-top:40px;">${trainerprofile.tf_programintro}</p>
+								</ul>
+								
+								<footer class="major">
+								
+									
+								</footer>
+							</section>
+						-->
 						
-												</c:if>
-												</sec:authorize>
-											</div>
-										 
-										  	</div>
-										  	<div style="visibility:hidden;">d</div>
-										  <hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
-										  	<div style="visibility:hidden;">d</div>
-										  </c:forEach>
-										  </div>
-										  </li>
-										  </ul>
-										  </div>
-										  <div style="width: 2%; "></div>
-										  
-										  <!-- 프로필고정 -->
-										
-										  <div style="width: 40%;">
-										  <ul class="statistics " style="position: sticky; top: 15px;">
-											<li class="style6" >
-												<span class="icon fa-gem"></span>
-													<c:forEach var="filelist" items="${filelist}" varStatus="status1">
-														<c:if test="${status1.index==0}">
-													 	 	<div style="margin-left:-50px; "><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a></div>
-													    </c:if>
-													    <c:if test="${status1.index!=0}">
-													 	 	<a    href="../../../Img/${filelist.file_name}" data-lightbox="example-set"></a>
-													    </c:if>
-												 	 </c:forEach> 
-													<strong style="font-size:25px; ">${trainerprofile.tf_name} 트레이너</strong> 
-													<strong style="font-size:15px;" class="aa" onclick="Centerview(1);">${center.c_name}</strong> 
-											
-								 		<div class="vertical-align;">
-								 		
-										<c:if test="${	staraverage==1}">
-										
-										   		  <span class="starR2 on" >⭐</span>
-										   		   <span class="starR2 on" >${staraverage }.0</span>
-										   		   <span class="starR2 on" >(${reviewlistlength })</span>
-										   		
-										   	</c:if>
-										   		<c:if test="${staraverage==2}">
-										   		<span class="starR2 on" >⭐</span>
-										   		  <span class="starR2 on" >⭐</span>
-										   		   <span class="starR2 on" >${staraverage }.0</span>
-										   		   <span class="starR2 on" >(${reviewlistlength })</span>
-										   		 
-										   	</c:if>
-										   		<c:if test="${staraverage==3}">
-												<a  href="#intro" style="color:white; text-decoration:none;">
-												<span class="starR2 on" >⭐</span>
-										   		  <span class="starR2 on" >⭐</span>
-										   		   <span class="starR2 on" >⭐</span>
-										   		   <span class="starR2 on" >${staraverage }.0</span>
-										   		   <span class="starR2 on" >(${reviewlistlength })</span>
-												</a>
-										   	
-										   		
-										   		  
-										   	</c:if>
-										   		<c:if test="${staraverage==4}">
-										   	<span class="starR2 on" >⭐</span>
-										   		  <span class="starR2 on" >⭐</span>
-										   		   <span class="starR2 on" >⭐</span>
-										   		    <span class="starR on" >⭐</span>
-										   		   <span class="starR2 on" >${staraverage }.0</span>
-										   		   <span class="starR2 on" >(${reviewlistlength })</span>
-										   	</c:if>
-										   	<c:if test="${staraverage==5}">
-										   		<span class="starR2 on" >⭐</span>
-										   		  <span class="starR2 on" >⭐</span>
-										   		   <span class="starR2 on" >⭐</span>
-										   		    <span class="starR2 on" >⭐</span>
-										   		    <span class="starR2 on" >⭐</span>
-										   		   <span class="starR2 on" >${staraverage }.0</span>
-										   		   <span class="starR2 on" >(${reviewlistlength })</span>
-										   	</c:if>
-										   
-											</div>
-											<p>"${trainerprofile.tf_hanjulintro}"</p>
-												<P>전문분야 ${outputprogramsub}</P> 
-												<P>대표가격 ${trainerprofile.tf_lessonunit}당 ${trainerprofile.tf_lessonprice}원/ ${trainerprofile.tf_lessonnumber}${trainerprofile.tf_lessonunit}기준</P> 
-												
-												<sec:authorize access="hasRole('ROLE_USER')">
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						<c:forEach var="PT_List" items="${PT_List}" varStatus="status1">
+						
+						<!-- First Section PT프로그램-->
+							<section id="first" class="main special">
+								<header class="major">
+								
+									<h2><Strong  style="color:black">${PT_List.pt_title }</Strong></h2>
+									<div class="slider10">
+									<c:forEach var="filelist" items="${PT_filelist}" varStatus="status2">
+									
+										<c:if test="${PT_List.pt_id == filelist.pt_id }">
+											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set${filelist.pt_id }"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
+										</c:if>
+									</c:forEach>
+									</div>
+									
+								
+									
+								
+								</header>
+								<ul class="features">
+									<li>
+										<span class="icon solid major style1 fa-code"></span>
+										<h5><Strong style="color:black">${PT_List.pt_programsub1}</Strong></h5>
+									</li>
+									<li>
+										<span class="icon major style3 fa-copy"></span>
+										<h5><Strong style="color:black">${PT_List.pt_programsub2}</strong></h5>
+									</li>
+									<li>
+										<span class="icon major style5 fa-gem"></span>
+										<h5><Strong style="color:black">${PT_List.pt_programsub3}</Strong></h5>
+									</li>
+									
+										<p style="color:black; margin-top:40px;">${PT_List.pt_programintro}</p>
+								</ul>
+								
+								<footer class="major">
+								
+									
+								</footer>
+								
+							</section>
+							</c:forEach>
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						<!-- Second Section -->
+							<section id="second" class="main special">
+								<header class="major">
+								<h2 ><Strong style="color:black">레슨 스케쥴</Strong></h2>
+							
+								</header>
+								<ul class="statistics">
+									<li class="style1">
+										<span class="icon solid fa-code-branch"></span>
+										<strong>평일</strong> ${trainerprofile.tf_daymorning } ~  ${trainerprofile.tf_dayafter }
+									</li>
+									<li class="style2">
+										<span class="icon fa-folder-open"></span>
+										<strong>토요일</strong> ${trainerprofile.tf_saterdaymorning } ~  ${trainerprofile.tf_saterafter }
+									</li>
+									<li class="style3">
+										<span class="icon solid fa-signal"></span>
+										<strong>일요일</strong> ${trainerprofile.tf_sundaymorning } ~  ${trainerprofile.tf_sundayafter }
+									</li>
+									<li class="style4">
+										<span class="icon solid fa-laptop"></span>
+										<strong>휴무일</strong> ${trainerprofile.tf_dayoff }
+									</li>
+									<li class="style5">
+										<span class="icon fa-gem"></span>
+										<strong>참고사항</strong> ${trainerprofile.tf_lessonintro }
+									</li>
+								</ul>
+							
+							</section>
+
+						<!-- Get Started -->
+							<section id="cta" class="main special">
+								<header class="major">
+							<h2 ><Strong style="color:black">레슨 이용 가격</Strong></h2>
+
+							<div id="sectionbox" class="form-control"
+								style="padding: 10px; margin-top:10px; background-color: black; ">
+					<p style="text-align: center;  margin-top:10px; margin-bottom:0.5px"><strong style="color:white;">&nbsp;&nbsp;· ${trainerprofile.tf_lessontitle }</strong></p>
+								<hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
+								<p style=" margin-left:30px; margin-top:20px; text-align:left;">${trainerprofile.tf_lessonnumber }${trainerprofile.tf_lessonunit }</p>   
+								<p style="margin-top:-50px; margin-right:30px; float:right;"> ${trainerprofile.tf_lessonunit }당 <Strong style="color:white;">${trainerprofile.tf_lessonprice }원</Strong></p>
+								<p style="margin-top:-19px;  margin-right:30px;margin-bottom:6px; font-size:12px; float:right;"> ${trainerprofile.tf_lessonnumber*trainerprofile.tf_lessonprice }원</p>	   
+								<hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
+								<p style=" margin-left:30px; margin-top:20px; text-align:left; ">${trainerprofile.tf_lessonnumber2 }${trainerprofile.tf_lessonunit }</p>                    
+								<p style="float:right;  margin-right:30px; margin-top:-50px;"> ${trainerprofile.tf_lessonunit }당 <Strong style="color:white;">${trainerprofile.tf_lessonprice2 }원</Strong></p>
+								<p style="float:right;  margin-right:30px;margin-top:-19px; margin-bottom:6px; font-size:12px;"> ${trainerprofile.tf_lessonnumber2*trainerprofile.tf_lessonprice2 }원</p>
+								<hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
+								<p style=" margin-left:30px; margin-top:20px; text-align:left;">${trainerprofile.tf_lessonnumber3 }${trainerprofile.tf_lessonunit }</p>                    
+								<p style="float:right; margin-right:30px;margin-top:-50px;"> ${trainerprofile.tf_lessonunit }당 <Strong style="color:white;">${trainerprofile.tf_lessonprice3 }원</Strong></p>
+								<p style="float:right; margin-right:30px; margin-top:-19px; margin-bottom:6px; font-size:12px;"> ${trainerprofile.tf_lessonnumber3*trainerprofile.tf_lessonprice3 }원</p>
+							<hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
+								<p style=" margin-left:30px; margin-top:20px; text-align:left;">${trainerprofile.tf_lessonnumber4 }${trainerprofile.tf_lessonunit }</p>                    
+								<p style="float:right; margin-right:30px;margin-top:-50px;"> ${trainerprofile.tf_lessonunit }당 <Strong style="color:white;">${trainerprofile.tf_lessonprice4 }원</Strong></p>
+								<p style="float:right; margin-right:30px; margin-top:-19px; margin-bottom:6px; font-size:12px;"> ${trainerprofile.tf_lessonnumber4*trainerprofile.tf_lessonprice4 }원</p>
+								<hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
+								
+									<div>
+									<P >ㆍ 레슨 1회에 ${ trainerprofile.tf_lessontime} 진행됩니다.</P> 
+									<P style="margin-top:-20px;">ㆍ ${ trainerprofile.tf_lessonoption}</P>
+									<P style="margin-top:-20px;">ㆍ ${ trainerprofile.tf_lessonintro}</P>  
+									</div>
+								</div>
+								</header>
+								<footer class="major">
+									<ul class="actions special">
+									
+									<sec:authorize access="hasRole('ROLE_USER')">
 										<sec:authentication property="principal" var="principal"/>  
 	<c:if test="${(principal.u_trainercheck=='0')}">
 		<sec:authorize access="hasRole('ROLE_USER')">
 		<c:if test="${fn:contains(trainerprofile.tf_consulting, principal.u_key)}">
 			<button type="button" class="btn btn-success" disabled >
-	  			<p style="color:white; margin-top:3px;">상담신청완료<p>
+	  			상담신청완료
 			</button>
 			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelconsultingModal">
-	  			<p style="color:white; margin-top:3px;">상담신청취소<p>
+	  			상담신청취소
 			</button>
 		</c:if>
+		
 		<c:if test="${!(fn:contains(trainerprofile.tf_consulting, principal.u_key))}">
+			<c:if test="${memberprofilecountcheck ==0 }">
+			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#consulting_memberprofilezero_Modal">
+	  			상담신청
+			</button>
+			</c:if>
+			<c:if test="${memberprofilecountcheck ==1 }">
 			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#consultingModal">
-	  			<p style="margin-top:3px;">상담신청</p>
-			</button>		
+	  			상담신청	
+			</button>
+			</c:if>
 		</c:if>
+		
 	</sec:authorize>
 	</c:if>		
-	</sec:authorize>	
+	</sec:authorize>
+	
 	<!-- 로그인안한사람일 경우 -->
 	<sec:authorize access="isAnonymous()">
 	<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#consultingModalanonymous">
-	  			<p style="margin-top:3px;">상담신청</p>
+	  			상담신청
 			</button>
-	</sec:authorize>		
-										</li>
-										</ul>
-										  </div>
-										</div>
-									</div>
-								</div>
-							</section>		
-</div>
+	</sec:authorize>
+	
+	
+				
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+	<c:if test="${(trainerprofile.tf_check=='완료')}">
+		<button type="button" style="margin-right:10px;"class="btn btn-success" disabled>
+  			검토완료
+		</button>
+		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelModal">
+  			검토취소
+		</button>
+	</c:if>
+	
+	<c:if test="${(trainerprofile.tf_check=='대기')}">
+		<button type="button" style="margin-right:10px;"class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  			검토완료
+		</button>
+		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#rejectModal">
+  			검토반려
+		</button>
+	</c:if>
+	
+	<c:if test="${(trainerprofile.tf_check=='반려')}">
+		<button type="button" style="background-color:red; margin-right:10px;" class="btn" disabled>
+  			검토반려
+		</button>
+		<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelModal">
+  			반려취소
+		</button>
+		<style>
+		@media (min-width: 481px) {
+		h5 {
+			margin-left:-190px;
+			margin-top:50px;
+			}
+		}
+		</style>
+		<h5 style="text-align:; "><Strong style="color:red;">반려사유 : ${trainerprofile.tf_rejectreason}</Strong></h5>
+	</c:if>
+</sec:authorize>
+									</ul>	
+								</footer>
+							</section>
+
+					</div>
+
 				<!-- Footer -->
 					<footer id="footer">
 						<section>
@@ -4494,505 +4356,230 @@ input, select, textarea {
 						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
 					</footer>
 
-
-
 			</div>
 
-	
-	
-
-	<input type="hidden" id="trainerprofile_u_key" value="${trainerprofile.u_key }">
-
+<input type="hidden" value="${toast}" id="toastcheck">		
+<div class='error' style='display:none'>삭제완료</div>
+<div class='error2' style='display:none'>등록완료</div>
+<div class='error3' style='display:none'>수정완료</div>
+<div class='error4' style='display:none'>취소완료</div>
+<div class='error5' style='display:none'>반려완료</div>
 	</body>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
-
-
-
-<!-- 리뷰 삭제 Modal Modal -->
-<div class="modal fade" id="deleteFile1Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- 검토완료 Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">리뷰삭제</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">검토확인</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        정말 리뷰를 삭제 하시겠습니까?
+        정말 검토완료 하시겠습니까?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-outline-primary" onclick="clickDelete2()"data-target="#clickDelete">확인</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickConfirm(centerInfo)">확인</button>
       </div>
     </div>
   </div>
-</div>			
-
-<!-- 리뷰 Modal Modal -->
-<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-80size">
-    <div class="modal-content modal-80size">
+</div>	
+<!-- 검토반려 Modal -->
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;"><Strong style="color:black;">솔직한 후기를 남겨주세요!</Strong></h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">검토확인</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h6 style="color:black;"><Strong style="color:black;">일반이용 후기 작성 요령</Strong></h6>
-        <ul>
-        <li style="font-size:15px;">해당 코치님에게 트레이닝을 받은 증빙사진이 필요합니다.
-		(PT 약정서/계약서 or 코치님과 함께 찍은 사진 등 기타)</li>
-		 <li style="font-size:15px;">증빙사진의 공개/비공개 여부를 선택할 수 있습니다.</li>
-		 <li style="font-size:15px;">증빙이 적절하지 않을 시 삭제처리 됩니다.(상시 모니터링 중)</li>
-        </ul>
-         <h6 style="color:black;"><Strong style="color:black;">별점을 선택해주세요</Strong></h6>
-   		<div class="starRev">
-  <!-- 편의 상 가장 첫번째의 별은 기본으로 class="on"이 되게 설정해주었습니다. -->
-  <span class="starR on" >⭐</span>
-  <span class="starR">⭐</span>
-  <span class="starR" >⭐</span>
-  <span class="starR" >⭐</span>
-  <span class="starR" >⭐</span>
-</div>
-         <p><p>					
-				
-				<div class="opencheck" style="display: flex;align-items: center;">
-         		 <h6 style="color:black;"><Strong style="color:black;">증빙사진을 올려주세요</Strong></h6><p><Strong style="color:black; font-size:12px;">( 최대 3장까지 등록가능합니다 )</Strong></p>
-				<span style="margin-top:-30px; margin-right:-10px;"class="open"  >√</span><p style="color:black;margin-top:5px;">사진공개</p>
-				</div>         
-         
-          	  <form method="POST" onsubmit="return false;" enctype="multipart/form-data">
-        <input type="file" onchange="addFile(this);" multiple />
-          
-        <div class="file-list"></div>
-  	
-   
-    </form>
-            <h6 style="color:black; margin-top:0px;"><Strong style="color:black;">내용을 작성해주세요</Strong></h6>
-            <div class="input-group has-validation">
-								<textarea style="height:200px;"cols="30" rows="10" class="form-control" id="reviewcontent" name="tf_intro"></textarea>
-							</div>
-            
-            
+        정말 검토반려 하시겠습니까? 확인을 누르시면 반려상태로 변경됩니다. (반려상태는 트레이너 리스트에 노출X)
       </div>
+      <label for="myTextarea" class="form-label" style="font-size: 15px; text-align:left; margin-left:15px; margin-bottom:-10px"><Strong style="color:black;">반려사유를 상세히 작성해주세요.</Strong></label>
+			<div class="input-group has-validation" style="padding:10px; color:black;">
+				<textarea  class="form-control" style="color:black;"name="tf_programintro" id="rejectreason" placeholder="반려사유를 입력해주세요"></textarea>
+			</div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-outline-primary" onclick="submitForm()" data-target="#clickReviewinsert" data-bs-dismiss="modal">확인</button>
-         <sec:authorize access="hasRole('ROLE_USER')">
-          <sec:authentication property="principal" var="principal"/> 
-     <input type="hidden"  id="memberprofile_u_key" value="${principal.u_key}">
-       <input type="hidden"  id="memberprofile_name" value="${principal.uName}">
-       </sec:authorize>
+        <button type="button" class="btn btn-outline-primary" onclick="clickReject(centerInfo)">확인</button>
       </div>
     </div>
   </div>
 </div>	
 
+<!-- 상담신청 Modal -->
+<div class="modal fade" id="consultingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">상담 신청</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p style="color:black;">정말 상담을 신청하시겠습니까?</p>
+       <select class="form-select" aria-label="Default select example" onchange="selectBoxChange(this.value);">
+  <c:forEach var="PT_List" items="${PT_List}">
+    <option value="${PT_List.pt_title}"<c:if test="${PT_List.pt_title}"> selected</c:if>>${PT_List.pt_title}</option>
+  </c:forEach>
+</select>
+  <p style="size:5px; color:black;">상담을 신청할 PT 프로그램을 선택해주세요.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickConfirmconsulting(memberInfo)">확인</button>
+      </div>
+    </div>
+  </div>
+</div>	
+<!-- 상담신청전 멤버프로필 등록 Modal -->
+<div class="modal fade" id="consulting_memberprofilezero_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">상담 신청</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p style="color:black;">상담신청을 하시려면 회원프로필을 등록하셔야 합니다. 프로필등록 페이지로 이동합니다.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickmemberprofileinsert(memberInfo)">확인</button>
+      </div>
+    </div>
+  </div>
+</div>	
 
+<!-- 비회원 상담신청 Modal -->
+<div class="modal fade" id="consultingModalanonymous" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">상담 신청</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        상담신청은 회원만 가능합니다. 로그인페이지로 이동합니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickConfirmlogin(centerInfo)">확인</button>
+      </div>
+    </div>
+  </div>
+</div>	
 
+<!-- 비회원 리뷰남기기 Modal -->
+<div class="modal fade" id="reviewModalanonymous" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">리뷰 작성</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        리뷰 작성은 회원만 가능합니다. 로그인페이지로 이동합니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickConfirmlogin(centerInfo)">확인</button>
+      </div>
+    </div>
+  </div>
+</div>	
 
+<!-- 검토취소 Modal -->
+<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">검토 취소</h1>
+        <button  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        정말 취소하시겠습니까? 확인을 누르면 검토대기상태로 변경됩니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickConfirmCancel(centerInfo)">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 상담요청취소 Modal -->
+<div class="modal fade" id="cancelconsultingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">상담요청취소</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        정말 상담신청을 취소하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" style="color:black;" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickConfirmCancelconsulting(memberInfo)">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 검토완료하기 누르면 넘어갈 데이타 -->
+<form name="centerInfo">
+	<input type="hidden" name="u_key" value="${trainerprofile.u_key}">
+	<input type="hidden" name="tf_rejectreason" id="tf_rejectreason">
+</form>
 
+<!-- 상담완료하기 누르면 넘어갈 데이타 -->
+<sec:authorize access="hasRole('ROLE_USER')">
+<form name="memberInfo">
+<sec:authentication property="principal" var="principal"/>
+	<input type="hidden" name="member_u_key" id="member_u_key" value="${principal.u_key}">
+	<input type="hidden" name="trainer_u_key" value="${trainerprofile.u_key}">
+	<input type="hidden" name="tf_id" value="${trainerprofile.tf_id}">
+	
+	<input type="hidden" name="selectedPT" id="selectedPT" value="${PT_List[0].pt_title}">
+	
+</form>			
+</sec:authorize>
+	
+	
+	
+	
 <script>
-$('.modifyreviewBtn').each(function(){
-	$(this).on('click', function(event) {
-	r_id = $(this).next().next().val();
-	console.log("r_id:"+r_id); 
-	var filecount=0;
-	var filename1 = $('.filename'+ r_id ).eq('0').val()
-	var filename2 = $('.filename'+ r_id ).eq('1').val()
-	var filename3 = $('.filename'+ r_id ).eq('2').val()
-	
-	
-	var file_r_id1= $('.file_r_id'+ r_id ).eq('0').val()
-	var file_r_id2= $('.file_r_id'+ r_id ).eq('1').val()
-	var file_r_id3= $('.file_r_id'+ r_id ).eq('2').val()
-	
-	
-	
-	
-	console.log(filename1);
-	console.log(filename2);
-	console.log(filename3);
-	
-	console.log(file_r_id1);
-	console.log(file_r_id2);
-	console.log(file_r_id3);
-	if(filename1){
-		filecount++;
-	}
-	if(filename2){
-		filecount++;
-	}
-	if(filename3){
-		filecount++;
-	}
-	
-	console.log("filecount:"+filecount);
-	
-	filepath1 = "../../../Img/"+filename1;
-	filepath2 = "../../../Img/"+filename2;
-	filepath3 = "../../../Img/"+filename3;
-	console.log("filepath1:"+filepath1);
-	console.log("filepath2:"+filepath2);
-	console.log("filepath3:"+filepath3);
-
-	
-	
-	$('.file-reviewmodify-list'+r_id).children().remove();
-	 let htmlData2 = '';
-	 for(var j=1;j<=filecount;j++){
-         
-
-		 if(j==1){
-			 htmlData2 += '<div style="display: inline-block;   box-sizing: border-box; padding: 10px; float:left;" id="file' + file_r_id1 + '" class="filebox2'+r_id+'">';
-		        htmlData2 += '<img src="' + filepath1 + '" title="' + filename1 + '" width=100 height=100 />';
-				 htmlData2 += '  <a class="delete2" onclick="deletemodifyFile(' + file_r_id1 + ');">';
-				  htmlData2 += '  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px;  margin-left:-52px; margin-top:-210px;  cursor:pointer;" alt="Button Icon">';
-				  htmlData2 += '</div>';  
-		 }
-		    else if(j==2){
-				 htmlData2 += '<div style="display: inline-block;  box-sizing: border-box; padding: 10px; " id="file' + file_r_id2 + '" class="filebox2'+r_id+'">';
-		    	htmlData2 += '<img src="' + filepath2 + '" title="' + filename2 + '" width=100 height=100 />';
-				 htmlData2 += '  <a class="delete2" onclick="deletemodifyFile(' + file_r_id2 + ');">';
-				  htmlData2 += '  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px; margin-left:-52px; margin-top:-210px;   cursor:pointer;" alt="Button Icon">';
-				  htmlData2 += '</div>';  
-
-		    }
-		    else if(j==3){
-				 htmlData2 += '<div style="display: inline-block;  box-sizing: border-box; padding: 10px; " id="file' + file_r_id3 + '" class="filebox2'+r_id+'">';
-		    	htmlData2 += '<img src="' + filepath3 + '" title="' + filename3 + '" width=100 height=100 />';
-				 htmlData2 += '  <a class="delete2" onclick="deletemodifyFile(' + file_r_id3 + ');">';
-				  htmlData2 += '  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px; margin-left:-52px; margin-top:-210px;   cursor:pointer;" alt="Button Icon">';
-				  htmlData2 += '</div>'; 
-		    }
-         }
-	 
-     $('.file-reviewmodify-list'+r_id).append(htmlData2);
-})
-})
-
-
-
-$('.removefileBtn').each(function(){
-	$(this).on('click', function(event) {
-	r_id = $(this).prev().val();
-	trainerprofile_u_key = $(this).prev().prev().val();
-})
-})
-
-
-function clickDelete2()
-{
-	 location.href='${path}	/reviewDelete?r_id='+r_id+'&trainerprofile_u_key='+trainerprofile_u_key+'';
-	 sessionStorage.setItem('postDeleted', 'true');
+var selectBoxChange = function(value){
+	console.log("값변경테스트:"+ value);
+	$("#selectedPT").val(value);
 }
+</script>	
+	
+	
+	
 
-$('.starRev span').click(function(){
-	  $(this).parent().children('span').removeClass('on');
-	  $(this).addClass('on').prevAll('span').addClass('on');
-	  let starR = $('.starR.on').length;
-	  console.log("starR:"+starR);
-	  return false;
-	});
-let count =0;
-$('.opencheck span').click(function(){
-	if(count==0){
-		console.log("count:"+count);
-		  $(this).addClass('on').prevAll('span').addClass('on');
-		count++;
-	}else if (count!=0){
-		console.log("count:"+count);
-		 $(this).parent().children('span').removeClass('on');
-		count--;
-	}
-	
-	  return false;
-	});	
-	
-let count2 =0;
-$('.opencheck2 span').click(function(){
-	if(count2==0){
-		console.log("count2:"+count2);
-		  $(this).addClass('on').prevAll('span').addClass('on');
-		  count2++;
-	}else if (count2!=0){
-		console.log("count2:"+count2);
-		 $(this).parent().children('span').removeClass('on');
-		 count2--;
-	}
-	
-	  return false;
-	});	
 	
 	
-function setThumbnail(event) {
-    for (var image of event.target.files) {
-      var reader = new FileReader();
-
-      reader.onload = function(event) {
-        var img = document.createElement("img");
-        img.setAttribute("src", event.target.result);
-        document.querySelector("div#image_container").appendChild(img);
-      };
-
-      console.log(image);
-      reader.readAsDataURL(image);
-    }
-  }
-</script>
-
-<!-- 다중파일업로드 이미지 미리보기 삭제끝 -->
 <script>
-var fileNo = 0;
-var filesArr = new Array();
-
-
-
-
-/* 첨부파일 추가 */
-function addFile(obj){
-    var maxFileCnt = 3;   // 첨부파일 최대 개수
-    var attFileCnt = document.querySelectorAll('.filebox').length;    // 기존 추가된 첨부파일 개수
-    var remainFileCnt = maxFileCnt - attFileCnt;    // 추가로 첨부가능한 개수
-    var curFileCnt = obj.files.length;  // 현재 선택된 첨부파일 개수
-
-   
-   
-    console.log("obj.target.value:"+event.target.value);
-    
- 
-    // 첨부파일 개수 확인
-    if (curFileCnt > remainFileCnt) {
-        alert("첨부파일은 최대 " + maxFileCnt + "개 까지 첨부 가능합니다.");
-    } else {
-    	
-        for (const file of obj.files) {
-        	console.log("호출");
-        	 let value = URL.createObjectURL(event.target.files[0]); 
-        	  
-        	
-            // 첨부파일 검증
-            if (validation(file)) {
-                // 파일 배열에 담기
-                var reader = new FileReader();
-
-                reader.onload = function (event) {
-                	
-				    filesArr.push(file);
-				   
-				   
-                   
-                  
-                };
-                reader.readAsDataURL(file);
-				console.log(event.target.result);
-                // 목록 추가
-                let htmlData = '';
-                htmlData += '<div style="display: inline-block; width: 33.33%;  box-sizing: border-box; padding: 10px; " id="file' + fileNo + '" class="filebox">';
-       		  htmlData +=  '<img src="'+value+'" title="'+file.name+'" width=100 height=100 />';
-                htmlData += '   <p class="name" style="color:black; margin-bottom:-30px;">' + file.name + '</p>';
-				  htmlData += '  <a class="delete" onclick="deleteFile(' + fileNo + ');">';
-				  htmlData += '  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px;  margin-left:0px; margin-top:-197px;  cursor:pointer;" alt="Button Icon">';
-				  htmlData += '</div>';
-				 
-              
-               
-                $('.file-list').append(htmlData);
-                
-                
-               
-                
-                
-                fileNo++;
-            } else {
-                continue;
-            }
-        }
-    }
-    // 초기화
-    document.querySelector("input[type=file]").value = "";
-}
-
-/* 리뷰수정 모달에서 첨부파일추가 */
-function addFile2(obj){
-	var r_id = $(obj).next().val();
-    var maxFileCnt = 3;   // 첨부파일 최대 개수
-    var attFileCnt = document.querySelectorAll('.file-reviewmodify-list'+r_id).length;    // 기존 추가된 첨부파일 개수
-   // var attFileCnt = document.querySelectorAll('.filebox2'+r_id).length;    // 기존 추가된 첨부파일 개수
-    var parentElement = document.querySelector('.file-reviewmodify-list' + r_id);
-    var filebox2Elements = parentElement.querySelectorAll('.filebox2'+r_id);
-    var filebox2Count = filebox2Elements.length;
-    console.log("filebox2Count:"+filebox2Count);
-    var remainFileCnt = maxFileCnt - filebox2Count;    // 추가로 첨부가능한 개수
-    var curFileCnt = obj.files.length;  // 현재 선택된 첨부파일 개수
-
-	console.log("r_id:"+r_id);
-    console.log("maxFileCnt:"+maxFileCnt);
-    console.log("attFileCnt:"+attFileCnt);
-    console.log("remainFileCnt:"+remainFileCnt);
-    console.log("curFileCnt:"+curFileCnt);
-   
-    console.log("obj.target.value:"+event.target.value);
-    
- 
-    // 첨부파일 개수 확인
-    if (curFileCnt > remainFileCnt) {
-        alert("첨부파일은 최대 " + maxFileCnt + "개 까지 첨부 가능합니다.");
-    } else {
-    	
-        for (const file of obj.files) {
-        	console.log("호출");
-        	 let value = URL.createObjectURL(event.target.files[0]); 
-        	 console.log("value:"+value);
-        	
-            // 첨부파일 검증
-            if (validation(file)) {
-                // 파일 배열에 담기
-                var reader = new FileReader();
-
-                reader.onload = function (event) {	
-				    filesArr.push(file);     
-                };
-                reader.readAsDataURL(file);
-				console.log("event.target.result:"+event.target.result);
-                // 목록 추가
-                let htmlData = '';
-				  htmlData += '<div style="display: inline-block;  box-sizing: border-box; padding: 10px; margin-left:25px;" id="file' + fileNo + '" class="filebox2'+r_id+'">';
-       			  htmlData +=  '<img src="'+value+'" title="'+file.name+'" width=100 height=100 />';
-				  htmlData += '  <a class="delete" onclick="deleteFile(' + fileNo + ');">';
-				  htmlData += '  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px; margin-left:-52px; margin-top:-210px;  cursor:pointer;" alt="Button Icon">';
-				  htmlData += '</div>';	
-				  $('.file-reviewmodify-list'+r_id).append(htmlData);     
-                  fileNo++;
-            } else {
-                continue;
-            }
-        }
-    }
-    // 초기화
-    document.querySelector("input[type=file]").value = "";
-}
-
-/* 첨부파일 검증 */
-function validation(obj){
-    const fileTypes = ['application/pdf', 'image/gif', 'image/jpeg', 'image/png', 'image/bmp', 'image/tif', 'application/haansofthwp', 'application/x-hwp'];
-    if (obj.name.length > 100) {
-        alert("파일명이 100자 이상인 파일은 제외되었습니다.");
-        return false;
-    } else if (obj.size > (100 * 1024 * 1024)) {
-        alert("최대 파일 용량인 100MB를 초과한 파일은 제외되었습니다.");
-        return false;
-    } else if (obj.name.lastIndexOf('.') == -1) {
-        alert("확장자가 없는 파일은 제외되었습니다.");
-        return false;
-    } else if (!fileTypes.includes(obj.type)) {
-        alert("첨부가 불가능한 파일은 제외되었습니다.");
-        return false;
-    } else {
-        return true;
-    }
-}
-
-/* 첨부파일 삭제 */
-function deleteFile(num) {
-    document.querySelector("#file" + num).remove();
-    filesArr[num].is_delete = true;
-}
-
-/* 폼 전송 */
-function submitForm() {
-    // 폼데이터 담기
-    var form = document.querySelector("form");
-    var formData = new FormData(form);
-    for (var i = 0; i < filesArr.length; i++) {
-        // 삭제되지 않은 파일만 폼데이터에 담기
-        if (!filesArr[i].is_delete) {
-            formData.append("attach_file", filesArr[i]);
-        }
-    }
-
-	var test = 'test333';
-	let content = $('#reviewcontent').val();
-	let starR = $('.starR.on').length;
-	let opencheck = $('.open.on').length;
-	let trainerprofile_u_key = $('#u_key').val();
-	let memberprofile_u_key = $('#memberprofile_u_key').val();
-	let memberprofile_name = $('#memberprofile_name').val();
-	
-	console.log("test:"+test);
-	console.log("content:"+content);
-	console.log("starR:"+starR);
-	console.log("opencheck:"+opencheck);
-	console.log("memberprofile_name:"+memberprofile_name);
-	console.log("trainerprofile_u_key:"+trainerprofile_u_key);
-	console.log("memberprofile_u_key:"+memberprofile_u_key);
-	var data = {   
-		    "test" : test , "content" : content, "starR":starR ,"opencheck":opencheck, "trainerprofile_u_key":trainerprofile_u_key, "memberprofile_u_key":memberprofile_u_key, "memberprofile_name":memberprofile_name
-		
-	}
-	formData.append('test', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
-	$.ajax({
-        type:"POST",
-        url: "/reviewInsert",
-        processData: false,
-        contentType: false,
-      	data: formData,
-        success: function(rtn){
-         // $('#main').html(rtn);
-          console.log("파일업로드성공: ", rtn);
-     	 location.href='${path}	/reviewinsertresult?u_key='+trainerprofile_u_key+'&memberprofile_u_key='+memberprofile_u_key+'';
-     	 sessionStorage.setItem('postInserted', 'true');
-        },
-        err: function(err){
-          console.log("파일업로드실패:", err);
-        }
-      })
-      
-  
-}
-
-/* 수정 모달 폼 전송 */
-function submitForm2(r_id) {
-    // 폼데이터 담기
-    console.log("r_id는 이거입니다:"+r_id);
-    var form = document.querySelector("form");
-    var formData = new FormData(form);
-    for (var i = 0; i < filesArr.length; i++) {
-        // 삭제되지 않은 파일만 폼데이터에 담기
-        if (!filesArr[i].is_delete) {
-            formData.append("attach_file", filesArr[i]);
-        }
-    }
-	var test = 'test333';
-	let trainerprofile_u_key = $('#u_key').val();
-	let memberprofile_u_key = $('#memberprofile_u_key').val();
-	let memberprofile_name = $('#memberprofile_name').val();
-	let content = $('#reviewmodifycontent').val();
-	let starR =$(".starR3." + r_id + ".on").length;
-	let opencheck = $(".open3." + r_id + ".on").length;
-	
-	var data = {   
-		  "memberprofile_name":memberprofile_name,  "content":content,"starR":starR,"opencheck":opencheck, "test" : test ,"r_id":r_id, "trainerprofile_u_key":trainerprofile_u_key, "memberprofile_u_key":memberprofile_u_key
-		
-	}
-	formData.append('test', new Blob([ JSON.stringify(data) ], {type : "application/json"}));
-    $.ajax({
-        type:"POST",
-        url: "/reviewmodifyInsert",
-        processData: false,
-        contentType: false,
-      	data: formData,
-        success: function(rtn){
-          console.log("파일수정업로드성공: ", rtn);
-     	 location.href='${path}	/trainerProfileDetail?u_key='+trainerprofile_u_key+'&memberprofile_u_key='+memberprofile_u_key+'&logicCheck='+'delete'+'';
-     	 sessionStorage.setItem('postModifyed', 'true');
-        },
-        err: function(err){
-          console.log("파일업로드실패:", err);
-        }
-      })
-      
-  
-}
-
-
-
 function Centerview(test) {
 	
 	  let tf_loadaddress = $('#tf_loadaddress').val();
@@ -5000,6 +4587,7 @@ function Centerview(test) {
 	  
 		console.log('tf_loadaddress:test'+tf_loadaddress);
 		console.log('u_key:'+u_key);
+		console.log('프로필에서 센터 클릭');
 		$.ajax({
 			method: "POST",
 			url: "/aj-centerview2",
@@ -5017,66 +4605,210 @@ function Centerview(test) {
 		});
 		
 }
-
-
-$("#reviewselect").change( function() {
-
-	console.log("셀렉트박스변경호출");
-	let trainerprofile_u_key = $('#trainerprofile_u_key').val();
-
-	let select = $('#reviewselect').val();
-	console.log("select:"+select);
-	$.ajax({
-		method: "POST",
-		url: "/aj-reviewselect",
-		data: { trainer_u_key: trainerprofile_u_key ,select:select}
-	})
-	.done(function( html ) {
-		console.log(html);
-		$('#reviewselectlist').html(html);
-	     $( '.slider2' ).slick( {
-		          autoplay: true,
-		          autoplaySpeed: 1000,
-		        } );
-		     
-		   
-	});
-
-});
-
-
-$('#reviewmodifymodal').on('show.bs.modal', function(event) {          
-    r_content = $(this).prev().prev().prev().prev().prev().prev().prev().val();
-    	
- 	document.getElementById("reviewmodifycontent").innerHTML = r_content;
-    
-    console.log("r_content:"+r_content);
-   
- })
- 
- 
- 
- /* 리뷰수정 첨부파일 삭제 */
-function deletemodifyFile(r_id) {
-	console.log("리뷰수정모달에서 파일삭제 클릭");
-	console.log("r_id:"+r_id);
-	document.querySelector("#file" + r_id).remove();
-	$.ajax({
-		method: "POST",
-		url: "/aj-reviewfiledeletemodify",
-		data: { r_id: r_id}
-	})
-	.done(function( html ) {
-	//	console.log(html);
-		//$('#reviewselectlist').html(html);
-	    
-
-		   
-	});
+function review(test) {
 	
-    //filesArr[num].is_delete = true;
+	  let trainer_u_key = $('#u_key').val();
+	  
+	 let member_u_key = $('#member_u_key').val();
+		console.log("trainer_u_key:"+trainer_u_key);
+		console.log("member_u_key:"+member_u_key);
+		$.ajax({
+			method: "POST",
+			url: "/aj-review",
+			data: {  trainer_u_key: trainer_u_key}
+		})
+		.done(function( html ) {
+			
+			$('#centerview').html(html);
+		     $( '.slider2' ).slick( {
+			          autoplay: true,
+			          autoplaySpeed: 1000,
+			        });
+			     
+			   
+		});
+		
 }
+<!-- 검토완료하기 누르면 발생 -->
+
+	function clickConfirm(formName) {
+		formName.action = "/trainerprofilecheck";
+		sessionStorage.setItem('postconfirm', 'true');
+		formName.method = "post";
+		formName.submit();
+	}
+</script>
+<script>
+function clickReject(formName) {
+	 var textarea = document.getElementById("rejectreason");
+	  var text = textarea.value;
+	//반려사유가 필수로 입력되어야하는 조건
+	  if (text.trim() === "") {
+		    // 값이 입력되지 않은 경우에 대한 처리
+		    console.log("값이 입력되지 않았습니다.");
+		    alert("반려사유를 입력해주세요.")
+		    // 여기에 추가적인 동작을 원하는 대로 작성하세요.
+		  } else {
+		    // 값이 입력된 경우에 대한 처리
+		   formName.action = "/trainerprofilereject";
+	sessionStorage.setItem('postreject', 'true');
+	formName.method = "post";
+	formName.submit();
+		    // 여기에 추가적인 동작을 원하는 대로 작성하세요.
+		  }	
+}
+</script>
+<script>
+function handleInputChange() {
+	  var textarea = document.getElementById("rejectreason");
+	  var text = textarea.value;
+	  var tf_rejectreason = document.getElementById("tf_rejectreason");
+	  tf_rejectreason.value=text;
+	  console.log("tf_rejectreason:"+text);
+	}
+
+	var textarea = document.getElementById("rejectreason");
+	textarea.addEventListener("input", handleInputChange);
+</script>
+<script>
+<!-- 로그인창 이동 완료하기 누르면 발생 -->
+function clickConfirmlogin(formName) {
+	formName.action = "/signin";
+	formName.method = "post";
+	formName.submit();
+}
+</script>
+<!-- 상담신청 완료하기 누르면 발생 -->
+<script>
+	function clickConfirmconsulting(formName) {
+		formName.action = "/profileconsultingcheck";
+		formName.method = "post";
+		formName.submit();
+	}
+</script>
+
+
+<!-- 검토취소하기 누르면 발생 -->
+<script>
+	function clickConfirmCancel(formName) {
+		formName.action = "/trainerprofilecheckcancel";
+		sessionStorage.setItem('postcancel', 'true');
+		formName.method = "post";
+		formName.submit();
+	}
+	
+<!-- 상담요청 취소하기 누르면 발생 -->
+function clickConfirmCancelconsulting(formName) {
+		formName.action = "/profileconsultingcancel";
+		formName.method = "post";
+		formName.submit();
+	}
+<!-- 프로필 등록하기 누르면 발생 -->
+function clickmemberprofileinsert(formName) {
+		 var member_u_key =$('#member_u_key').val(); 
+		  var url = "/memberProfile?u_key=" + encodeURIComponent(member_u_key);  
+		  window.location.href = url;
+	}
 
 </script>
-<!-- 다중파일업로드 이미지 미리보기 삭제끝 -->
+	<script src="/docs/5.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+		crossorigin="anonymous"></script>
+
+	<script src="form-validation.js"></script>
+	
+ <!-- PT사진 슬라이드 -->
+<script>
+$( document ).ready( function() {
+    $( '.slider10' ).slick( {
+      autoplay: true,
+      autoplaySpeed: 1000,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+    } );
+})
+  
+
+
+
+
+
+
+window.addEventListener('load', function() {
+	  var postDeleted = sessionStorage.getItem('postDeleted');
+	  var postInserted = sessionStorage.getItem('postInserted');
+	  var postModifyed = sessionStorage.getItem('postModifyed');
+	  var postconfirm = sessionStorage.getItem('postconfirm');
+	  var postcancel = sessionStorage.getItem('postcancel');
+	  var postreject = sessionStorage.getItem('postreject');
+	  	  if (postDeleted) {
+		  $('.error').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+	    // 삭제 상태 제거
+	    sessionStorage.removeItem('postDeleted');
+	  }
+	  	 if (postInserted) {
+			  $('.error2').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		    // 작성 상태 제거
+		    sessionStorage.removeItem('postInserted');
+		  }
+	  	 if (postModifyed) {
+			  $('.error3').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		    // 수정 상태 제거
+		    sessionStorage.removeItem('postModifyed');
+		  }
+		 if (postconfirm) {
+			  $('.error3').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		    // 수정 상태 제거
+		    sessionStorage.removeItem('postconfirm');
+		  }
+		 if (postcancel) {
+			  $('.error4').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		    // 수정 상태 제거
+		    sessionStorage.removeItem('postcancel');
+		  }
+		 if (postreject) {
+			  $('.error5').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		    // 수정 상태 제거
+		    sessionStorage.removeItem('postreject');
+		  }
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function test(test) {
+	
+	 
+		$.ajax({
+			method: "POST",
+			url: "/aj-test",
+			data: {}
+		})
+		.done(function( html ) {
+			
+			$('#centerview').html(html);
+		     $( '.slider2' ).slick( {
+			          autoplay: true,
+			          autoplaySpeed: 1000,
+			        });
+			     
+			   
+		});
+		
+}
+
+
+</script>
 </html>

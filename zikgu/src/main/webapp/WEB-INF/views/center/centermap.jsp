@@ -3433,18 +3433,28 @@ input, select, textarea {
 					font-size: 0.9em;
 				}
 
-		@media screen and (max-width: 736px) {
-
+@media screen and (max-width: 736px) {
+			.aa{
+			font-size:15px;
+			}
+			.slick-active{
+			margin-top:50px;
+			}
 			#nav {
-				display: none;
+				display: ;
+				background-color:white;
+				border-bottom:1px solid black;
+				
+			}
+			#nav_2{
+				display:none;
 			}
 
-				#nav + #main {
+			#nav + #main {
 					padding-top: 0;
-				}
+			}
 
 		}
-
 /* Main */
 
 	#main {
@@ -3947,7 +3957,7 @@ input, select, textarea {
 							<p><input type="hidden" name="u_key" class="sticky_btn"  value="${u_key}" id="u_key"></p>
 							
 						</ul>
-						<ul>
+						<ul id="nav_2">
 							<li><a class="aa" href="#intro" class="active" style="color:black">센터 소개</a></li>
 							<li><a class="aa" style="color:black" href="#first">센터 사진</a></li>
 							<li><a class="aa" style="color:black" href="#second">운영 시간</a></li>

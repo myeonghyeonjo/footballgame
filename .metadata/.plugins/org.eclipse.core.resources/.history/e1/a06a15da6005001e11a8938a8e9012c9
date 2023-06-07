@@ -3555,25 +3555,14 @@ input, select, textarea {
 				}
 
 		@media screen and (max-width: 736px) {
-			.aa{
-			font-size:15px;
-			}
-			.slick-active{
-			margin-top:50px;
-			}
+
 			#nav {
-				display: ;
-				background-color:white;
-				border-bottom:1px solid black;
-				
-			}
-			#nav_2{
-				display:none;
+				display: none;
 			}
 
-			#nav + #main {
+				#nav + #main {
 					padding-top: 0;
-			}
+				}
 
 		}
 
@@ -4030,7 +4019,7 @@ input, select, textarea {
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<h1 id="c_name" style="color:white;">${trainerprofile.tf_name} 트레이너</h1>
+						<h1 id="c_name" style="color:white;">${trainerprofile.tf_name} 트레이너2</h1>
 						
 						<p>${trainerprofile.tf_hanjulintro}<br /></p>
 						
@@ -4057,7 +4046,7 @@ input, select, textarea {
 							<p><input type="hidden" name="u_key" class="sticky_btn"  value="${trainerprofile.u_key}" id="u_key"></p>
 							
 						</ul>
-						<ul id="nav_2">
+						<ul>
 							<li><a class="aa" href="#intro" class="active" style="color:black">최근 후기</a></li>
 						</ul>
 						

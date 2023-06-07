@@ -4057,7 +4057,7 @@ input, select, textarea {
 							<p><input type="hidden" name="u_key" class="sticky_btn"  value="${trainerprofile.u_key}" id="u_key"></p>
 							
 						</ul>
-						<ul id="nav_2">
+						<ul>
 							<li><a class="aa" href="#intro" class="active" style="color:black">최근 후기</a></li>
 						</ul>
 						
