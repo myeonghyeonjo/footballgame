@@ -254,7 +254,7 @@ button:hover {
 							<a href="/trainerPT?u_key=${u_key}" class="aa" id="trainer_a3"
 								style="color: #4169e1; margin-left: 30px; margin-top: -20px; ">PT 등록 ></a> 
 							<a href="/trainerconsultinglist?u_key=${u_key}" class="aa"
-								style="color: #4169e1; margin-left: 30px; margin-top: -10px; ">PT 요청
+								style="color: #4169e1; margin-left: 20px; margin-top: -10px; ">PT 요청
 								조회 ></a>
 						</div>
 					</div>

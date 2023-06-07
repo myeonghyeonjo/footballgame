@@ -34,7 +34,7 @@
 <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Favicons -->
 <link rel="apple-touch-icon"
 	href="/docs/5.2/assets/img/favicons/apple-touch-icon.png"
@@ -103,6 +103,8 @@ style>.image-container2 {
 	}
 }
 
+
+
 .b-example-divider {
 	height: 3rem;
 	background-color: rgba(0, 0, 0, .1);
@@ -158,11 +160,10 @@ style>.image-container2 {
 			<div class="py-5 text-center">
 				<h2 style="text-align: left; color: black;"><strong>센터 정보 등록</strong></h2>
 			</div>
-<form  action="/centerinsertprocess" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
-	
+<form  action="/centerinsertprocess" method="post" enctype="multipart/form-data" accept-charset="UTF-8">	
 			<div class="row g-5">
 				<div class="col-md-7 col-lg-8">
-					<label for="email" style="font-size: 20px; padding: 10px;" form-labelmt-4" ><strong>센터사진</strong></label><br>
+					<label for="email" style="font-size: 20px; padding: 10px;" form-labelmt-4" ><strong>센터사진  <span id="uploadfile_messageSpan" class="point c_dayDoubleChk"></span></strong></label><br>
 					<div id="sectionbox" class="form-control">
 					<label for="formFile2" style="padding:1px;" class="form-label mt-4">센터의 사진을 올려주세요.</label> 
 						
@@ -177,13 +178,15 @@ style>.image-container2 {
 								<input type="hidden" name="u_key" value="${u_key}">
 								<div>
 									<label for="username2" class="form-label" 
-										style="font-size: 15px;">센터이름</label> <input
+										style="font-size: 15px;">센터이름  <span id="c_name_messageSpan" class="point c_dayDoubleChk"></span>
+										</label> <input
 										type="text" id="username2" style="flex: 1; height: 40px;" name="c_name"
 										class="form-control" placeholder="센터이름을입력해주세요">
 								</div>
 								
 								<label for="username2" class="form-label" 
-										style="font-size: 15px;">이용정보</label> <input
+										style="font-size: 15px;">이용정보  <span id="c_inform_messageSpan" class="point c_dayDoubleChk"></span>
+										</label> <input
 										type="text" id="username2" style="flex: 1; height: 40px;" name="c_inform"
 										class="form-control" placeholder="이용정보를입력해주세요">
 								</div>
@@ -192,7 +195,9 @@ style>.image-container2 {
 							
 							
 						<div class="col-12">
-							<label for="email" style="font-size: 20px;" form-labelmt-4" ><strong>센터 소개</label>
+							<label for="email" style="font-size: 20px;" form-labelmt-4" ><strong>센터 소개
+							<span id="intro_messageSpan" class="point c_dayDoubleChk"></span>
+							</label>
 							<div class="input-group has-validation">
 								<textarea cols="50" rows="10" class="form-control" id="c_intro" name="c_intro"
 									placeholder="소개글을 입력해주세요"></textarea>
@@ -201,72 +206,101 @@ style>.image-container2 {
 							
 							
 							<label for="email" style="font-size: 20px; padding: 10px;"
-								form-labelmt-4" ><strong>운영 시간</label>
+								form-labelmt-4" ><strong>운영 시간<span id="messageSpan" class="point c_dayDoubleChk"></span>
+								</label>
 							<div id="sectionbox" class="form-control"
 								style="padding: 10px; background-color: white;"">
 								
 								
-							
+							<style>
+							@media ( max-width : 992px) {
+	.numberOnly {
+		width: 100px;
+		
+	}
+	#c_dayoff{
+	width:900px;
+	}
+}
+						@media ( max-width : 420px) {
+	.numberOnly {
+		width: 80px;
+	}
+	#c_dayoff{
+	width:550px;
+	}
+}
+@media ( min-width : 992px) {
+	.numberOnly {
+		width: 160px;
+		
+	}
+	#c_dayoff{
+	width:1900px;
+	}
+}
+							</style>
 									
 									<div style="display: flex;">
 										<p style="padding:12px;">평일&nbsp;&nbsp;&nbsp;</p>
 										<input type="text" id="timeInput" name="c_daymorning"
-											style="margin: 10px; width: 160px; flex: 0.2; height: 40px;"
-											class="form-control" oninput="formatTime(this)" maxlength="4">
+											style="margin: 10px; flex: 0.2; height: 40px;"
+											class="form-control numberOnly" oninput="formatTime(this)" maxlength="4">
 
 										<p style="padding:12px;">~</p>
 										<input type="text" id="timeInput" name="c_dayafter"
-											style="margin: 10px; width: 160px; flex: 0.2; height: 40px;"
-											class="form-control" oninput="formatTime(this)" maxlength="4">
-
+											style="margin: 10px;  flex: 0.2; height: 40px;"
+											class="form-control numberOnly" oninput="formatTime(this)" maxlength="4">	    								
 									</div>
 									<div style="display: flex;">
 										<p style="padding:12px;">토요일</p>
 										<input type="text" id="timeInput" name="c_satermorning"
-											style="margin: 10px; width: 160px; flex: 0.2; height: 40px;"
-											class="form-control" oninput="formatTime(this)" maxlength="4">
+											style="margin: 10px;  flex: 0.2; height: 40px;"
+											class="form-control numberOnly" oninput="formatTime(this)" maxlength="4">
 											<p style="padding:12px;">~</p>
 										<input type="text" id="timeInput" name="c_saterafter"
-											style="margin: 10px; width: 160px; flex: 0.2; height: 40px;"
-											class="form-control" oninput="formatTime(this)" maxlength="4">
+											style="margin: 10px;  flex: 0.2; height: 40px;"
+											class="form-control numberOnly" oninput="formatTime(this)" maxlength="4">
+										<span id="sater_messageSpan" class="point c_dayDoubleChk"></span>
 									</div>
 									<div style="display: flex;">
 										<p style="padding:12px;">일요일</p>
 										<input type="text" id="timeInput" name="c_sunmorning"
-											style="margin: 10px; width: 160px; flex: 0.2; height: 40px;"
-											class="form-control" oninput="formatTime(this)" maxlength="4">
+											style="margin: 10px; flex: 0.2; height: 40px;"
+											class="form-control numberOnly" oninput="formatTime(this)" maxlength="4">
 											<p style="padding:12px;">~</p>
 										<input type="text" id="timeInput" name="c_sunafter"
-											style="margin: 10px; width: 160px; flex: 0.2; height: 40px;"
-											class="form-control" oninput="formatTime(this)" maxlength="4">
+											style="margin: 10px;  flex: 0.2; height: 40px;"
+											class="form-control numberOnly" oninput="formatTime(this)" maxlength="4">
+										<span id="sun_messageSpan" class="point c_dayDoubleChk"></span>
 									</div>
 									<div style="display: flex;">
 										<p style="padding:12px;">휴무일</p>
-										<input type="text" id="rcvordAm" name="c_dayoff"
-											style="margin: 10px; width: 160px; flex: 0.3; height: 40px;"
+										<input type="text" id="c_dayoff" name="c_dayoff"
+											style="margin: 10px;  flex: 1; height: 40px;"
 											class="form-control" placeholder="휴무일입력">
+											<span id="dayoff_messageSpan" class="point c_dayDoubleChk"></span>
 									</div>
 							
 								
 									</div>
 							<label for="email" style="font-size: 20px; padding: 10px;"
-								form-labelmt-4" ><strong>센터 주소</label>
+								form-labelmt-4" ><strong>센터 주소	<span id="c_postcode_messageSpan" class="point c_dayDoubleChk"></span>
+								</label>
 								<div id="sectionbox" class="form-control" 
 								style="padding: 10px; background-color: white;">
 									<div style="display: flex;">
-										<input type="text" style= "flex: 0.5; margin:2px;" class="form-control"  name="c_postcode" id="sample4_postcode" placeholder="우편번호">
+										<input type="text" style= "flex: 0.5; margin:2px;" class="form-control"  name="c_postcode" id="sample4_postcode" placeholder="우편번호"  readonly >
 										<input type="button"  style= "flex: 0.5; margin:2px;" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"  class="form-control" ><br>
 									</div>
-										<input type="text" class="form-control" style="margin: 2px;" id="sample4_roadAddress" name="c_loadaddress" placeholder="도로명주소">
-										<input type="text" class="form-control"  style="margin: 2px;"  id="sample4_jibunAddress" name="c_oldaddress" placeholder="지번주소">
+										<input type="text" class="form-control" style="margin: 2px;" id="sample4_roadAddress" name="c_loadaddress" placeholder="도로명주소" readonly>
+										<input type="text" class="form-control"  style="margin: 2px;"  id="sample4_jibunAddress" name="c_oldaddress" placeholder="지번주소" readonly>
 										<span id="guide" style="color:#999;display:none"></span>
 										<input type="text"  class="form-control"  style="margin: 2px;"  id="sample4_detailAddress" name="c_detailaddress" placeholder="상세주소">
-										<input type="text" class="form-control"  style="margin: 2px;"  id="sample4_extraAddress" name="c_option" placeholder="참고항목">
+										<input type="text" class="form-control"  style="margin: 2px;"  id="sample4_extraAddress" name="c_option" placeholder="참고항목" readonly>
 								</div>
+<button style="margin-top:20px;" class="w-100 btn btn-primary btn-lg" type="submit" onclick="return checkInput();">등록하기</button>							</div>				
 							</div>
-							</div>
-<button class="w-100 btn btn-primary btn-lg" type="submit">등록하기</button>
-
 					</form>
 		</main>
 
@@ -355,7 +389,9 @@ style>.image-container2 {
           new daum.Postcode({
               oncomplete: function(data) {
                   // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
+                 
+					var c_postcode_messageSpan = document.getElementById("c_postcode_messageSpan");
+					c_postcode_messageSpan.innerText = "";
                   // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
                   // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
                   var roadAddr = data.roadAddress; // 도로명 주소 변수
@@ -406,8 +442,328 @@ style>.image-container2 {
           }).open();
       }
 
+      function checkInput() {
+    	  var c_daymorning = document.getElementsByName("c_daymorning")[0].value;
+    	  var c_dayafter = document.getElementsByName("c_dayafter")[0].value;
+    	  var c_satermorning = document.getElementsByName("c_satermorning")[0].value;
+    	  var c_saterafter = document.getElementsByName("c_saterafter")[0].value;
+    	  var c_sunmorning = document.getElementsByName("c_sunmorning")[0].value;
+    	  var c_sunafter = document.getElementsByName("c_sunafter")[0].value;
+    	  var c_dayoff = document.getElementsByName("c_dayoff")[0].value;
+    	  var c_intro = document.getElementsByName("c_intro")[0].value;
+    	  var c_name = document.getElementsByName("c_name")[0].value;
+    	  var c_inform = document.getElementsByName("c_inform")[0].value;
+    	  var c_postcode = document.getElementsByName("c_postcode")[0].value;
+    	  var uploadfile = document.getElementsByName("uploadfile")[0].value;
+    	  
+    	  
+    	  var messageSpan = document.getElementById("messageSpan");
+    	  var sater_messageSpan = document.getElementById("sater_messageSpan");
+    	  var sun_messageSpan = document.getElementById("sun_messageSpan");
+    	  var dayoff_messageSpan = document.getElementById("dayoff_messageSpan");
+    	  var intro_messageSpan = document.getElementById("intro_messageSpan");
+    	  var c_postcode_messageSpan = document.getElementById("c_postcode_messageSpan");
+    	  var uploadfile_messageSpan = document.getElementById("uploadfile_messageSpan");
+    	  
+    	  if (c_daymorning === "" || c_dayafter === "" || c_satermorning === "" || c_saterafter ===""
+    			  || c_sunmorning === "" || c_sunafter === "" || c_dayoff === "" || c_intro === ""
+    			  || c_name === "" || c_inform === "" || c_postcode === "") {
+    		  alert("입력값을 확인해주세요.");
+    		  if (c_daymorning === "" || c_dayafter === "" || c_satermorning === "" || c_saterafter === "" 
+    				  || c_sunmorning === "" || c_sunafter === "" || c_dayoff === "") {
+    	   	     messageSpan.innerText = " 값을 입력해주세요.";
+    	   	 	 messageSpan.style.color = "red";	 	
+    		  }
+    		  if (c_daymorning != "" && c_dayafter != "" && c_satermorning != "" && c_saterafter != "" 
+				  && c_sunmorning != "" && c_sunafter != "" && c_dayoff != "") {
+    			  messageSpan.innerText = ""; // 문구를 비웁니다.
+     		  }
+    		 
+    		  if (c_intro === "") {
+    			  intro_messageSpan.innerText = "소개글을 입력해주세요.";
+    			  intro_messageSpan.style.color = "red";
+      		  }
+    		  if (c_intro != "") {
+    			  intro_messageSpan.innerText = "";  // 문구를 비웁니다.
+      		  }
+    		  if (c_name === "") {
+    			  c_name_messageSpan.innerText = "값을 입력해주세요.";
+    			  c_name_messageSpan.style.color = "red";
+      		  }
+    		  if (c_name != "") {
+    			  c_name_messageSpan.innerText = "";  // 문구를 비웁니다.
+      		  }
+    		  if (c_inform === "") {
+    			  c_inform_messageSpan.innerText = "값을 입력해주세요.";
+    			  c_inform_messageSpan.style.color = "red";
+      		  }
+    		  if (c_inform != "") {
+    			  c_inform_messageSpan.innerText = "";  // 문구를 비웁니다.
+      		  }
+    		  if (c_postcode === "") {
+    			  c_postcode_messageSpan.innerText = "주소를 입력해주세요.";
+    			  c_postcode_messageSpan.style.color = "red";
+      		  }
+    		  if (c_postcode != "") {
+    			  c_postcode_messageSpan.innerText = "";  // 문구를 비웁니다.
+      		  }
+    		  if (uploadfile === "") {
+    			  uploadfile_messageSpan.innerText = "사진을 등록해주세요.";
+    			  uploadfile_messageSpan.style.color = "red";
+      		  }
+    		  if (uploadfile != "") {
+    			  uploadfile_messageSpan.innerText = "";  // 문구를 비웁니다.
+      		  }
+    		  
+    	    return false; // form 제출을 막기 위해 false를 반환합니다.
+    	  } else {
+    	    messageSpan.innerText = ""; // 문구를 비웁니다.
+    	    sater_messageSpan.innerText = "";  // 문구를 비웁니다.
+    	    sun_messageSpan.innerText = "";  // 문구를 비웁니다.
+    	    dayoff_messageSpan.innerText = "";  // 문구를 비웁니다.
+    	    intro_messageSpan.innerText = "";  // 문구를 비웁니다.
+    	    c_name_messageSpan.innerText = "";  // 문구를 비웁니다.
+    	    c_inform_messageSpan.innerText = "";  // 문구를 비웁니다.
+    	    c_postcode_messageSpan.innerText = "";  // 문구를 비웁니다.
+    	    return true; // form 제출을 허용하기 위해 true를 반환합니다.
+    	  }
+    	}  
       
+      
+     
 </script>
+<script>
+  
+$('input[name="c_inform"]').blur(function(){
+	var sm_name =  $('input[name="c_inform"]').val();
+	var c_inform_messageSpan = document.getElementById("c_inform_messageSpan");
+	if(sm_name == "" || sm_name.length < 1){
+		 c_inform_messageSpan.innerText = "값을 입력해주세요.";
+		 c_inform_messageSpan.style.color = "red";
+	}else{
+		 c_inform_messageSpan.innerText = "";
+	}
+});  
+$('input[name="c_name"]').blur(function(){
+	var sm_name =  $('input[name="c_name"]').val();
+	var c_nanme_messageSpan = document.getElementById("c_name_messageSpan");
+	if(sm_name == "" || sm_name.length < 1){
+		c_nanme_messageSpan.innerText = "값을 입력해주세요.";
+		c_nanme_messageSpan.style.color = "red";
+	}else{
+		c_nanme_messageSpan.innerText = "";
+	}
+});  
+$('input[name="c_daymorning"]').blur(function(){
+	var sm_name =  $('input[name="c_daymorning"]').val();
+	var sm_name2 =  $('input[name="c_dayafter"]').val();
+	var sm_name3 =  $('input[name="c_satermorning"]').val();
+	var sm_name4 =  $('input[name="c_saterafter"]').val();
+	var sm_name5 =  $('input[name="c_sunmorning"]').val();
+	var sm_name6 =  $('input[name="c_sunafter"]').val();
+	var sm_name7 =  $('input[name="c_dayoff"]').val();
+	var messageSpan = document.getElementById("messageSpan");
+	if(sm_name == "" || sm_name.length < 5 ||
+			sm_name2 == "" || sm_name2.length < 5||
+			sm_name3 == "" || sm_name3.length < 5||
+			sm_name4 == "" || sm_name4.length < 5||
+			sm_name5 == "" || sm_name5.length < 5||
+			sm_name6 == "" || sm_name6.length < 5){
+		messageSpan.innerText = " 정확한 값을 입력해주세요. ex)11:30";
+		messageSpan.style.color = "red";
+	}else if(sm_name7 == "" || sm_name7.length < 1){
+		messageSpan.innerText = " 값을 입력해주세요.";
+		messageSpan.style.color = "red";
+	}else{
+		messageSpan.innerText = "";
+	}
+});  
 
+$('input[name="c_dayafter"]').blur(function(){
+	var sm_name =  $('input[name="c_daymorning"]').val();
+	var sm_name2 =  $('input[name="c_dayafter"]').val();
+	var sm_name3 =  $('input[name="c_satermorning"]').val();
+	var sm_name4 =  $('input[name="c_saterafter"]').val();
+	var sm_name5 =  $('input[name="c_sunmorning"]').val();
+	var sm_name6 =  $('input[name="c_sunafter"]').val();
+	var sm_name7 =  $('input[name="c_dayoff"]').val();
+	var messageSpan = document.getElementById("messageSpan");
+	if(sm_name == "" || sm_name.length < 5 ||
+			sm_name2 == "" || sm_name2.length < 5||
+			sm_name3 == "" || sm_name3.length < 5||
+			sm_name4 == "" || sm_name4.length < 5||
+			sm_name5 == "" || sm_name5.length < 5||
+			sm_name6 == "" || sm_name6.length < 5){
+		messageSpan.innerText = " 정확한 값을 입력해주세요. ex)11:30";
+		messageSpan.style.color = "red";
+	}else if(sm_name7 == "" || sm_name7.length < 1){
+		messageSpan.innerText = " 값을 입력해주세요.";
+		messageSpan.style.color = "red";
+	}else{
+		messageSpan.innerText = "";
+	}
+});  
+$('input[name="c_satermorning"]').blur(function(){
+	var sm_name =  $('input[name="c_daymorning"]').val();
+	var sm_name2 =  $('input[name="c_dayafter"]').val();
+	var sm_name3 =  $('input[name="c_satermorning"]').val();
+	var sm_name4 =  $('input[name="c_saterafter"]').val();
+	var sm_name5 =  $('input[name="c_sunmorning"]').val();
+	var sm_name6 =  $('input[name="c_sunafter"]').val();
+	var sm_name7 =  $('input[name="c_dayoff"]').val();
+	var messageSpan = document.getElementById("messageSpan");
+	if(sm_name == "" || sm_name.length < 5 ||
+			sm_name2 == "" || sm_name2.length < 5||
+			sm_name3 == "" || sm_name3.length < 5||
+			sm_name4 == "" || sm_name4.length < 5||
+			sm_name5 == "" || sm_name5.length < 5||
+			sm_name6 == "" || sm_name6.length < 5){
+		messageSpan.innerText = " 정확한 값을 입력해주세요. ex)11:30";
+		messageSpan.style.color = "red";
+	}else if(sm_name7 == "" || sm_name7.length < 1){
+		messageSpan.innerText = " 값을 입력해주세요.";
+		messageSpan.style.color = "red";
+	}else{
+		messageSpan.innerText = "";
+	}
+});  
+$('input[name="c_saterafter"]').blur(function(){
+	var sm_name =  $('input[name="c_daymorning"]').val();
+	var sm_name2 =  $('input[name="c_dayafter"]').val();
+	var sm_name3 =  $('input[name="c_satermorning"]').val();
+	var sm_name4 =  $('input[name="c_saterafter"]').val();
+	var sm_name5 =  $('input[name="c_sunmorning"]').val();
+	var sm_name6 =  $('input[name="c_sunafter"]').val();
+	var sm_name7 =  $('input[name="c_dayoff"]').val();
+	var messageSpan = document.getElementById("messageSpan");
+	if(sm_name == "" || sm_name.length < 5 ||
+			sm_name2 == "" || sm_name2.length < 5||
+			sm_name3 == "" || sm_name3.length < 5||
+			sm_name4 == "" || sm_name4.length < 5||
+			sm_name5 == "" || sm_name5.length < 5||
+			sm_name6 == "" || sm_name6.length < 5){
+		messageSpan.innerText = " 정확한 값을 입력해주세요. ex)11:30";
+		messageSpan.style.color = "red";
+	}else if(sm_name7 == "" || sm_name7.length < 1){
+		messageSpan.innerText = " 값을 입력해주세요.";
+		messageSpan.style.color = "red";
+	}else{
+		messageSpan.innerText = "";
+	}
+});  
+$('input[name="c_sunmorning"]').blur(function(){
+	var sm_name =  $('input[name="c_daymorning"]').val();
+	var sm_name2 =  $('input[name="c_dayafter"]').val();
+	var sm_name3 =  $('input[name="c_satermorning"]').val();
+	var sm_name4 =  $('input[name="c_saterafter"]').val();
+	var sm_name5 =  $('input[name="c_sunmorning"]').val();
+	var sm_name6 =  $('input[name="c_sunafter"]').val();
+	var sm_name7 =  $('input[name="c_dayoff"]').val();
+	var messageSpan = document.getElementById("messageSpan");
+	if(sm_name == "" || sm_name.length < 5 ||
+			sm_name2 == "" || sm_name2.length < 5||
+			sm_name3 == "" || sm_name3.length < 5||
+			sm_name4 == "" || sm_name4.length < 5||
+			sm_name5 == "" || sm_name5.length < 5||
+			sm_name6 == "" || sm_name6.length < 5){
+		messageSpan.innerText = " 정확한 값을 입력해주세요. ex)11:30";
+		messageSpan.style.color = "red";
+	} else if(sm_name7 == "" || sm_name7.length < 1){
+		messageSpan.innerText = " 값을 입력해주세요.";
+		messageSpan.style.color = "red";
+	}else{
+		messageSpan.innerText = "";
+	}
+});  
+$('input[name="c_sunafter"]').blur(function(){
+	var sm_name =  $('input[name="c_daymorning"]').val();
+	var sm_name2 =  $('input[name="c_dayafter"]').val();
+	var sm_name3 =  $('input[name="c_satermorning"]').val();
+	var sm_name4 =  $('input[name="c_saterafter"]').val();
+	var sm_name5 =  $('input[name="c_sunmorning"]').val();
+	var sm_name6 =  $('input[name="c_sunafter"]').val();
+	var sm_name7 =  $('input[name="c_dayoff"]').val();
+	var messageSpan = document.getElementById("messageSpan");
+	if(sm_name == "" || sm_name.length < 5 ||
+			sm_name2 == "" || sm_name2.length < 5||
+			sm_name3 == "" || sm_name3.length < 5||
+			sm_name4 == "" || sm_name4.length < 5||
+			sm_name5 == "" || sm_name5.length < 5||
+			sm_name6 == "" || sm_name6.length < 5){
+		messageSpan.innerText = " 정확한 값을 입력해주세요. ex)11:30";
+		messageSpan.style.color = "red";
+	} else if(sm_name7 == "" || sm_name7.length < 1){
+		messageSpan.innerText = " 값을 입력해주세요.";
+		messageSpan.style.color = "red";
+	}else{
+		messageSpan.innerText = "";
+	}
+});  
+$('input[name="c_dayoff"]').blur(function(){
+	var sm_name7 =  $('input[name="c_dayoff"]').val();
+	var sm_name =  $('input[name="c_daymorning"]').val();
+	var sm_name2 =  $('input[name="c_dayafter"]').val();
+	var sm_name3 =  $('input[name="c_satermorning"]').val();
+	var sm_name4 =  $('input[name="c_saterafter"]').val();
+	var sm_name5 =  $('input[name="c_sunmorning"]').val();
+	var sm_name6 =  $('input[name="c_sunafter"]').val();
+	var messageSpan = document.getElementById("messageSpan");
+	if(sm_name7 == "" || sm_name7.length < 1){
+		messageSpan.innerText = " 값을 입력해주세요.";
+		messageSpan.style.color = "red";
+	} else if(sm_name == "" || sm_name.length < 5 ||
+			sm_name2 == "" || sm_name2.length < 5||
+			sm_name3 == "" || sm_name3.length < 5||
+			sm_name4 == "" || sm_name4.length < 5||
+			sm_name5 == "" || sm_name5.length < 5||
+			sm_name6 == "" || sm_name6.length < 5){
+		messageSpan.innerText = " 정확한 값을 입력해주세요. ex)11:30";
+		messageSpan.style.color = "red";
+	} else{
+		messageSpan.innerText = "";
+	}
+});  
+$('input[name="uploadfile"]').blur(function(){
+	var sm_name =  $('input[name="uploadfile"]').val();
+	var uploadfile_messageSpan = document.getElementById("uploadfile_messageSpan");
+	if(sm_name == "" || sm_name.length < 1){
+		uploadfile_messageSpan.innerText = " 사진을 등록해주세요.";
+		uploadfile_messageSpan.style.color = "red";
+	}else{
+		uploadfile_messageSpan.innerText = "";
+	}
+});  
+$("#c_intro").blur(function(){
+	var sm_name =  $(this).val();
+	var intro_messageSpan = document.getElementById("intro_messageSpan");
+	if(sm_name == "" || sm_name.length < 1){
+		intro_messageSpan.innerText = "소개글을 입력해주세요.";
+		intro_messageSpan.style.color = "red";
+	}else{
+		intro_messageSpan.innerText = "";
+	}
+});  
+
+//input 숫자만 입력
+$(".numberOnly").on("keyup", function(event) {
+	var arr = $(this).val();
+	console.log("arr길이:"+arr.length);
+    if (event.which && (event.which  > 47 && event.which  < 58 || event.which == 8)) { 	
+  
+    	console.log(" $(this).val:"+$(this).val());
+    	
+
+    }  else {
+    	
+        alert('숫자만 입력해주세요.');
+        $(this).val($(this).val().replace(/[^0-9]/g,""));
+    	
+    }
+    
+    // 입력값에서 숫자만 추출
+	  
+	  
+});
+</script>
 </body>
 </html>
