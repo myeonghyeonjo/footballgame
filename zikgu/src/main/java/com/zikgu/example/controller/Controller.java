@@ -1294,6 +1294,85 @@ model.addAttribute("exception", exception);
 			model.addAttribute("list",list);
 			return "/member/trainerprofilelist";
 	    }
+		@RequestMapping("/trainer_consulting_search_All")
+	    public String trainer_consulting_search_All(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,@RequestParam("u_key") int u_key,TrainerProfile trainerprofile) {
+			System.out.println("keyword:"+keyword);
+			System.out.println("u_key:"+u_key);
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			int tf_id = trainerprofile.getTf_id();
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+			    pagination.setTf_id(tf_id);
+			    pagination.setKeyword(keyword);
+				int listcount = boardservice.gettrainerconsultingsearchlistCount(pagination);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();
+				pagination.setTf_id(tf_id);			
+			pagination.setKeyword(keyword);
+			List<MemberProfile> list = boardservice.memberprofileconsultingsearchlist(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","전체");
+			model.addAttribute("u_key",u_key);
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("list",list);
+			return "/member/trainerconsultinglist";
+	    }
+		@RequestMapping("/trainer_consulting_complete_search_All")
+	    public String trainer_consulting_complete_search_All(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,@RequestParam("u_key") int u_key,TrainerProfile trainerprofile) {
+			System.out.println("keyword:"+keyword);
+			System.out.println("u_key:"+u_key);
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			int tf_id = trainerprofile.getTf_id();
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+			    pagination.setTf_id(tf_id);
+			    pagination.setKeyword(keyword);
+				int listcount = boardservice.gettrainerconsultingcompletesearchlistCount(pagination);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();
+				pagination.setTf_id(tf_id);			
+			pagination.setKeyword(keyword);
+			List<MemberProfile> list = boardservice.memberprofileconsultingcompletesearchlist(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","완료");
+			model.addAttribute("u_key",u_key);
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("list",list);
+			return "/member/trainerconsultinglist";
+	    }
+		@RequestMapping("/trainer_consulting_waite_search_All")
+	    public String trainer_consulting_waite_search_All(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,@RequestParam("u_key") int u_key,TrainerProfile trainerprofile) {
+			System.out.println("keyword:"+keyword);
+			System.out.println("u_key:"+u_key);
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			int tf_id = trainerprofile.getTf_id();
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+			    pagination.setTf_id(tf_id);
+			    pagination.setKeyword(keyword);
+				int listcount = boardservice.gettrainerconsultingwaitesearchlistCount(pagination);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();
+				pagination.setTf_id(tf_id);			
+			pagination.setKeyword(keyword);
+			List<MemberProfile> list = boardservice.memberprofileconsultingwaitesearchlist(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","대기");
+			model.addAttribute("u_key",u_key);
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("list",list);
+			return "/member/trainerconsultinglist";
+	    }
+		
 		@RequestMapping("/trainer_search_complete")
 	    public String trainer_search_complete(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,TrainerProfile trainerprofile) {
 			System.out.println("keyword:"+keyword);
@@ -1482,6 +1561,69 @@ model.addAttribute("exception", exception);
 			model.addAttribute("keyword",keyword);
 			model.addAttribute("sort","전체");
 			List<Center> list = boardservice.getcenterinsertsearchList(pagination);
+			model.addAttribute("list",list);
+			return "/center/centerinsertlist";
+	    }
+		@RequestMapping("/center_insert_search_complete")
+	    public String center_insert_search_complete(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,@RequestParam("u_key") int u_key,Center center) {
+			System.out.println("keyword:"+keyword);
+			System.out.println("u_kye:"+u_key);
+			String reqPage1 = request.getParameter("page");	  
+			pagination.setKeyword(keyword);
+			pagination.setU_key(u_key);
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getcenterinsertSearchcompleteCount(pagination);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","완료");
+			List<Center> list = boardservice.getcenterinsertsearchcompleteList(pagination);
+			model.addAttribute("list",list);
+			return "/center/centerinsertlist";
+	    }
+		@RequestMapping("/center_insert_search_waite")
+	    public String center_insert_search_waite(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,@RequestParam("u_key") int u_key,Center center) {
+			System.out.println("keyword:"+keyword);
+			System.out.println("u_kye:"+u_key);
+			String reqPage1 = request.getParameter("page");	  
+			pagination.setKeyword(keyword);
+			pagination.setU_key(u_key);
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getcenterinsertSearchwaiteCount(pagination);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","대기");
+			List<Center> list = boardservice.getcenterinsertsearchwaiteList(pagination);
+			model.addAttribute("list",list);
+			return "/center/centerinsertlist";
+	    }
+		@RequestMapping("/center_insert_search_reject")
+	    public String center_insert_search_reject(Model model,Pagination pagination, HttpServletRequest request ,@RequestParam("keyword") String keyword,@RequestParam("u_key") int u_key,Center center) {
+			System.out.println("keyword:"+keyword);
+			System.out.println("u_kye:"+u_key);
+			String reqPage1 = request.getParameter("page");	  
+			pagination.setKeyword(keyword);
+			pagination.setU_key(u_key);
+			   if(reqPage1 != null)
+				   page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getcenterinsertSearchrejectCount(pagination);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+			
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("sort","반려");
+			List<Center> list = boardservice.getcenterinsertsearchrejectList(pagination);
 			model.addAttribute("list",list);
 			return "/center/centerinsertlist";
 	    }
@@ -2284,16 +2426,66 @@ model.addAttribute("exception", exception);
 	    }
 		
 		@RequestMapping("/trainerconsultinglist")
-	    public String trainerconsultinglist(User user, Model model,@RequestParam("u_key") int u_key,MemberProfile memberprofile,TrainerProfile trainerprofile) {
-			
+	    public String trainerconsultinglist(Pagination pagination,HttpServletRequest request,User user, Model model,@RequestParam("u_key") int u_key,MemberProfile memberprofile,TrainerProfile trainerprofile) {
 			trainerprofile = boardservice.trainerprofileDetail(u_key);
-			trainerprofile.getTf_id();
-			
-			List<MemberProfile> list = boardservice.memberprofileconsulting(trainerprofile.getTf_id());
-		
+			int tf_id = trainerprofile.getTf_id();
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.gettrainerconsultinglistCount(trainerprofile.getTf_id());
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();
+				pagination.setTf_id(tf_id);
+	
+			List<MemberProfile> list = boardservice.memberprofileconsultinglist(pagination);
+			model.addAttribute("pagination",pagination);
 			model.addAttribute("u_key",u_key);
 			model.addAttribute("trainerprofile",trainerprofile);
 			model.addAttribute("list",list);
+			model.addAttribute("sort","전체");
+			return "/member/trainerconsultinglist";
+	    }
+		@RequestMapping("/trainerconsultingcompletelist")
+	    public String trainerconsultingcompletelist(Pagination pagination,HttpServletRequest request,User user, Model model,@RequestParam("u_key") int u_key,MemberProfile memberprofile,TrainerProfile trainerprofile) {
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			int tf_id = trainerprofile.getTf_id();
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.gettrainerconsultingcompletelistCount(trainerprofile.getTf_id());
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();
+				pagination.setTf_id(tf_id);
+	
+			List<MemberProfile> list = boardservice.memberprofileconsultingcompletelist(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("u_key",u_key);
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("list",list);
+			model.addAttribute("sort","완료");
+			return "/member/trainerconsultinglist";
+	    }
+		@RequestMapping("/trainerconsultingwaitelist")
+	    public String trainerconsultingwaitelist(Pagination pagination,HttpServletRequest request,User user, Model model,@RequestParam("u_key") int u_key,MemberProfile memberprofile,TrainerProfile trainerprofile) {
+			trainerprofile = boardservice.trainerprofileDetail(u_key);
+			int tf_id = trainerprofile.getTf_id();
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.gettrainerconsultingwaitelistCount(trainerprofile.getTf_id());
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();
+				pagination.setTf_id(tf_id);
+	
+			List<MemberProfile> list = boardservice.memberprofileconsultingwaitelist(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("u_key",u_key);
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("list",list);
+			model.addAttribute("sort","대기");
 			return "/member/trainerconsultinglist";
 	    }
 		

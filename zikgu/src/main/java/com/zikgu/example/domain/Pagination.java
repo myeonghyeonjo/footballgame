@@ -13,6 +13,7 @@ public class Pagination {
 	public static final int perPage=10;   // 한번에 불러 올 Count 수
 	private String keyword;
 	private int u_key;
+	private int tf_id;
 	
 	
 	public void init() {
@@ -94,6 +95,14 @@ public class Pagination {
 
 	public void setU_key(int u_key) {
 		this.u_key = u_key;
+	}
+
+	public int getTf_id() {
+		return tf_id;
+	}
+
+	public void setTf_id(int tf_id) {
+		this.tf_id = tf_id;
 	}
 	
 }

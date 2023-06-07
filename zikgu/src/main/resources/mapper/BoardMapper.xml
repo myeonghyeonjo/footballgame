@@ -1028,7 +1028,133 @@
 		FROM memberprofile
 		WHERE m_consulting like concat('%',#{tf_id},'%')
 	</select>
-
+<!-- 상담신청한 일반회원 프로필 리스트 -->
+	<select id="memberprofileconsultinglist" resultType="memberprofile">
+		SELECT
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender,
+		m_consulting as m_consulting,
+		m_consultingconfirm as m_consultingconfirm
+		FROM memberprofile
+		WHERE m_consulting like concat('%',#{tf_id},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 상담신청한 일반회원 검색 프로필 리스트 -->
+	<select id="memberprofileconsultingsearchlist" resultType="memberprofile">
+		SELECT
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender,
+		m_consulting as m_consulting,
+		m_consultingconfirm as m_consultingconfirm
+		FROM memberprofile
+		WHERE m_consulting like concat('%',#{tf_id},'%') AND m_name like concat('%',#{keyword},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 상담신청한 일반회원 검색(완료) 프로필 리스트 -->
+	<select id="memberprofileconsultingcompletesearchlist" resultType="memberprofile">
+		SELECT
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender,
+		m_consulting as m_consulting,
+		m_consultingconfirm as m_consultingconfirm
+		FROM memberprofile
+		WHERE m_consulting like concat('%',#{tf_id},'%') AND m_name like concat('%',#{keyword},'%') AND m_consultingconfirm NOT like concat('%',#{tf_id},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 상담신청한 일반회원 검색(대기) 프로필 리스트 -->
+	<select id="memberprofileconsultingwaitesearchlist" resultType="memberprofile">
+		SELECT
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender,
+		m_consulting as m_consulting,
+		m_consultingconfirm as m_consultingconfirm
+		FROM memberprofile
+		WHERE m_consulting like concat('%',#{tf_id},'%') AND m_name like concat('%',#{keyword},'%') AND m_consultingconfirm  like concat('%',#{tf_id},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	
+<!-- 상담신청한 일반회원 (완료) 프로필 리스트 -->
+	<select id="memberprofileconsultingcompletelist" resultType="memberprofile">
+		SELECT
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender,
+		m_consulting as m_consulting,
+		m_consultingconfirm as m_consultingconfirm
+		FROM memberprofile
+		WHERE m_consulting like concat('%',#{tf_id},'%') AND m_consultingconfirm NOT like concat('%',#{tf_id},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 상담신청한 일반회원 (대기) 프로필 리스트 -->
+	<select id="memberprofileconsultingwaitelist" resultType="memberprofile">
+		SELECT
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender,
+		m_consulting as m_consulting,
+		m_consultingconfirm as m_consultingconfirm
+		FROM memberprofile
+		WHERE m_consulting like concat('%',#{tf_id},'%') AND m_consultingconfirm like concat('%',#{tf_id},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>
 
 
 
@@ -1553,6 +1679,48 @@
 
 		WHERE u_key = #{u_key} AND ( c_name like concat('%',#{keyword},'%') OR c_loadaddress like
 		concat('%',#{keyword},'%') ) 
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 등록한 센터  검색+완료 -->
+	<select id="getcenterinsertsearchcompleteList" resultType="Center">
+		SELECT 
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+
+		WHERE u_key = #{u_key} AND ( c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') ) AND c_confirm =1
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 등록한 센터  검색+대기 -->
+	<select id="getcenterinsertsearchwaiteList" resultType="Center">
+		SELECT 
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+
+		WHERE u_key = #{u_key} AND ( c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') ) AND c_confirm =0
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 등록한 센터  검색+반려 -->
+	<select id="getcenterinsertsearchrejectList" resultType="Center">
+		SELECT 
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+
+		WHERE u_key = #{u_key} AND ( c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') ) AND c_confirm =2
 		LIMIT 			#{pageNum}, 10 
 	</select>
 
@@ -2351,6 +2519,44 @@
 				 SELECT       count(*)                
 				 FROM            trainerprofile
 	</select>
+	<!-- 상담신청한 회원프로필 갯수 카운트 -->
+	<select id="gettrainerconsultinglistCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				 WHERE m_consulting like concat('%',#{tf_id},'%')
+	</select>
+		<!-- 상담신청한 회원프로필검색 갯수 카운트 -->
+	<select id="gettrainerconsultingsearchlistCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				 WHERE m_consulting like concat('%',#{tf_id},'%') AND m_name like concat('%',#{keyword},'%')
+	</select>
+	<!-- 상담신청한 회원프로필검색 갯수(완료) 카운트 -->
+	<select id="gettrainerconsultingcompletesearchlistCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				 WHERE m_consulting like concat('%',#{tf_id},'%') AND m_name like concat('%',#{keyword},'%') AND m_consultingconfirm NOT like concat('%',#{tf_id},'%')
+	</select>
+	<!-- 상담신청한 회원프로필검색 갯수(대기) 카운트 -->
+	<select id="gettrainerconsultingwaitesearchlistCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				 WHERE m_consulting like concat('%',#{tf_id},'%') AND m_name like concat('%',#{keyword},'%') AND m_consultingconfirm  like concat('%',#{tf_id},'%')
+	</select>
+	
+	<!-- 상담신청한 회원프로필 (완료) 갯수 카운트 -->
+	<select id="gettrainerconsultingcompletelistCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				 WHERE m_consulting like concat('%',#{tf_id},'%') AND m_consultingconfirm NOT like concat('%',#{tf_id},'%')
+	</select>
+	<!-- 상담신청한 회원프로필 (대기) 갯수 카운트 -->
+	<select id="gettrainerconsultingwaitelistCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				 WHERE m_consulting like concat('%',#{tf_id},'%') AND m_consultingconfirm like concat('%',#{tf_id},'%')
+	</select>
+	
 	 <!-- 리뷰 갯수 카운트 -->
 	<select id="getreviewCount" resultType="int">
 				 SELECT       count(*)                
@@ -2513,6 +2719,24 @@
 				 SELECT       count(*)                
 				 FROM            center
 				WHERE u_key = #{u_key} AND (c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%')) 
+	</select>
+	<!-- 등록한 센터 갯수(검색+완료) 카운트 -->
+	<select id="getcenterinsertSearchcompleteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				WHERE u_key = #{u_key} AND (c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%')) AND c_confirm = 1 
+	</select>
+	<!-- 등록한 센터 갯수(검색+대기) 카운트 -->
+	<select id="getcenterinsertSearchwaiteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				WHERE u_key = #{u_key} AND (c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%')) AND c_confirm = 0 
+	</select>
+	<!-- 등록한 센터 갯수(검색+반려) 카운트 -->
+	<select id="getcenterinsertSearchrejectCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				WHERE u_key = #{u_key} AND (c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%')) AND c_confirm = 2 
 	</select>
 	
 		 <!-- 센터 갯수(검색+완료) 카운트 -->

@@ -1004,7 +1004,96 @@ public class BoardServiceImpl implements BoardService {
 	public List<Center> getcenterinsertsearchList(Pagination pagination){
 		return boardmapper.getcenterinsertsearchList(pagination);
 	}
+	
+	@Override
+	public int getcenterinsertSearchcompleteCount(Pagination pagination) {
+		return boardmapper.getcenterinsertSearchcompleteCount(pagination);
+	}
+	
+	@Override
+	public List<Center> getcenterinsertsearchcompleteList(Pagination pagination){
+		return boardmapper.getcenterinsertsearchcompleteList(pagination);
+	}
+	
+	@Override
+	public int getcenterinsertSearchwaiteCount(Pagination pagination) {
+		return boardmapper.getcenterinsertSearchwaiteCount(pagination);
+	}
+	
+	@Override
+	public List<Center> getcenterinsertsearchwaiteList(Pagination pagination){
+		return boardmapper.getcenterinsertsearchwaiteList(pagination);
+	}
+	
+	@Override
+	public int getcenterinsertSearchrejectCount(Pagination pagination) {
+		return boardmapper.getcenterinsertSearchrejectCount(pagination);
+	}
+	
+	@Override
+	public List<Center> getcenterinsertsearchrejectList(Pagination pagination){
+		return boardmapper.getcenterinsertsearchrejectList(pagination);
+	}
+	
+	@Override
+	public int gettrainerconsultinglistCount(int tf_id) {
+		return boardmapper.gettrainerconsultinglistCount(tf_id);
+	}
 
+	@Override
+	public List<MemberProfile> memberprofileconsultinglist(Pagination pagination){
+		return boardmapper.memberprofileconsultinglist(pagination);
+	}
+	
+	@Override
+	public int gettrainerconsultingcompletelistCount(int tf_id) {
+		return boardmapper.gettrainerconsultingcompletelistCount(tf_id);
+	}
+	
+	@Override
+	public List<MemberProfile> memberprofileconsultingcompletelist(Pagination pagination){
+		return boardmapper.memberprofileconsultingcompletelist(pagination);
+	}
+	
+	@Override
+	public int gettrainerconsultingwaitelistCount(int tf_id) {
+		return boardmapper.gettrainerconsultingwaitelistCount(tf_id);
+	}
+	
+	@Override
+	public List<MemberProfile> memberprofileconsultingwaitelist(Pagination pagination){
+		return boardmapper.memberprofileconsultingwaitelist(pagination);
+	}
+	
+	@Override
+	public int gettrainerconsultingsearchlistCount(Pagination pagination) {
+		return boardmapper.gettrainerconsultingsearchlistCount(pagination);
+	}
+	
+	@Override
+	public List<MemberProfile> memberprofileconsultingsearchlist(Pagination pagination){
+		return boardmapper.memberprofileconsultingsearchlist(pagination);
+	}
+	
+	@Override
+	public int gettrainerconsultingcompletesearchlistCount(Pagination pagination) {
+		return boardmapper.gettrainerconsultingcompletesearchlistCount(pagination);
+	}
+	
+	@Override
+	public List<MemberProfile> memberprofileconsultingcompletesearchlist(Pagination pagination){
+		return boardmapper.memberprofileconsultingcompletesearchlist(pagination);
+	}
+	
+	@Override
+	public int gettrainerconsultingwaitesearchlistCount(Pagination pagination) {
+		return boardmapper.gettrainerconsultingwaitesearchlistCount(pagination);
+	}
+	
+	@Override
+	public List<MemberProfile> memberprofileconsultingwaitesearchlist(Pagination pagination){
+		return boardmapper.memberprofileconsultingwaitesearchlist(pagination);
+	}
 }
 
 

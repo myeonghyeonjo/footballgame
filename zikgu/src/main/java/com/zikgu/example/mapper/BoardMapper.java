@@ -365,6 +365,42 @@ public interface BoardMapper {
 
 	public List<Center> getcenterinsertsearchList(Pagination pagination);
 
+	public int getcenterinsertSearchcompleteCount(Pagination pagination);
+
+	public List<Center> getcenterinsertsearchcompleteList(Pagination pagination);
+
+	public int getcenterinsertSearchwaiteCount(Pagination pagination);
+
+	public List<Center> getcenterinsertsearchwaiteList(Pagination pagination);
+
+	public int getcenterinsertSearchrejectCount(Pagination pagination);
+
+	public List<Center> getcenterinsertsearchrejectList(Pagination pagination);
+
+	public int gettrainerconsultinglistCount(int tf_id);
+
+	public List<MemberProfile> memberprofileconsultinglist(Pagination pagination);
+
+	public int gettrainerconsultingcompletelistCount(int tf_id);
+
+	public List<MemberProfile> memberprofileconsultingcompletelist(Pagination pagination);
+
+	public int gettrainerconsultingwaitelistCount(int tf_id);
+
+	public List<MemberProfile> memberprofileconsultingwaitelist(Pagination pagination);
+
+	public int gettrainerconsultingsearchlistCount(Pagination pagination);
+
+	public List<MemberProfile> memberprofileconsultingsearchlist(Pagination pagination);
+
+	public int gettrainerconsultingcompletesearchlistCount(Pagination pagination);
+
+	public List<MemberProfile> memberprofileconsultingcompletesearchlist(Pagination pagination);
+
+	public int gettrainerconsultingwaitesearchlistCount(Pagination pagination);
+
+	public List<MemberProfile> memberprofileconsultingwaitesearchlist(Pagination pagination);
+
 	
 
 

@@ -171,13 +171,13 @@
     
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand headermenu1 col-md-3 col-lg-2 me-0 px-3 fs-6" >검색</a>
-
-		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  col-lg-3 " href="/memberprofilelist">회원 프로필 관리	 
+  <sec:authentication property="principal" var="principal" />
+		
+		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3 "id="nav_link_memberprofile2"  href="/centerconfirmlist?u_key=${principal.u_key }">센터목록	 
 		</a>
-		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " href="/trainerprofilelist">트레이너 프로필 관리
+		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  col-lg-3 " href="/trainerconsultinglist?u_key=${principal.u_key }">상담신청목록	 
 		</a>
-		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3 "id="nav_link_memberprofile2"  href="/centerlist">센터 관리
-		</a>
+	
 		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " href="/reviewlist">리뷰 관리
 		</a>
        	<form action="center_insert_search_All" method="post" style="width:1200px;" >
@@ -194,22 +194,18 @@
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link sidemenu active" aria-current="page" href="/memberprofilelist">
-              <span data-feather="home" class="align-text-bottom"></span>
-              회원목록
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link sidemenu" href="/trainerprofilelist">
-              <span data-feather="file" class="align-text-bottom"></span>
-              트레이너목록
+         
+          <li class="nav-item ">
+           <sec:authentication property="principal" var="principal" />
+            <a class="nav-link sidemenu" id="nav_link_memberprofile" href="/centerconfirmlist?u_key=${principal.u_key }">
+              <span data-feather="shopping-cart" class="align-text-bottom"></span>
+              센터목록
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link sidemenu" id="nav_link_memberprofile" href="/centerlist">
-              <span data-feather="shopping-cart" class="align-text-bottom"></span>
-              센터목록
+            <a class="nav-link sidemenu" href="/trainerconsultinglist?u_key=${principal.u_key }">
+              <span data-feather="users" class="align-text-bottom"></span>
+              상담신청목록
             </a>
           </li>
           <li class="nav-item ">
@@ -328,11 +324,7 @@
 		            </c:if>
 		          </div>
 	        </c:if>
-       <select class="form-select" name="tf_certificate" id="reviewselect" style="flex: 0.85;" required>
-										<option selected>정렬</option>
-										<option value="starhigh">평점높은순</option>
-										<option value="starlow">평점낮은순</option>
-		</select>
+   
           
         </div>
       </div>
@@ -484,23 +476,25 @@ function search_allbutton_click() {
 function search_completebutton_click() {
 	console.log("완료버튼을 누르셨습니다.");
 	var keyword = $('#keyword').val();
-	
+	var u_key = $('#u_key').val();
 	var path = '/center_insert_search_complete';
-	var url = path + '?keyword=' + encodeURIComponent(keyword);
+	var url = path + '?keyword=' + encodeURIComponent(keyword)+ '&u_key=' + encodeURIComponent(u_key);
 	location.href = url;
 }
 function search_waitebutton_click() {
 	console.log("대기버튼을 누르셨습니다.");
 	var keyword = $('#keyword').val();
-	var path = '/center_search_waite';
-	var url = path + '?keyword=' + encodeURIComponent(keyword);
+	var u_key = $('#u_key').val();
+	var path = '/center_insert_search_waite';
+	var url = path + '?keyword=' + encodeURIComponent(keyword)+ '&u_key=' + encodeURIComponent(u_key);
 	location.href = url;
 }
 function search_rejectbutton_click() {
 	console.log("반려버튼을 누르셨습니다.");
 	var keyword = $('#keyword').val();
-	var path = '/center_search_reject';
-	var url = path + '?keyword=' + encodeURIComponent(keyword);
+	var u_key = $('#u_key').val();
+	var path = '/center_insert_search_reject';
+	var url = path + '?keyword=' + encodeURIComponent(keyword)+ '&u_key=' + encodeURIComponent(u_key);
 	location.href = url;
 }
 
