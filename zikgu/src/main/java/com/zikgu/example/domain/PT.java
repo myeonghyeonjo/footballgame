@@ -13,6 +13,10 @@ public class PT {
 	private String FILE_PATH;
 	private String pt_programintro;
 	private String PT_programsub;
+	private int tf_id;
+	private int cer_id;
+	private String cer_option;
+	private String cer_content;
 	
 	public int getPt_id() {
 		return pt_id;
@@ -85,6 +89,30 @@ public class PT {
 	}
 	public void setPt_programintro(String pt_programintro) {
 		this.pt_programintro = pt_programintro;
+	}
+	public int getTf_id() {
+		return tf_id;
+	}
+	public void setTf_id(int tf_id) {
+		this.tf_id = tf_id;
+	}
+	public int getCer_id() {
+		return cer_id;
+	}
+	public void setCer_id(int cer_id) {
+		this.cer_id = cer_id;
+	}
+	public String getCer_option() {
+		return cer_option;
+	}
+	public void setCer_option(String cer_option) {
+		this.cer_option = cer_option;
+	}
+	public String getCer_content() {
+		return cer_content;
+	}
+	public void setCer_content(String cer_content) {
+		this.cer_content = cer_content;
 	}
 
 }

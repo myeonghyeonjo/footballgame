@@ -2,3 +2,11 @@
 1686045051605	Encapsulate field 'u_key'
 1686064941629	Copy file
 1686074866687	Copy file
+1686116371894	Encapsulate field 'tf_id'
+1686116412493	Encapsulate field 'cer_id'
+1686116415457	Encapsulate field 'cer_option'
+1686116418061	Encapsulate field 'cer_content'
+1686116465711	Encapsulate field 'cer_file_id'
+1686116685286	Delete element
+1686116891459	Encapsulate field 'tf_certificateoption'
+1686125771333	Copy file

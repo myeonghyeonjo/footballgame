@@ -168,7 +168,16 @@
 </style>
 </style>
 <style>
-
+.image-container2 {
+	width: 100px; /* 원하는 가로 크기로 지정 */
+	height: 100px; /* 원하는 세로 크기로 지정 */
+	text-align: left;
+}
+.image-container2 img {
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+}
 .container10 {
   display: flex;
   align-items: center;
@@ -4110,6 +4119,8 @@ input, select, textarea {
 
 								
 								<h4><Strong style="color:black">자격사항</Strong></h4>
+								
+								
 								<c:forEach var="filelist" items="${filelist_2}">
 											<div style="position:relative;">
 											<a  class="aa" style="text-decoration-color : white;"   href="../../../Img/${filelist.file_name}"  data-lightbox="example-set2"><input type="text" class="form-control" style=" color:white; background-color:black; " name="tf_certificatetitle"
@@ -4119,6 +4130,44 @@ input, select, textarea {
 											</div>
 								
 								</c:forEach>
+								
+								<div id="sectionbox" class="form-control"
+								style="padding: 10px; background-color: white;">
+
+								<form  action="/trainerProfilePTInsert" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+
+								<div  >
+									
+								<div style="display: flex;">
+  <select class="form-select" name="tf_certificateoption" id="tf_certificateoption" style="flex: 0.15;" required>
+    <option value="학력">학력</option>
+    <option value="자격증">자격증</option>
+    <option value="자격증">수상경력</option>
+    <option value="자격증">근무경력</option>
+  </select>
+
+  <input type="text" class="form-control" style="flex: 1.5;" name="tf_certificatetitle" id="tf_certificatetitle" placeholder="내용을 입력해주세요">
+</div>
+									<input type="hidden" name="tf_id" value="${trainerprofile.tf_id }">
+									<input type="hidden" name="u_key" value="${trainerprofile.u_key }">
+									
+									<!-- <button type = "button" style="flex:1; width:210px;"class="btn btn-outline-dark" id = "deleteQuestion" qMaster="${sv.sNo}" qIndex="${q.qIndex}">질문 삭제</button>-->
+									
+								<label for="state" name="tf_certificatephoto" class="form-label">증명서/사진등록[필수]</label> 
+										<input class="form-control" type="file"
+											name="uploadFile" accept="image/*" onchange="setThumbnail2(event);"
+											id="formFile2"  />
+										
+								<div class="image-container2" id="image_container2"></div>
+								</div>
+								<div><br><button type = "button" style="display:none;" class="btn btn-outline-dark"  name ="addCertificate" id ="addCertificate">자격사항 추가하기</button>
+									<button style="width:90px;"class="btn btn-outline-dark" type="submit">등록하기</button>
+								  
+								</div>
+								 </form>	
+								
+								
+							</div>
 							</section>
 
 						<!-- First Section PT프로그램
@@ -4392,8 +4441,11 @@ input, select, textarea {
 						<button style="display:on" type="button" id="tf_PTmodifyBtn" class="btn btn-outline-dark">수정</button>		
 						<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#deleteModal" data-ptid="${PT_List.pt_id}" data-ukey="${trainerprofile.u_key}" >삭제</button>
 						<input type="hidden" name="pt_id" value="${PT_List.pt_id}">
+						
 							</section>
-								
+							<div class="d-flex justify-content-center">
+							<button type="button" style="margin-bottom:20px;"class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ptaddModal" data-ptid="${PT_List.pt_id}" data-ukey="${trainerprofile.u_key}" >PT추가</button>
+							</div>
 							</c:forEach>
 							
 						
@@ -4708,7 +4760,63 @@ input, select, textarea {
 	
 	
 	
-	
+<!-- 자격사항 Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-80size">
+    <div class="modal-content modal-80size">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;"><Strong style="color:black;">솔직한 후기를 남겨주세요!</Strong></h1>
+      </div>
+      <div class="modal-body">
+        <h6 style="color:black;"><Strong style="color:black;">일반이용 후기 작성 요령</Strong></h6>
+        <ul>
+        <li style="font-size:15px;">해당 코치님에게 트레이닝을 받은 증빙사진이 필요합니다.
+		(PT 약정서/계약서 or 코치님과 함께 찍은 사진 등 기타)</li>
+		 <li style="font-size:15px;">증빙사진의 공개/비공개 여부를 선택할 수 있습니다.</li>
+		 <li style="font-size:15px;">증빙이 적절하지 않을 시 삭제처리 됩니다.(상시 모니터링 중)</li>
+        </ul>
+         <h6 style="color:black;"><Strong style="color:black;">별점을 선택해주세요</Strong></h6>
+   		<div class="starRev">
+  <!-- 편의 상 가장 첫번째의 별은 기본으로 class="on"이 되게 설정해주었습니다. -->
+  <span class="starR on" >⭐</span>
+  <span class="starR">⭐</span>
+  <span class="starR" >⭐</span>
+  <span class="starR" >⭐</span>
+  <span class="starR" >⭐</span>
+</div>
+         <p><p>					
+				
+				<div class="opencheck" style="display: flex;align-items: center;">
+         		 <h6 style="color:black;"><Strong style="color:black;">증빙사진을 올려주세요</Strong></h6><p><Strong style="color:black; font-size:12px;">( 최대 3장까지 등록가능합니다 )</Strong></p>
+				<span style="margin-top:-30px; margin-right:-10px;"class="open"  >√</span><p style="color:black;margin-top:5px;">사진공개</p>
+				</div>         
+         
+          	  <form method="POST" onsubmit="return false;" enctype="multipart/form-data">
+        <input type="file" onchange="addFile(this);" multiple />
+          
+        <div class="file-list"></div>
+  	
+   
+    </form>
+            <h6 style="color:black; margin-top:0px;"><Strong style="color:black;">내용을 작성해주세요</Strong></h6>
+            <div class="input-group has-validation">
+								<textarea style="height:200px;"cols="30" rows="10" class="form-control" id="reviewcontent" name="tf_intro"></textarea>
+							</div>
+            
+            
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="submitForm()" data-target="#clickReviewinsert" data-bs-dismiss="modal">확인</button>
+         <sec:authorize access="hasRole('ROLE_USER')">
+          <sec:authentication property="principal" var="principal"/> 
+     <input type="hidden"  id="memberprofile_u_key" value="${principal.u_key}">
+       <input type="hidden"  id="memberprofile_name" value="${principal.uName}">
+       </sec:authorize>
+      </div>
+    </div>
+  </div>
+</div>		
 <!-- 트레이너 프로필 사진 1 삭제 Modal Modal -->
 <div class="modal fade" id="deleteFile1Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -4760,6 +4868,24 @@ input, select, textarea {
     </div>
   </div>
 </div>	
+<!-- PT추가Modal Modal -->
+<div class="modal fade" id="ptaddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">PT추가</h1>
+      </div>
+      <div class="modal-body">
+        정말 PT를 추가 하시겠습니까? 확인 버튼을 누르시면 PT추가등록 페이지로 이동합니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickPTadd(PtInfo)"data-target="#clickPTadd">확인</button>
+      </div>
+    </div>
+  </div>
+</div>	
+
 <!-- 센터변경Modal Modal -->
 <div class="modal fade" id="centerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -5075,7 +5201,7 @@ $(document).on('click', '#tf_PTprogrammodifyBtnOK', function () {
 	$(this).prev().css("display", "none");
 	$(this).next().css("display", "none");
 	$(this).next().next().css("display", "");
-	$(this).next().next().next().css("display", "");
+	$(this).next().next().next().css("display", "none");
 	$(this).css("display", "none");
 	let pt_id = $(this).next().next().next().next().val();
 	
@@ -5421,17 +5547,24 @@ var u_key= "";
        console.log(pt_id);
        console.log(u_key);
     })
+     $('#ptaddModal').on('show.bs.modal', function(event) {          
+       pt_id = $(event.relatedTarget).data('ptid');
+       u_key = $(event.relatedTarget).data('ukey');
+       console.log(pt_id);
+       console.log(u_key);
+    })
     
      function clickDelete()
     {
-      
-
     	 location.href='${path}	/PtDelete?pt_id='+pt_id+'&u_key='+u_key+'';
     }
+    function clickPTadd()
+    {
+    	 location.href='${path}	/trainerPT?u_key='+u_key+'';
+    }
+    
     function clickcenterchange()
     {
-      
-
     	 location.href='${path}	/centerlistcomplete2';
     }
     
@@ -5511,5 +5644,66 @@ if (checkedCount > limit) {
 }
 });
 }
+
+
+
+var filecount=1;
+//자격조건 추가
+$(document).on('click', '#addCertificate', function () {
+	filecount = filecount+1;
+	console.log(filecount);
+	const addCertificateButton = document.getElementById('addCertificate');
+	addCertificateButton.style.display = 'none';
+$("#addCertificate").parent().before("<div style=' margin-top:10px; background-color: white;'><div style='display: flex;'><select class='form-select' name='tf_certificate' id='country' style='flex: 0.85;'required><option value='학력'>학력</option><option value='자격증'>자격증</option><option value='자격증'>수상경력</option><option value='자격증'>근무경력</option></select><div class='col-md-8.5'><input type='text' class='form-control' style='width:480px;flex: 0.5;' name='tf_certificatetitle'id='address2' placeholder='내용을 입력해주세요'></div><button type = 'button'style='flex:1; width:210px;'class='btn btn-outline-dark' id = 'deleteQuestion' qMaster='${sv.sNo}' qIndex='${q.qIndex}'>질문 삭제</button></div><label for='state' name='tf_certificatephoto' class='form-label'>증명서/사진등록[필수]</label><input class='form-control' type='file' name='tf_cer_photo" + filecount + "' 'filecount' accept='image/*' onchange='setThumbnail2(event);'id='formFile2' multiple /><div class='image-container2' id='image_container2'></div><input type='hidden' name='filecount' value='"+filecount+"'></div>")
+});
+//자격조건 등록
+$(document).on('click', '#addCertificateinsert', function () {
+	 let tf_id = $('#tf_id').val();
+	 let cer_option = $('#cer_option').val();
+	 let cer_content = $('#cer_content').val();
+	 let member_u_key = $('#member_u_key').val();
+		console.log("trainer_u_key:"+trainer_u_key);
+		console.log("member_u_key:"+member_u_key);
+		$.ajax({
+			method: "POST",
+			url: "/aj-review_trainerprofilemodify",
+			data: {  trainer_u_key: trainer_u_key}
+		})
+		.done(function( html ) {
+			
+			$('#centerview').html(html);
+		     $( '.slider2' ).slick( {
+			          autoplay: true,
+			          autoplaySpeed: 1000,
+			        });
+			     
+			   
+		});
+});
+
+
+//자격조건 삭제
+$(document).on('click', '#deleteQuestion', function () {
+	filecount = filecount-1;
+	console.log(filecount);
+	$(this).parent().parent().remove();
+	const addCertificateButton = document.getElementById('addCertificate');
+	addCertificateButton.style.display = 'block';
+});
+
+function setThumbnail2(event) {
+    for (var image of event.target.files) {
+      var reader = new FileReader();
+
+      reader.onload = function(event) {
+        var img = document.createElement("img");
+        img.setAttribute("src", event.target.result);
+        document.querySelector("div#image_container2").appendChild(img);
+      };
+
+      console.log(image);
+      reader.readAsDataURL(image);
+    }
+  }
 </script>
 </html>

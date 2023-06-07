@@ -228,8 +228,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public List<Center> getcenterListOne(int u_key){
-		return boardmapper.getcenterListOne(u_key);
+	public List<Center> getcenterListOne(Pagination pagination){
+		return boardmapper.getcenterListOne(pagination);
 	}
 	
 	@Override
@@ -944,6 +944,65 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void updatept_programsub(PT pt) {
 		boardmapper.updatept_programsub(pt);
+	}
+	
+	@Override
+	public void filePTUpload(String originalfileName, String saveFileName, long fileSize, String savePath,
+			FileDto filedto) {
+		HashMap<String, Object> hm = new HashMap<>();
+		hm.put("originalfileName", originalfileName);
+		hm.put("saveFileName", saveFileName);
+		hm.put("fileSize", fileSize);
+		hm.put("savePath", savePath);
+		hm.put("tf_certificateoption", filedto.getTf_certificateoption());
+		hm.put("tf_certificatetitle", filedto.getTf_certificatetitle());
+		hm.put("tf_id", filedto.getTf_id());
+		boardmapper.filePTUpload(hm);
+	}
+	
+	@Override
+	public int getcenterListOneCount(int trainerprofile_u_key) {
+		return boardmapper.getcenterListOneCount(trainerprofile_u_key);
+	}
+	
+	@Override
+	public int getcentercompleteListcount(int u_key) {
+		return boardmapper.getcentercompleteListcount(u_key);
+	}
+	
+	@Override
+	public List<Center> getcentercompleteListOne(Pagination pagination){
+		return boardmapper.getcentercompleteListOne(pagination);
+	}
+	
+	@Override
+	public int getcenterwaiteListcount(int u_key) {
+		return boardmapper.getcenterwaiteListcount(u_key);
+	}
+	
+	@Override
+	public List<Center> getcenterwaiteListOne(Pagination pagination){
+		return boardmapper.getcenterwaiteListOne(pagination);
+	}
+	
+	@Override
+	public int getcenterrejectListcount(int u_key) {
+		return boardmapper.getcenterrejectListcount(u_key);
+	}
+	
+	@Override
+	public List<Center> getcenterrejectListOne(Pagination pagination){
+		return boardmapper.getcenterrejectListOne(pagination);
+	}
+	
+	@Override
+	public int getcenterinsertSearchCount(Pagination pagination) {
+		return boardmapper.getcenterinsertSearchCount(pagination);
+	}
+	
+	@Override
+	public List<Center> getcenterinsertsearchList(Pagination pagination){
+		return boardmapper.getcenterinsertsearchList(pagination);
 	}
 
 }

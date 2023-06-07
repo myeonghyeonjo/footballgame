@@ -1,0 +1,8 @@
+package com.zikgu.example.domain;
+
+public class certificate {
+	private int cer_id;
+	private int tf_id;
+	private String cer_option;
+	private String cer_content;
+}

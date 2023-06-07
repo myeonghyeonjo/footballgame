@@ -3990,7 +3990,7 @@ input, select, textarea {
 											class="btn-check" id="btn-check-outlined" autocomplete="off" value="벌크업">
 										<label class="btn btn-outline-dark" for="btn-check-outlined">벌크업</label><br>
 										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
-											class="btn-check" id="btn-check-outlined2" autocomplete="off" value="식단관리">
+											`class="btn-check" id="btn-check-outlined2" autocomplete="off" value="식단관리">
 										<label class="btn btn-outline-dark" for="btn-check-outlined2">식단관리</label><br>
 										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
 											class="btn-check" id="btn-check-outlined3" autocomplete="off" value="기능개선">

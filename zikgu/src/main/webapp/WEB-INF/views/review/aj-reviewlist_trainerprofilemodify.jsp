@@ -4100,7 +4100,7 @@ input, select, textarea {
 											<div style="width: 35%;">
 											</div>
 										<sec:authorize access="hasRole('ROLE_USER')">
-										<button  type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#reviewModal" data-ptid="${PT_List.pt_id}" data-ukey="${trainerprofile.u_key}" ><p style="margin-top:3px;">리뷰 남기기</p></button>
+										<!-- <button  type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#reviewModal" data-ptid="${PT_List.pt_id}" data-ukey="${trainerprofile.u_key}" ><p style="margin-top:3px;">리뷰 남기기</p></button> -->
 										</sec:authorize>
 										<!-- 로그인안한사람일 경우 -->
 										<sec:authorize access="isAnonymous()">

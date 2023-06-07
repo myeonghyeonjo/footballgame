@@ -4019,7 +4019,7 @@ input, select, textarea {
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<h1 id="c_name" style="color:white;">${trainerprofile.tf_name} 트레이너11</h1>
+						<h1 id="c_name" style="color:white;">${trainerprofile.tf_name} 트레이너</h1>
 						
 						<p>${trainerprofile.tf_hanjulintro}<br /></p>
 						
@@ -4105,7 +4105,10 @@ input, select, textarea {
 											<div style="width: 35%;">
 											</div>
 										<sec:authorize access="hasRole('ROLE_USER')">
+										<sec:authentication property="principal" var="principal"/> 
+										<c:if test="${trainerprofile.u_key != principal.u_key}">
 										<button  type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#reviewModal" data-ptid="${PT_List.pt_id}" data-ukey="${trainerprofile.u_key}" ><p style="margin-top:3px;">리뷰 남기기</p></button>
+										</c:if>
 										</sec:authorize>
 										<!-- 로그인안한사람일 경우 -->
 										<sec:authorize access="isAnonymous()">

@@ -72,7 +72,7 @@ public interface BoardMapper {
 
 	public void memberProfileinsert(MemberProfile memberprofile);
 
-	public List<Center> getcenterListOne(int u_key);
+	public List<Center> getcenterListOne(Pagination pagination);
 
 	public List<FileDto> getcenterSearchFileList(String tfIdString);
 
@@ -344,6 +344,26 @@ public interface BoardMapper {
 	public int getmemberprofilecountcheck(int memberprofile_u_key);
 
 	public void updatept_programsub(PT pt);
+
+	public void filePTUpload(HashMap<String, Object> hm);
+
+	public int getcenterListOneCount(int trainerprofile_u_key);
+
+	public int getcentercompleteListcount(int u_key);
+
+	public List<Center> getcentercompleteListOne(Pagination pagination);
+
+	public int getcenterwaiteListcount(int u_key);
+
+	public List<Center> getcenterwaiteListOne(Pagination pagination);
+
+	public int getcenterrejectListcount(int u_key);
+
+	public List<Center> getcenterrejectListOne(Pagination pagination);
+
+	public int getcenterinsertSearchCount(Pagination pagination);
+
+	public List<Center> getcenterinsertsearchList(Pagination pagination);
 
 	
 
