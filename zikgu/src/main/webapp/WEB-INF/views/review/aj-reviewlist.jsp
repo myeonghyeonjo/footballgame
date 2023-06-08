@@ -4113,7 +4113,7 @@ input, select, textarea {
 											<p style="font-size:13px;">${reviewlistlength }개의 후기</p>
 											
 											</div>
-											<div style="width: 35%;">
+											<div style="width: 33%;">
 											</div>
 										<sec:authorize access="hasRole('ROLE_USER')">
 										<sec:authentication property="principal" var="principal"/> 
@@ -4235,7 +4235,7 @@ input, select, textarea {
     </form>
     </div>
 						<h6 style="color:black; margin-top:0px;"><Strong style="color:black; font-size:15px; text-align:left;">내용을 작성해주세요</Strong></h6>            <div class="input-group has-validation">
-								<textarea style="height:200px;"cols="30" rows="10" class="form-control" id="reviewmodifycontent" name="tf_intro">${reviewlist.r_content}${reviewlist.r_id}</textarea>
+								<textarea style="height:200px;"cols="30" rows="10" class="form-control" id="reviewmodifycontent" name="tf_intro">${reviewlist.r_content}</textarea>
 							</div>
             
             
@@ -4326,7 +4326,12 @@ input, select, textarea {
 										    <div id="r_content${reviewlist.r_id}"style="text-align:left;">
 										   		${reviewlist.r_content}
 										   	</div>
-										   
+										  	  <c:if test="${reviewlist.r_reply != '' }">
+												 <div style="background-color:grey; text-align:left; padding:10px;">
+												 <Strong style="font-size:17px; font-weight:bold;margin-bottom:10px;">${trainerprofile.tf_name} 선생님</Strong>
+												 ${reviewlist.r_reply}
+												 </div>
+											 </c:if>
 										 
 										   	<div style="display: flex;">
 											   	<div style="width: 82%;">
@@ -4405,10 +4410,10 @@ input, select, textarea {
 										   		  
 										   	</c:if>
 										   		<c:if test="${staraverage==4}">
-										   	<span class="starR2 on" >⭐</span>
-										   		  <span class="starR2 on" >⭐</span>
+										   		 	<span class="starR2 on" >⭐</span>
 										   		   <span class="starR2 on" >⭐</span>
-										   		    <span class="starR on" >⭐</span>
+										   		    <span class="starR2 on" >⭐</span>
+										   		   <span class="starR2 on" >⭐</span>
 										   		   <span class="starR2 on" >${staraverage }.0</span>
 										   		   <span class="starR2 on" >(${reviewlistlength })</span>
 										   	</c:if>
@@ -4416,16 +4421,16 @@ input, select, textarea {
 										   		<span class="starR2 on" >⭐</span>
 										   		  <span class="starR2 on" >⭐</span>
 										   		   <span class="starR2 on" >⭐</span>
-										   		    <span class="starR2 on" >⭐</span>
-										   		    <span class="starR2 on" >⭐</span>
+													 <span class="starR2 on" >⭐</span>
+										   		     <span class="starR2 on" >⭐</span>
 										   		   <span class="starR2 on" >${staraverage }.0</span>
 										   		   <span class="starR2 on" >(${reviewlistlength })</span>
 										   	</c:if>
 										   
 											</div>
 											<p>"${trainerprofile.tf_hanjulintro}"</p>
-												<P>전문분야 ${outputprogramsub}</P> 
-												<P>대표가격 ${trainerprofile.tf_lessonunit}당 ${trainerprofile.tf_lessonprice}원/ ${trainerprofile.tf_lessonnumber}${trainerprofile.tf_lessonunit}기준</P> 
+												<P><Strong style="font-size:18px;font-weight:bold;">전문분야</Strong> ${outputprogramsub}</P> 
+												<P><Strong style="font-size:18px;font-weight:bold;">대표가격</Strong> ${trainerprofile.tf_lessonunit}당 ${trainerprofile.tf_lessonprice}원/ ${trainerprofile.tf_lessonnumber}${trainerprofile.tf_lessonunit}기준</P> 
 												
 												<sec:authorize access="hasRole('ROLE_USER')">
 										<sec:authentication property="principal" var="principal"/>  

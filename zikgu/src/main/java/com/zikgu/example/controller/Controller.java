@@ -810,7 +810,7 @@ model.addAttribute("exception", exception);
 			List<FileDto> filelist = boardservice.getreviewFileList(r_id);
 			review = boardservice.getreviewDetail2(r_id);
 			int trainerprofile_u_key = review.getTrainerprofile_u_key();
-			trainerprofile = boardservice.trainerprofileDetail(trainerprofile_u_key);	
+			trainerprofile = boardservice.trainerprofileDetail(trainerprofile_u_key);		
 			model.addAttribute("trainerprofile",trainerprofile);
 			model.addAttribute("reviewfilelist",filelist);
 			model.addAttribute("r_id",r_id);	

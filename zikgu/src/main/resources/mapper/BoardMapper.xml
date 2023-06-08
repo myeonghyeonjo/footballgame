@@ -2293,7 +2293,10 @@
 		r_content as r_content,
 		r_starR as r_starR,
 		memberprofile_name as memberprofile_name,
-		r_date as r_date
+		r_date as r_date,
+		r_reply as r_reply,
+		r_replydate as r_replydate
+		
 		FROM review
 		Where trainerprofile_u_key = #{trainerprofile_u_key} AND (r_check = 0 OR r_check = 1) 
 		ORDER BY r_id DESC
