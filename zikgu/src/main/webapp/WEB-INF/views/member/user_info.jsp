@@ -391,6 +391,19 @@ button:hover {
 										조회 ></a>
 								</div>
 							</div>
+										<div id="user_rounded-rectangle1" class="bg-light"
+									style="margin-top: 30px;">
+									<h3 style="color: black; padding: 30px;">
+										<Strong>리뷰 관리</Strong>
+									</h3>
+									<p
+										style="margin-left: 30px; margin-top: -10px; margin-right: 50px">작성한 리뷰를 확인하고, 수정하세요
+										</p>
+
+									<a href="/member_review_dashboard?u_key=${u_key}" class="aa"
+										style="color: #4169e1; margin-left: 30px; margin-top: -10px; margin-right: 50px">리뷰
+										조회 ></a>
+								</div>
 						</div>
 					</sec:authorize>
 				</c:if>

@@ -1134,6 +1134,46 @@ public class BoardServiceImpl implements BoardService {
 	public Review getreviewDetail2(int r_id) {
 		return boardmapper.getreviewDetail2(r_id);
 	}
+	
+	@Override
+	public int gettrainer_review_search_Count(Pagination pagination) {
+		return boardmapper.gettrainer_review_search_Count(pagination);
+	}
+	
+	@Override
+	public List<Review> gettrainer_review_search_ListALL(Pagination pagination){
+		return boardmapper.gettrainer_review_search_ListALL(pagination);
+	}
+	
+	@Override
+	public int gettrainer_review_search_complete_Count(Pagination pagination) {
+		return boardmapper.gettrainer_review_search_complete_Count(pagination);
+	}
+	
+	@Override
+	public List<Review> gettrainer_review_search_complete_ListALL(Pagination pagination){
+		return boardmapper.gettrainer_review_search_complete_ListALL(pagination);
+	}
+	
+	@Override
+	public int gettrainer_review_search_waite_Count(Pagination pagination) {
+		return boardmapper.gettrainer_review_search_waite_Count(pagination);
+	}
+	
+	@Override
+	public List<Review> gettrainer_review_search_waite_ListALL(Pagination pagination){
+		return boardmapper.gettrainer_review_search_waite_ListALL(pagination);
+	}
+	
+	@Override
+	public int getmember_reviewCount(int u_key) {
+		return boardmapper.getmember_reviewCount(u_key);
+	}
+	
+	@Override
+	public List<Review> getmember_reviewListALL(Pagination pagination){
+		return boardmapper.getmember_reviewListALL(pagination);
+	}
 }
 
 

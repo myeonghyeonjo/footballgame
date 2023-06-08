@@ -424,6 +424,22 @@ public interface BoardService {
 
 	public Review getreviewDetail2(int r_id);
 
+	public int gettrainer_review_search_Count(Pagination pagination);
+
+	public List<Review> gettrainer_review_search_ListALL(Pagination pagination);
+
+	public int gettrainer_review_search_complete_Count(Pagination pagination);
+
+	public List<Review> gettrainer_review_search_complete_ListALL(Pagination pagination);
+
+	public int gettrainer_review_search_waite_Count(Pagination pagination);
+
+	public List<Review> gettrainer_review_search_waite_ListALL(Pagination pagination);
+
+	public int getmember_reviewCount(int u_key);
+
+	public List<Review> getmember_reviewListALL(Pagination pagination);
+
 	
 
 	

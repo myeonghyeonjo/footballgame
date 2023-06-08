@@ -928,6 +928,85 @@ model.addAttribute("exception", exception);
 			
 			return "/review/trainer_review_dashboard";
 	    }
+		@RequestMapping("/member_review_dashboard")
+	    public String member_review_dashboard(Center center,Model model,@RequestParam("u_key") int u_key,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.getmember_reviewCount(u_key);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+				pagination.setU_key(u_key);
+				List<Review> list = boardservice.getmember_reviewListALL(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("sort","전체");
+			model.addAttribute("list",list);
+			
+			return "/review/member_review_dashboard";
+	    }
+		
+		@RequestMapping("/trainer_review_dashboard_search_All")
+	    public String trainer_review_dashboard_search_All(Center center,Model model,@RequestParam("u_key") int u_key,@RequestParam("keyword") String keyword,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+			   pagination.setU_key(u_key);
+			   pagination.setKeyword(keyword);
+				int listcount = boardservice.gettrainer_review_search_Count(pagination);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+				
+				List<Review> list = boardservice.gettrainer_review_search_ListALL(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("sort","전체");
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("list",list);
+			
+			return "/review/trainer_review_dashboard";
+	    }
+		@RequestMapping("/trainer_review_dashboard_search_complete")
+	    public String trainer_review_dashboard_search_complete(Center center,Model model,@RequestParam("u_key") int u_key,@RequestParam("keyword") String keyword,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+			   pagination.setU_key(u_key);
+			   pagination.setKeyword(keyword);
+				int listcount = boardservice.gettrainer_review_search_complete_Count(pagination);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+				
+				List<Review> list = boardservice.gettrainer_review_search_complete_ListALL(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("sort","완료");
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("list",list);
+			
+			return "/review/trainer_review_dashboard";
+	    }
+		@RequestMapping("/trainer_review_dashboard_search_waite")
+	    public String trainer_review_dashboard_search_waite(Center center,Model model,@RequestParam("u_key") int u_key,@RequestParam("keyword") String keyword,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+			   pagination.setU_key(u_key);
+			   pagination.setKeyword(keyword);
+				int listcount = boardservice.gettrainer_review_search_waite_Count(pagination);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+				
+				List<Review> list = boardservice.gettrainer_review_search_waite_ListALL(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("sort","대기");
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("list",list);
+			
+			return "/review/trainer_review_dashboard";
+	    }
+		
 		@RequestMapping("/trainer_review_complete_dashboard")
 	    public String trainer_review_complete_dashboard(Center center,Model model,@RequestParam("u_key") int u_key,Pagination pagination,HttpServletRequest request) {
 			String reqPage1 = request.getParameter("page");	  
@@ -3637,7 +3716,7 @@ model.addAttribute("exception", exception);
 			 return "/member/aj-updatereview";
 	    }
 		@RequestMapping("/replyinsert")
-		public String replyInsert( Center center,Model model,Review review, TrainerProfile trainerprofile) {
+		public String replyInsert( Center center,Model model,Review review, TrainerProfile trainerprofile,@RequestParam("trainerprofile_u_key") int trainerprofile_u_key) {
 			System.out.println(review.getR_reply());
 			 // 현재 시각 가져오기
 	        LocalDateTime now = LocalDateTime.now();
@@ -3647,7 +3726,9 @@ model.addAttribute("exception", exception);
 	        String formattedDateTime = now.format(formatter);
 	        review.setR_replydate(formattedDateTime);
 			boardservice.replyInsert(review);  
-			
+			System.out.println("trainerprofile_u_key:"+trainerprofile_u_key);
+			trainerprofile = boardservice.trainerprofileDetail(trainerprofile_u_key);		
+			model.addAttribute("trainerprofile",trainerprofile);
 			List<Review> list  = boardservice.getreviewDetail(review.getR_id());
 			List<FileDto> filelist = boardservice.getreviewFileList(review.getR_id());
 			model.addAttribute("reviewfilelist",filelist);

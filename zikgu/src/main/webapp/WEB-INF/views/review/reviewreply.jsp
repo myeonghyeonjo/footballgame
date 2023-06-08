@@ -4176,7 +4176,7 @@ input, select, textarea {
 										   		${reviewlist.r_content}
 										   		
 										   	</div>
-										   	 <c:if test="${reviewlist.r_reply != '' }">
+										   	 <c:if test="${reviewlist.r_reply != NULL }">
 												 <div style="background-color:grey; text-align:left; padding:10px;">
 												 <Strong style="font-size:17px; font-weight:bold;margin-bottom:10px;">${trainerprofile.tf_name} 선생님</Strong>
 												 ${reviewlist.r_reply}
@@ -4185,12 +4185,17 @@ input, select, textarea {
 										  	</div>
 										  <hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
 										  	<div >
-										  	<c:if test="${reviewlist.r_reply == '' }">
+										  	<sec:authorize access="hasRole('ROLE_USER')">
+										  	<sec:authentication property="principal" var="principal"/> 
+										  	<c:if test="${reviewlist.trainerprofile_u_key == principal.u_key }">
+										  	<c:if test="${reviewlist.r_reply == NULL }">
 										  	<p style="color:#ffbc00; width:50px;" class="aa modifyreviewBtn" data-bs-toggle="modal" data-bs-target="#reviewmodifymodal${reviewlist.r_id}" data-rcontent="${reviewlist.r_content}">답글</p>
 										  	</c:if>
-										  	<c:if test="${reviewlist.r_reply != '' }">
+										  	<c:if test="${reviewlist.r_reply != NULL }">
 										  	<p style="color:#ffbc00; width:50px;" class="aa modifyreviewBtn" data-bs-toggle="modal" data-bs-target="#reviewmodifymodal${reviewlist.r_id}" data-rcontent="${reviewlist.r_content}">수정</p>
 										  	</c:if>
+										  	</c:if>
+										  	</sec:authorize>
 										  	<sec:authorize access="hasRole('ROLE_ADMIN')">
 													<c:if test="${(reviewlist.r_check=='1')}">
 														<button type="button" class="btn btn-success" disabled >
@@ -4791,11 +4796,11 @@ function submitForm2(r_id) {
     console.log("r_id는 이거입니다:"+r_id);
     var formData = new FormData();
 	var test = 'test333';
-	let trainerprofile_u_key = $('#u_key').val();
+	let trainerprofile_u_key = $('#memberprofile_u_key').val();
 	let memberprofile_u_key = $('#memberprofile_u_key').val();
 	let memberprofile_name = $('#memberprofile_name').val();
 	let r_reply = $('#r_reply').val();
-	  var url = "/replyinsert?r_id=" + encodeURIComponent(r_id)+"&r_reply=" + encodeURIComponent(r_reply);  
+	  var url = "/replyinsert?r_id=" + encodeURIComponent(r_id)+"&r_reply=" + encodeURIComponent(r_reply)+"&trainerprofile_u_key="+encodeURIComponent(trainerprofile_u_key);  
 	  window.location.href = url;
 	  
   
