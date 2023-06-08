@@ -3974,7 +3974,8 @@ input, select, textarea {
 									<div class="content">
 										<header class="major">
 										
-											<h2><Strong style="color:black">프로그램 제목</Strong></h2>
+											<h2><Strong style="color:black">프로그램 제목<span id="pt_title_messageSpan" class="point c_dayDoubleChk"></span>
+											</Strong></h2>
 											 <input type="text" id="username2" style=" flex: 1; height: 40px;" name="pt_title"
 										class="form-control" placeholder="프로그램 제목을 작성해주세요 (40자 이내)">
 										</header>
@@ -4008,7 +4009,7 @@ input, select, textarea {
 										}
 									}
 								</style>
-								<h4><Strong style="color:black">전문분야(최대 3개까지 선택가능)</Strong></h4>
+								<h4><Strong style="color:black">전문분야(3개 선택)<span id="PT_programsub_messageSpan" class="point c_dayDoubleChk"></span></Strong></h4>
 								<div style="display: ;" class="dynamic_programsub1">
 										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
 											class="btn-check" id="btn-check-outlined" autocomplete="off" value="벌크업">
@@ -4101,7 +4102,7 @@ input, select, textarea {
 										<textarea cols="50" rows="10" class="form-control" name="pt_programintro"
 											id="myTextarea" placeholder="내용을 입력해주세요"
 											oninput="maxLengthCheck(this)" ></textarea></h4>
-									<label for="state" class="form-label">참고 사진</label>
+									<label for="state" class="form-label">참고 사진(필수)<span id="PT_photo_messageSpan" class="point c_dayDoubleChk"></span></label>
 									<input class="form-control" type="file"
 											name="PT_photo" accept="image/*" onchange="setThumbnail3(event);"
 											id="formFile2" multiple />
@@ -4133,7 +4134,7 @@ input, select, textarea {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소</button>
-        <button type="submit" class="btn btn-outline-primary">확인</button>
+        <button type="submit" class="btn btn-outline-primary" onclick="return checkInput();">확인</button>
       </div>
     </div>
   </div>
@@ -4472,8 +4473,84 @@ function setThumbnail3(event) {
   }
 </Script>
 
+<script>
+function checkInput() {
+	  var pt_title = document.getElementsByName("pt_title")[0].value;
+	  var pt_programintro = document.getElementsByName("pt_programintro")[0].value;
+	  var PT_photo = document.getElementsByName("PT_photo")[0].value;
+	  var checkboxes = document.querySelectorAll('input[name="PT_programsub"]:checked'); // 체크박스 요소들을 선택합니다
+	  var checkedCount = checkboxes.length; // 체크된 개수를 확인합니다
+	  
+	  var pt_title_messageSpan = document.getElementById("pt_title_messageSpan");
+	  
+	 // var messageSpan = document.getElementById("messageSpan");
+	  if (pt_title === "" ||checkedCount !== 3 || PT_photo === "" || pt_programintro === "") {
+		  alert("입력값을 확인해주세요.");
+		 /* if (c_daymorning === "" || c_dayafter === "" || c_satermorning === "" || c_saterafter === "" 
+				  || c_sunmorning === "" || c_sunafter === "" || c_dayoff === "") {
+	   	     messageSpan.innerText = " 값을 입력해주세요.";
+	   	 	 messageSpan.style.color = "red";	 	
+		  }
+		  if (c_daymorning != "" && c_dayafter != "" && c_satermorning != "" && c_saterafter != "" 
+			  && c_sunmorning != "" && c_sunafter != "" && c_dayoff != "") {
+			  messageSpan.innerText = ""; // 문구를 비웁니다.
+		  }*/
+		 
+		  if (pt_title === "") {
+			  pt_title_messageSpan.innerText = " 제목을 입력해주세요.";
+			  pt_title_messageSpan.style.color = "red";
+		  }
+		  if (pt_title != "") {
+			  pt_title_messageSpan.innerText = "";  // 문구를 비웁니다.
+		  }
+		  if (PT_photo === "") {
+			  PT_photo_messageSpan.innerText = " 사진을 등록해주세요.";
+			  PT_photo_messageSpan.style.color = "red";
+		  }
+		  if (PT_photo != "") {
+			  PT_photo_messageSpan.innerText = "";  // 문구를 비웁니다.
+		  }
+		  if (checkedCount != 3) {
+			  PT_programsub_messageSpan.innerText = " PT 전문분야를 선택해주세요.(3개 선택)";
+			  PT_programsub_messageSpan.style.color = "red";
+		  }
+		  if (checkedCount === 3) {
+			  PT_programsub_messageSpan.innerText = "";  // 문구를 비웁니다.
+		  }
+		  
+	    return false; // form 제출을 막기 위해 false를 반환합니다.
+	  } else {
+		pt_title_messageSpan.innerText = ""; // 문구를 비웁니다.
+		 PT_photo_messageSpan.innerText = "";  // 문구를 비웁니다.
+		  PT_programsub_messageSpan.innerText = "";  // 문구를 비웁니다.
+	    return true; // form 제출을 허용하기 위해 true를 반환합니다.
+	  }
+	}  
 
+</script>
+<script>
+$('input[name="pt_title"]').blur(function(){
+	var sm_name =  $('input[name="pt_title"]').val();
+	var pt_title_messageSpan = document.getElementById("pt_title_messageSpan");
+	if(sm_name == "" || sm_name.length < 1){
+		pt_title_messageSpan.innerText = " 제목을 입력해주세요.";
+		pt_title_messageSpan.style.color = "red";
+	}else{
+		pt_title_messageSpan.innerText = "";
+	}
+});  
+$('input[name="PT_photo"]').blur(function(){
+	var sm_name =  $('input[name="PT_photo"]').val();
+	var PT_photo_messageSpan = document.getElementById("PT_photo_messageSpan");
+	if(sm_name == "" || sm_name.length < 1){
+		PT_photo_messageSpan.innerText = " 사진을 등록해주세요.";
+		PT_photo_messageSpan.style.color = "red";
+	}else{
+		PT_photo_messageSpan.innerText = "";
+	}
+}); 
 
+</script>
 
 
 

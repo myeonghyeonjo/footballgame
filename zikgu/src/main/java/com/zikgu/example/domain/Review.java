@@ -15,6 +15,8 @@ public class Review {
 	private String r_date;
 	private String r_check;
 	private int review_r_id;
+	private String r_reply;
+	private String r_replydate;
 	
 	public int getR_id() {
 		return r_id;
@@ -99,6 +101,18 @@ public class Review {
 	}
 	public void setReview_r_id(int review_r_id) {
 		this.review_r_id = review_r_id;
+	}
+	public String getR_reply() {
+		return r_reply;
+	}
+	public void setR_reply(String r_reply) {
+		this.r_reply = r_reply;
+	}
+	public String getR_replydate() {
+		return r_replydate;
+	}
+	public void setR_replydate(String r_replydate) {
+		this.r_replydate = r_replydate;
 	}
 
 	

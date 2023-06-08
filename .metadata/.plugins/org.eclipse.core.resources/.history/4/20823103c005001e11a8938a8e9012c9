@@ -1,0 +1,2815 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zikgu.example.mapper.BoardMapper">
+	<select id="selectBoardList" resultType="Board">
+		SELECT b_id as bId,
+		b_title as bTitle,
+		b_content as bContent,
+		b_writer as bWriter
+		FROM
+		lc_board
+	</select>
+
+	<select id="nameCheck" resultType="integer">
+		select count(*) from lc_user
+		where u_name =#{sm_name}
+	</select>
+
+	<select id="idCheck" resultType="integer">
+		select count(*) from lc_user
+		where u_id =#{sm_id}
+	</select>
+
+	<select id="phoneCheck" resultType="integer">
+		select count(*) from lc_user
+		where u_Phone =#{Phone}
+	</select>
+
+	<select id="idPhone" resultType="integer">
+		select count(*) from lc_user
+		where Phone =#{Phone}
+	</select>
+
+	<!-- 트레이너프로필 등록 -->
+	<insert id="trainerProfileinsert" parameterType="trainerprofile">
+		INSERT INTO
+		trainerprofile (
+		tf_lessonoption,
+		tf_schedureintro,
+		tf_certificate,
+		tf_sunday,
+		tf_saterday,
+		tf_intro,
+		tf_day,
+		tf_daymorning,
+		tf_dayafter,
+		tf_saterdaymorning,
+		tf_saterafter,
+		tf_sundaymorning,
+		tf_sundayafter,
+		tf_certificatetitle,
+		tf_programtitle,
+		tf_programsub,
+		tf_programintro,
+		tf_lessontitle,
+		tf_lessonnumber,
+		tf_lessonnumber2,
+		tf_lessonnumber3,
+		tf_lessonnumber4,
+		tf_lessonprice,
+		tf_lessonunit,
+		tf_lessontime,
+		tf_lessonintro,
+		tf_hanjulintro,
+		tf_dayoff,
+		u_key,
+		tf_loadaddress,
+		tf_lessonprice2,
+		tf_lessonprice3,
+		tf_lessonprice4,
+		tf_name,
+		tf_postcode,
+		tf_gender,
+		tf_option
+
+		) VALUES (
+		#{tf_lessonoption},
+		#{tf_schedureintro},
+		#{tf_certificate},
+		#{tf_sunday},
+		#{tf_saterday},
+		#{tf_intro},
+		#{tf_day},
+		#{tf_daymorning},
+		#{tf_dayafter},
+		#{tf_saterdaymorning},
+		#{tf_saterafter},
+		#{tf_sundaymorning},
+		#{tf_sundayafter},
+		#{tf_certificatetitle},
+		#{tf_programtitle},
+		#{tf_programsub},
+		#{tf_programintro},
+		#{tf_lessontitle},
+		#{tf_lessonnumber},
+		#{tf_lessonnumber2},
+		#{tf_lessonnumber3},
+		#{tf_lessonnumber4},
+		#{tf_lessonprice},
+		#{tf_lessonunit},
+		#{tf_lessontime},
+		#{tf_lessonintro},
+		#{tf_hanjulintro},
+		#{tf_dayoff},
+		#{u_key},
+		#{tf_loadaddress},
+		#{tf_lessonprice2},
+		#{tf_lessonprice3},
+		#{tf_lessonprice4},
+		#{tf_name},
+		#{tf_postcode},
+		#{tf_gender},
+		#{tf_option}
+		)
+	</insert>
+
+	<!-- 트레이너프로필 Id가져오기 -->
+	<select id="gettf_id" resultType="int">
+
+		select MAX(tf_id) as tf_id
+		from
+		trainerprofile
+
+	</select>
+
+	<!-- 트레이너프로필 Id가져오기 2 -->
+	<select id="gettf_id2" resultType="int">
+
+		select tf_id as tf_id
+		from
+		trainerprofile
+		where u_id = #{u_id}
+
+	</select>
+
+	<!-- 로그인 회원 key가져오기 -->
+	<select id="getu_key" resultType="int">
+
+		select u_key as u_key
+		from
+		lc_user
+		where u_id = #{u_id}
+
+	</select>
+
+	<!-- 회원 m_id가져오기 -->
+	<select id="getm_id" resultType="int">
+
+		select MAX(m_id) as m_id
+		from
+		memberprofile
+
+
+	</select>
+
+	<!-- 회원 m_id가져오기2 -->
+	<select id="getm_id2" resultType="int">
+
+		select m_id as m_id
+		from
+		memberprofile
+		WHERE u_key = #{u_key}
+
+
+	</select>
+
+
+	<!-- 센터 Id가져오기 -->
+	<select id="getc_id" resultType="int">
+
+		select MAX(c_id) as c_id
+		from
+		center
+
+	</select>
+
+	<!-- 유저 이름 가져오기 -->
+	<select id="getU_name" resultType="String">
+
+		select u_name as u_name
+		from
+		lc_user
+		where u_id = #{u_id}
+	</select>
+
+	<!-- 유저 이름 가져오기2 -->
+	<select id="getU_name2" resultType="String">
+
+		select u_name as u_name
+		from
+		lc_user
+		where u_key = #{u_key}
+	</select>
+
+	<!-- 파일업로드 -->
+	<insert id="fileUpload" parameterType="HashMap">
+		INSERT INTO tf_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		tf_id,
+		FILE_GROUP
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{tf_id},
+		1
+		)
+	</insert>
+
+	<!--PT 파일업로드 -->
+	<insert id="PTfileUpload" parameterType="HashMap">
+		INSERT INTO pt_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		u_key,
+		pt_id
+
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{trainer_u_key},
+		#{pt_id}
+
+		)
+	</insert>
+
+
+	<!-- 파일업로드 -->
+	<insert id="fileUpload2" parameterType="HashMap">
+		INSERT INTO tf_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		tf_id,
+		FILE_GROUP
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{tf_id},
+		2
+		)
+	</insert>
+	
+	<!-- 자격사항 파일업로드 -->
+	<insert id="filePTUpload" parameterType="HashMap">
+		INSERT INTO tf_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		tf_id,
+		FILE_GROUP,
+		tf_certificatetitle,
+		tf_certificateoption
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{tf_id},
+		2,
+		#{tf_certificatetitle},
+		#{tf_certificateoption}
+		)
+	</insert>
+
+	<!-- 수장페이지 파일업로드 -->
+	<insert id="filemodifyUpload" parameterType="HashMap">
+		INSERT INTO tf_file
+		(
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		tf_id,
+		FILE_GROUP
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{tf_id},
+		#{file_group}
+		)
+	</insert>
+
+
+	<!-- 파일업로드 -->
+	<insert id="fileUpload2_1" parameterType="HashMap">
+		INSERT INTO tf_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		tf_id,
+		FILE_GROUP,
+		tf_certificatetitle
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{tf_id},
+		2,
+		#{tf_certificatetitle2}
+		)
+	</insert>
+
+	<!-- 파일업로드 -->
+	<insert id="fileUpload3" parameterType="HashMap">
+		INSERT INTO tf_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		tf_id,
+		FILE_GROUP
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{tf_id},
+		3
+		)
+	</insert>
+
+
+
+	<!--센터 파일업로드 -->
+	<insert id="centerfileUpload" parameterType="HashMap">
+		INSERT INTO
+		center_file(
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		c_id,
+		u_key,
+		c_loadaddress
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{c_id},
+		#{u_key},
+		#{c_loadaddress}
+		)
+	</insert>
+
+	<!-- 트레이너 프로필 상세정보 -->
+	<select id="trainerprofileDetail" resultType="trainerprofile">
+		select tf_lessonoption as tf_lessonoption,
+		tf_schedureintro as tf_schedureintro,
+		tf_certificate as tf_certificate,
+		tf_sunday as tf_sunday,
+		tf_saterday as tf_saterday,
+		tf_intro as tf_intro,
+		tf_day as tf_day,
+		tf_daymorning as tf_daymorning,
+		tf_dayafter as tf_dayafter,
+		tf_saterdaymorning as tf_saterdaymorning,
+		tf_saterafter as tf_saterafter,
+		tf_sundaymorning as tf_sundaymorning,
+		tf_sundayafter as tf_sundayafter,
+		tf_dayoff as tf_dayoff,
+		tf_certificatetitle as tf_certificatetitle,
+		tf_programtitle as tf_programtitle,
+		u_key as u_key,
+		tf_programsub as tf_programsub,
+		tf_programintro as tf_programintro,
+		tf_lessontitle as tf_lessontitle,
+		tf_lessonnumber as tf_lessonnumber,
+		tf_lessonnumber2 as tf_lessonnumber2,
+		tf_lessonnumber3 as tf_lessonnumber3,
+		tf_lessonnumber4 as tf_lessonnumber4,
+		tf_lessonprice as tf_lessonprice,
+		tf_lessonunit as tf_lessonunit,
+		tf_lessontime as tf_lessontime,
+		tf_lessonintro as tf_lessonintro,
+		tf_hanjulintro as tf_hanjulintro,
+		tf_id as tf_id,
+		tf_lessonprice2 as tf_lessonprice2,
+		tf_lessonprice3 as tf_lessonprice3,
+		tf_lessonprice4 as tf_lessonprice4,
+		tf_loadaddress as tf_loadaddress,
+		tf_gender as tf_gender,
+		tf_check as tf_check,
+		tf_consulting as tf_consulting,
+		tf_name as tf_name,
+		tf_consulting as tf_consulting,
+		tf_consultingconfirm as tf_consultingconfirm,
+		tf_rejectreason as tf_rejectreason
+
+
+		from trainerprofile where u_key = #{u_key}
+	</select>
+
+
+	<select id="getsearch" resultType="trainerprofile">
+		select tf_lessonoption as tf_lessonoption,
+		tf_schedureintro as tf_schedureintro,
+		tf_certificate as tf_certificate,
+		tf_sunday as tf_sunday,
+		tf_saterday as tf_saterday,
+		tf_intro as tf_intro,
+		tf_day as tf_day,
+		tf_daymorning as tf_daymorning,
+		tf_dayafter as tf_dayafter,
+		tf_saterdaymorning as tf_saterdaymorning,
+		tf_saterafter as tf_saterafter,
+		tf_sundaymorning as tf_sundaymorning,
+		tf_sundayafter as tf_sundayafter,
+		tf_dayoff as tf_dayoff,
+		tf_certificatetitle as tf_certificatetitle,
+		tf_programtitle as tf_programtitle,
+		u_key as u_key,
+		tf_programsub as tf_programsub,
+		tf_programintro as tf_programintro,
+		tf_lessontitle as tf_lessontitle,
+		tf_lessonnumber as tf_lessonnumber,
+		tf_lessonnumber2 as tf_lessonnumber2,
+		tf_lessonnumber3 as tf_lessonnumber3,
+		tf_lessonnumber4 as tf_lessonnumber4,
+		tf_lessonprice as tf_lessonprice,
+		tf_lessonunit as tf_lessonunit,
+		tf_lessontime as tf_lessontime,
+		tf_lessonintro as tf_lessonintro,
+		tf_hanjulintro as tf_hanjulintro,
+		tf_id as tf_id,
+		tf_lessonprice2 as tf_lessonprice2,
+		tf_lessonprice3 as tf_lessonprice3,
+		tf_lessonprice4 as tf_lessonprice4,
+		tf_loadaddress as tf_loadaddress
+
+
+		from trainerprofile WHERE tf_loadaddress like concat('%',#{keyword},'%')
+	</select>
+
+	<select id="trainerList" resultType="trainerprofile">
+		select tf_lessonoption as tf_lessonoption,
+		tf_schedureintro as tf_schedureintro,
+		tf_certificate as tf_certificate,
+		tf_sunday as tf_sunday,
+		tf_saterday as tf_saterday,
+		tf_intro as tf_intro,
+		tf_day as tf_day,
+		tf_daymorning as tf_daymorning,
+		tf_dayafter as tf_dayafter,
+		tf_saterdaymorning as tf_saterdaymorning,
+		tf_saterafter as tf_saterafter,
+		tf_sundaymorning as tf_sundaymorning,
+		tf_sundayafter as tf_sundayafter,
+		tf_dayoff as tf_dayoff,
+		tf_certificatetitle as tf_certificatetitle,
+		tf_programtitle as tf_programtitle,
+		u_key as u_key,
+		tf_programsub as tf_programsub,
+		tf_programintro as tf_programintro,
+		tf_lessontitle as tf_lessontitle,
+		tf_lessonnumber as tf_lessonnumber,
+		tf_lessonnumber2 as tf_lessonnumber2,
+		tf_lessonnumber3 as tf_lessonnumber3,
+		tf_lessonnumber4 as tf_lessonnumber4,
+		tf_lessonprice as tf_lessonprice,
+		tf_lessonunit as tf_lessonunit,
+		tf_lessontime as tf_lessontime,
+		tf_lessonintro as tf_lessonintro,
+		tf_hanjulintro as tf_hanjulintro,
+		tf_id as tf_id,
+		tf_lessonprice2 as tf_lessonprice2,
+		tf_lessonprice3 as tf_lessonprice3,
+		tf_lessonprice4 as tf_lessonprice4,
+		tf_loadaddress as tf_loadaddress,
+		tf_name as tf_name
+
+
+		from trainerprofile ORDER BY tf_id DESC
+
+
+		LIMIT 3
+	</select>
+
+	<!-- 회원이 상담신청한 트레이너목록들 -->
+	<select id="trainerprofileconsulting"
+		resultType="trainerprofile">
+		select tf_lessonoption as tf_lessonoption,
+		tf_schedureintro as tf_schedureintro,
+		tf_certificate as tf_certificate,
+		tf_sunday as tf_sunday,
+		tf_saterday as tf_saterday,
+		tf_intro as tf_intro,
+		tf_day as tf_day,
+		tf_daymorning as tf_daymorning,
+		tf_dayafter as tf_dayafter,
+		tf_saterdaymorning as tf_saterdaymorning,
+		tf_saterafter as tf_saterafter,
+		tf_sundaymorning as tf_sundaymorning,
+		tf_sundayafter as tf_sundayafter,
+		tf_dayoff as tf_dayoff,
+		tf_certificatetitle as tf_certificatetitle,
+		tf_programtitle as tf_programtitle,
+		u_key as u_key,
+		tf_programsub as tf_programsub,
+		tf_programintro as tf_programintro,
+		tf_lessontitle as tf_lessontitle,
+		tf_lessonnumber as tf_lessonnumber,
+		tf_lessonnumber2 as tf_lessonnumber2,
+		tf_lessonnumber3 as tf_lessonnumber3,
+		tf_lessonnumber4 as tf_lessonnumber4,
+		tf_lessonprice as tf_lessonprice,
+		tf_lessonunit as tf_lessonunit,
+		tf_lessontime as tf_lessontime,
+		tf_lessonintro as tf_lessonintro,
+		tf_hanjulintro as tf_hanjulintro,
+		tf_id as tf_id,
+		tf_lessonprice2 as tf_lessonprice2,
+		tf_lessonprice3 as tf_lessonprice3,
+		tf_lessonprice4 as tf_lessonprice4,
+		tf_loadaddress as tf_loadaddress,
+		tf_name as tf_name,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		tf_consulting as tf_consulting,
+		tf_consultingconfirm as tf_consultingconfirm
+
+
+		from trainerprofile
+		WHERE tf_consulting like concat('%',#{u_key},'%')
+	</select>
+<!-- 회원이 상담신청한 트레이너(완료) 목록들 -->
+	<select id="trainerprofileconsultingcomplete"
+		resultType="trainerprofile">
+		select tf_lessonoption as tf_lessonoption,
+		tf_schedureintro as tf_schedureintro,
+		tf_certificate as tf_certificate,
+		tf_sunday as tf_sunday,
+		tf_saterday as tf_saterday,
+		tf_intro as tf_intro,
+		tf_day as tf_day,
+		tf_daymorning as tf_daymorning,
+		tf_dayafter as tf_dayafter,
+		tf_saterdaymorning as tf_saterdaymorning,
+		tf_saterafter as tf_saterafter,
+		tf_sundaymorning as tf_sundaymorning,
+		tf_sundayafter as tf_sundayafter,
+		tf_dayoff as tf_dayoff,
+		tf_certificatetitle as tf_certificatetitle,
+		tf_programtitle as tf_programtitle,
+		u_key as u_key,
+		tf_programsub as tf_programsub,
+		tf_programintro as tf_programintro,
+		tf_lessontitle as tf_lessontitle,
+		tf_lessonnumber as tf_lessonnumber,
+		tf_lessonnumber2 as tf_lessonnumber2,
+		tf_lessonnumber3 as tf_lessonnumber3,
+		tf_lessonnumber4 as tf_lessonnumber4,
+		tf_lessonprice as tf_lessonprice,
+		tf_lessonunit as tf_lessonunit,
+		tf_lessontime as tf_lessontime,
+		tf_lessonintro as tf_lessonintro,
+		tf_hanjulintro as tf_hanjulintro,
+		tf_id as tf_id,
+		tf_lessonprice2 as tf_lessonprice2,
+		tf_lessonprice3 as tf_lessonprice3,
+		tf_lessonprice4 as tf_lessonprice4,
+		tf_loadaddress as tf_loadaddress,
+		tf_name as tf_name,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		tf_consulting as tf_consulting,
+		tf_consultingconfirm as tf_consultingconfirm
+
+
+		from trainerprofile
+		WHERE tf_consulting like concat('%',#{u_key},'%') AND tf_consultingconfirm NOT like concat('%',#{u_key},'%')
+	</select>
+	<!-- 회원이 상담신청한 트레이너(대기) 목록들 -->
+	<select id="trainerprofileconsultingwaite"
+		resultType="trainerprofile">
+		select tf_lessonoption as tf_lessonoption,
+		tf_schedureintro as tf_schedureintro,
+		tf_certificate as tf_certificate,
+		tf_sunday as tf_sunday,
+		tf_saterday as tf_saterday,
+		tf_intro as tf_intro,
+		tf_day as tf_day,
+		tf_daymorning as tf_daymorning,
+		tf_dayafter as tf_dayafter,
+		tf_saterdaymorning as tf_saterdaymorning,
+		tf_saterafter as tf_saterafter,
+		tf_sundaymorning as tf_sundaymorning,
+		tf_sundayafter as tf_sundayafter,
+		tf_dayoff as tf_dayoff,
+		tf_certificatetitle as tf_certificatetitle,
+		tf_programtitle as tf_programtitle,
+		u_key as u_key,
+		tf_programsub as tf_programsub,
+		tf_programintro as tf_programintro,
+		tf_lessontitle as tf_lessontitle,
+		tf_lessonnumber as tf_lessonnumber,
+		tf_lessonnumber2 as tf_lessonnumber2,
+		tf_lessonnumber3 as tf_lessonnumber3,
+		tf_lessonnumber4 as tf_lessonnumber4,
+		tf_lessonprice as tf_lessonprice,
+		tf_lessonunit as tf_lessonunit,
+		tf_lessontime as tf_lessontime,
+		tf_lessonintro as tf_lessonintro,
+		tf_hanjulintro as tf_hanjulintro,
+		tf_id as tf_id,
+		tf_lessonprice2 as tf_lessonprice2,
+		tf_lessonprice3 as tf_lessonprice3,
+		tf_lessonprice4 as tf_lessonprice4,
+		tf_loadaddress as tf_loadaddress,
+		tf_name as tf_name,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		tf_consulting as tf_consulting,
+		tf_consultingconfirm as tf_consultingconfirm
+
+
+		from trainerprofile
+		WHERE tf_consulting like concat('%',#{u_key},'%') AND tf_consultingconfirm like concat('%',#{u_key},'%')
+	</select>
+
+	<!-- 센터 등록 -->
+	<insert id="centerinsertprocess" parameterType="trainerprofile">
+		INSERT INTO
+		center (
+		c_name,
+		c_postcode,
+		c_loadaddress,
+		c_oldaddress,
+		c_detailaddress,
+		c_option,
+		c_inform,
+		c_daymorning,
+		c_dayafter,
+		c_satermorning,
+		c_saterafter,
+		c_sunmorning,
+		c_sunafter,
+		c_dayoff,
+		u_key,
+		c_intro
+		) VALUES (
+		#{c_name},
+		#{c_postcode},
+		#{c_loadaddress},
+		#{c_oldaddress},
+		#{c_detailaddress},
+		#{c_option},
+		#{c_inform},
+		#{c_daymorning},
+		#{c_dayafter},
+		#{c_satermorning},
+		#{c_saterafter},
+		#{c_sunmorning},
+		#{c_sunafter},
+		#{c_dayoff},
+		#{u_key},
+		#{c_intro}
+
+		)
+	</insert>
+
+
+	<!-- 회원 디테일 -->
+	<select id="getmemberprofiledetail" resultType="memberprofile">
+
+		select m_id,
+		m_name,
+		m_programsub,
+		m_oldaddress,
+		m_detailaddress,
+		m_optionaddress,
+		m_gender,
+		m_intro,
+		m_postcode,
+		m_loadaddress,
+		u_key,
+		m_likegender,
+		m_day,
+		m_daymorning,
+		m_dayafter,
+		m_saterafter,
+		m_saterdaymorning,
+		m_saterafter,
+		m_sunday,
+		m_sundaymorning,
+		m_sundayafter,
+		m_schedureintro,
+		m_consulting,
+		m_consultingconfirm
+
+		from memberprofile
+		where m_id = #{m_id}
+
+	</select>
+
+	<!-- 회원 디테일2 -->
+	<select id="getmemberprofiledetail2" resultType="memberprofile">
+
+		select m_id,
+		m_name,
+		m_programsub,
+		m_oldaddress,
+		m_detailaddress,
+		m_optionaddress,
+		m_gender,
+		m_intro,
+		m_postcode,
+		m_loadaddress,
+		u_key,
+		m_likegender,
+		m_day,
+		m_daymorning,
+		m_dayafter,
+		m_saterafter,
+		m_saterdaymorning,
+		m_saterday,
+		m_sunday,
+		m_sundaymorning,
+		m_sundayafter,
+		m_schedureintro,
+		m_consulting,
+		m_consultingconfirm
+
+		from memberprofile
+		where u_key = #{member_u_key}
+
+	</select>
+
+
+	<!-- 센터 디테일 -->
+	<select id="getcenterDetail" resultType="center">
+
+		select c_name,
+		c_postcode,
+		c_loadaddress,
+		c_oldaddress,
+		c_detailaddress,
+		c_option,
+		c_inform,
+		c_daymorning,
+		c_dayafter,
+		c_satermorning,
+		c_saterafter,
+		c_sunmorning,
+		c_sunafter,
+		c_dayoff,
+		c_confirm,
+		c_intro
+
+		from center
+		where c_id = #{c_id}
+
+	</select>
+
+	<!-- 센터 디테일2 -->
+	<select id="getcenterDetail2" resultType="center">
+
+		select c_name,
+		c_postcode,
+		c_loadaddress,
+		c_oldaddress,
+		c_detailaddress,
+		c_option,
+		c_inform,
+		c_daymorning,
+		c_dayafter,
+		c_satermorning,
+		c_saterafter,
+		c_sunmorning,
+		c_sunafter,
+		c_dayoff,
+		c_confirm,
+		c_id,
+		u_key,
+		c_intro,
+		c_rejectreason
+
+		from center
+		where c_loadaddress = #{tf_loadaddress}
+		Limit 1
+	</select>
+	<select id="getcenterDetail3" resultType="center">
+
+		select c_name,
+		c_postcode,
+		c_loadaddress,
+		c_oldaddress,
+		c_detailaddress,
+		c_option,
+		c_inform,
+		c_daymorning,
+		c_dayafter,
+		c_satermorning,
+		c_saterafter,
+		c_sunmorning,
+		c_sunafter,
+		c_dayoff,
+		c_confirm,
+		c_id,
+		u_key,
+		c_intro
+
+		from center
+		where c_id = #{c_id}
+	</select>
+	
+
+
+
+	<!-- 휴대폰번호 가져오기 -->
+	<select id="getphone" resultType="FileDto">
+		SELECT
+		u_phone as phone
+
+		FROM lc_user
+		WHERE u_key = #{u_key}
+	</select>
+
+	<!-- 센터별 파일정보 가져오기 -->
+	<select id="getcenterFileList" resultType="FileDto">
+		SELECT O_NAME as o_name,
+		FILE_PATH as file_path,
+		FILE_NAME as file_name,
+		c_file_id as c_file_id
+		FROM center_file
+		WHERE c_id = #{c_id}
+
+	</select>
+
+	<!-- 센터별 파일정보 가져오기 -->
+	<select id="getcenterFileList2" resultType="FileDto">
+		SELECT O_NAME as o_name,
+		FILE_PATH as file_path,
+		FILE_NAME as file_name,
+		c_file_id as c_file_id,
+		u_key as u_key
+		FROM center_file
+		WHERE c_loadaddress = #{tf_loadaddress}
+
+	</select>
+
+
+
+
+	<!-- 트레이너별 파일정보 가져오기 -->
+	<select id="gettf_FileList" resultType="FileDto">
+		SELECT O_NAME as o_name,
+		FILE_PATH as file_path,
+		FILE_NAME as file_name,
+		FILE_GROUP as FILE_GROUP,
+		tf_file_id as tf_file_id,
+		tf_id as tf_id,
+		tf_certificatetitle as tf_certificatetitle
+		FROM tf_file
+		WHERE tf_id = #{tf_id} and FILE_GROUP = #{FILE_GROUP}
+
+	</select>
+
+	<!-- 트레이너별 파일정보 가져오기 -->
+	<select id="getcenterSearchFileList" resultType="FileDto">
+		SELECT O_NAME as o_name,
+		FILE_PATH as file_path,
+		FILE_NAME as file_name,
+		FILE_GROUP as FILE_GROUP,
+		tf_file_id as tf_file_id,
+		tf_id as tf_id,
+		tf_certificatetitle as tf_certificatetitle
+		FROM tf_file
+
+		WHERE tf_id like concat('%',#{tfIdString},'%') and FILE_GROUP = 1
+	</select>
+
+	<select id="getprofileFileList2" resultType="FileDto">
+		SELECT O_NAME as o_name,
+		FILE_PATH as file_path,
+		FILE_NAME as file_name,
+		FILE_GROUP as FILE_GROUP,
+		tf_file_id as tf_file_id,
+		tf_id as tf_id,
+		tf_certificatetitle as tf_certificatetitle
+		FROM tf_file
+
+		WHERE tf_id like concat('%',#{tf_id},'%') and FILE_GROUP = 1
+
+	</select>
+
+
+
+
+
+	<!-- 센터 리스트(모든) -->
+	<select id="getcenterListALL" resultType="center">
+		SELECT
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+		LIMIT 			#{pageNum}, 10 
+		
+	</select>
+	<!-- 센터 리스트(완료) -->
+	<select id="getcentercompleteList" resultType="center">
+		SELECT
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+		WHERE c_confirm = '1'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 센터 리스트(대기) -->
+	<select id="getcenterwaiteList" resultType="center">
+		SELECT
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+		WHERE c_confirm = '0'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 센터 리스트(반려) -->
+	<select id="getcenterrejectList" resultType="center">
+		SELECT
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+		WHERE c_confirm = '2'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	
+
+	<!--트레이너 리스트(모든) -->
+	<select id="gettrainerprofileListALL"
+		resultType="trainerprofile">
+		SELECT
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
+
+		FROM trainerprofile
+		LIMIT 			#{pageNum}, 10 
+
+	</select>
+	<!--트레이너 리스트(검토완료) -->
+	<select id="gettrainerprofileListcomplete"
+		resultType="trainerprofile">
+		SELECT
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
+
+		FROM trainerprofile
+		WHERE tf_check = '완료'
+		LIMIT 			#{pageNum}, 10 
+
+	</select>
+
+
+	<!-- 일반회원 프로필 리스트(모든) -->
+	<select id="getmemberprofileListALL" resultType="memberprofile">
+		SELECT
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender
+		FROM memberprofile
+		LIMIT 			#{pageNum}, 10 
+	</select>
+
+	<!-- 상담신청한 일반회원 프로필 리스트 -->
+	<select id="memberprofileconsulting" resultType="memberprofile">
+		SELECT
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender,
+		m_consulting as m_consulting,
+		m_consultingconfirm as m_consultingconfirm
+		FROM memberprofile
+		WHERE m_consulting like concat('%',#{tf_id},'%')
+	</select>
+<!-- 상담신청한 일반회원 프로필 리스트 -->
+	<select id="memberprofileconsultinglist" resultType="memberprofile">
+		SELECT
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender,
+		m_consulting as m_consulting,
+		m_consultingconfirm as m_consultingconfirm
+		FROM memberprofile
+		WHERE m_consulting like concat('%',#{tf_id},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 상담신청한 일반회원 검색 프로필 리스트 -->
+	<select id="memberprofileconsultingsearchlist" resultType="memberprofile">
+		SELECT
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender,
+		m_consulting as m_consulting,
+		m_consultingconfirm as m_consultingconfirm
+		FROM memberprofile
+		WHERE m_consulting like concat('%',#{tf_id},'%') AND m_name like concat('%',#{keyword},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 상담신청한 일반회원 검색(완료) 프로필 리스트 -->
+	<select id="memberprofileconsultingcompletesearchlist" resultType="memberprofile">
+		SELECT
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender,
+		m_consulting as m_consulting,
+		m_consultingconfirm as m_consultingconfirm
+		FROM memberprofile
+		WHERE m_consulting like concat('%',#{tf_id},'%') AND m_name like concat('%',#{keyword},'%') AND m_consultingconfirm NOT like concat('%',#{tf_id},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 상담신청한 일반회원 검색(대기) 프로필 리스트 -->
+	<select id="memberprofileconsultingwaitesearchlist" resultType="memberprofile">
+		SELECT
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender,
+		m_consulting as m_consulting,
+		m_consultingconfirm as m_consultingconfirm
+		FROM memberprofile
+		WHERE m_consulting like concat('%',#{tf_id},'%') AND m_name like concat('%',#{keyword},'%') AND m_consultingconfirm  like concat('%',#{tf_id},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	
+<!-- 상담신청한 일반회원 (완료) 프로필 리스트 -->
+	<select id="memberprofileconsultingcompletelist" resultType="memberprofile">
+		SELECT
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender,
+		m_consulting as m_consulting,
+		m_consultingconfirm as m_consultingconfirm
+		FROM memberprofile
+		WHERE m_consulting like concat('%',#{tf_id},'%') AND m_consultingconfirm NOT like concat('%',#{tf_id},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 상담신청한 일반회원 (대기) 프로필 리스트 -->
+	<select id="memberprofileconsultingwaitelist" resultType="memberprofile">
+		SELECT
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender,
+		m_consulting as m_consulting,
+		m_consultingconfirm as m_consultingconfirm
+		FROM memberprofile
+		WHERE m_consulting like concat('%',#{tf_id},'%') AND m_consultingconfirm like concat('%',#{tf_id},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>
+
+
+
+
+	<!-- 센터 리스트 u_key별 -->
+	<select id="getcenterListOne" resultType="center">
+		SELECT
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+		Where u_key = #{u_key}
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 센터 리스트 u_key별 (완료)-->
+	<select id="getcentercompleteListOne" resultType="center">
+		SELECT
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+		Where u_key = #{u_key} AND c_confirm = 1
+		LIMIT 			#{pageNum}, 10 
+	</select>
+<!-- 센터 리스트 u_key별 (대기)-->
+	<select id="getcenterwaiteListOne" resultType="center">
+		SELECT
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+		Where u_key = #{u_key} AND c_confirm = 0
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 센터 리스트 u_key별 (반려)-->
+	<select id="getcenterrejectListOne" resultType="center">
+		SELECT
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+		Where u_key = #{u_key} AND c_confirm = 2
+		LIMIT 			#{pageNum}, 10 
+	</select>
+
+	<!--멤버 상담완료or상담취소 (신청자 빼기or더하기) 업데이트 -->
+	<update id="updateM_consultingconfirm" parameterType="center">
+		UPDATE memberprofile SET
+		m_consultingconfirm = #{m_consultingconfirm}
+
+		WHERE m_id = #{m_id}
+	</update>
+
+	<!--트레이너 상담신청회원 상담완료or상담취소 (신청자 빼기or더하기) 업데이트 -->
+	<update id="updateTf_Consultingconfirm" parameterType="center">
+		UPDATE trainerprofile SET
+		tf_consultingconfirm = #{tf_consultingconfirm}
+
+		WHERE tf_id = #{tf_id}
+	</update>
+
+	<!--트레이너 상담신청회원 (신청자 빼기) 업데이트 -->
+	<update id="updateTf_consulting" parameterType="center">
+		UPDATE trainerprofile SET
+		tf_consulting = #{tf_consulting},
+		tf_consultingconfirm = #{tf_consultingconfirm}
+
+		WHERE tf_id = #{tf_id}
+	</update>
+
+	<!--트레이너 상담신청회원 (신청자 더하기) 업데이트 -->
+	<update id="updateTf_consulting2" parameterType="center">
+		UPDATE trainerprofile SET
+		tf_consulting = #{tf_consulting},
+		tf_consultingconfirm = #{tf_consultingconfirm}
+
+
+		WHERE tf_id = #{tf_id}
+	</update>
+
+	<!--회원 상담 목록프로필 (빼기)업데이트 -->
+	<update id="updateM_consulting" parameterType="center">
+		UPDATE memberprofile SET
+		m_consulting = #{m_consulting},
+		m_consultingconfirm = #{m_consultingconfirm}
+
+		WHERE m_id = #{m_id}
+	</update>
+
+	<!--회원 상담 목록프로필 (더하기)업데이트 -->
+	<update id="updateM_consulting2" parameterType="center">
+		UPDATE memberprofile SET
+		m_consulting = #{m_consulting},
+		m_consultingconfirm = #{m_consultingconfirm},
+		m_selectedPT = #{m_selectedPT},
+		m_selectedPTconfirm = #{m_selectedPTconfirm}
+
+
+		WHERE m_id = #{m_id}
+	</update>
+
+
+	<!-- 센터 승인확정 -->
+	<update id="centerConfirm" parameterType="center">
+		UPDATE center SET
+		c_confirm = 1
+
+		WHERE c_id = #{c_id}
+	</update>
+	<!-- 센터 반려확정 -->
+	<update id="centerReject" parameterType="center">
+		UPDATE center SET
+		c_confirm = 2,
+		c_rejectreason = #{c_rejectreason}
+		WHERE c_id = #{c_id}
+	</update>
+
+<!-- 리뷰 승인확정 -->
+	<update id="reviewConfirm" parameterType="review">
+		UPDATE review SET
+		r_check = 1
+
+		WHERE r_id = #{r_id}
+	</update>
+	<!-- 리뷰 반려 -->
+	<update id="reviewReject" parameterType="review">
+		UPDATE review SET
+		r_check = 2
+
+		WHERE r_id = #{r_id}
+	</update>
+
+	<!-- 센터 취소 -->
+	<update id="centerConfirmCancel" parameterType="center">
+		UPDATE center SET
+		c_confirm = 0,
+		c_rejectreason = ' '
+		WHERE c_id = #{c_id}
+	</update>
+<!-- 리뷰 승인취소 -->
+	<update id="reviewConfirmCancel" parameterType="center">
+		UPDATE review SET
+		r_check = 0
+		WHERE r_id = #{r_id}
+	</update>
+
+	<!-- 트레이너 프로필 검토확인확정 -->
+	<update id="trainerprofilecheck" parameterType="trainerprofile">
+		UPDATE trainerprofile SET
+		tf_check = '완료'
+
+		WHERE u_key = #{u_key}
+	</update>
+	<!-- 트레이너 프로필 검토확인확정 -->
+	<update id="trainerprofilereject" parameterType="trainerprofile">
+		UPDATE trainerprofile SET
+		tf_check = '반려',
+		tf_rejectreason = #{tf_rejectreason}
+		
+		WHERE u_key = #{u_key}
+	</update>
+
+	<!-- 트레이너 프로필 검토확인 취소 -->
+	<update id="trainerprofilecheckcancel"
+		parameterType="trainerprofile">
+		UPDATE trainerprofile SET
+		tf_check = '대기',
+		tf_rejectreason = ''
+		WHERE u_key = #{u_key}
+	</update>
+
+
+
+
+	<!-- 모든 검색 -->
+	<select id="search_All" resultType="TrainerProfile">
+
+
+
+		SELECT tf_id as tf_id,
+		tf_hanjulintro as tf_hanjulintro,
+		tf_lessonnumber as tf_lessonnumber,
+		tf_lessonprice as tf_lessonprice,
+		tf_lessonunit as tf_lessonunit,
+		tf_loadaddress as tf_loadaddress,
+		u_key as u_key,
+		tf_name as tf_name
+
+		FROM trainerprofile
+
+		WHERE tf_loadaddress like concat('%',#{keyword},'%') OR tf_option like
+		concat('%',#{keyword},'%') OR tf_name like concat('%',#{keyword},'%')
+
+	</select>
+	
+		<!-- 트레이너 모든 검색 -->
+	<select id="gettrainerprofilesearchList" resultType="TrainerProfile">
+		SELECT 
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
+
+		FROM trainerprofile
+
+		WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like
+		concat('%',#{keyword},'%') 
+		LIMIT 			#{pageNum}, 10 
+	</select>
+			<!-- 상담신청한 트레이너 모든 검색 -->
+	<select id="gettconsultingsearchList" resultType="TrainerProfile">
+		SELECT 
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key,
+		tf_consulting as tf_consulting,
+		tf_consultingconfirm as tf_consultingconfirm
+
+		FROM trainerprofile
+
+		WHERE tf_consulting like concat('%',#{u_key},'%') AND tf_name like
+		concat('%',#{keyword},'%') 
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 상담신청한 트레이너 (완료) 검색 -->
+	<select id="gettconsultingcompletesearchList" resultType="TrainerProfile">
+		SELECT 
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key,
+		tf_consulting as tf_consulting,
+		tf_consultingconfirm as tf_consultingconfirm
+
+		FROM trainerprofile
+
+		WHERE tf_consulting like concat('%',#{u_key},'%') AND tf_name like
+		concat('%',#{keyword},'%') AND tf_consultingconfirm NOT like
+		concat('%',#{u_key},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 상담신청한 트레이너 (대기) 검색 -->
+	<select id="gettconsultingwaitesearchList" resultType="TrainerProfile">
+		SELECT 
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key,
+		tf_consulting as tf_consulting,
+		tf_consultingconfirm as tf_consultingconfirm
+
+		FROM trainerprofile
+
+		WHERE tf_consulting like concat('%',#{u_key},'%') AND tf_name like
+		concat('%',#{keyword},'%') AND tf_consultingconfirm  like
+		concat('%',#{u_key},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	
+	<!-- 리뷰 모든 검색 -->
+	<select id="getreviewsearchList" resultType="Review">
+		SELECT 
+				r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+
+		FROM review
+
+		WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like
+		concat('%',#{keyword},'%') 
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 리뷰  검색+완료 -->
+	<select id="getreviewsearchcompleteList" resultType="Review">
+		SELECT 
+				r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+
+		FROM review
+
+		WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like concat('%',#{keyword},'%') 
+		AND r_check ='1'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 리뷰  검색+대기 -->
+	<select id="getreviewsearchwaiteList" resultType="Review">
+		SELECT 
+				r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+
+		FROM review
+
+		WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like concat('%',#{keyword},'%') 
+		AND r_check ='0'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 리뷰  검색+반려 -->
+	<select id="getreviewsearchwrejectList" resultType="Review">
+		SELECT 
+				r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+
+		FROM review
+
+		WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like concat('%',#{keyword},'%') 
+		AND r_check ='2'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	
+	<!-- 리뷰 디테일 -->
+	<select id="getreviewDetail" resultType="Review">
+		SELECT 
+				r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+
+		FROM review
+
+		WHERE r_id = #{r_id}
+	
+	</select>
+	
+	<!-- 리뷰  검색+대기 -->
+	<select id="getreviewSearchwaiteCount" resultType="int">
+		 SELECT       count(*)                
+				 FROM            review
+				WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like
+		concat('%',#{keyword},'%') AND r_check ='0' 
+	</select>
+	
+	<!-- 등록한 리뷰 갯수  -->
+	<select id="getcenterListOneCount" resultType="int">
+		 SELECT       count(*)                
+				 FROM            center
+				WHERE  u_key = ${trainerprofile_u_key} 
+	</select>
+	
+	<!-- 멤버 프로필 작성했느지 여부 체크 -->
+	<select id="getmemberprofilecountcheck" resultType="int">
+		 SELECT       count(*)                
+				 FROM            memberprofile
+				WHERE u_key = #{memberprofile_u_key}
+		
+	</select>
+	
+	
+	<!-- 등록요청한 센터 갯수 -->
+	<select id="getcenterListcount" resultType="int">
+		 SELECT       count(*)                
+		 FROM            center
+		 WHERE u_key =${u_key} 
+	</select>
+	<!-- 등록요청한 센터 (완료) 갯수 -->
+	<select id="getcentercompleteListcount" resultType="int">
+		 SELECT       count(*)                
+		 FROM            center
+		 WHERE u_key =${u_key} AND c_confirm = 1
+	</select>
+	<!-- 등록요청한 센터 (대기) 갯수 -->
+	<select id="getcenterwaiteListcount" resultType="int">
+		 SELECT       count(*)                
+		 FROM            center
+		 WHERE u_key =${u_key} AND c_confirm = 0
+	</select>
+	<!-- 등록요청한 센터 (반려) 갯수 -->
+	<select id="getcenterrejectListcount" resultType="int">
+		 SELECT       count(*)                
+		 FROM            center
+		 WHERE u_key =${u_key} AND c_confirm = 2
+	</select>
+	
+		<!-- 트레이너 모든 검색 + 완료 -->
+	<select id="gettrainerprofilesearchcompleteList" resultType="TrainerProfile">
+		SELECT 
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
+
+		FROM trainerprofile
+
+		WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like
+		concat('%',#{keyword},'%')  AND tf_check ='완료'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 트레이너 모든 검색 + 대기 -->
+	<select id="gettrainerprofilesearchwaiteList" resultType="TrainerProfile">
+		SELECT 
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
+
+		FROM trainerprofile
+
+		WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like
+		concat('%',#{keyword},'%')  AND tf_check ='대기'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 트레이너 모든 검색 + 반려 -->
+	<select id="gettrainerprofilesearchrejectList" resultType="TrainerProfile">
+		SELECT 
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
+
+		FROM trainerprofile
+
+		WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like
+		concat('%',#{keyword},'%')  AND tf_check ='반려'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	
+	<!-- 일반회원 모든 검색 -->
+	<select id="getmemberprfilesearchList" resultType="MemberProfile">
+		SELECT 
+		m_id as m_id,
+		m_name as m_name,
+		m_programsub as m_programsub,
+		m_oldaddress as m_oldaddress,
+		m_detailaddress as m_detailaddress,
+		m_optionaddress as m_optionaddress,
+		m_gender as m_gender,
+		m_intro as m_intro,
+		m_postcode as m_postcode,
+		m_loadaddress as m_loadaddress,
+		u_key as u_key,
+		m_likegender as m_likegender
+		FROM memberprofile
+
+		WHERE m_id like concat('%',#{keyword},'%') OR m_name like
+		concat('%',#{keyword},'%') 
+		LIMIT 			#{pageNum}, 10 
+	</select>
+<!-- 센터 모든 검색 -->
+	<select id="getcentersearchList" resultType="Center">
+		SELECT 
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+
+		WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') 
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 등록한 센터 모든 검색 -->
+	<select id="getcenterinsertsearchList" resultType="Center">
+		SELECT 
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+
+		WHERE u_key = #{u_key} AND ( c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') ) 
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 등록한 센터  검색+완료 -->
+	<select id="getcenterinsertsearchcompleteList" resultType="Center">
+		SELECT 
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+
+		WHERE u_key = #{u_key} AND ( c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') ) AND c_confirm =1
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 등록한 센터  검색+대기 -->
+	<select id="getcenterinsertsearchwaiteList" resultType="Center">
+		SELECT 
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+
+		WHERE u_key = #{u_key} AND ( c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') ) AND c_confirm =0
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 등록한 센터  검색+반려 -->
+	<select id="getcenterinsertsearchrejectList" resultType="Center">
+		SELECT 
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+
+		WHERE u_key = #{u_key} AND ( c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') ) AND c_confirm =2
+		LIMIT 			#{pageNum}, 10 
+	</select>
+
+<!-- 센터  검색+완료 -->
+	<select id="getcentersearchcompelteList" resultType="Center">
+		SELECT 
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+
+		WHERE c_confirm = '1' AND c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%') 
+		
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	
+	
+<!-- 센터  검색+대기 -->
+	<select id="getcentersearchwaiteList" resultType="Center">
+		SELECT 
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+		WHERE c_confirm = '0' AND c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%')
+		LIMIT 			#{pageNum}, 10 
+	</select>	
+	<!-- 센터  검색+반려 -->
+	<select id="getcentersearchrejectList" resultType="Center">
+		SELECT 
+		c_id as c_id,
+		c_name as c_name,
+		c_postcode as c_postcode,
+		c_loadaddress as c_loadaddress,
+		c_confirm as c_confirm
+		FROM center
+		WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%') AND c_confirm = '2'
+		LIMIT 			#{pageNum}, 10 
+	</select>	
+
+	<!-- 회원 프로필 등록 -->
+	<insert id="memberProfileinsert" parameterType="memberprofile">
+		INSERT INTO
+		memberprofile (
+		m_name,
+		m_programsub,
+		m_oldaddress,
+		m_detailaddress,
+		m_optionaddress,
+		m_gender,
+		m_intro,
+		m_postcode,
+		m_loadaddress,
+		u_key,
+		m_likegender,
+		m_day,
+		m_daymorning,
+		m_dayafter,
+		m_saterafter,
+		m_saterdaymorning,
+		m_saterday,
+		m_sunday,
+		m_sundaymorning,
+		m_sundayafter,
+		m_schedureintro
+
+		) VALUES (
+		#{m_name},
+		#{m_programsub},
+		#{m_oldaddress},
+		#{m_detailaddress},
+		#{m_optionaddress},
+		#{m_gender},
+		#{m_intro},
+		#{m_postcode},
+		#{m_loadaddress},
+		#{u_key},
+		#{m_likegender},
+		#{m_day},
+		#{m_daymorning},
+		#{m_dayafter},
+		#{m_saterafter},
+		#{m_saterdaymorning},
+		#{m_saterday},
+		#{m_sunday},
+		#{m_sundaymorning},
+		#{m_sundayafter},
+		#{m_schedureintro}
+
+		)
+	</insert>
+	
+	<!-- 멤버 프로필  수정 -->
+	<update id="memberProfilemodifyinsert" parameterType="memberprofile">
+		UPDATE memberprofile SET
+		
+		m_name = #{m_name},
+		m_programsub= #{m_programsub},
+		m_oldaddress= #{m_oldaddress},
+		m_detailaddress = #{m_detailaddress},
+		m_optionaddress = #{m_optionaddress},
+		m_gender = #{m_gender},
+		m_intro = #{m_intro},
+		m_postcode = #{m_postcode},
+		m_loadaddress = #{m_loadaddress},
+		m_likegender = #{m_likegender},
+		m_day = #{m_day},
+		m_daymorning = #{m_daymorning},
+		m_dayafter = #{m_dayafter},
+		m_saterafter = #{m_saterafter},
+		m_saterdaymorning = #{m_saterdaymorning},
+		m_saterday = #{m_saterday},
+		m_sunday = #{m_sunday},
+		m_sundaymorning = #{m_sundaymorning},
+		m_sundayafter = #{m_sundayafter},
+		m_schedureintro = #{m_schedureintro}
+		WHERE m_id = #{m_id}
+	</update>
+	
+	<!-- PT 프로그램 등록 -->
+	<insert id="ptInsert" parameterType="memberprofile">
+		INSERT INTO pt (
+		u_key,
+		pt_title,
+		pt_programsub1,
+		pt_programsub2,
+		pt_programsub3,
+		pt_programintro
+
+		) VALUES (
+		#{u_key},
+		#{pt_title},
+		#{pt_programsub1},
+		#{pt_programsub2},
+		#{pt_programsub3},
+		#{pt_programintro}
+		)
+
+	</insert>
+	<!-- 회원가입시 초기 PT 프로그램 등록 -->
+	<insert id="signupptInsert" parameterType="memberprofile">
+		INSERT INTO pt (
+		u_key,
+		pt_title,
+		pt_programsub1,
+		pt_programsub2,
+		pt_programsub3,
+		pt_programintro
+
+		) VALUES (
+		#{u_key},
+		"PT제목을 입력해주세요",
+		"PT전문분야를 선택해주세요",
+		"PT전문분야를 선택해주세요",
+		"PT전문분야를 선택해주세요",
+		"PT소개글을 입력해주세요"
+		)
+
+	</insert>
+
+	<!-- 트레이너 pt id정보 -->
+	<select id="getpt_id" resultType="int">
+		select MAX(pt_id) as pt_id
+		from pt
+	</select>
+
+	<!-- 트레이너 pt 디테일정보 -->
+	<select id="getPTdetail" resultType="pt">
+		SELECT
+		pt_id as pt_id,
+		pt_title as pt_title,
+		pt_programsub1 as pt_programsub1,
+		pt_programsub2 as pt_programsub2,
+		pt_programsub3 as pt_programsub3,
+		pt_programintro as pt_programintro
+		FROM pt
+		Where u_key = #{u_key}
+	</select>
+
+	<!-- PT파일리스트 -->
+	<select id="getPT_FileList" resultType="FileDto">
+		SELECT
+		pt_file_id as pt_file_id,
+		O_NAME as O_NAME,
+		FILE_NAME as FILE_NAME,
+		FILE_SIZE as FILE_SIZE,
+		FILE_PATH as FILE_PATH,
+		u_key as u_key,
+		pt_id as pt_id
+		FROM pt_file
+		Where u_key = #{u_key}
+	</select>
+
+
+
+
+
+	<!-- 선택된 프로그램 정보 등록 -->
+	<insert id="insertselectedpt" parameterType="selectedpt">
+		INSERT INTO
+		selectedpt (
+		selectedPT_title,
+		tf_id,
+		m_u_key,
+		tf_u_key
+
+
+		) VALUES (
+		#{selectedPT_title},
+		#{tf_id},
+		#{m_u_key},
+		#{tf_u_key}
+
+		)
+
+	</insert>
+
+	<!-- 트레이너 프로필 이름 수정 -->
+	<update id="modifytf_name" parameterType="trainerprofile">
+		UPDATE trainerprofile SET
+		tf_name = #{tf_name}
+
+		WHERE tf_id = #{tf_id}
+	</update>
+	
+	
+	<!-- 트레이너 주소 수정 -->
+	<update id="trainerprofileaddressupdate" parameterType="trainerprofile">
+		UPDATE trainerprofile SET
+		tf_loadaddress = #{tf_loadaddress}
+
+		WHERE u_key = #{u_key}
+	</update>
+
+	<!-- 트레이너 한줄소개 수정 -->
+	<update id="modifytf_hanjulintro" parameterType="trainerprofile">
+		UPDATE trainerprofile SET
+		tf_hanjulintro = #{tf_hanjulintro}
+
+		WHERE tf_id = #{tf_id}
+	</update>
+
+	<!-- 트레이너 소개 수정 -->
+	<update id="modifytf_intro" parameterType="trainerprofile">
+		UPDATE trainerprofile SET
+		tf_intro = #{tf_intro}
+
+		WHERE tf_id = #{tf_id}
+	</update>
+
+	<!-- 트레이너 스케쥴 수정 -->
+	<update id="modifytf_schedule" parameterType="trainerprofile">
+		UPDATE trainerprofile SET
+		tf_daymorning = #{tf_daymorning},
+		tf_dayafter = #{tf_dayafter},
+		tf_saterdaymorning = #{tf_saterdaymorning},
+		tf_saterafter = #{tf_saterafter},
+		tf_sundaymorning = #{tf_sundaymorning},
+		tf_sundayafter = #{tf_sundayafter},
+		tf_dayoff = #{tf_dayoff},
+		tf_lessonintro = #{tf_lessonintro}
+
+		WHERE tf_id = #{tf_id}
+	</update>
+
+
+	<!-- pt 삭제 -->
+	<delete id="deletePt" parameterType="pt">
+		DELETE FROM pt
+		WHERE pt_id = #{pt_id}
+
+	</delete>
+	<!-- 멤버 프로필 삭제 -->
+	<delete id="memberProfiledelete" parameterType="memberProfile">
+		DELETE FROM memberprofile
+		WHERE m_id = #{m_id}
+
+	</delete>
+	
+	<!-- center 삭제 -->
+	<delete id="clickcenterprofileDelete" parameterType="pt">
+		DELETE FROM center
+		WHERE c_id = #{c_id}
+
+	</delete>
+
+	<!-- PT 소개 수정 -->
+	<update id="updatept_programintro"
+		parameterType="trainerprofile">
+		UPDATE pt SET
+		pt_programintro = #{pt_programintro}
+
+
+		WHERE pt_id = #{pt_id}
+	</update>
+	<!--트레이너프로필 레슨 가격수정 -->
+	<update id="updatetf_lessonprice" parameterType="trainerprofile">
+		UPDATE trainerprofile SET
+		tf_lessonoption = #{tf_lessonoption},
+		tf_lessontitle = #{tf_lessontitle},
+		tf_lessonnumber = #{tf_lessonnumber},
+		tf_lessonnumber2 = #{tf_lessonnumber2},
+		tf_lessonnumber3 = #{tf_lessonnumber3},
+		tf_lessonnumber4 = #{tf_lessonnumber4},
+		tf_lessonprice = #{tf_lessonprice},
+		tf_lessonprice2 = #{tf_lessonprice2},
+		tf_lessonprice3 = #{tf_lessonprice3},
+		tf_lessonprice4 = #{tf_lessonprice4},
+		tf_lessontime = #{tf_lessontime},
+		tf_lessonintro = #{tf_lessonintro}
+
+		WHERE tf_id = #{tf_id}
+	</update>
+	<!--트레이너 파일1 삭제 -->
+	<delete id="tfFile1Delete" parameterType="pt">
+		DELETE FROM tf_file
+
+		WHERE FILE_PATH = #{file_path}
+
+	</delete>
+
+	<!--트레이너 프로그램파일 삭제 -->
+	<delete id="tfProgramFileDelete" parameterType="pt">
+		DELETE FROM pt_file
+
+		WHERE FILE_PATH = #{file_path}
+
+	</delete>
+	<!-- PT 제목 수정 -->
+	<update id="updatept_title" parameterType="trainerprofile">
+		UPDATE pt SET
+		pt_title = #{pt_title}
+
+
+		WHERE pt_id = #{pt_id}
+	</update>
+
+
+	<!-- 초기 빈 트레이너 프로필 생성 -->
+	<insert id="createTrainerProfile" parameterType="selectedpt">
+		INSERT INTO
+		trainerprofile (
+		tf_lessonoption,
+		tf_schedureintro,
+		tf_certificate,
+		tf_sunday,
+		tf_saterday,
+		tf_intro,
+		tf_day,
+		tf_daymorning,
+		tf_dayafter,
+		tf_saterdaymorning,
+		tf_saterafter,
+		tf_sundaymorning,
+		tf_sundayafter,
+		tf_certificatetitle,
+		tf_programtitle,
+		tf_programsub,
+		tf_programintro,
+		tf_lessontitle,
+		tf_lessonnumber,
+		tf_lessonnumber2,
+		tf_lessonnumber3,
+		tf_lessonnumber4,
+		tf_lessonprice,
+		tf_lessonunit,
+		tf_lessontime,
+		tf_lessonintro,
+		tf_hanjulintro,
+		tf_dayoff,
+		u_key,
+		tf_loadaddress,
+		tf_lessonprice2,
+		tf_lessonprice3,
+		tf_lessonprice4,
+		tf_name,
+		tf_postcode,
+		tf_gender,
+		tf_option
+
+
+
+		) VALUES (
+		0,
+		"참고사항을 입력해주세요",
+		0,
+		0,
+		0,
+		"트레이너 소개글을 입력해주세요",
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
+		"회",
+		0,
+		"참고사항을 입력해주세요",
+		"한줄 소개글을 입력해주세요",
+		"휴무일을 입력해주세요",
+		#{u_key},
+		"샘플 주소입니다",
+		0,
+		0,
+		0,
+		"홍길동",
+		0,
+		0,
+		0
+
+
+		)
+
+	</insert>
+	<!-- 수장페이지 프로그램 파일업로드 -->
+	<insert id="fileprogrammodifyUpload" parameterType="HashMap">
+		INSERT INTO
+		pt_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		pt_id,
+		u_key
+
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{pt_id},
+		#{u_key}
+
+		)
+	</insert>
+	<!-- 파일업로드 테스트 -->
+	<insert id="fileUploadtest" parameterType="HashMap">
+		INSERT INTO pt_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH
+
+
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath}
+
+
+		)
+	</insert>
+
+	<!-- 리뷰 파일 등록 -->
+	<insert id="ReviewfileUpload" parameterType="HashMap">
+		INSERT INTO
+		review_file (
+		O_NAME,
+		FILE_NAME,
+		FILE_SIZE,
+		FILE_PATH,
+		trainerprofile_u_key,
+		memberprofile_u_key,
+		r_opencheck,
+		r_content,
+		r_starR,
+		memberprofile_name,
+		review_r_id
+
+		) VALUES (
+		#{originalfileName},
+		#{saveFileName},
+		#{fileSize},
+		#{savePath},
+		#{trainerprofile_u_key},
+		#{memberprofile_u_key},
+		#{r_opencheck},
+		#{r_content},
+		#{r_starR},
+		#{memberprofile_name},
+		#{review_r_id}
+
+		)
+	</insert>
+	<!-- 리뷰 등록 -->
+	<insert id="ReviewInsert" parameterType="HashMap">
+		INSERT INTO review (
+		trainerprofile_u_key,
+		memberprofile_u_key,
+		r_opencheck,
+		r_content,
+		r_starR,
+		memberprofile_name,
+		r_check
+		) VALUES (
+		#{trainerprofile_u_key},
+		#{memberprofile_u_key},
+		#{r_opencheck},
+		#{r_content},
+		#{r_starR},
+		#{memberprofile_name},
+		0
+		)
+	</insert>
+	
+	<!-- 멤버 u_key -->
+	<select id="getmemberprofileU_key" resultType="memberprofile">
+		SELECT
+		u_key as u_key
+		FROM memberprofile
+		Where m_id = #{m_id}
+	</select>
+	
+	
+	<!-- 리뷰 리스트 -->
+	<select id="gettf_reviewlist" resultType="Review">
+		SELECT
+		r_id as r_id,
+		trainerprofile_u_key as trainerprofile_u_key,
+		memberprofile_u_key as memberprofile_u_key,
+		r_opencheck as r_opencheck,
+		r_content as r_content,
+		r_starR as r_starR,
+		memberprofile_name as memberprofile_name,
+		r_date as r_date
+		FROM review
+		Where trainerprofile_u_key = #{trainerprofile_u_key} AND (r_check = 0 OR r_check = 1) 
+		ORDER BY r_id DESC
+	</select>
+	<!-- 리뷰 파일 리스트 -->
+	<select id="gettf_reviewfilelist" resultType="Review">
+		SELECT
+
+		r_id as r_id,
+		O_NAME as O_NAME,
+		FILE_NAME as FILE_NAME,
+		FILE_SIZE as FILE_SIZE,
+		FILE_PATH as FILE_PATH,
+		r_opencheck as r_opencheck,
+		memberprofile_name as memberprofile_name,
+		memberprofile_u_key as memberprofile_u_key,
+		r_date as r_date ,
+		review_r_id as review_r_id
+		FROM review_file
+		Where trainerprofile_u_key = #{trainerprofile_u_key} AND r_opencheck=1
+		ORDER BY r_id DESC
+	</select>
+
+	<!-- 리뷰 별점 높은순 리스트 -->
+	<select id="gettf_reviewstarhighlist" resultType="Review">
+		SELECT
+		r_id as r_id,
+		trainerprofile_u_key as trainerprofile_u_key,
+		memberprofile_u_key as memberprofile_u_key,
+		r_opencheck as r_opencheck,
+		r_content as r_content,
+		r_starR as r_starR,
+		memberprofile_name as memberprofile_name,
+		r_date as r_date
+		FROM review
+		Where trainerprofile_u_key = #{trainerprofile_u_key}
+		ORDER BY r_starR DESC
+
+	</select>
+
+	<!-- 리뷰 별점 높은순 파일 리스트 -->
+	<select id="gettf_reviewstarhighfilelist" resultType="Review">
+		SELECT
+
+
+		O_NAME as O_NAME,
+		FILE_NAME as FILE_NAME,
+		FILE_SIZE as FILE_SIZE,
+		FILE_PATH as FILE_PATH,
+		r_opencheck as r_opencheck,
+		memberprofile_name as memberprofile_name,
+		memberprofile_u_key as memberprofile_u_key,
+		r_date as r_date
+		FROM review_file
+		Where trainerprofile_u_key = #{trainerprofile_u_key} AND r_opencheck=1
+		ORDER BY r_starR DESC
+
+	</select>
+	<!-- 리뷰 별점 낮은순 리스트 -->
+	<select id="gettf_reviewstarlowlist" resultType="Review">
+		SELECT
+		r_id as r_id,
+		trainerprofile_u_key as trainerprofile_u_key,
+		memberprofile_u_key as memberprofile_u_key,
+		r_opencheck as r_opencheck,
+		r_content as r_content,
+		r_starR as r_starR,
+		memberprofile_name as memberprofile_name,
+		r_date as r_date
+		FROM review
+		Where trainerprofile_u_key = #{trainerprofile_u_key}
+		ORDER BY r_starR ASC
+	</select>
+	<!-- 리뷰 별점 낮은순 파일 리스트 -->
+	<select id="gettf_reviewstarlowfilelist" resultType="Review">
+		SELECT
+
+
+		O_NAME as O_NAME,
+		FILE_NAME as FILE_NAME,
+		FILE_SIZE as FILE_SIZE,
+		FILE_PATH as FILE_PATH,
+		r_opencheck as r_opencheck,
+		memberprofile_name as memberprofile_name,
+		memberprofile_u_key as memberprofile_u_key,
+		r_date as r_date
+		FROM review_file
+		Where trainerprofile_u_key = #{trainerprofile_u_key} AND r_opencheck=1
+		ORDER BY r_starR ASC
+	</select>
+
+	<!-- 최근에 등록한 리뷰 id -->
+	<select id="getReviewrid" resultType="int">
+		select MAX(r_id ) as r_id
+		from review
+	</select>
+
+	<!-- 리뷰 삭제 -->
+	<delete id="reviewDelete" parameterType="pt">
+		DELETE FROM review
+		WHERE r_id = #{r_id}
+	</delete>
+	<!-- 리뷰 파일 삭제 -->
+	<delete id="reviewfiledelete" parameterType="pt">
+		DELETE FROM review_file
+		WHERE review_r_id = #{r_id}
+	</delete>
+
+	<!-- 리뷰 파일모달에서 수정 삭제 -->
+	<delete id="reviewfiledeletemodify" parameterType="pt">
+		DELETE FROM review_file
+		WHERE r_id = #{r_id}
+	</delete>
+
+
+	<!--리뷰수정 -->
+	<update id="ReviewmodifyInsert" parameterType="center">
+		UPDATE review SET
+		r_opencheck = #{r_opencheck},
+		r_content = #{r_content},
+		r_starR = #{r_starR},
+		r_date = #{r_date},
+		r_check = 0
+		WHERE r_id = #{r_id}
+	</update>
+	<!--PT 프로그램 수정 -->
+	<update id="updatept_programsub" parameterType="center">
+		UPDATE pt SET
+		pt_programsub1 = #{pt_programsub1},
+		pt_programsub2 = #{pt_programsub2},
+		pt_programsub3 = #{pt_programsub3}
+		WHERE pt_id = #{pt_id}
+	</update>
+	
+	<!-- 리뷰 작성 여부 체크 -->
+	<select id="getreviewinsetcheck" resultType="int">
+		select r_date as r_date,
+				memberprofile_u_key as memberprofile_u_key
+		from review
+		WHERE r_date =#{formattedDate}
+	</select>
+	
+	<!-- 리뷰 리스트 -->
+	<select id="gettreviewListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+		from review	
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 리뷰 완료 리스트 -->
+	<select id="gettreviewcompleteListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+		from review	
+		WHERE r_check = '1'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 리뷰 대기 리스트 -->
+	<select id="gettreviewwaiteListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+		from review	
+		WHERE r_check = '0'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 리뷰 반려 리스트 -->
+	<select id="gettreviewrejectListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+		from review	
+		WHERE r_check = '2'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	
+	<!--트레이너 리스트(검토완료) -->
+	<select id="gettrainerprofilecompleteList"
+		resultType="trainerprofile">
+		SELECT
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
+
+		FROM trainerprofile
+		WHERE tf_check = '완료'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!--트레이너 리스트(검토대기) -->
+	<select id="gettrainerprofileListwaite"
+		resultType="trainerprofile">
+		SELECT
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
+
+		FROM trainerprofile
+		WHERE tf_check = '대기'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+			<!--트레이너 리스트(반려) -->
+	<select id="gettrainerprofileListreject"
+		resultType="trainerprofile">
+		SELECT
+		tf_name as tf_name,
+		tf_check as tf_check,
+		tf_id as tf_id,
+		tf_loadaddress as tf_loadaddress,
+		tf_postcode as tf_postcode,
+		tf_gender as tf_gender,
+		u_key as u_key
+
+		FROM trainerprofile
+		WHERE tf_check = '반려'
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	
+	
+  <!-- 트레이너 프로필 갯수 카운트 -->
+	<select id="gettrainerprofileCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+	</select>
+	<!-- 상담신청한 회원프로필 갯수 카운트 -->
+	<select id="gettrainerconsultinglistCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				 WHERE m_consulting like concat('%',#{tf_id},'%')
+	</select>
+		<!-- 상담신청한 회원프로필검색 갯수 카운트 -->
+	<select id="gettrainerconsultingsearchlistCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				 WHERE m_consulting like concat('%',#{tf_id},'%') AND m_name like concat('%',#{keyword},'%')
+	</select>
+	<!-- 상담신청한 회원프로필검색 갯수(완료) 카운트 -->
+	<select id="gettrainerconsultingcompletesearchlistCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				 WHERE m_consulting like concat('%',#{tf_id},'%') AND m_name like concat('%',#{keyword},'%') AND m_consultingconfirm NOT like concat('%',#{tf_id},'%')
+	</select>
+	<!-- 상담신청한 회원프로필검색 갯수(대기) 카운트 -->
+	<select id="gettrainerconsultingwaitesearchlistCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				 WHERE m_consulting like concat('%',#{tf_id},'%') AND m_name like concat('%',#{keyword},'%') AND m_consultingconfirm  like concat('%',#{tf_id},'%')
+	</select>
+	
+	<!-- 상담신청한 회원프로필 (완료) 갯수 카운트 -->
+	<select id="gettrainerconsultingcompletelistCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				 WHERE m_consulting like concat('%',#{tf_id},'%') AND m_consultingconfirm NOT like concat('%',#{tf_id},'%')
+	</select>
+	<!-- 상담신청한 회원프로필 (대기) 갯수 카운트 -->
+	<select id="gettrainerconsultingwaitelistCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				 WHERE m_consulting like concat('%',#{tf_id},'%') AND m_consultingconfirm like concat('%',#{tf_id},'%')
+	</select>
+	
+	 <!-- 리뷰 갯수 카운트 -->
+	<select id="getreviewCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+	</select>
+	<!-- 트레이너한테 작성된 리뷰 갯수 카운트 -->
+	<select id="gettrainer_reviewCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE trainerprofile_u_key = ${u_key}
+	</select>
+	
+	 <!-- 리뷰 (완료)갯수 카운트 -->
+	<select id="getreviewcompleteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE r_check = '1'
+	</select>
+	 <!-- 트레이너상담(완료)갯수 카운트 -->
+	<select id="gettrainerprofileconsultingcompleteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				WHERE tf_consulting like concat('%',#{u_key},'%') AND tf_consultingconfirm NOT like concat('%',#{u_key},'%')
+	</select>
+	 <!-- 트레이너상담(전체)갯수 카운트 -->
+	<select id="gettrainerprofileconsultingCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				WHERE tf_consulting like concat('%',#{u_key},'%') 
+	</select>
+	 <!-- 트레이너상담(대기)갯수 카운트 -->
+	<select id="gettrainerprofileconsultingwaiteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				WHERE tf_consulting like concat('%',#{u_key},'%') AND tf_consultingconfirm like concat('%',#{u_key},'%')
+	</select>
+	
+	 <!-- 리뷰 (대기)갯수 카운트 -->
+	<select id="getreviewwaiteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE r_check = '0'
+	</select>
+	 <!-- 리뷰 (반려)갯수 카운트 -->
+	<select id="getreviewrejectCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE r_check = '2'
+	</select>
+	
+	
+	 <!-- 트레이너 프로필 갯수(검토완료) 카운트 -->
+	<select id="gettrainerprofileCountcomplete" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				 WHERE tf_check = '완료'
+	</select>
+	
+	 <!-- 일반회원 프로필 갯수 카운트 -->
+	<select id="getmemberprofilelistCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				 
+	</select>
+		 <!-- 트레이너 프로필 갯수(검토대기) 카운트 -->
+	<select id="gettrainerprofileCountwaite" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				 WHERE tf_check = '대기'
+	</select>
+		 <!-- 트레이너 프로필 갯수(반려) 카운트 -->
+	<select id="gettrainerprofileCountreject" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				 WHERE tf_check = '반려'
+	</select>
+	
+		 <!-- 트레이너 프로필 갯수(검색) 카운트 -->
+	<select id="gettrainerprofileSearchCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like
+		concat('%',#{keyword},'%') 
+	</select>
+		 <!-- 상담신청한 트레이너 프로필 갯수(검색+전체) 카운트 -->
+	<select id="getconsultingSearchCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				WHERE tf_consulting like concat('%',#{u_key},'%') AND tf_name like
+		concat('%',#{keyword},'%') 
+	</select>
+		 <!-- 상담신청한 트레이너 프로필 갯수(검색+완료) 카운트 -->
+	<select id="getconsultingSearchcompleteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				WHERE tf_consultingconfirm NOT like concat('%',#{u_key},'%') AND tf_consulting like concat('%',#{u_key},'%')  AND tf_name like concat('%',#{keyword},'%') 
+	</select>
+			 <!-- 상담신청한 트레이너 프로필 갯수(검색+대기) 카운트 -->
+	<select id="getconsultingSearchwaiteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				WHERE tf_consultingconfirm  like concat('%',#{u_key},'%') AND tf_consulting like concat('%',#{u_key},'%')  AND tf_name like concat('%',#{keyword},'%') 
+	</select>
+	
+	 <!-- 리뷰 갯수(검색) 카운트 -->
+	<select id="getreviewSearchCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like
+		concat('%',#{keyword},'%') 
+	</select>
+	 <!-- 리뷰 갯수(검색+완료) 카운트 -->
+	<select id="getreviewSearchcompleteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like concat('%',#{keyword},'%') 
+				AND r_check='1'
+	</select>
+	 <!-- 리뷰 갯수(검색+반려) 카운트 -->
+	<select id="getreviewSearchrejectCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				WHERE r_id like concat('%',#{keyword},'%') OR memberprofile_name like concat('%',#{keyword},'%') 
+				AND r_check='2'
+	</select>
+	
+	
+		 <!-- 트레이너 프로필 갯수(검색+완료) 카운트 -->
+	<select id="gettrainerprofileSearchcompelteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like concat('%',#{keyword},'%') 
+				AND tf_check='완료'
+	</select>
+		 <!-- 트레이너 프로필 갯수(검색+대기) 카운트 -->
+	<select id="gettrainerprofileSearchwaiteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like concat('%',#{keyword},'%') 
+				AND tf_check='대기'
+	</select>
+		 <!-- 트레이너 프로필 갯수(검색+반려) 카운트 -->
+	<select id="gettrainerprofileSearchrejectCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            trainerprofile
+				WHERE tf_id like concat('%',#{keyword},'%') OR tf_name like concat('%',#{keyword},'%') 
+				AND tf_check='반려'
+	</select>
+	
+	
+		 <!-- 일반회원 프로필 갯수(검색) 카운트 -->
+	<select id="getmemberprofileSearchCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            memberprofile
+				WHERE m_id like concat('%',#{keyword},'%') OR m_name like
+		concat('%',#{keyword},'%') 
+	</select>
+	 <!-- 센터 갯수(검색) 카운트 -->
+	<select id="getcenterSearchCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') 
+	</select>
+	 <!-- 등록한 센터 갯수(검색) 카운트 -->
+	<select id="getcenterinsertSearchCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				WHERE u_key = #{u_key} AND (c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%')) 
+	</select>
+	<!-- 등록한 센터 갯수(검색+완료) 카운트 -->
+	<select id="getcenterinsertSearchcompleteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				WHERE u_key = #{u_key} AND (c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%')) AND c_confirm = 1 
+	</select>
+	<!-- 등록한 센터 갯수(검색+대기) 카운트 -->
+	<select id="getcenterinsertSearchwaiteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				WHERE u_key = #{u_key} AND (c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%')) AND c_confirm = 0 
+	</select>
+	<!-- 등록한 센터 갯수(검색+반려) 카운트 -->
+	<select id="getcenterinsertSearchrejectCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				WHERE u_key = #{u_key} AND (c_name like concat('%',#{keyword},'%') OR c_loadaddress like concat('%',#{keyword},'%')) AND c_confirm = 2 
+	</select>
+	
+		 <!-- 센터 갯수(검색+완료) 카운트 -->
+	<select id="getcenterSearchcompleteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') AND c_confirm = '1'
+	</select>
+		 <!-- 센터 갯수(검색+대기) 카운트 -->
+	<select id="getcenterSearchwaiteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') AND c_confirm = '0'
+	</select>
+	 <!-- 센터 갯수(검색+반려) 카운트 -->
+	<select id="getcenterSearchrejectCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				WHERE c_name like concat('%',#{keyword},'%') OR c_loadaddress like
+		concat('%',#{keyword},'%') AND c_confirm = '2'
+	</select>
+	
+			 <!-- 센터  프로필 갯수() 카운트 -->
+	<select id="getcenterCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+	</select>
+			 <!-- 센터  프로필 갯수(완료) 카운트 -->
+	<select id="getcentercompelteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				 WHERE c_confirm = '1'
+	</select>
+			 <!-- 센터  프로필 갯수(대기) 카운트 -->
+	<select id="getcenterwaiteCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				 WHERE c_confirm = '0'
+	</select>
+			 <!-- 센터  프로필 갯수(반려) 카운트 -->
+	<select id="getcenterrejectCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            center
+				 WHERE c_confirm = '2'
+	</select>
+	
+			 <!-- 리뷰 파일 리스트 -->
+	<select id="getreviewFileList" resultType="Review">
+				SELECT
+
+		r_id as r_id,
+		O_NAME as O_NAME,
+		FILE_NAME as FILE_NAME,
+		FILE_SIZE as FILE_SIZE,
+		FILE_PATH as FILE_PATH,
+		r_opencheck as r_opencheck,
+		memberprofile_name as memberprofile_name,
+		memberprofile_u_key as memberprofile_u_key,
+		r_date as r_date ,
+		review_r_id as review_r_id
+		FROM review_file
+		Where review_r_id = #{r_id}
+	</select>
+	
+	
+	
+</mapper>

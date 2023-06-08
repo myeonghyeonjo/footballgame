@@ -11,3 +11,9 @@
 1686116891459	Encapsulate field 'tf_certificateoption'
 1686125771333	Copy file
 1686147622366	Encapsulate field 'tf_id'
+1686202185985	Copy file
+1686202245973	Rename resource 'centerinsertlist.jsp'
+1686208164599	Encapsulate field 'r_replycheck'
+1686208549036	Encapsulate field 'r_reply'
+1686208551794	Encapsulate field 'r_replydate'
+1686208932881	Copy file

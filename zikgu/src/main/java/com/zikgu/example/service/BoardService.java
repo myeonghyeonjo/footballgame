@@ -408,6 +408,22 @@ public interface BoardService {
 
 	public List<MemberProfile> memberprofileconsultingwaitesearchlist(Pagination pagination);
 
+	public int gettrainer_reviewCount(int u_key);
+
+	public List<Review> gettrainer_reviewListALL(Pagination pagination);
+
+	public int gettrainer_review_complete_Count(int u_key);
+
+	public List<Review> gettrainer_review_complete_ListALL(Pagination pagination);
+
+	public int gettrainer_review_waite_Count(int u_key);
+
+	public List<Review> gettrainer_review_waite_ListALL(Pagination pagination);
+
+	public void replyInsert(Review review);
+
+	public Review getreviewDetail2(int r_id);
+
 	
 
 	

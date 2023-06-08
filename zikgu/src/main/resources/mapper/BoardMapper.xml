@@ -209,6 +209,7 @@
 		1
 		)
 	</insert>
+	
 
 	<!--PT 파일업로드 -->
 	<insert id="PTfileUpload" parameterType="HashMap">
@@ -1216,6 +1217,14 @@
 		WHERE m_id = #{m_id}
 	</update>
 
+<!--리뷰 답글 등록 -->
+	<update id="replyInsert" parameterType="review">
+		UPDATE review SET
+		r_reply = #{r_reply},
+		r_replydate = #{r_replydate}
+
+		WHERE r_id  = #{r_id }
+	</update>
 	<!--트레이너 상담신청회원 상담완료or상담취소 (신청자 빼기or더하기) 업데이트 -->
 	<update id="updateTf_Consultingconfirm" parameterType="center">
 		UPDATE trainerprofile SET
@@ -1523,13 +1532,36 @@
 				r_content as r_content,
 				r_starR as r_starR,
 				memberprofile_name as memberprofile_name,
-				r_date as r_date
+				r_date as r_date,
+				r_reply as r_reply,
+				r_replydate as r_replydate
 
 		FROM review
 
 		WHERE r_id = #{r_id}
 	
 	</select>
+		<!-- 리뷰 디테일 -->
+	<select id="getreviewDetail2" resultType="Review">
+		SELECT 
+				r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date,
+				r_reply as r_reply,
+				r_replydate as r_replydate
+
+		FROM review
+
+		WHERE r_id = #{r_id}
+	
+	</select>
+	
 	
 	<!-- 리뷰  검색+대기 -->
 	<select id="getreviewSearchwaiteCount" resultType="int">
@@ -2418,6 +2450,58 @@
 		from review	
 		LIMIT 			#{pageNum}, 10 
 	</select>
+		<!-- 트레이너한테 작성된 리뷰 리스트 -->
+	<select id="gettrainer_reviewListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date,
+				r_reply as r_reply,
+				r_replydate as r_replydate
+		from review	
+		WHERE trainerprofile_u_key = #{u_key} AND (r_check = 0 or r_check = 1)
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 트레이너한테 작성된 리뷰(완료) 리스트 -->
+	<select id="gettrainer_review_complete_ListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date,
+				r_reply as r_reply,
+				r_replydate as r_replydate
+		from review	
+		WHERE trainerprofile_u_key = #{u_key} AND (r_check = 0 or r_check = 1) AND r_reply != ''
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 트레이너한테 작성된 리뷰(대기) 리스트 -->
+	<select id="gettrainer_review_waite_ListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date,
+				r_reply as r_reply,
+				r_replydate as r_replydate
+		from review	
+		WHERE trainerprofile_u_key = #{u_key} AND (r_check = 0 or r_check = 1) AND r_reply = ''
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	
 	<!-- 리뷰 완료 리스트 -->
 	<select id="gettreviewcompleteListALL" resultType="review">
 		select r_id as r_id,
@@ -2562,6 +2646,25 @@
 				 SELECT       count(*)                
 				 FROM            review
 	</select>
+	<!-- 트레이너한테 작성된 리뷰 갯수 카운트 -->
+	<select id="gettrainer_reviewCount" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE trainerprofile_u_key = ${u_key}
+	</select>
+	<!-- 트레이너한테 작성된 리뷰(완료)갯수 카운트 -->
+	<select id="gettrainer_review_complete_Count" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE trainerprofile_u_key = ${u_key} AND r_reply != ''  AND (r_check = 0 or r_check = 1)
+	</select>
+	<!-- 트레이너한테 작성된 리뷰(대기)갯수 카운트 -->
+	<select id="gettrainer_review_waite_Count" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE trainerprofile_u_key = ${u_key} AND r_reply = ''  AND (r_check = 0 or r_check = 1)
+	</select>
+	
 	 <!-- 리뷰 (완료)갯수 카운트 -->
 	<select id="getreviewcompleteCount" resultType="int">
 				 SELECT       count(*)                

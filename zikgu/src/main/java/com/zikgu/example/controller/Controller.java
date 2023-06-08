@@ -3,6 +3,8 @@ package com.zikgu.example.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -802,6 +804,19 @@ model.addAttribute("exception", exception);
 			model.addAttribute("reviewlist",list);
 			return "/review/reviewdetail";
 	    }
+		@RequestMapping("/reviewreply")
+	    public String reviewreply(TrainerProfile trainerprofile,Review review,Model model,@RequestParam("r_id") int r_id,@RequestParam("u_key") int u_key) {	
+			List<Review> list  = boardservice.getreviewDetail(r_id);
+			List<FileDto> filelist = boardservice.getreviewFileList(r_id);
+			review = boardservice.getreviewDetail2(r_id);
+			int trainerprofile_u_key = review.getTrainerprofile_u_key();
+			trainerprofile = boardservice.trainerprofileDetail(trainerprofile_u_key);	
+			model.addAttribute("trainerprofile",trainerprofile);
+			model.addAttribute("reviewfilelist",filelist);
+			model.addAttribute("r_id",r_id);	
+			model.addAttribute("reviewlist",list);
+			return "/review/reviewreply";
+	    }
 		
 		@RequestMapping("/centerlist")
 	    public String centerlist(Center center,Model model,Pagination pagination,HttpServletRequest request) {
@@ -895,6 +910,57 @@ model.addAttribute("exception", exception);
 			model.addAttribute("sort","전체");
 			
 			return "/center/centerinsertlist";
+	    }
+		@RequestMapping("/trainer_review_dashboard")
+	    public String trainer_review_dashboard(Center center,Model model,@RequestParam("u_key") int u_key,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.gettrainer_reviewCount(u_key);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+				pagination.setU_key(u_key);
+				List<Review> list = boardservice.gettrainer_reviewListALL(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("sort","전체");
+			model.addAttribute("list",list);
+			
+			return "/review/trainer_review_dashboard";
+	    }
+		@RequestMapping("/trainer_review_complete_dashboard")
+	    public String trainer_review_complete_dashboard(Center center,Model model,@RequestParam("u_key") int u_key,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.gettrainer_review_complete_Count(u_key);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+				pagination.setU_key(u_key);
+				List<Review> list = boardservice.gettrainer_review_complete_ListALL(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("sort","완료");
+			model.addAttribute("list",list);
+			
+			return "/review/trainer_review_dashboard";
+	    }
+		@RequestMapping("/trainer_review_waite_dashboard")
+	    public String trainer_review_waite_dashboard(Center center,Model model,@RequestParam("u_key") int u_key,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+				int listcount = boardservice.gettrainer_review_waite_Count(u_key);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+				pagination.setU_key(u_key);
+				List<Review> list = boardservice.gettrainer_review_waite_ListALL(pagination);
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("sort","대기");
+			model.addAttribute("list",list);
+			
+			return "/review/trainer_review_dashboard";
 	    }
 		
 		@RequestMapping("/centerconfirmcompletelist")
@@ -3570,7 +3636,25 @@ model.addAttribute("exception", exception);
 			   
 			 return "/member/aj-updatereview";
 	    }
-		
+		@RequestMapping("/replyinsert")
+		public String replyInsert( Center center,Model model,Review review, TrainerProfile trainerprofile) {
+			System.out.println(review.getR_reply());
+			 // 현재 시각 가져오기
+	        LocalDateTime now = LocalDateTime.now();
+	        // 형식 지정
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	        // 형식에 맞게 포맷팅
+	        String formattedDateTime = now.format(formatter);
+	        review.setR_replydate(formattedDateTime);
+			boardservice.replyInsert(review);  
+			
+			List<Review> list  = boardservice.getreviewDetail(review.getR_id());
+			List<FileDto> filelist = boardservice.getreviewFileList(review.getR_id());
+			model.addAttribute("reviewfilelist",filelist);
+			model.addAttribute("r_id",review.getR_id());	
+			model.addAttribute("reviewlist",list);
+			return "/review/reviewreply";
+    }
 		@RequestMapping("/sidebar")
 	    public String sidebar( ) {
 			

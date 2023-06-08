@@ -178,7 +178,7 @@
 		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  col-lg-3 " href="/trainerconsultinglist?u_key=${principal.u_key }">상담신청목록	 
 		</a>
 	
-		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " href="/reviewlist">리뷰 관리
+		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " id="nav_link_memberprofile2" href="/trainer_review_dashboard?u_key=${principal.u_key }"> 리뷰 관리
 		</a>
        	<form action="center_insert_search_All" method="post" style="width:1200px;" >
 		          <input class="form-control form-control-dark  rounded-0 border-0"  aria-label="Search" type="text" name="keyword" id="keyword" placeholder="센터명,센터주소 검색" value="${keyword }">
@@ -209,7 +209,7 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link sidemenu" href="/reviewlist">
+            <a class="nav-link sidemenu" href="/trainer_review_dashboard?u_key=${principal.u_key }">
               <span data-feather="users" class="align-text-bottom"></span>
               리뷰관리
             </a>

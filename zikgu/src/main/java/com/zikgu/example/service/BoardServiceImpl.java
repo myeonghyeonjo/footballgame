@@ -1094,6 +1094,46 @@ public class BoardServiceImpl implements BoardService {
 	public List<MemberProfile> memberprofileconsultingwaitesearchlist(Pagination pagination){
 		return boardmapper.memberprofileconsultingwaitesearchlist(pagination);
 	}
+	
+	@Override
+	public int gettrainer_reviewCount(int u_key) {
+		return boardmapper.gettrainer_reviewCount(u_key);
+	}
+	
+	@Override
+	public List<Review> gettrainer_reviewListALL(Pagination pagination){
+		return boardmapper.gettrainer_reviewListALL(pagination);
+	}
+	
+	@Override
+	public int gettrainer_review_complete_Count(int u_key) {
+		return boardmapper.gettrainer_review_complete_Count(u_key);
+	}
+	
+	@Override
+	public List<Review> gettrainer_review_complete_ListALL(Pagination pagination){
+		return boardmapper.gettrainer_review_complete_ListALL(pagination);
+	}
+	
+	@Override
+	public int gettrainer_review_waite_Count(int u_key) {
+		return boardmapper.gettrainer_review_waite_Count(u_key);
+	}
+	
+	@Override
+	public List<Review> gettrainer_review_waite_ListALL(Pagination pagination){
+		return boardmapper.gettrainer_review_waite_ListALL(pagination);
+	}
+	
+	@Override
+	public void replyInsert(Review review) {
+		 boardmapper.replyInsert(review);
+	}
+	
+	@Override
+	public Review getreviewDetail2(int r_id) {
+		return boardmapper.getreviewDetail2(r_id);
+	}
 }
 
 

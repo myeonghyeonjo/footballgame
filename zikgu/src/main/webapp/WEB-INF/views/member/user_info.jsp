@@ -257,6 +257,20 @@ button:hover {
 								style="color: #4169e1; margin-left: 20px; margin-top: -10px; ">PT 요청
 								조회 ></a>
 						</div>
+						
+						<div id="rounded-rectangle2" class="bg-light"
+							style="margin-top: 30px;">
+							<h3 style="color: black; padding: 30px;">
+								<Strong>리뷰 관리</Strong>
+							</h3>
+							<p id="trainer_p3"
+								style="margin-left: 30px; ">나의 리뷰를 확인하고 답글을 달아보세요.</p>
+							<a href="/trainer_review_dashboard?u_key=${u_key}" class="aa" id="trainer_a3"
+								style="color: #4169e1; margin-left: 30px; margin-top: -20px; ">리뷰 목록 ></a> 
+							<!-- <a href="/trainerconsultinglist?u_key=${u_key}" class="aa"
+								style="color: #4169e1; margin-left: 20px; margin-top: -10px; ">PT 요청
+								조회 ></a> -->
+						</div>
 					</div>
 
 
