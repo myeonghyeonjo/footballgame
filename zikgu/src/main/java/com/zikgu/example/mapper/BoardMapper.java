@@ -433,6 +433,8 @@ public interface BoardMapper {
 
 	public List<Review> getmember_reviewListALL(Pagination pagination);
 
+	public List<TrainerProfile> trainerListAll();
+
 	
 
 

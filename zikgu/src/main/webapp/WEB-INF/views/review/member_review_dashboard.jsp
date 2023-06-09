@@ -303,8 +303,9 @@
           <thead>
             <tr>
               <th scope="col">번호</th>
-              <th scope="col">작성자</th>
-              <th scope="col">작성일시</th>
+              <th scope="col">트레이너명</th>
+                 <th scope="col">내용</th>
+              <th scope="col">작성일자</th>
               <th scope="col">답글여부</th>  
             </tr>
           </thead>
@@ -313,7 +314,13 @@
 		        <c:forEach var="list" items="${list }">
 		           		<tr onclick="location.href='reviewreply?r_id=${list.r_id }&u_key=${principal.u_key }'" style="cursor:pointer">
 				              <td>${list.r_id }</td>
-				              <td>${list.memberprofile_name }</td>
+				             
+				              <c:forEach var="trainerlist" items="${trainerlist }">
+				              <c:if test="${list.trainerprofile_u_key ==trainerlist.u_key }">
+				              <td>${trainerlist.tf_name }</td>
+				              </c:if>
+				              </c:forEach>
+				              <td>${list.r_content.length() > 30 ? list.r_content.substring(0, 30) : list.r_content}</td>
 				              <td>${list.r_date }</td>
 				              <c:if test="${(list.r_reply!='')}">
 						 			  <td style="color:green;">작성완료</td>

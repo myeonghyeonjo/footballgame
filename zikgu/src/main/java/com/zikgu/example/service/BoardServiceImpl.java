@@ -1174,6 +1174,11 @@ public class BoardServiceImpl implements BoardService {
 	public List<Review> getmember_reviewListALL(Pagination pagination){
 		return boardmapper.getmember_reviewListALL(pagination);
 	}
+	
+	@Override
+	public List<TrainerProfile> trainerListAll(){
+		return boardmapper.trainerListAll();
+	}
 }
 
 

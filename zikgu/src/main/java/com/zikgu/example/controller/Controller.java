@@ -18,6 +18,7 @@ import java.util.UUID;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.maven.shared.invoker.SystemOutHandler;
 import org.openqa.selenium.devtools.v95.page.model.OriginTrial;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -929,7 +930,7 @@ model.addAttribute("exception", exception);
 			return "/review/trainer_review_dashboard";
 	    }
 		@RequestMapping("/member_review_dashboard")
-	    public String member_review_dashboard(Center center,Model model,@RequestParam("u_key") int u_key,Pagination pagination,HttpServletRequest request) {
+	    public String member_review_dashboard(Center center,Model model,@RequestParam("u_key") int u_key,Pagination pagination,TrainerProfile trainerprofile,HttpServletRequest request) {
 			String reqPage1 = request.getParameter("page");	  
 			   if(reqPage1 != null)
 					page = Integer.parseInt(reqPage1);
@@ -939,9 +940,11 @@ model.addAttribute("exception", exception);
 				pagination.init();			
 				pagination.setU_key(u_key);
 				List<Review> list = boardservice.getmember_reviewListALL(pagination);
+				List<TrainerProfile> trainerlist = boardservice.trainerListAll();
 			model.addAttribute("pagination",pagination);
 			model.addAttribute("sort","전체");
 			model.addAttribute("list",list);
+			model.addAttribute("trainerlist",trainerlist);
 			
 			return "/review/member_review_dashboard";
 	    }
@@ -3257,11 +3260,39 @@ model.addAttribute("exception", exception);
 	    }
 	
 		@RequestMapping("/aj-review")
-	    public String review( Model model, Center center,PT pt,@RequestParam("trainer_u_key") int trainer_u_key,TrainerProfile trainerprofile) {
+	    public String review( Model model,  Center center,PT pt,@RequestParam("trainer_u_key") int trainer_u_key,@RequestParam("memberprofile_u_key") int memberprofile_u_key,TrainerProfile trainerprofile) {
 			 trainerprofile = boardservice.trainerprofileDetail(trainer_u_key);
 			 String tf_loadaddress = trainerprofile.getTf_loadaddress();
 			 String trainerprofile_u_key = String.valueOf(trainer_u_key);
 			 List<Review> reviewlist = boardservice.gettf_reviewlist(trainerprofile_u_key);
+			 //자신이 작성한 리뷰를 젤 최상단으로 - 시작
+			 List<Review> targetReviews = new ArrayList<>();
+
+			// 'u_key'가 10인 요소를 찾아서 targetReviews에 추가
+			for (Review review : reviewlist) {
+			    if (review.getMemberprofile_u_key() == memberprofile_u_key) {
+			        targetReviews.add(review);
+			    }
+			}
+			// targetReviews 요소들을 뒤집기 
+			int start = 0;
+			int end = targetReviews.size() - 1;
+
+			while (start < end) {
+			    Review temp = targetReviews.get(start);
+			    targetReviews.set(start, targetReviews.get(end));
+			    targetReviews.set(end, temp);
+			    
+			    start++;
+			    end--;
+			}
+
+			// targetReviews의 요소들을 reviewlist에서 제거하고, 각 요소를 최상단으로 추가
+			for (Review targetReview : targetReviews) {
+			    reviewlist.remove(targetReview);
+			    reviewlist.add(0, targetReview);
+			}
+				 //자신이 작성한 리뷰를 젤 최상단으로 - 끝
 			 List<Review> reviewfilelist = boardservice.gettf_reviewfilelist(trainerprofile_u_key);
 			 int sumstar=0;
 			 int staraverage=0;
@@ -3602,6 +3633,7 @@ model.addAttribute("exception", exception);
 			   String r_content = (String) test.get("content");
 			   int r_starR =  (int) test.get("starR");
 			   int r_opencheck =  (int) test.get("opencheck");
+			   System.out.println("r_opencheck:"+r_opencheck);
 			   String memberprofile_u_key =   (String) test.get("memberprofile_u_key");
 			   String trainerprofile_u_key =   (String) test.get("trainerprofile_u_key");
 			   String memberprofile_name = (String) test.get("memberprofile_name");

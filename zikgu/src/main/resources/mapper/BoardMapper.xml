@@ -492,6 +492,46 @@
 
 		LIMIT 3
 	</select>
+	<select id="trainerListAll" resultType="trainerprofile">
+		select tf_lessonoption as tf_lessonoption,
+		tf_schedureintro as tf_schedureintro,
+		tf_certificate as tf_certificate,
+		tf_sunday as tf_sunday,
+		tf_saterday as tf_saterday,
+		tf_intro as tf_intro,
+		tf_day as tf_day,
+		tf_daymorning as tf_daymorning,
+		tf_dayafter as tf_dayafter,
+		tf_saterdaymorning as tf_saterdaymorning,
+		tf_saterafter as tf_saterafter,
+		tf_sundaymorning as tf_sundaymorning,
+		tf_sundayafter as tf_sundayafter,
+		tf_dayoff as tf_dayoff,
+		tf_certificatetitle as tf_certificatetitle,
+		tf_programtitle as tf_programtitle,
+		u_key as u_key,
+		tf_programsub as tf_programsub,
+		tf_programintro as tf_programintro,
+		tf_lessontitle as tf_lessontitle,
+		tf_lessonnumber as tf_lessonnumber,
+		tf_lessonnumber2 as tf_lessonnumber2,
+		tf_lessonnumber3 as tf_lessonnumber3,
+		tf_lessonnumber4 as tf_lessonnumber4,
+		tf_lessonprice as tf_lessonprice,
+		tf_lessonunit as tf_lessonunit,
+		tf_lessontime as tf_lessontime,
+		tf_lessonintro as tf_lessonintro,
+		tf_hanjulintro as tf_hanjulintro,
+		tf_id as tf_id,
+		tf_lessonprice2 as tf_lessonprice2,
+		tf_lessonprice3 as tf_lessonprice3,
+		tf_lessonprice4 as tf_lessonprice4,
+		tf_loadaddress as tf_loadaddress,
+		tf_name as tf_name
+
+
+		from trainerprofile 
+	</select>
 
 	<!-- 회원이 상담신청한 트레이너목록들 -->
 	<select id="trainerprofileconsulting"
@@ -2245,7 +2285,7 @@
 		#{savePath},
 		#{trainerprofile_u_key},
 		#{memberprofile_u_key},
-		#{r_opencheck},
+		1,
 		#{r_content},
 		#{r_starR},
 		#{memberprofile_name},

@@ -440,6 +440,8 @@ public interface BoardService {
 
 	public List<Review> getmember_reviewListALL(Pagination pagination);
 
+	public List<TrainerProfile> trainerListAll();
+
 	
 
 	

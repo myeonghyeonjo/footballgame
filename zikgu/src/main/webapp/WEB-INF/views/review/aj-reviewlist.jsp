@@ -4312,10 +4312,17 @@ input, select, textarea {
 										   				<c:if test="${reviewfilelist.memberprofile_u_key == reviewlist.memberprofile_u_key}">
 										   				<c:if test="${reviewfilelist.review_r_id == reviewlist.r_id}">
 										   				<c:if test="${reviewlist.r_opencheck==1}">
-											<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
-											<input type="hidden" value="${reviewfilelist.file_name }" class="filename${reviewlist.r_id}">
-											<input type="hidden" value="${reviewfilelist.r_id }" class="file_r_id${reviewlist.r_id}">
-											</c:if>
+															<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
+															<input type="hidden" value="${reviewfilelist.file_name }" class="filename${reviewlist.r_id}">
+															<input type="hidden" value="${reviewfilelist.r_id }" class="file_r_id${reviewlist.r_id}">
+												     	</c:if>
+												     	<c:if test="${reviewlist.r_opencheck==0}">
+												     		<div style="display:none;">															
+												     		<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
+															<input type="hidden" value="${reviewfilelist.file_name }" class="filename${reviewlist.r_id}">
+															<input type="hidden" value="${reviewfilelist.r_id }" class="file_r_id${reviewlist.r_id}">
+												   		  	</div>
+												     	</c:if>
 											</c:if>
 											</c:if>
 											</c:forEach>
@@ -4326,7 +4333,7 @@ input, select, textarea {
 										    <div id="r_content${reviewlist.r_id}"style="text-align:left;">
 										   		${reviewlist.r_content}
 										   	</div>
-										  	  <c:if test="${reviewlist.r_reply != '' }">
+										  	  <c:if test="${reviewlist.r_reply != null }">
 												 <div style="background-color:grey; text-align:left; padding:10px;">
 												 <Strong style="font-size:17px; font-weight:bold;margin-bottom:10px;">${trainerprofile.tf_name} 선생님</Strong>
 												 ${reviewlist.r_reply}
@@ -4971,7 +4978,7 @@ function submitForm2(r_id) {
 	let content = $('#reviewmodifycontent').val();
 	let starR =$(".starR3." + r_id + ".on").length;
 	let opencheck = $(".open3." + r_id + ".on").length;
-	
+	console.log("opencheck:"+opencheck);
 	var data = {   
 		  "memberprofile_name":memberprofile_name,  "content":content,"starR":starR,"opencheck":opencheck, "test" : test ,"r_id":r_id, "trainerprofile_u_key":trainerprofile_u_key, "memberprofile_u_key":memberprofile_u_key
 		

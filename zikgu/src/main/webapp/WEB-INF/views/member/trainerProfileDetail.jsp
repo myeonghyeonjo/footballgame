@@ -3994,7 +3994,8 @@ input, select, textarea {
 					<nav id="nav">
 					<ul>
 							<sec:authorize access="hasRole('ROLE_USER')">
-							<sec:authentication property="principal" var="principal"/>  			
+							<sec:authentication property="principal" var="principal"/>  		
+								
 							<li ><a class="aa" href="/trainerProfileDetail?u_key=${trainerprofile.u_key}&memberprofile_u_key=${principal.u_key}"  style="color:white; background-color:black;" >Profile</a></li>      
 							</sec:authorize>	
 							<sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -4004,8 +4005,18 @@ input, select, textarea {
 							<sec:authorize access="isAnonymous()">
 							<li ><a class="aa" href="/trainerProfileDetail?u_key=${trainerprofile.u_key}&memberprofile_u_key=0"  style="color:white; background-color:black;" >Profile</a></li>      				
       						</sec:authorize>
+      						
       						<li  onclick="Centerview(1);"><a href="#" class="aa" style="color:black">Center</a></li>	
-      						 <li   onclick="review(1);"><a  href="#"class="aa" style="color:black">review</a></li>						
+      						<sec:authorize access="isAuthenticated()">
+							<sec:authentication property="principal" var="principal"/>  
+							<input type="hidden" id="memberprofile_u_key" value="${principal.u_key}">
+      						 <li   onclick="review(1);"><a  href="#"class="aa" style="color:black">review</a></li>		
+      						 </sec:authorize>
+      						<sec:authorize access="isAnonymous()">
+      						<input type="hidden" id="memberprofile_u_key" value="99999">
+							 <li   onclick="review(1);"><a  href="#"class="aa" style="color:black">review</a></li>		
+      						 </sec:authorize>
+      						 				
       						<p><input type="hidden" name="tf_loadaddress" class="sticky_btn"  value="${trainerprofile.tf_loadaddress}" id="tf_loadaddress"></p>
 							<p><input type="hidden" name="u_key" class="sticky_btn"  value="${trainerprofile.u_key}" id="u_key"></p>
 						</ul>
@@ -4608,14 +4619,16 @@ function Centerview(test) {
 function review(test) {
 	
 	  let trainer_u_key = $('#u_key').val();
+	  let memberprofile_u_key =$('#memberprofile_u_key').val();
 	  
 	 let member_u_key = $('#member_u_key').val();
 		console.log("trainer_u_key:"+trainer_u_key);
+		console.log("memberprofile_u_key:"+memberprofile_u_key);
 		console.log("member_u_key:"+member_u_key);
 		$.ajax({
 			method: "POST",
 			url: "/aj-review",
-			data: {  trainer_u_key: trainer_u_key}
+			data: {  trainer_u_key: trainer_u_key , memberprofile_u_key: memberprofile_u_key}
 		})
 		.done(function( html ) {
 			
