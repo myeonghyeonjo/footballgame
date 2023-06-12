@@ -435,6 +435,24 @@ public interface BoardMapper {
 
 	public List<TrainerProfile> trainerListAll();
 
+	public int getmember_review_complete_Count(int u_key);
+
+	public int getmember_review_waite_Count(int u_key);
+
+	public List<Review> getmember_review_complete_ListALL(Pagination pagination);
+
+	public List<Review> getmember_review_waite_ListALL(Pagination pagination);
+
+	public int getmember_review_reject_Count(int u_key);
+
+	public List<Review> getmember_review_reject_ListALL(Pagination pagination);
+
+	public int getmember_review_search_Count(Pagination pagination);
+
+	public String gettrainer_profilename(String trainerprofile_u_key);
+
+	public List<Review> getmember_review_search_ListALL(Pagination pagination);
+
 	
 
 

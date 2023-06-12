@@ -3,6 +3,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.annotation.OverridingMethodsMustInvokeSuper;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -1178,6 +1180,51 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<TrainerProfile> trainerListAll(){
 		return boardmapper.trainerListAll();
+	}
+	
+	@Override
+	public int getmember_review_complete_Count(int u_key) {
+		return boardmapper.getmember_review_complete_Count(u_key);
+	}
+	
+	@OverridingMethodsMustInvokeSuper
+	public int getmember_review_waite_Count(int u_key) {
+		return boardmapper.getmember_review_waite_Count(u_key);
+	}
+	
+	@Override
+	public List<Review> getmember_review_complete_ListALL(Pagination pagination){
+		return boardmapper.getmember_review_complete_ListALL(pagination);
+	}
+	
+	@Override
+	public List<Review> getmember_review_waite_ListALL(Pagination pagination){
+		return boardmapper.getmember_review_waite_ListALL(pagination);
+	}
+	
+	@Override
+	public int getmember_review_reject_Count(int u_key) {
+		return boardmapper.getmember_review_reject_Count(u_key);
+	}
+	
+	@Override
+	public List<Review> getmember_review_reject_ListALL(Pagination pagination){
+		return boardmapper.getmember_review_reject_ListALL(pagination);
+	}
+	
+	@Override
+	public int getmember_review_search_Count(Pagination pagination) {
+		return boardmapper.getmember_review_search_Count(pagination);
+	}
+	
+	@Override
+	public String gettrainer_profilename(String trainerprofile_u_key) {
+		return boardmapper.gettrainer_profilename(trainerprofile_u_key);
+	}
+	
+	@Override
+	public List<Review> getmember_review_search_ListALL(Pagination pagination){
+		return boardmapper.getmember_review_search_ListALL(pagination);
 	}
 }
 

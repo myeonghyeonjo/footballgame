@@ -155,7 +155,10 @@
 		<input type="hidden" id="keyword" value="${keyword}">
 		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  col-lg-3 " id="nav_link_memberprofile2" href="/memberconsulting?u_key=${principal.u_key}">상담신청목록	 
 		</a>
-		 
+		   <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  "href="/member_review_dashboard?u_key=${principal.u_key }"> 리뷰 관리
+		</a>
+		   <a  style="visibility:hidden;"class="navbar-brand headermenu2 col-md-3 col-xs-3  "href="/member_review_dashboard?u_key=${principal.u_key }"> 리뷰 관리
+		</a>
 		  <sec:authentication property="principal" var="principal"/>
        	<form action="consulting_search_All?u_key=${principal.u_key}" method="post" style="width:1200px;" >
 		          <input class="form-control form-control-dark  rounded-0 border-0"  aria-label="Search" type="text" name="keyword" placeholder="트레이너명 검색" value="${keyword }">
@@ -176,6 +179,12 @@
             <a class="nav-link sidemenu active" id="nav_link_memberprofile"aria-current="page" href="/memberconsulting?u_key=${principal.u_key}">
               <span data-feather="home" class="align-text-bottom"></span>
               상담신청목록
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link sidemenu" href="/member_review_dashboard?u_key=${principal.u_key }"> 
+              <span data-feather="shopping-cart" class="align-text-bottom"></span>
+              리뷰관리
             </a>
           </li>
           <li class="nav-item">

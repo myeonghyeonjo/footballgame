@@ -181,7 +181,12 @@
 		lc_user
 		where u_id = #{u_id}
 	</select>
-
+	<!-- 트레이너 프로필 이름 -->
+	<select id="gettrainer_profilename" resultType="String">
+				 SELECT       tf_name as tf_name
+				 FROM            trainerprofile
+				 WHERE u_key = #{trainerprofile.u_key} 
+	</select>
 	<!-- 유저 이름 가져오기2 -->
 	<select id="getU_name2" resultType="String">
 
@@ -485,11 +490,9 @@
 		tf_lessonprice4 as tf_lessonprice4,
 		tf_loadaddress as tf_loadaddress,
 		tf_name as tf_name
-
-
-		from trainerprofile ORDER BY tf_id DESC
-
-
+		from trainerprofile 
+			WHERE tf_loadaddress != '샘플 주소입니다' AND tf_name != '홍길동' AND tf_check != '반려' AND tf_hanjulintro != '한줄 소개글을 입력해주세요'
+			ORDER BY tf_id DESC 
 		LIMIT 3
 	</select>
 	<select id="trainerListAll" resultType="trainerprofile">
@@ -937,7 +940,8 @@
 		tf_certificatetitle as tf_certificatetitle
 		FROM tf_file
 
-		WHERE tf_id like concat('%',#{tf_id},'%') and FILE_GROUP = 1
+		WHERE tf_id=#{tf_id} and FILE_GROUP = 1
+		limit 2
 
 	</select>
 
@@ -1339,8 +1343,9 @@
 	<!-- 리뷰 반려 -->
 	<update id="reviewReject" parameterType="review">
 		UPDATE review SET
-		r_check = 2
-
+		r_check = 2,
+		r_rejectreason = #{r_rejectreason}
+		
 		WHERE r_id = #{r_id}
 	</update>
 
@@ -1574,7 +1579,8 @@
 				memberprofile_name as memberprofile_name,
 				r_date as r_date,
 				r_reply as r_reply,
-				r_replydate as r_replydate
+				r_replydate as r_replydate,
+				r_rejectreason as r_rejectreason
 
 		FROM review
 
@@ -2302,7 +2308,8 @@
 		r_content,
 		r_starR,
 		memberprofile_name,
-		r_check
+		r_check,
+		trainerprofile_name
 		) VALUES (
 		#{trainerprofile_u_key},
 		#{memberprofile_u_key},
@@ -2310,7 +2317,8 @@
 		#{r_content},
 		#{r_starR},
 		#{memberprofile_name},
-		0
+		0,
+		#{trainerprofile_name}
 		)
 	</insert>
 	
@@ -2335,7 +2343,9 @@
 		memberprofile_name as memberprofile_name,
 		r_date as r_date,
 		r_reply as r_reply,
-		r_replydate as r_replydate
+		r_replydate as r_replydate,
+		r_rejectreason as r_rejectreason,
+		r_check as r_check
 		
 		FROM review
 		Where trainerprofile_u_key = #{trainerprofile_u_key} AND (r_check = 0 OR r_check = 1) 
@@ -2527,6 +2537,57 @@
 		WHERE memberprofile_u_key = #{u_key}
 		LIMIT 			#{pageNum}, 10 
 	</select>
+	<!-- 멤버가 작성한 리뷰(완료) 리스트 -->
+	<select id="getmember_review_complete_ListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date,
+				r_reply as r_reply,
+				r_replydate as r_replydate
+		from review	
+		WHERE memberprofile_u_key = #{u_key} AND r_check = 1
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 멤버가 작성한 리뷰(대기) 리스트 -->
+	<select id="getmember_review_waite_ListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date,
+				r_reply as r_reply,
+				r_replydate as r_replydate
+		from review	
+		WHERE memberprofile_u_key = #{u_key} AND r_check = 0
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	<!-- 멤버가 작성한 리뷰(반려) 리스트 -->
+	<select id="getmember_review_reject_ListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date,
+				r_reply as r_reply,
+				r_replydate as r_replydate
+		from review	
+		WHERE memberprofile_u_key = #{u_key} AND r_check = 2
+		LIMIT 			#{pageNum}, 10 
+	</select>
 	
 		<!-- 트레이너한테 작성된 리뷰 검색 리스트 -->
 	<select id="gettrainer_review_search_ListALL" resultType="review">
@@ -2545,6 +2606,26 @@
 		WHERE trainerprofile_u_key = #{u_key} AND (r_check = 0 or r_check = 1) AND memberprofile_name like concat('%',#{keyword},'%')  AND (r_check = 0 or r_check = 1)
 		LIMIT 			#{pageNum}, 10 
 	</select>
+	
+		<!-- 회원이 작성한 리뷰 검색 리스트 -->
+	<select id="getmember_review_search_ListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date,
+				r_reply as r_reply,
+				r_replydate as r_replydate,
+				trainerprofile_name as trainerprofile_name
+		from review	
+		WHERE memberprofile_u_key = #{u_key} AND trainerprofile_name like concat('%',#{keyword},'%')   OR r_content like concat('%',#{keyword},'%') 
+		LIMIT 			#{pageNum}, 10 
+	</select>
+	
 		<!-- 트레이너한테 작성된 리뷰 검색+완료 리스트 -->
 	<select id="gettrainer_review_search_complete_ListALL" resultType="review">
 		select r_id as r_id,
@@ -2771,12 +2852,39 @@
 				 FROM            review
 				 WHERE memberprofile_u_key = ${u_key}
 	</select>
+		<!-- 회원이 작성한 리뷰 갯수(완료) 카운트 -->
+	<select id="getmember_review_complete_Count" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE memberprofile_u_key = ${u_key} AND r_check = 1
+	</select>
+		<!-- 회원이 작성한 리뷰 갯수 (대기) 카운트 -->
+	<select id="getmember_review_waite_Count" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE memberprofile_u_key = ${u_key} AND r_check = 0
+	</select>
+	<!-- 회원이 작성한 리뷰 갯수 (반려) 카운트 -->
+	<select id="getmember_review_reject_Count" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE memberprofile_u_key = ${u_key} AND r_check = 2
+	</select>
+	
 	<!-- 트레이너한테 작성된 리뷰 갯수 검색 카운트 -->
 	<select id="gettrainer_review_search_Count" resultType="int">
 				 SELECT       count(*)                
 				 FROM            review
 				 WHERE trainerprofile_u_key = ${u_key} AND memberprofile_name like concat('%',#{keyword},'%')  AND (r_check = 0 or r_check = 1)
 	</select>
+		<!--회원이 작성한 리뷰 갯수 검색 카운트 -->
+	<select id="getmember_review_search_Count" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE memberprofile_u_key = ${u_key} AND trainerprofile_name like concat('%',#{keyword},'%')  OR r_content like concat('%',#{keyword},'%')    
+	</select>
+
+	
 	<!-- 트레이너한테 작성된 리뷰 갯수 검색+완료 카운트 -->
 	<select id="gettrainer_review_search_complete_Count" resultType="int">
 				 SELECT       count(*)                

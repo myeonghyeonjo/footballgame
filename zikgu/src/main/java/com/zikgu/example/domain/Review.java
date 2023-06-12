@@ -17,6 +17,8 @@ public class Review {
 	private int review_r_id;
 	private String r_reply;
 	private String r_replydate;
+	private String r_rejectreason;
+	private String trainerprofile_name;
 	
 	public int getR_id() {
 		return r_id;
@@ -113,6 +115,18 @@ public class Review {
 	}
 	public void setR_replydate(String r_replydate) {
 		this.r_replydate = r_replydate;
+	}
+	public String getR_rejectreason() {
+		return r_rejectreason;
+	}
+	public void setR_rejectreason(String r_rejectreason) {
+		this.r_rejectreason = r_rejectreason;
+	}
+	public String getTrainerprofile_name() {
+		return trainerprofile_name;
+	}
+	public void setTrainerprofile_name(String trainerprofile_name) {
+		this.trainerprofile_name = trainerprofile_name;
 	}
 
 	

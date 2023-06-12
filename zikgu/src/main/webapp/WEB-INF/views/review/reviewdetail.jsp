@@ -4282,6 +4282,7 @@ input, select, textarea {
 														</button>												
 													</c:if>
 									 			</sec:authorize>
+									 			
 									 			<!-- 승인하기 Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -4300,25 +4301,29 @@ input, select, textarea {
     </div>
   </div>
 </div>
-<!-- 리뷰승인거절모달 -->
+
+<!-- 반려하기 Modal -->
 <div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">리뷰 검토</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">센터 검토</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div style="color:black; text-align:left;"class="modal-body">
-        정말 반려 하시겠습니까? 확인을 누르시면 반려상태로 변경됩니다. (반려상태는 리뷰리스트에 노출X) 
+      <div class="modal-body" style="text-align:left; color:black;">
+          정말 반려 하시겠습니까? 확인을 누르시면 반려상태로 변경됩니다. (반려상태는 센터리스트에 노출X) 
       </div>
+      <label for="myTextarea" class="form-label" style="font-size: 8px; text-align:left; margin-left:15px;margin-bottom:-10px; color:black;"><Strong>반려사유 상세히 작성해주세요.</Strong></label>
+			<div class="input-group has-validation" style="padding:10px; color:black;">
+				<textarea  style="color:black;"class="form-control" name="tf_programintro" id="rejectreason" placeholder="반려사유를 입력해주세요"></textarea>
+			</div>
       <div class="modal-footer">
-        <button type="button" style="color:black;"class="btn btn-outline-dark" data-bs-dismiss="modal">취소하기</button>
-        <button type="button" style="color:#2fa4e7;" class="btn btn-outline-primary" onclick="clickreject(reviewInfo)">반려하기</button>
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">취소하기</button>
+        <button type="button" class="btn btn-outline-primary" onclick="clickreject(reviewInfo)">반려하기</button>
       </div>
     </div>
   </div>
 </div>
-
 <!-- 승인취소 Modal -->
 <div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -4339,9 +4344,11 @@ input, select, textarea {
 </div>
 <!-- 승인하기 누르면 넘어갈 데이타 -->
 <form name="reviewInfo">
-	<input type="hidden" name="r_id" value="${r_id}">
+	<input type="hidden" name="r_id" value="${r_id}" id="r_id">
 </form>
-									 			
+									<c:if test="${reviewlist.r_check == 2}">
+									<p style="color:red; font-size:18px; margin-top:-30px; font-weight:bold;">반려사유 : ${reviewlist.r_rejectreason }</p>			
+									</c:if>
 										  	</div>
 										  </c:forEach>
 										  </div>
@@ -4997,10 +5004,12 @@ function deletemodifyFile(r_id) {
 <!-- 반려하기 누르면 발생 -->
 <script>
 	function clickreject(formName) {
-		formName.action = "/reviewreject";
 		sessionStorage.setItem('postModifyed', 'true');
-		formName.method = "post";
-		formName.submit();
+		var r_id = $('#r_id').val();
+		var r_rejectreason = $('#rejectreason').val();
+		var path = '/reviewreject';
+		var url = path + '?r_id=' + encodeURIComponent(r_id)+'&r_rejectreason='+encodeURIComponent(r_rejectreason);
+		location.href = url;
 	}
 </script>
 

@@ -43,7 +43,11 @@
 
 
     <style>
-    
+/* 별 이모지에 마우스 오버 시 */
+.starR2:hover {
+  text-decoration: underline;
+} 
+ 
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -316,31 +320,96 @@ li{
          
           <sec:authorize access="hasRole('ROLE_USER')">
           <sec:authentication property="principal" var="principal"/>
-          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=${principal.u_key}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="50%" height="200px"   alt=""
-			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="50%" height="200px"   alt=""
-						 ></a>			 
+          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=${principal.u_key}"  data-lightbox="example-set">
+			 <c:forEach var="trainerprofile_filelistAll" items="${trainerprofile_filelistAll}" varStatus="status4">     
+			 		
+			 		<c:if test="${trainerprofile_filelistAll.tf_id == list.tf_id }">	
+			 		 
+						<img style="border-radius: 3%;"src="../../../Img/${trainerprofile_filelistAll.file_name}" width="49%" height="200px"   alt="">
+						
+						 </c:if>
+			</c:forEach></a>		
 			</sec:authorize>
 			 <sec:authorize access="hasRole('ROLE_ADMIN')">
           <sec:authentication property="principal" var="principal"/>
-          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="50%" height="200px"    alt=""
-			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="50%" height="200px"    alt=""
-			></a>			 
+          	 	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=${principal.u_key}"  data-lightbox="example-set">
+			 <c:forEach var="trainerprofile_filelistAll" items="${trainerprofile_filelistAll}" varStatus="status4">     
+			 		<c:if test="${trainerprofile_filelistAll.tf_id == list.tf_id }">  				 
+						<img style="border-radius: 3%;"src="../../../Img/${trainerprofile_filelistAll.file_name}" width="49%" height="200px"   alt="">
+						 </c:if>
+			</c:forEach></a>			 
 			</sec:authorize>
 			 <sec:authorize access="isAnonymous()">
-			<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set">
-			<img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="50%" height="200px"    alt=""
-			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}"width="50%" height="200px"   alt=""
-			 ></a>	
+			 	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set">
+			 <c:forEach var="trainerprofile_filelistAll" items="${trainerprofile_filelistAll}" varStatus="status4">     
+			 		<c:if test="${trainerprofile_filelistAll.tf_id == list.tf_id }">  	
+			 					 
+						<img style="border-radius: 3%;"src="../../../Img/${trainerprofile_filelistAll.file_name}" width="49%" height="200px"   alt="">
+						 </c:if>
+			</c:forEach></a>	
 			</sec:authorize>
 			
-			
-            <div onclick="location.href='/trainerProfileDetail?u_key=${list.u_key}';" style="cursor: pointer; padding:10px;">
-              <p class="card-text" style=" margin-bottom:1px; margin-left:1px"><Strong>${list.tf_name }선생님</Strong></p>
-              <p class="card-text" style=" margin-bottom:4px;">${list.tf_hanjulintro }</p>
-              	<p class="card-text" style="font-size: 8px; margin-bottom:1px;"><Strong>${list.tf_lessonnumber }${list.tf_lessonunit }</Strong> 기준 ${list.tf_lessonunit }당 <strong>${list.tf_lessonprice }원</Strong></p>
-                  <p class="card-text" style="font-size: 8px;">${list.tf_loadaddress }</p>
-        			<p class="card-text" style="font-size: 8px;">${centernameList }</p>
+					
+            
+              <p onclick="location.href='/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=1';"  class="card-text" style="cursor: pointer; margin-bottom:1px; padding:10px; margin-bottom:-10px;color:black;"><Strong>${list.tf_name }선생님 <c:if test="${status2.index ==0 }">	
+			 		<a class="starR2" href="/trainerProfileDetail_review?u_key=${list.u_key }&memberprofile_u_key=0" style="text-decoration:none; color:black;">
+			 		<c:if test="${review0_average>=1 && review0_average<2}">
+							<span class="starR2 on" >⭐(${review0_size})</span>
+			 		</c:if>
+			 		<c:if test="${review0_average>=2 && review0_average<3}">
+							<span class="starR2 on" >⭐⭐(${review0_size})</span>
+			 		</c:if>
+			 		<c:if test="${review0_average>=3 && review0_average<4}">
+							<span class="starR2 on" >⭐⭐⭐(${review0_size})</span>
+			 		</c:if>
+			 		<c:if test="${review0_average>=4 && review0_average<5}">
+							<span class="starR2 on" >⭐⭐⭐⭐(${review0_size})</span>
+			 		</c:if>
+			 		<c:if test="${review0_average==5}">
+							<span class="starR2 on" >⭐⭐⭐⭐⭐(${review0_size})</span>
+			 		</c:if>
+			 		 </c:if></a>
+			 		 	<c:if test="${status2.index ==1 }">	
+			 		<c:if test="${review1_average>=1 && review1_average<2}">
+							<span class="starR2 on" >⭐(${review1_size})</span>
+			 		</c:if>
+			 		<c:if test="${review1_average>=2 && review1_average<3}">
+							<span class="starR2 on" >⭐⭐(${review1_size})</span>
+			 		</c:if>
+			 		<c:if test="${review1_average>=3 && review1_average<4}">
+							<span class="starR2 on" >⭐⭐⭐(${review1_size})</span>
+			 		</c:if>
+			 		<c:if test="${review1_average>=4 && review1_average<5}">
+							<span class="starR2 on" >⭐⭐⭐⭐(${review1_size})</span>
+			 		</c:if>
+			 		<c:if test="${review1_average==5}">
+							<span class="starR2 on" >⭐⭐⭐⭐⭐(${review1_size})</span>
+			 		</c:if>
+			 		 </c:if>
+			 		 	<c:if test="${status2.index ==2 }">	
+			 		<c:if test="${review2_average>=1 && review2_average<2}">
+							<span class="starR2 on" >⭐(${review2_size})</span>
+			 		</c:if>
+			 		<c:if test="${review2_average>=2 && review2_average<3}">
+							<span class="starR2 on" >⭐⭐(${review2_size})</span>
+			 		</c:if>
+			 		<c:if test="${review2_average>=3 && review2_average<4 }">
+							<span class="starR2 on" >⭐⭐⭐(${review2_size})</span>
+			 		</c:if>
+			 		<c:if test="${review2_average>=4 && review2_average<5 }">
+							<span class="starR2 on" >⭐⭐⭐⭐(${review2_size})</span>
+			 		</c:if>
+			 		<c:if test="${review2_average==5}">
+							<span class="starR2 on" >⭐⭐⭐⭐⭐(${review2_size})</span>
+			 		</c:if>
+			 		 </c:if></Strong></p>
+			 		 <div onclick="location.href='/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=1';" style="cursor: pointer; padding:10px;">
+              <p class="card-text" style=" margin-bottom:4px;color:black;">${list.tf_hanjulintro }</p>
+              	<p class="card-text" style="font-size: 13px; margin-bottom:1px; color:black;"><Strong>${list.tf_lessonnumber }${list.tf_lessonunit }</Strong> 기준 ${list.tf_lessonunit }당 <strong>${list.tf_lessonprice }원</Strong></p>
+                  <p class="card-text" style="font-size: 13px;color:black;">${list.tf_loadaddress }</p>
+ 
                   </div>
+                 <a href="/aj-centerview2?tf_loadaddress=${list.tf_loadaddress }&u_key=${list.u_key}" style="text-decoration:none;"><span class="starR2 on"   style="font-size:15px; margin-left:10px;color:black;">${centernameList }</span></a> 
                    </div>
      
         </div>
@@ -350,6 +419,7 @@ li{
         </c:forEach>
 		</c:forEach>
    </div>
+
         </div>
         </div>
 </main>

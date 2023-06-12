@@ -4276,13 +4276,13 @@ input, select, textarea {
 										  
 										  
 										  
-										  
+									
 										  <div >
-										 	<div style="text-align:left;">
-										 <h5 style="color:white">${reviewlist.memberprofile_name}  ${reviewlist.r_date} 
-										 <c:if test="${reviewlist.r_starR==1}">
-										   		  <span class="starR2 on" >⭐</span>
-										   		  
+										    	<c:if test="${reviewlist.r_check != 2}">
+										 	<div style="text-align:left;">		 		
+												 <h5 style="color:white">${reviewlist.memberprofile_name}  ${reviewlist.r_date} 
+										 <c:if test="${reviewlist.r_starR==1}">	
+										   		  <span class="starR2 on" >⭐</span>				
 										   	</c:if>
 										   		<c:if test="${reviewlist.r_starR==2}">
 										   		<span class="starR2 on" >⭐⭐</span>
@@ -4331,6 +4331,103 @@ input, select, textarea {
 										   	
 										   	
 										    <div id="r_content${reviewlist.r_id}"style="text-align:left;">
+									
+										    	
+										   		${reviewlist.r_content}
+										   	</div>
+										  	  <c:if test="${reviewlist.r_reply != null }">
+												 <div style="background-color:grey; text-align:left; padding:10px;">
+												 <Strong style="font-size:17px; font-weight:bold;margin-bottom:10px;">${trainerprofile.tf_name} 선생님</Strong>
+												 ${reviewlist.r_reply}
+												 </div>
+											 </c:if>
+										 
+										   	<div style="display: flex;">
+											   	<div style="width: 82%;">
+												</div>
+												
+									 			<sec:authorize access="hasRole('ROLE_USER')">
+									 				<sec:authentication property="principal" var="principal"/> 
+									 		
+									 			<c:if test="${principal.u_key==reviewlist.memberprofile_u_key }">
+									 			
+									 			<p style="color:#ffbc00" class="aa modifyreviewBtn" data-bs-toggle="modal" data-bs-target="#reviewmodifymodal${reviewlist.r_id}" data-rcontent="${reviewlist.r_content}">수정</p> &nbsp;
+												<input type="hidden"  value="${trainerprofile.u_key }">			
+												<input type="hidden" id="r_id" value="${reviewlist.r_id}">
+												<p style="color:grey" class="aa removefileBtn" data-bs-toggle="modal" data-bs-target="#deleteFile1Modal"  data-rid="${reviewlist.r_id}">삭제</p> &nbsp;
+												</c:if>
+												</sec:authorize>
+												
+											</div>
+												<c:if test="${reviewlist.r_check != 2}">
+												  	<div style="visibility:hidden;">d</div>
+										  <hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
+										  	<div style="visibility:hidden;">d</div>
+										 	</c:if>
+										 
+										 	</c:if>
+										  	</div>
+										  	
+										  	<!-- 반려리뷰설정 -->
+										  	<sec:authorize access="hasRole('ROLE_USER')">
+										  	<sec:authentication property="principal" var="principal"/> 
+										  		<c:if test="${reviewlist.memberprofile_u_key == principal.u_key}">
+										  		<c:if test="${reviewlist.r_check == 2}">
+										  	  <div >
+										 	<div style="text-align:left;">		 		
+												 <h5 style="color:grey">${reviewlist.memberprofile_name}  ${reviewlist.r_date} 
+										 <c:if test="${reviewlist.r_starR==1}">	
+										   		  <span class="starR2">⭐</span>				
+										   	</c:if>
+										   		<c:if test="${reviewlist.r_starR==2}">
+										   		<span class="starR2" >⭐⭐</span>
+										   		
+										   		 
+										   	</c:if>
+										   		<c:if test="${reviewlist.r_starR==3}">
+										   		<span class="starR2" >⭐⭐⭐</span>
+										   		
+										   		  
+										   	</c:if>
+										   		<c:if test="${reviewlist.r_starR==4}">
+										   	<span class="starR2" >⭐⭐⭐⭐</span>
+										   		  
+										   	</c:if>
+										   	<c:if test="${reviewlist.r_starR==5}">
+										   		<span class="starR2" >⭐⭐⭐⭐⭐</span>
+										   		 
+										   	</c:if></h5>  
+										   	
+										   	
+										  	
+										   	</div>
+										   
+										   	<div style="text-align:left;">
+										   	<c:forEach var="reviewfilelist" items="${reviewfilelist}" varStatus="status2">
+										   				<c:if test="${reviewfilelist.memberprofile_u_key == reviewlist.memberprofile_u_key}">
+										   				<c:if test="${reviewfilelist.review_r_id == reviewlist.r_id}">
+										   				<c:if test="${reviewlist.r_opencheck==1}">
+															<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
+															<input type="hidden" value="${reviewfilelist.file_name }" class="filename${reviewlist.r_id}">
+															<input type="hidden" value="${reviewfilelist.r_id }" class="file_r_id${reviewlist.r_id}">
+												     	</c:if>
+												     	<c:if test="${reviewlist.r_opencheck==0}">
+												     		<div style="display:none;">															
+												     		<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
+															<input type="hidden" value="${reviewfilelist.file_name }" class="filename${reviewlist.r_id}">
+															<input type="hidden" value="${reviewfilelist.r_id }" class="file_r_id${reviewlist.r_id}">
+												   		  	</div>
+												     	</c:if>
+											</c:if>
+											</c:if>
+											</c:forEach>
+												<div style="visibility:hidden;">d</div>
+											</div>
+										   	
+										   	
+										    <div id="r_content${reviewlist.r_id}"style="text-align:left; color:grey;">
+									
+										    	
 										   		${reviewlist.r_content}
 										   	</div>
 										  	  <c:if test="${reviewlist.r_reply != null }">
@@ -4357,13 +4454,22 @@ input, select, textarea {
 											
 						
 												</c:if>
+												
 												</sec:authorize>
 											</div>
-										 
+										 	<p style="text-align:left; color:red;">반려사유 : ${reviewlist.r_rejectreason } (리뷰를 수정해주세요.)</p>
+										 	<p style="text-align:left; color:red; font-size:12px; margin-top:-20px;">(반려된 리뷰는 후기에 노출되지 않습니다. 리뷰수정시 관리자 확인 후 정상처리 될 예정입니다.)</p>
 										  	</div>
-										  	<div style="visibility:hidden;">d</div>
+										  	</c:if>
+										  		  	<div style="visibility:hidden;">d</div>
+										  		  	<c:if test="${reviewlist.r_check == 2}">
 										  <hr style="margin: 12px; color:white; border-width:2px 0 0 0;">
+										  </c:if>
 										  	<div style="visibility:hidden;">d</div>
+										  	</c:if>
+										  	</sec:authorize>
+										  	<!-- 반려리뷰설정 끝-->
+									
 										  </c:forEach>
 										  </div>
 										  </li>
