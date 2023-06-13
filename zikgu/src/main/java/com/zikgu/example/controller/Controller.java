@@ -3,6 +3,7 @@ package com.zikgu.example.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -99,7 +100,7 @@ public class Controller {
 	List<Player> answerAll = new ArrayList<Player>();
 	
 	@RequestMapping("/")
-	public String home(Model model) {
+	public String home(Model model,TrainerProfile trainerprofile) {
 		 //List<Board> list = boardservice.selectBoardList();
 		// model.addAttribute("list", list);
 		//logger.debug("debug");
@@ -116,7 +117,62 @@ public class Controller {
 		String getU_key2 = String.valueOf(value2); // String으로 변환
 		list.get(1).getU_key();
 		list.get(2).getU_key();
+		List<Review> reviewlist_homepage = boardservice.getreviewlist_homepage();
 		
+		List<TrainerProfile> reviewlist_trainerprofile_All = new ArrayList<>();
+		List<Center> reviewlist_trainerprofile_centername_All = new ArrayList<>();
+		List<FileDto> reviewlist_trainerprofile_Img_All = new ArrayList<>();
+		// reviewlist_homepage에서 Review 객체에 접근하여 r_date를 가져오기 위한 반복문
+		for (Review review : reviewlist_homepage) {
+		    // Review 객체의 r_date에 접근
+		    String r_date = review.getR_date();
+		    // r_date를 사용하여 원하는 작업 수행
+		    // 예: System.out.println(r_date);
+
+		    // 현재 시간 가져오기
+	        LocalDateTime currentTime = LocalDateTime.now();
+	        // 날짜/시간 형식 지정
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	        // 형식에 맞게 출력
+	        String formattedTime = currentTime.format(formatter);
+	        System.out.println("현재 시간: " + formattedTime);
+	        // 문자열을 LocalDateTime 객체로 변환
+	        LocalDateTime startTime = LocalDateTime.parse(r_date, formatter);
+	        LocalDateTime endTime = LocalDateTime.parse(formattedTime, formatter);
+	        // 시간 차이 계산
+	        Duration duration = Duration.between(startTime, endTime);
+	        // 시간 차이 출력
+	        long hours = duration.toHours();
+	        long minutes = duration.toMinutesPart();
+	        long seconds = duration.toSecondsPart();
+	        System.out.println("시간 차이: " + hours + "시간 " + minutes + "분 " + seconds + "초");
+	        if(hours<1) {
+	        	 review.setR_date(String.valueOf(minutes)+"분 전");
+	        } else if(minutes<1 && hours<1){
+	        	 review.setR_date(String.valueOf(seconds)+"초 전");
+	        } else if(hours>23) {
+	        	review.setR_date(r_date);	
+	        } else {
+	        	 review.setR_date(String.valueOf(hours)+"시간 전");
+	        }
+	        
+	        int trainerprofile_u_key = review.getTrainerprofile_u_key();
+	        List<TrainerProfile> trainerprofile2 = boardservice.reviewlist_trainerprofile(trainerprofile_u_key);
+	        trainerprofile = boardservice.trainerprofileDetail(trainerprofile_u_key);
+	        String tf_loadaddress = trainerprofile.getTf_loadaddress();
+	        int tf_id = trainerprofile.getTf_id();
+	        List<Center> reviewlist_trainerprofile_centername = boardservice.reviewlist_trainerprofile_centername(tf_loadaddress);
+	        List<FileDto> reviewlist_trainerprofile_Img = boardservice.reviewlist_trainerprofile_Img(tf_id);
+	        
+	        reviewlist_trainerprofile_centername_All.addAll(reviewlist_trainerprofile_centername);
+	        reviewlist_trainerprofile_All.addAll(trainerprofile2);
+	        reviewlist_trainerprofile_Img_All.addAll(reviewlist_trainerprofile_Img);
+	        model.addAttribute("reviewlist_trainerprofile_All", reviewlist_trainerprofile_All);
+	        model.addAttribute("reviewlist_trainerprofile_Img_All", reviewlist_trainerprofile_Img_All);
+	        model.addAttribute("reviewlist_trainerprofile_centername_All", reviewlist_trainerprofile_centername_All);
+		}
+		
+        
 		List<Review> reviewlist0 = boardservice.gettf_reviewlist(getU_key0);
 		int sum = 0;
 		for (Review review : reviewlist0) {
@@ -186,6 +242,8 @@ public class Controller {
 			  model.addAttribute("centerfilelistAll", centerfilelistAll);
 			  model.addAttribute("centernameList", centernameList);
 		}
+		model.addAttribute("reviewlist_homepage", reviewlist_homepage);
+		
 		return "/member/homepage2";
 	}
 
@@ -1498,9 +1556,6 @@ model.addAttribute("exception", exception);
 		
 		@RequestMapping("/search_All")
 	    public String search_All(Model model,@RequestParam("keyword") String keyword,TrainerProfile trainerprofile,FileDto filedto) {
-			
-			
-			
 			if(keyword=="") {
 				System.out.println("키워드가 없습니다.");
 				List<TrainerProfile> list = boardservice.trainerList();
@@ -1578,7 +1633,6 @@ model.addAttribute("exception", exception);
 			model.addAttribute("centerfilelistAll",centerfilelistAll);
 			model.addAttribute("centernameList",centernameList);
 			System.out.println("centerfilelistAll:"+centerfilelistAll);
-			
 			return "/member/searchList";
 			}
 	    }
@@ -3570,6 +3624,9 @@ model.addAttribute("exception", exception);
 		 public String reviewInsert( Model model,Review review,  @RequestPart(value = "test") Map<String, Object> test,MultipartHttpServletRequest mhsq, FileDto filedto,TrainerProfile trainerprofile) throws IllegalStateException, IOException {
 			
 			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
+			//String realFolder = "home/ec2-user/health/Img";  //파일저장위치
+			//String realFolder = "";  //파일저장위치
+			
 			 File dir = new File(realFolder);
 			   if (!dir.isDirectory()) {
 				   dir.mkdirs();
@@ -3607,8 +3664,6 @@ model.addAttribute("exception", exception);
 					   String genId = UUID.randomUUID().toString(); 
 					   // 본래 파일명                
 					   String originalfileName = mf.get(i).getOriginalFilename();
-					 
-					   
 					   String saveFileName = genId + "." + originalfileName.substring(originalfileName.lastIndexOf(".") + 1);
 					   // 저장되는 파일 이름                
 					   String savePath = realFolder + saveFileName; 

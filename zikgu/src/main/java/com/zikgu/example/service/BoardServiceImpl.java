@@ -1226,6 +1226,26 @@ public class BoardServiceImpl implements BoardService {
 	public List<Review> getmember_review_search_ListALL(Pagination pagination){
 		return boardmapper.getmember_review_search_ListALL(pagination);
 	}
+	
+	@Override
+	public List<Review> getreviewlist_homepage(){
+		return boardmapper.getreviewlist_homepage();
+	}
+	
+	@Override
+	public List<TrainerProfile> reviewlist_trainerprofile(int trainerprofile_u_key){
+		return boardmapper.reviewlist_trainerprofile(trainerprofile_u_key);
+	}
+	
+	@Override
+	public List<Center> reviewlist_trainerprofile_centername(String tf_loadaddress){
+		return boardmapper.reviewlist_trainerprofile_centername(tf_loadaddress);
+	}
+	
+	@Override
+	public List<FileDto> reviewlist_trainerprofile_Img(int tf_id){
+		return boardmapper.reviewlist_trainerprofile_Img(tf_id);
+	}
 }
 
 

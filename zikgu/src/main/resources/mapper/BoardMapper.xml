@@ -412,7 +412,53 @@
 
 		from trainerprofile where u_key = #{u_key}
 	</select>
+<!-- 트레이너 프로필 상세정보 -->
+	<select id="reviewlist_trainerprofile" resultType="trainerprofile">
+		select tf_lessonoption as tf_lessonoption,
+		tf_schedureintro as tf_schedureintro,
+		tf_certificate as tf_certificate,
+		tf_sunday as tf_sunday,
+		tf_saterday as tf_saterday,
+		tf_intro as tf_intro,
+		tf_day as tf_day,
+		tf_daymorning as tf_daymorning,
+		tf_dayafter as tf_dayafter,
+		tf_saterdaymorning as tf_saterdaymorning,
+		tf_saterafter as tf_saterafter,
+		tf_sundaymorning as tf_sundaymorning,
+		tf_sundayafter as tf_sundayafter,
+		tf_dayoff as tf_dayoff,
+		tf_certificatetitle as tf_certificatetitle,
+		tf_programtitle as tf_programtitle,
+		u_key as u_key,
+		tf_programsub as tf_programsub,
+		tf_programintro as tf_programintro,
+		tf_lessontitle as tf_lessontitle,
+		tf_lessonnumber as tf_lessonnumber,
+		tf_lessonnumber2 as tf_lessonnumber2,
+		tf_lessonnumber3 as tf_lessonnumber3,
+		tf_lessonnumber4 as tf_lessonnumber4,
+		tf_lessonprice as tf_lessonprice,
+		tf_lessonunit as tf_lessonunit,
+		tf_lessontime as tf_lessontime,
+		tf_lessonintro as tf_lessonintro,
+		tf_hanjulintro as tf_hanjulintro,
+		tf_id as tf_id,
+		tf_lessonprice2 as tf_lessonprice2,
+		tf_lessonprice3 as tf_lessonprice3,
+		tf_lessonprice4 as tf_lessonprice4,
+		tf_loadaddress as tf_loadaddress,
+		tf_gender as tf_gender,
+		tf_check as tf_check,
+		tf_consulting as tf_consulting,
+		tf_name as tf_name,
+		tf_consulting as tf_consulting,
+		tf_consultingconfirm as tf_consultingconfirm,
+		tf_rejectreason as tf_rejectreason
 
+
+		from trainerprofile where u_key = #{trainerprofile_u_key}
+	</select>
 
 	<select id="getsearch" resultType="trainerprofile">
 		select tf_lessonoption as tf_lessonoption,
@@ -839,6 +885,34 @@
 		where c_loadaddress = #{tf_loadaddress}
 		Limit 1
 	</select>
+	<!-- 센터 디테일2 -->
+	<select id="reviewlist_trainerprofile_centername" resultType="center">
+
+		select c_name,
+		c_postcode,
+		c_loadaddress,
+		c_oldaddress,
+		c_detailaddress,
+		c_option,
+		c_inform,
+		c_daymorning,
+		c_dayafter,
+		c_satermorning,
+		c_saterafter,
+		c_sunmorning,
+		c_sunafter,
+		c_dayoff,
+		c_confirm,
+		c_id,
+		u_key,
+		c_intro,
+		c_rejectreason
+
+		from center
+		where c_loadaddress = #{tf_loadaddress}
+		Limit 1
+	</select>
+	
 	<select id="getcenterDetail3" resultType="center">
 
 		select c_name,
@@ -942,6 +1016,20 @@
 
 		WHERE tf_id=#{tf_id} and FILE_GROUP = 1
 		limit 2
+
+	</select>
+	<select id="reviewlist_trainerprofile_Img" resultType="FileDto">
+		SELECT O_NAME as o_name,
+		FILE_PATH as file_path,
+		FILE_NAME as file_name,
+		FILE_GROUP as FILE_GROUP,
+		tf_file_id as tf_file_id,
+		tf_id as tf_id,
+		tf_certificatetitle as tf_certificatetitle
+		FROM tf_file
+
+		WHERE tf_id=#{tf_id} and FILE_GROUP = 1
+		limit 1
 
 	</select>
 
@@ -1508,6 +1596,25 @@
 		concat('%',#{keyword},'%') 
 		LIMIT 			#{pageNum}, 10 
 	</select>
+	<!-- 홈페이지 배너 리뷰 -->
+	<select id="getreviewlist_homepage" resultType="Review">
+		SELECT 
+				r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date
+
+		FROM review
+		WHERE r_check != 2 
+		ORDER BY r_date DESC
+		LIMIT 			6 
+	</select>
+	
 	<!-- 리뷰  검색+완료 -->
 	<select id="getreviewsearchcompleteList" resultType="Review">
 		SELECT 

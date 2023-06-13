@@ -453,6 +453,14 @@ public interface BoardMapper {
 
 	public List<Review> getmember_review_search_ListALL(Pagination pagination);
 
+	public List<Review> getreviewlist_homepage();
+
+	public List<TrainerProfile> reviewlist_trainerprofile(int trainerprofile_u_key);
+
+	public List<Center> reviewlist_trainerprofile_centername(String tf_loadaddress);
+
+	public List<FileDto> reviewlist_trainerprofile_Img(int tf_id);
+
 	
 
 

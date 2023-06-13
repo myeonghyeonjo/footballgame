@@ -1,12 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.io.File"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!doctype html>
 <html lang="Ko">
-  
+
     
     <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" >  -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.2/cerulean/bootstrap.min.css" rel="stylesheet" >
@@ -22,10 +24,17 @@
     <title>Album example · Bootstrap v5.2</title>
 
     <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/album/">
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
 
-    
+     <!-- 기본적으로 CDN링크는 Material+Icons 한개만 제공 -->
+  <link href="https://fonts.googleapis.com/
+  icon?family=Material+Icons rel="stylesheet">
+  <!-- 아래와 같이 | 를 사용하면 여러개의 아이콘을 동시에 불러올 수 있다. -->
+    <link href="https://fonts.googleapis.com/
+    icon?family=Material+Icons|Material+Icons+Sharp|Material+Icons+Two+Tone|Material+Icons+Outlined"
+    rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> 
 
 <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
@@ -40,9 +49,38 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   
 <meta name="theme-color" content="#712cf9">
-
+<!-- 슬라이드 -->
+<!-- 이 예제에서는 필요한 js, css 를 링크걸어 사용 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 
     <style>
+span.rightarrow {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  
+}
+
+span.rightarrow:hover {
+	cursor : pointer;
+}
+    
+ .swiper-container {
+
+
+}
+.swiper-slide {
+	background-color:white;
+	border-radius:7px;
+	padding:30px;
+}
+.swiper-slide img {
+	box-shadow:0 0 5px #555;
+	max-width:100%; /* 이미지 최대너비를 제한, 슬라이드에 이미지가 여러개가 보여질때 필요 */
+	/* 이 예제에서 필요해서 설정했습니다. 상황에따라 다를 수 있습니다. */
+}  
 /* 별 이모지에 마우스 오버 시 */
 .starR2:hover {
   text-decoration: underline;
@@ -182,6 +220,7 @@
    	width:175px;
    }
 }
+
     .search_icon{
     height: 40px;
     width: 40px;
@@ -299,8 +338,13 @@ li{
    
 
 <div class="d-flex align-items-center">
-  <h4 class="fw-light mb-0" style="color:black;"><strong>Health Catch 트레이너.</strong></h4>
-  <h4 class="lead text-muted mb-0" style="color:black;">언제든, 당신에게 맞는 방식으로.</h4>
+<span class="material-symbols-outlined" style="font-size:100px; color:#F2BE22">
+exercise
+</span>
+<div>
+  <h4  style="color:black; font-weight:bold; font-size:30px;"><strong>Health Catch 트레이너</strong></h4>
+  <h4  style="color:grey;font-weight:bold;">언제든, 당신에게 맞는 방식으로</h4>
+  </div>
 </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
        
@@ -316,7 +360,7 @@ li{
 			<c:if test="${status.index == status1.index && status.index == status2.index && status.index == status3.index}">
 		
         <div class="col">
-          <div class="card shadow-sm">
+          <div class="card shadow-sm" style="border:none; padding:15px;">
          
           <sec:authorize access="hasRole('ROLE_USER')">
           <sec:authentication property="principal" var="principal"/>
@@ -325,7 +369,7 @@ li{
 			 		
 			 		<c:if test="${trainerprofile_filelistAll.tf_id == list.tf_id }">	
 			 		 
-						<img style="border-radius: 3%;"src="../../../Img/${trainerprofile_filelistAll.file_name}" width="49%" height="200px"   alt="">
+						<img style=""src="../../../Img/${trainerprofile_filelistAll.file_name}" width="49%" height="190px"   alt="">
 						
 						 </c:if>
 			</c:forEach></a>		
@@ -369,6 +413,7 @@ li{
 							<span class="starR2 on" >⭐⭐⭐⭐⭐(${review0_size})</span>
 			 		</c:if>
 			 		 </c:if></a>
+			 		 <a class="starR2" href="/trainerProfileDetail_review?u_key=${list.u_key }&memberprofile_u_key=0" style="text-decoration:none; color:black;">
 			 		 	<c:if test="${status2.index ==1 }">	
 			 		<c:if test="${review1_average>=1 && review1_average<2}">
 							<span class="starR2 on" >⭐(${review1_size})</span>
@@ -385,7 +430,8 @@ li{
 			 		<c:if test="${review1_average==5}">
 							<span class="starR2 on" >⭐⭐⭐⭐⭐(${review1_size})</span>
 			 		</c:if>
-			 		 </c:if>
+			 		 </c:if></a>
+			 		 <a class="starR2" href="/trainerProfileDetail_review?u_key=${list.u_key }&memberprofile_u_key=0" style="text-decoration:none; color:black;">
 			 		 	<c:if test="${status2.index ==2 }">	
 			 		<c:if test="${review2_average>=1 && review2_average<2}">
 							<span class="starR2 on" >⭐(${review2_size})</span>
@@ -402,14 +448,14 @@ li{
 			 		<c:if test="${review2_average==5}">
 							<span class="starR2 on" >⭐⭐⭐⭐⭐(${review2_size})</span>
 			 		</c:if>
-			 		 </c:if></Strong></p>
+			 		 </c:if></a></Strong></p>
 			 		 <div onclick="location.href='/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=1';" style="cursor: pointer; padding:10px;">
               <p class="card-text" style=" margin-bottom:4px;color:black;">${list.tf_hanjulintro }</p>
               	<p class="card-text" style="font-size: 13px; margin-bottom:1px; color:black;"><Strong>${list.tf_lessonnumber }${list.tf_lessonunit }</Strong> 기준 ${list.tf_lessonunit }당 <strong>${list.tf_lessonprice }원</Strong></p>
                   <p class="card-text" style="font-size: 13px;color:black;">${list.tf_loadaddress }</p>
  
                   </div>
-                 <a href="/aj-centerview2?tf_loadaddress=${list.tf_loadaddress }&u_key=${list.u_key}" style="text-decoration:none;"><span class="starR2 on"   style="font-size:15px; margin-left:10px;color:black;">${centernameList }</span></a> 
+                 <a href="/aj-centerview2?tf_loadaddress=${list.tf_loadaddress }&u_key=${list.u_key}" style="text-decoration:none; margin-top:-10px;"><span class="starR2 on"   style="font-size:13px; margin-left:10px;color:grey; font-weight:bold;">${centernameList }</span></a> 
                    </div>
      
         </div>
@@ -420,8 +466,72 @@ li{
 		</c:forEach>
    </div>
 
+			<div style="display:flex; margin-top:100px;">
+   			<span class="material-symbols-outlined" style="font-size:100px; color:#F2BE22;">
+			reviews
+			</span>
+			<div>
+			<h5 style="color:black; margin-top:10px; font-weight:bold;">합리적인 가격으로 최고의 선생님을 만나세요</h5>
+			<h3 style="color:black; font-weight:bold;">운동닥터 <Strong style="color:#F2BE22;">실시간</Strong> 후기</h3>	
+			</div>
+			
+			</div>	
+		<!-- 클래스명은 변경하면 안 됨 -->
+<div class="swiper-container" style="border:none; margin-top:30px; padding:15px;">
+	<div class="swiper-wrapper">
+					 <c:forEach var="reviewlist_homepage" items="${reviewlist_homepage}" varStatus="status5">     
+							 <c:forEach var="reviewlist_trainerprofile_All" items="${reviewlist_trainerprofile_All}" varStatus="status6">    
+															 <c:forEach var="reviewlist_trainerprofile_centername_All" items="${reviewlist_trainerprofile_centername_All}" varStatus="status7">    
+																							 <c:forEach var="reviewlist_trainerprofile_Img_All" items="${reviewlist_trainerprofile_Img_All}" varStatus="status8">    
+								<c:if test="${status5.index == status6.index && status5.index == status8.index  && status5.index  == status7.index &&  status6.index == status7.index }">
+	
+		<div class="swiper-slide"> 
+			
+			<p ><Strong style="color:black;">${reviewlist_homepage.memberprofile_name } 회원님</Strong>· <Strong style="color:rgb(0, 128, 255);">${reviewlist_homepage.r_date } </Strong>
+			<a class="starR2" href="/trainerProfileDetail_review?u_key=${reviewlist_trainerprofile_All.u_key }&memberprofile_u_key=0" style="text-decoration:none;">
+			<Strong class="starR2" style="color:black;">
+			<c:if test="${reviewlist_homepage.r_starR==1}">⭐
+			</c:if>
+			<c:if test="${reviewlist_homepage.r_starR==2}">⭐⭐
+			</c:if>
+			<c:if test="${reviewlist_homepage.r_starR==3}">⭐⭐⭐
+			</c:if>
+			<c:if test="${reviewlist_homepage.r_starR==4}">⭐⭐⭐⭐
+			</c:if>
+			<c:if test="${reviewlist_homepage.r_starR==5}">⭐⭐⭐⭐⭐
+			</c:if></Strong></a>
+			</p>
+			<p style="">${reviewlist_homepage.r_content }<p>
+			<div onclick="location.href='/trainerProfileDetail?u_key=${reviewlist_trainerprofile_All.u_key}&memberprofile_u_key=1';"  style="border:none; box-shadow:0 0 5px #ccc inset; border-radius: 50px; height:70px; position: relative; cursor:pointer">
+  <img style="border:none; border-radius: 100px; width:70px; height:70px;" src="../../../Img/${reviewlist_trainerprofile_Img_All.file_name}">
+  <strong style="color:black;">${reviewlist_trainerprofile_All.tf_name}</strong> <strong style="color:#F2BE22; font-size:13px;">트레이너</strong>
+  <strong style="color:grey; font-size:13px;">${reviewlist_trainerprofile_centername_All.c_name}</strong>
+<!-- <span class="rightarrow arrowhover" style="font-size:14px; font-weight:bold;color:#F2BE22; margin-right:25px;">트레이너 보기</span>
+  <span class="material-symbols-outlined rightarrow" style="color:#F2BE22; font-size:25x;">
+ arrow_forward_ios
+  </span> -->
+</div>
+		</div>
+		
+		
+			</c:if>
+			</c:forEach>
+			</c:forEach>
+			</c:forEach>
+			</c:forEach>
+	</div>
+
+	<!-- 네비게이션 -->
+
+	<div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+	<div class="swiper-button-prev"></div><!-- 이전 버튼 -->
+
+	<!-- 페이징 
+	<div class="swiper-pagination"></div>-->
+</div>
         </div>
         </div>
+        
 </main>
 
 <footer class="text-muted py-5">
@@ -439,4 +549,68 @@ li{
 
       
   </body>
+<script>
+new Swiper('.swiper-container', {
+
+	slidesPerView : 2, // 동시에 보여줄 슬라이드 갯수
+	spaceBetween : 30, // 슬라이드간 간격
+	slidesPerGroup : 1, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+
+	// 그룹수가 맞지 않을 경우 빈칸으로 메우기
+	// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+	loopFillGroupWithBlank : true,
+
+	loop : true, // 무한 반복
+
+	pagination : { // 페이징
+		el : '.swiper-pagination',
+		clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+	},
+	navigation : { // 네비게이션
+		nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+		prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+	},
+
+});
+</script>
+
+
+<script>
+// 함수를 만들어서 슬라이더 설정을 변경하는 방법
+function setSwiperOptions() {
+    var screenWidth = window.innerWidth; // 현재 창의 너비를 가져옴
+
+    var swiperOptions = {
+        slidesPerView: 2,
+        spaceBetween: 30,
+        slidesPerGroup: 1,
+        loopFillGroupWithBlank: true,
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    };
+
+    if (screenWidth <= 992) {
+        swiperOptions.slidesPerView = 1; // 화면 너비가 992px 이하일 때 슬라이드 개수를 1로 설정
+    }
+
+    new Swiper('.swiper-container', swiperOptions);
+}
+
+// 페이지 로드 후 호출하여 슬라이더 설정을 변경
+window.addEventListener('load', function() {
+    setSwiperOptions();
+});
+
+// 창 크기가 변경될 때마다 슬라이더 설정을 변경
+window.addEventListener('resize', function() {
+    setSwiperOptions();
+});
+</script>
 </html>
