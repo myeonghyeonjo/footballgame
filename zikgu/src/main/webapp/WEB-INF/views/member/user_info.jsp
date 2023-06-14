@@ -43,8 +43,24 @@
 	height: 210px; /* 높이 지정 */
 	background-color: #f0f0f0; /* 배경색 지정 */
 	width: 47%;
+	
+}
+#user_rounded-rectangle1, #rounded-rectangle1, #rounded-rectangle2{
+	  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transition: all 0.3s ease-in-out; /* 부드러운 모션을 위해 추가*/
 }
 
+    #user_rounded-rectangle1:hover, #rounded-rectangle1:hover, #rounded-rectangle2:hover {
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+}
 .aa {
 	text-decoration: none
 }

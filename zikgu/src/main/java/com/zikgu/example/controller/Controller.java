@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -101,12 +103,6 @@ public class Controller {
 	
 	@RequestMapping("/")
 	public String home(Model model,TrainerProfile trainerprofile) {
-		 //List<Board> list = boardservice.selectBoardList();
-		// model.addAttribute("list", list);
-		//logger.debug("debug");
-		//logger.info("info");
-		//logger.error("error");
-		
 		List<TrainerProfile> list = boardservice.trainerList();
 		List<String> centernameList = new ArrayList<>();
 		int value = list.get(0).getU_key(); // int형 값
@@ -1553,14 +1549,233 @@ model.addAttribute("exception", exception);
 				model.addAttribute("toast",2);     //리뷰등록토스트
 				return "/member/trainerProfileDetail";
 	    }
-		
 		@RequestMapping("/search_All")
 	    public String search_All(Model model,@RequestParam("keyword") String keyword,TrainerProfile trainerprofile,FileDto filedto) {
 			if(keyword=="") {
-				System.out.println("키워드가 없습니다.");
-				List<TrainerProfile> list = boardservice.trainerList();
+			List<TrainerProfile> list = boardservice.trainerList();
+			List<String> centernameList = new ArrayList<>();
+			int value = list.get(0).getU_key(); // int형 값
+			String getU_key0 = String.valueOf(value); // String으로 변환
+			int value1 = list.get(1).getU_key(); // int형 값
+			String getU_key1 = String.valueOf(value1); // String으로 변환
+			int value2 = list.get(2).getU_key(); // int형 값
+			String getU_key2 = String.valueOf(value2); // String으로 변환
+			list.get(1).getU_key();
+			list.get(2).getU_key();
+			List<Review> reviewlist_homepage = boardservice.getreviewlist_homepage();
+			
+			List<TrainerProfile> reviewlist_trainerprofile_All = new ArrayList<>();
+			List<Center> reviewlist_trainerprofile_centername_All = new ArrayList<>();
+			List<FileDto> reviewlist_trainerprofile_Img_All = new ArrayList<>();
+			// reviewlist_homepage에서 Review 객체에 접근하여 r_date를 가져오기 위한 반복문
+			for (Review review : reviewlist_homepage) {
+			    // Review 객체의 r_date에 접근
+			    String r_date = review.getR_date();
+			    // r_date를 사용하여 원하는 작업 수행
+			    // 예: System.out.println(r_date);
+
+			    // 현재 시간 가져오기
+		        LocalDateTime currentTime = LocalDateTime.now();
+		        // 날짜/시간 형식 지정
+		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		        // 형식에 맞게 출력
+		        String formattedTime = currentTime.format(formatter);
+		        System.out.println("현재 시간: " + formattedTime);
+		        // 문자열을 LocalDateTime 객체로 변환
+		        LocalDateTime startTime = LocalDateTime.parse(r_date, formatter);
+		        LocalDateTime endTime = LocalDateTime.parse(formattedTime, formatter);
+		        // 시간 차이 계산
+		        Duration duration = Duration.between(startTime, endTime);
+		        // 시간 차이 출력
+		        long hours = duration.toHours();
+		        long minutes = duration.toMinutesPart();
+		        long seconds = duration.toSecondsPart();
+		        System.out.println("시간 차이: " + hours + "시간 " + minutes + "분 " + seconds + "초");
+		        if(hours<1) {
+		        	 review.setR_date(String.valueOf(minutes)+"분 전");
+		        } else if(minutes<1 && hours<1){
+		        	 review.setR_date(String.valueOf(seconds)+"초 전");
+		        } else if(hours>23) {
+		        	review.setR_date(r_date);	
+		        } else {
+		        	 review.setR_date(String.valueOf(hours)+"시간 전");
+		        }
+		        
+		        int trainerprofile_u_key = review.getTrainerprofile_u_key();
+		        List<TrainerProfile> trainerprofile2 = boardservice.reviewlist_trainerprofile(trainerprofile_u_key);
+		        trainerprofile = boardservice.trainerprofileDetail(trainerprofile_u_key);
+		        String tf_loadaddress = trainerprofile.getTf_loadaddress();
+		        int tf_id = trainerprofile.getTf_id();
+		        List<Center> reviewlist_trainerprofile_centername = boardservice.reviewlist_trainerprofile_centername(tf_loadaddress);
+		        List<FileDto> reviewlist_trainerprofile_Img = boardservice.reviewlist_trainerprofile_Img(tf_id);
+		        
+		        reviewlist_trainerprofile_centername_All.addAll(reviewlist_trainerprofile_centername);
+		        reviewlist_trainerprofile_All.addAll(trainerprofile2);
+		        reviewlist_trainerprofile_Img_All.addAll(reviewlist_trainerprofile_Img);
+		        model.addAttribute("reviewlist_trainerprofile_All", reviewlist_trainerprofile_All);
+		        model.addAttribute("reviewlist_trainerprofile_Img_All", reviewlist_trainerprofile_Img_All);
+		        model.addAttribute("reviewlist_trainerprofile_centername_All", reviewlist_trainerprofile_centername_All);
+			}
+			
+	        
+			List<Review> reviewlist0 = boardservice.gettf_reviewlist(getU_key0);
+			int sum = 0;
+			for (Review review : reviewlist0) {
+			    sum += review.getR_starR();
+			}
+			double review0_average = (double) sum / reviewlist0.size();
+			
+			List<Review> reviewlist1 = boardservice.gettf_reviewlist(getU_key1);
+			int sum1 = 0;
+			for (Review review : reviewlist1) {
+			    sum1 += review.getR_starR();
+			}
+			double review1_average = (double) sum1 / reviewlist1.size();
+			
+			List<Review> reviewlist2 = boardservice.gettf_reviewlist(getU_key2);
+			int sum2 = 0;
+			for (Review review : reviewlist2) {
+			    sum2 += review.getR_starR();
+			}
+			double review2_average = (double) sum2 / reviewlist2.size();
+
+			List<FileDto> filelist0 = boardservice.getprofileFileList2(list.get(0).getTf_id());
+			List<FileDto> filelist1 = boardservice.getprofileFileList2(list.get(1).getTf_id());
+			List<FileDto> filelist2 = boardservice.getprofileFileList2(list.get(2).getTf_id());
+			  model.addAttribute("filelist0", filelist0);
+			  model.addAttribute("filelist1", filelist1);
+			  model.addAttribute("filelist2", filelist2);
+			  model.addAttribute("reviewlist0", reviewlist0);
+			  model.addAttribute("reviewlist1", reviewlist1);
+			  model.addAttribute("reviewlist2", reviewlist2);
+			  model.addAttribute("review0_average", review0_average);
+			  model.addAttribute("review1_average", review1_average);
+			  model.addAttribute("review2_average", review2_average);
+			  System.out.println("review2_average:"+review2_average);
+			  model.addAttribute("review0_size", reviewlist0.size());
+			  model.addAttribute("review1_size", reviewlist1.size());
+			  model.addAttribute("review2_size", reviewlist2.size());
+			  List<FileDto> trainerprofile_filelistAll = new ArrayList<>();
+			  List<Review> trainerprofile_reviewlist = new ArrayList<>();
+			  trainerprofile_filelistAll.addAll(filelist0);
+			  trainerprofile_filelistAll.addAll(filelist1);
+			  trainerprofile_filelistAll.addAll(filelist2);
+			  model.addAttribute("trainerprofile_filelistAll", trainerprofile_filelistAll);
+			for (int i = 0; i < list.size(); i++) {
+			    TrainerProfile trainerProfile = list.get(i);
+			    String loadaddress =  trainerProfile.getTf_loadaddress();
+			    Center center = boardservice.getcenterDetail2(loadaddress);
+			    String centername = center.getC_name();
+			    centernameList.add(centername);
+			    // trainerProfile 변수를 이용해 해당 요소의 필드에 접근하고 작업을 수행합니다.
+			}
+			System.out.println("list:"+list);
+			List<FileDto> filelistAll = new ArrayList<>();
+			List<FileDto> centerfilelistAll = new ArrayList<>();
+			 model.addAttribute("list", list);
+			for (TrainerProfile profile : list) {
+				  int tfId = profile.getTf_id();
+				  List<FileDto> filelist  = boardservice.getprofileFileList2(profile.getTf_id());
+				  List<FileDto> centerfilelist  = boardservice.getcenterFileList2(profile.getTf_loadaddress());
+				  filelistAll.addAll(filelist);
+				  centerfilelistAll.addAll(centerfilelist);
+				  //centerfilelistAll.addAll(centerfilelist);
+				  //fileListMap2.put("filelistAll", filelistAll);
+				  //fileListMap2.put("filelist", centerfilelist);		  
+				  model.addAttribute("list", list);
+				  model.addAttribute("filelistAll", filelistAll);
+				  model.addAttribute("centerfilelistAll", centerfilelistAll);
+				  model.addAttribute("centernameList", centernameList);
+			}
+			model.addAttribute("reviewlist_homepage", reviewlist_homepage);
+			model.addAttribute("selectedValue", "정렬");
+			return "/member/homepage2";
+			} else {
+				
+				List<TrainerProfile> list = boardservice.search_All(keyword);
 				List<String> centernameList = new ArrayList<>();
 				
+				
+				List<Review> reviewlist_homepage = boardservice.getreviewlist_homepage();
+				
+				List<TrainerProfile> reviewlist_trainerprofile_All = new ArrayList<>();
+				List<Center> reviewlist_trainerprofile_centername_All = new ArrayList<>();
+				List<FileDto> reviewlist_trainerprofile_Img_All = new ArrayList<>();
+				// reviewlist_homepage에서 Review 객체에 접근하여 r_date를 가져오기 위한 반복문
+				for (Review review : reviewlist_homepage) {
+				    // Review 객체의 r_date에 접근
+				    String r_date = review.getR_date();
+				    // r_date를 사용하여 원하는 작업 수행
+				    // 예: System.out.println(r_date);
+
+				    // 현재 시간 가져오기
+			        LocalDateTime currentTime = LocalDateTime.now();
+			        // 날짜/시간 형식 지정
+			        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			        // 형식에 맞게 출력
+			        String formattedTime = currentTime.format(formatter);
+			        System.out.println("현재 시간: " + formattedTime);
+			        // 문자열을 LocalDateTime 객체로 변환
+			        LocalDateTime startTime = LocalDateTime.parse(r_date, formatter);
+			        LocalDateTime endTime = LocalDateTime.parse(formattedTime, formatter);
+			        // 시간 차이 계산
+			        Duration duration = Duration.between(startTime, endTime);
+			        // 시간 차이 출력
+			        long hours = duration.toHours();
+			        long minutes = duration.toMinutesPart();
+			        long seconds = duration.toSecondsPart();
+			        System.out.println("시간 차이: " + hours + "시간 " + minutes + "분 " + seconds + "초");
+			        if(hours<1) {
+			        	 review.setR_date(String.valueOf(minutes)+"분 전");
+			        } else if(minutes<1 && hours<1){
+			        	 review.setR_date(String.valueOf(seconds)+"초 전");
+			        } else if(hours>23) {
+			        	review.setR_date(r_date);	
+			        } else {
+			        	 review.setR_date(String.valueOf(hours)+"시간 전");
+			        }
+			        
+			        int trainerprofile_u_key = review.getTrainerprofile_u_key();
+			        List<TrainerProfile> trainerprofile2 = boardservice.reviewlist_trainerprofile(trainerprofile_u_key);
+			        trainerprofile = boardservice.trainerprofileDetail(trainerprofile_u_key);
+			        String tf_loadaddress = trainerprofile.getTf_loadaddress();
+			        int tf_id = trainerprofile.getTf_id();
+			        List<Center> reviewlist_trainerprofile_centername = boardservice.reviewlist_trainerprofile_centername(tf_loadaddress);
+			        List<FileDto> reviewlist_trainerprofile_Img = boardservice.reviewlist_trainerprofile_Img(tf_id);
+			        
+			        reviewlist_trainerprofile_centername_All.addAll(reviewlist_trainerprofile_centername);
+			        reviewlist_trainerprofile_All.addAll(trainerprofile2);
+			        reviewlist_trainerprofile_Img_All.addAll(reviewlist_trainerprofile_Img);
+			        model.addAttribute("reviewlist_trainerprofile_All", reviewlist_trainerprofile_All);
+			        model.addAttribute("reviewlist_trainerprofile_Img_All", reviewlist_trainerprofile_Img_All);
+			        model.addAttribute("reviewlist_trainerprofile_centername_All", reviewlist_trainerprofile_centername_All);
+				}
+				for (TrainerProfile profile : list) {
+					int sum = 0;
+				    int u_key = profile.getU_key();
+					List<Review> reviewlist0 = boardservice.gettf_reviewlist( String.valueOf(u_key));
+					profile.setTf_reviewsize(reviewlist0.size());
+					for (Review review : reviewlist0) {
+					    sum += review.getR_starR();
+					}
+					double review0_average = (double) sum / reviewlist0.size();
+					if(Double.isNaN(review0_average)) {
+						profile.setTf_staravarage(0); // review0_average 값을 TrainerProfile 요소에 할당
+					} else {
+					profile.setTf_staravarage(review0_average); // review0_average 값을 TrainerProfile 요소에 할당
+					}
+				}
+				  List<FileDto> trainerprofile_filelistAll = new ArrayList<>();
+				for (TrainerProfile profile : list) {
+				    int Tf_id = profile.getTf_id();
+				    List<FileDto> filelist0 = boardservice.getprofileFileList2(Tf_id);
+				    trainerprofile_filelistAll.addAll(filelist0);
+				}
+				  List<Review> trainerprofile_reviewlist = new ArrayList<>();
+				  //trainerprofile_filelistAll.addAll(filelist0);
+				  //trainerprofile_filelistAll.addAll(filelist1);
+				  //trainerprofile_filelistAll.addAll(filelist2);
+				  model.addAttribute("trainerprofile_filelistAll", trainerprofile_filelistAll);
 				for (int i = 0; i < list.size(); i++) {
 				    TrainerProfile trainerProfile = list.get(i);
 				    String loadaddress =  trainerProfile.getTf_loadaddress();
@@ -1572,28 +1787,140 @@ model.addAttribute("exception", exception);
 				System.out.println("list:"+list);
 				List<FileDto> filelistAll = new ArrayList<>();
 				List<FileDto> centerfilelistAll = new ArrayList<>();
+				 model.addAttribute("list", list);
 				for (TrainerProfile profile : list) {
 					  int tfId = profile.getTf_id();
-					 
 					  List<FileDto> filelist  = boardservice.getprofileFileList2(profile.getTf_id());
 					  List<FileDto> centerfilelist  = boardservice.getcenterFileList2(profile.getTf_loadaddress());
 					  filelistAll.addAll(filelist);
 					  centerfilelistAll.addAll(centerfilelist);
 					  //centerfilelistAll.addAll(centerfilelist);
 					  //fileListMap2.put("filelistAll", filelistAll);
-					  //fileListMap2.put("filelist", centerfilelist);
-					  
+					  //fileListMap2.put("filelist", centerfilelist);		  
 					  model.addAttribute("list", list);
 					  model.addAttribute("filelistAll", filelistAll);
 					  model.addAttribute("centerfilelistAll", centerfilelistAll);
 					  model.addAttribute("centernameList", centernameList);
 				}
-				return "/member/searchList";
-			} else {List<TrainerProfile> list = boardservice.search_All(keyword);
-			int listlength = list.size();
-			System.out.println("listlength:"+listlength);
+				model.addAttribute("reviewlist_homepage", reviewlist_homepage);
+				  model.addAttribute("keyword", keyword);
+				  model.addAttribute("selectedValue", "정렬");
+				return "/member/searchList2";
+			}
+	    }
+		@RequestMapping("/starhigh")
+	    public String starhigh(Model model,@RequestParam("keyword") String keyword,@RequestParam("selectedValue") String selectedValue,TrainerProfile trainerprofile,FileDto filedto) {
+			
+			if(keyword=="") {
+			List<TrainerProfile> list = boardservice.trainerList();
 			List<String> centernameList = new ArrayList<>();
-			model.addAttribute("list",list);
+			int value = list.get(0).getU_key(); // int형 값
+			String getU_key0 = String.valueOf(value); // String으로 변환
+			int value1 = list.get(1).getU_key(); // int형 값
+			String getU_key1 = String.valueOf(value1); // String으로 변환
+			int value2 = list.get(2).getU_key(); // int형 값
+			String getU_key2 = String.valueOf(value2); // String으로 변환
+			list.get(1).getU_key();
+			list.get(2).getU_key();
+			List<Review> reviewlist_homepage = boardservice.getreviewlist_homepage();
+			
+			List<TrainerProfile> reviewlist_trainerprofile_All = new ArrayList<>();
+			List<Center> reviewlist_trainerprofile_centername_All = new ArrayList<>();
+			List<FileDto> reviewlist_trainerprofile_Img_All = new ArrayList<>();
+			// reviewlist_homepage에서 Review 객체에 접근하여 r_date를 가져오기 위한 반복문
+			for (Review review : reviewlist_homepage) {
+			    // Review 객체의 r_date에 접근
+			    String r_date = review.getR_date();
+			    // r_date를 사용하여 원하는 작업 수행
+			    // 예: System.out.println(r_date);
+
+			    // 현재 시간 가져오기
+		        LocalDateTime currentTime = LocalDateTime.now();
+		        // 날짜/시간 형식 지정
+		        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		        // 형식에 맞게 출력
+		        String formattedTime = currentTime.format(formatter);
+		        System.out.println("현재 시간: " + formattedTime);
+		        // 문자열을 LocalDateTime 객체로 변환
+		        LocalDateTime startTime = LocalDateTime.parse(r_date, formatter);
+		        LocalDateTime endTime = LocalDateTime.parse(formattedTime, formatter);
+		        // 시간 차이 계산
+		        Duration duration = Duration.between(startTime, endTime);
+		        // 시간 차이 출력
+		        long hours = duration.toHours();
+		        long minutes = duration.toMinutesPart();
+		        long seconds = duration.toSecondsPart();
+		        System.out.println("시간 차이: " + hours + "시간 " + minutes + "분 " + seconds + "초");
+		        if(hours<1) {
+		        	 review.setR_date(String.valueOf(minutes)+"분 전");
+		        } else if(minutes<1 && hours<1){
+		        	 review.setR_date(String.valueOf(seconds)+"초 전");
+		        } else if(hours>23) {
+		        	review.setR_date(r_date);	
+		        } else {
+		        	 review.setR_date(String.valueOf(hours)+"시간 전");
+		        }
+		        
+		        int trainerprofile_u_key = review.getTrainerprofile_u_key();
+		        List<TrainerProfile> trainerprofile2 = boardservice.reviewlist_trainerprofile(trainerprofile_u_key);
+		        trainerprofile = boardservice.trainerprofileDetail(trainerprofile_u_key);
+		        String tf_loadaddress = trainerprofile.getTf_loadaddress();
+		        int tf_id = trainerprofile.getTf_id();
+		        List<Center> reviewlist_trainerprofile_centername = boardservice.reviewlist_trainerprofile_centername(tf_loadaddress);
+		        List<FileDto> reviewlist_trainerprofile_Img = boardservice.reviewlist_trainerprofile_Img(tf_id);
+		        
+		        reviewlist_trainerprofile_centername_All.addAll(reviewlist_trainerprofile_centername);
+		        reviewlist_trainerprofile_All.addAll(trainerprofile2);
+		        reviewlist_trainerprofile_Img_All.addAll(reviewlist_trainerprofile_Img);
+		        model.addAttribute("reviewlist_trainerprofile_All", reviewlist_trainerprofile_All);
+		        model.addAttribute("reviewlist_trainerprofile_Img_All", reviewlist_trainerprofile_Img_All);
+		        model.addAttribute("reviewlist_trainerprofile_centername_All", reviewlist_trainerprofile_centername_All);
+			}
+			
+	        
+			List<Review> reviewlist0 = boardservice.gettf_reviewlist(getU_key0);
+			int sum = 0;
+			for (Review review : reviewlist0) {
+			    sum += review.getR_starR();
+			}
+			double review0_average = (double) sum / reviewlist0.size();
+			
+			List<Review> reviewlist1 = boardservice.gettf_reviewlist(getU_key1);
+			int sum1 = 0;
+			for (Review review : reviewlist1) {
+			    sum1 += review.getR_starR();
+			}
+			double review1_average = (double) sum1 / reviewlist1.size();
+			
+			List<Review> reviewlist2 = boardservice.gettf_reviewlist(getU_key2);
+			int sum2 = 0;
+			for (Review review : reviewlist2) {
+			    sum2 += review.getR_starR();
+			}
+			double review2_average = (double) sum2 / reviewlist2.size();
+
+			List<FileDto> filelist0 = boardservice.getprofileFileList2(list.get(0).getTf_id());
+			List<FileDto> filelist1 = boardservice.getprofileFileList2(list.get(1).getTf_id());
+			List<FileDto> filelist2 = boardservice.getprofileFileList2(list.get(2).getTf_id());
+			  model.addAttribute("filelist0", filelist0);
+			  model.addAttribute("filelist1", filelist1);
+			  model.addAttribute("filelist2", filelist2);
+			  model.addAttribute("reviewlist0", reviewlist0);
+			  model.addAttribute("reviewlist1", reviewlist1);
+			  model.addAttribute("reviewlist2", reviewlist2);
+			  model.addAttribute("review0_average", review0_average);
+			  model.addAttribute("review1_average", review1_average);
+			  model.addAttribute("review2_average", review2_average);
+			  System.out.println("review2_average:"+review2_average);
+			  model.addAttribute("review0_size", reviewlist0.size());
+			  model.addAttribute("review1_size", reviewlist1.size());
+			  model.addAttribute("review2_size", reviewlist2.size());
+			  List<FileDto> trainerprofile_filelistAll = new ArrayList<>();
+			  List<Review> trainerprofile_reviewlist = new ArrayList<>();
+			  trainerprofile_filelistAll.addAll(filelist0);
+			  trainerprofile_filelistAll.addAll(filelist1);
+			  trainerprofile_filelistAll.addAll(filelist2);
+			  model.addAttribute("trainerprofile_filelistAll", trainerprofile_filelistAll);
 			for (int i = 0; i < list.size(); i++) {
 			    TrainerProfile trainerProfile = list.get(i);
 			    String loadaddress =  trainerProfile.getTf_loadaddress();
@@ -1602,38 +1929,362 @@ model.addAttribute("exception", exception);
 			    centernameList.add(centername);
 			    // trainerProfile 변수를 이용해 해당 요소의 필드에 접근하고 작업을 수행합니다.
 			}
-			
-			Map<String, List<FileDto>> fileListMap2 = new HashMap<>();
-			List<Integer> tfIdList = new ArrayList<>();
+			System.out.println("list:"+list);
 			List<FileDto> filelistAll = new ArrayList<>();
 			List<FileDto> centerfilelistAll = new ArrayList<>();
+			 model.addAttribute("list", list);
 			for (TrainerProfile profile : list) {
 				  int tfId = profile.getTf_id();
-				  tfIdList.add(tfId);
 				  List<FileDto> filelist  = boardservice.getprofileFileList2(profile.getTf_id());
 				  List<FileDto> centerfilelist  = boardservice.getcenterFileList2(profile.getTf_loadaddress());
 				  filelistAll.addAll(filelist);
 				  centerfilelistAll.addAll(centerfilelist);
 				  //centerfilelistAll.addAll(centerfilelist);
-				  fileListMap2.put("filelistAll", filelistAll);
-				  //fileListMap2.put("filelist", centerfilelist);
-			}	
-			System.out.println("list:"+list);
-			System.out.println("filelistAll:"+filelistAll);
+				  //fileListMap2.put("filelistAll", filelistAll);
+				  //fileListMap2.put("filelist", centerfilelist);		  
+				  model.addAttribute("list", list);
+				  model.addAttribute("filelistAll", filelistAll);
+				  model.addAttribute("centerfilelistAll", centerfilelistAll);
+				  model.addAttribute("centernameList", centernameList);
+			}
+			model.addAttribute("reviewlist_homepage", reviewlist_homepage);
+			model.addAttribute("selectedValue", "정렬");
+			return "/member/homepage2";
+			} else if(selectedValue.equals("starhigh")){
 			
-			Map<String, List<FileDto>> fileListMap = new HashMap<>();
-			
-			fileListMap.put("filelistAll", filelistAll);
-			//fileListMap.put("centerfilelistAll", centerfilelistAll);
+				List<TrainerProfile> list = boardservice.search_All(keyword);
+				List<String> centernameList = new ArrayList<>();
+				
+				
+				List<Review> reviewlist_homepage = boardservice.getreviewlist_homepage();
+				
+				List<TrainerProfile> reviewlist_trainerprofile_All = new ArrayList<>();
+				List<Center> reviewlist_trainerprofile_centername_All = new ArrayList<>();
+				List<FileDto> reviewlist_trainerprofile_Img_All = new ArrayList<>();
+				// reviewlist_homepage에서 Review 객체에 접근하여 r_date를 가져오기 위한 반복문
+				for (Review review : reviewlist_homepage) {
+				    // Review 객체의 r_date에 접근
+				    String r_date = review.getR_date();
+				    // r_date를 사용하여 원하는 작업 수행
+				    // 예: System.out.println(r_date);
 
-			model.addAttribute("filelistAll",filelistAll);
-			model.addAttribute("listlength",listlength);
-			model.addAttribute("fileListMap",fileListMap);
-			model.addAttribute("keyword",keyword);
-			model.addAttribute("centerfilelistAll",centerfilelistAll);
-			model.addAttribute("centernameList",centernameList);
-			System.out.println("centerfilelistAll:"+centerfilelistAll);
-			return "/member/searchList";
+				    // 현재 시간 가져오기
+			        LocalDateTime currentTime = LocalDateTime.now();
+			        // 날짜/시간 형식 지정
+			        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			        // 형식에 맞게 출력
+			        String formattedTime = currentTime.format(formatter);
+			        System.out.println("현재 시간: " + formattedTime);
+			        // 문자열을 LocalDateTime 객체로 변환
+			        LocalDateTime startTime = LocalDateTime.parse(r_date, formatter);
+			        LocalDateTime endTime = LocalDateTime.parse(formattedTime, formatter);
+			        // 시간 차이 계산
+			        Duration duration = Duration.between(startTime, endTime);
+			        // 시간 차이 출력
+			        long hours = duration.toHours();
+			        long minutes = duration.toMinutesPart();
+			        long seconds = duration.toSecondsPart();
+			        System.out.println("시간 차이: " + hours + "시간 " + minutes + "분 " + seconds + "초");
+			        if(hours<1) {
+			        	 review.setR_date(String.valueOf(minutes)+"분 전");
+			        } else if(minutes<1 && hours<1){
+			        	 review.setR_date(String.valueOf(seconds)+"초 전");
+			        } else if(hours>23) {
+			        	review.setR_date(r_date);	
+			        } else {
+			        	 review.setR_date(String.valueOf(hours)+"시간 전");
+			        }
+			        
+			        int trainerprofile_u_key = review.getTrainerprofile_u_key();
+			        List<TrainerProfile> trainerprofile2 = boardservice.reviewlist_trainerprofile(trainerprofile_u_key);
+			        trainerprofile = boardservice.trainerprofileDetail(trainerprofile_u_key);
+			        String tf_loadaddress = trainerprofile.getTf_loadaddress();
+			        int tf_id = trainerprofile.getTf_id();
+			        List<Center> reviewlist_trainerprofile_centername = boardservice.reviewlist_trainerprofile_centername(tf_loadaddress);
+			        List<FileDto> reviewlist_trainerprofile_Img = boardservice.reviewlist_trainerprofile_Img(tf_id);
+			        
+			        reviewlist_trainerprofile_centername_All.addAll(reviewlist_trainerprofile_centername);
+			        reviewlist_trainerprofile_All.addAll(trainerprofile2);
+			        reviewlist_trainerprofile_Img_All.addAll(reviewlist_trainerprofile_Img);
+			        model.addAttribute("reviewlist_trainerprofile_All", reviewlist_trainerprofile_All);
+			        model.addAttribute("reviewlist_trainerprofile_Img_All", reviewlist_trainerprofile_Img_All);
+			        model.addAttribute("reviewlist_trainerprofile_centername_All", reviewlist_trainerprofile_centername_All);
+				}
+				 List<FileDto> trainerprofile_filelistAll = new ArrayList<>();
+				  List<FileDto> filelistAll = new ArrayList<>();
+					List<FileDto> centerfilelistAll = new ArrayList<>();
+				for (TrainerProfile profile : list) {
+					//트레이너 리뷰 갯수와 리뷰 평점구하기
+					int sum = 0;
+				    int u_key = profile.getU_key();
+					List<Review> reviewlist0 = boardservice.gettf_reviewlist( String.valueOf(u_key));
+					profile.setTf_reviewsize(reviewlist0.size());
+					for (Review review : reviewlist0) {
+					    sum += review.getR_starR();
+					}
+					double review0_average = (double) sum / reviewlist0.size();
+					if(Double.isNaN(review0_average)) {
+						profile.setTf_staravarage(0); // review0_average 값을 TrainerProfile 요소에 할당
+					} else {
+					profile.setTf_staravarage(review0_average); // review0_average 값을 TrainerProfile 요소에 할당
+					}	
+				}
+				System.out.println("Collections호출");
+				Collections.sort(list, Comparator.comparingDouble(TrainerProfile::getTf_staravarage).reversed());
+				for (TrainerProfile profile : list) {
+					int Tf_id = profile.getTf_id();
+					    List<FileDto> filelist0 = boardservice.getprofileFileList2(Tf_id);
+					    trainerprofile_filelistAll.addAll(filelist0);
+					    
+					    List<FileDto> filelist  = boardservice.getprofileFileList2(profile.getTf_id());
+						  List<FileDto> centerfilelist  = boardservice.getcenterFileList2(profile.getTf_loadaddress());
+						  filelistAll.addAll(filelist);
+						  centerfilelistAll.addAll(centerfilelist);
+				}
+				  List<Review> trainerprofile_reviewlist = new ArrayList<>();
+				  //trainerprofile_filelistAll.addAll(filelist0);
+				  //trainerprofile_filelistAll.addAll(filelist1);
+				  //trainerprofile_filelistAll.addAll(filelist2);
+				  model.addAttribute("trainerprofile_filelistAll", trainerprofile_filelistAll);
+				for (int i = 0; i < list.size(); i++) {
+				    TrainerProfile trainerProfile = list.get(i);
+				    String loadaddress =  trainerProfile.getTf_loadaddress();
+				    Center center = boardservice.getcenterDetail2(loadaddress);
+				    String centername = center.getC_name();
+				    centernameList.add(centername);
+				    // trainerProfile 변수를 이용해 해당 요소의 필드에 접근하고 작업을 수행합니다.
+				}
+				  model.addAttribute("filelistAll", filelistAll);
+				  model.addAttribute("centerfilelistAll", centerfilelistAll);
+				  model.addAttribute("centernameList", centernameList);
+				 model.addAttribute("list", list);
+				model.addAttribute("reviewlist_homepage", reviewlist_homepage);
+				  model.addAttribute("keyword", keyword);
+				  model.addAttribute("selectedValue", "평점순");
+				return "/member/searchList2";
+			} else if(selectedValue.equals("reviewhigh")){
+				List<TrainerProfile> list = boardservice.search_All(keyword);
+				List<String> centernameList = new ArrayList<>();
+				List<Review> reviewlist_homepage = boardservice.getreviewlist_homepage();
+				List<TrainerProfile> reviewlist_trainerprofile_All = new ArrayList<>();
+				List<Center> reviewlist_trainerprofile_centername_All = new ArrayList<>();
+				List<FileDto> reviewlist_trainerprofile_Img_All = new ArrayList<>();
+				// reviewlist_homepage에서 Review 객체에 접근하여 r_date를 가져오기 위한 반복문
+				for (Review review : reviewlist_homepage) {
+				    // Review 객체의 r_date에 접근
+				    String r_date = review.getR_date();
+				    // r_date를 사용하여 원하는 작업 수행
+				    // 예: System.out.println(r_date);
+
+				    // 현재 시간 가져오기
+			        LocalDateTime currentTime = LocalDateTime.now();
+			        // 날짜/시간 형식 지정
+			        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			        // 형식에 맞게 출력
+			        String formattedTime = currentTime.format(formatter);
+			        System.out.println("현재 시간: " + formattedTime);
+			        // 문자열을 LocalDateTime 객체로 변환
+			        LocalDateTime startTime = LocalDateTime.parse(r_date, formatter);
+			        LocalDateTime endTime = LocalDateTime.parse(formattedTime, formatter);
+			        // 시간 차이 계산
+			        Duration duration = Duration.between(startTime, endTime);
+			        // 시간 차이 출력
+			        long hours = duration.toHours();
+			        long minutes = duration.toMinutesPart();
+			        long seconds = duration.toSecondsPart();
+			        System.out.println("시간 차이: " + hours + "시간 " + minutes + "분 " + seconds + "초");
+			        if(hours<1) {
+			        	 review.setR_date(String.valueOf(minutes)+"분 전");
+			        } else if(minutes<1 && hours<1){
+			        	 review.setR_date(String.valueOf(seconds)+"초 전");
+			        } else if(hours>23) {
+			        	review.setR_date(r_date);	
+			        } else {
+			        	 review.setR_date(String.valueOf(hours)+"시간 전");
+			        }
+			        
+			        int trainerprofile_u_key = review.getTrainerprofile_u_key();
+			        List<TrainerProfile> trainerprofile2 = boardservice.reviewlist_trainerprofile(trainerprofile_u_key);
+			        trainerprofile = boardservice.trainerprofileDetail(trainerprofile_u_key);
+			        String tf_loadaddress = trainerprofile.getTf_loadaddress();
+			        int tf_id = trainerprofile.getTf_id();
+			        List<Center> reviewlist_trainerprofile_centername = boardservice.reviewlist_trainerprofile_centername(tf_loadaddress);
+			        List<FileDto> reviewlist_trainerprofile_Img = boardservice.reviewlist_trainerprofile_Img(tf_id);
+			        
+			        reviewlist_trainerprofile_centername_All.addAll(reviewlist_trainerprofile_centername);
+			        reviewlist_trainerprofile_All.addAll(trainerprofile2);
+			        reviewlist_trainerprofile_Img_All.addAll(reviewlist_trainerprofile_Img);
+			        model.addAttribute("reviewlist_trainerprofile_All", reviewlist_trainerprofile_All);
+			        model.addAttribute("reviewlist_trainerprofile_Img_All", reviewlist_trainerprofile_Img_All);
+			        model.addAttribute("reviewlist_trainerprofile_centername_All", reviewlist_trainerprofile_centername_All);
+				}
+				 List<FileDto> trainerprofile_filelistAll = new ArrayList<>();
+				  List<FileDto> filelistAll = new ArrayList<>();
+					List<FileDto> centerfilelistAll = new ArrayList<>();
+				for (TrainerProfile profile : list) {
+					//트레이너 리뷰 갯수와 리뷰 평점구하기
+					int sum = 0;
+				    int u_key = profile.getU_key();
+					List<Review> reviewlist0 = boardservice.gettf_reviewlist( String.valueOf(u_key));
+					profile.setTf_reviewsize(reviewlist0.size());
+					for (Review review : reviewlist0) {
+					    sum += review.getR_starR();
+					}
+					double review0_average = (double) sum / reviewlist0.size();
+					if(Double.isNaN(review0_average)) {
+						profile.setTf_staravarage(0); // review0_average 값을 TrainerProfile 요소에 할당
+					} else {
+					profile.setTf_staravarage(review0_average); // review0_average 값을 TrainerProfile 요소에 할당
+					}	
+				}
+				//정렬
+				System.out.println("Collections호출");
+				Collections.sort(list, Comparator.comparingDouble(TrainerProfile::getTf_reviewsize).reversed());
+				
+				//트레이너 사진,센터이름
+				for (TrainerProfile profile : list) {
+					int Tf_id = profile.getTf_id();
+					    List<FileDto> filelist0 = boardservice.getprofileFileList2(Tf_id);
+					    trainerprofile_filelistAll.addAll(filelist0);
+					    
+					    List<FileDto> filelist  = boardservice.getprofileFileList2(profile.getTf_id());
+						  List<FileDto> centerfilelist  = boardservice.getcenterFileList2(profile.getTf_loadaddress());
+						  filelistAll.addAll(filelist);
+						  centerfilelistAll.addAll(centerfilelist);
+				}
+				  List<Review> trainerprofile_reviewlist = new ArrayList<>();
+				  //trainerprofile_filelistAll.addAll(filelist0);
+				  //trainerprofile_filelistAll.addAll(filelist1);
+				  //trainerprofile_filelistAll.addAll(filelist2);
+				  model.addAttribute("trainerprofile_filelistAll", trainerprofile_filelistAll);
+				for (int i = 0; i < list.size(); i++) {
+				    TrainerProfile trainerProfile = list.get(i);
+				    String loadaddress =  trainerProfile.getTf_loadaddress();
+				    Center center = boardservice.getcenterDetail2(loadaddress);
+				    String centername = center.getC_name();
+				    centernameList.add(centername);
+				    // trainerProfile 변수를 이용해 해당 요소의 필드에 접근하고 작업을 수행합니다.
+				}
+				  model.addAttribute("filelistAll", filelistAll);
+				  model.addAttribute("centerfilelistAll", centerfilelistAll);
+				  model.addAttribute("centernameList", centernameList);
+				 model.addAttribute("list", list);
+				model.addAttribute("reviewlist_homepage", reviewlist_homepage);
+				  model.addAttribute("keyword", keyword);
+				  model.addAttribute("selectedValue", "리뷰순");
+				return "/member/searchList2";
+			} else{
+			
+				List<TrainerProfile> list = boardservice.search_All(keyword);
+				List<String> centernameList = new ArrayList<>();
+				
+				
+				List<Review> reviewlist_homepage = boardservice.getreviewlist_homepage();
+				
+				List<TrainerProfile> reviewlist_trainerprofile_All = new ArrayList<>();
+				List<Center> reviewlist_trainerprofile_centername_All = new ArrayList<>();
+				List<FileDto> reviewlist_trainerprofile_Img_All = new ArrayList<>();
+				// reviewlist_homepage에서 Review 객체에 접근하여 r_date를 가져오기 위한 반복문
+				for (Review review : reviewlist_homepage) {
+				    // Review 객체의 r_date에 접근
+				    String r_date = review.getR_date();
+				    // r_date를 사용하여 원하는 작업 수행
+				    // 예: System.out.println(r_date);
+
+				    // 현재 시간 가져오기
+			        LocalDateTime currentTime = LocalDateTime.now();
+			        // 날짜/시간 형식 지정
+			        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			        // 형식에 맞게 출력
+			        String formattedTime = currentTime.format(formatter);
+			        System.out.println("현재 시간: " + formattedTime);
+			        // 문자열을 LocalDateTime 객체로 변환
+			        LocalDateTime startTime = LocalDateTime.parse(r_date, formatter);
+			        LocalDateTime endTime = LocalDateTime.parse(formattedTime, formatter);
+			        // 시간 차이 계산
+			        Duration duration = Duration.between(startTime, endTime);
+			        // 시간 차이 출력
+			        long hours = duration.toHours();
+			        long minutes = duration.toMinutesPart();
+			        long seconds = duration.toSecondsPart();
+			        System.out.println("시간 차이: " + hours + "시간 " + minutes + "분 " + seconds + "초");
+			        if(hours<1) {
+			        	 review.setR_date(String.valueOf(minutes)+"분 전");
+			        } else if(minutes<1 && hours<1){
+			        	 review.setR_date(String.valueOf(seconds)+"초 전");
+			        } else if(hours>23) {
+			        	review.setR_date(r_date);	
+			        } else {
+			        	 review.setR_date(String.valueOf(hours)+"시간 전");
+			        }
+			        
+			        int trainerprofile_u_key = review.getTrainerprofile_u_key();
+			        List<TrainerProfile> trainerprofile2 = boardservice.reviewlist_trainerprofile(trainerprofile_u_key);
+			        trainerprofile = boardservice.trainerprofileDetail(trainerprofile_u_key);
+			        String tf_loadaddress = trainerprofile.getTf_loadaddress();
+			        int tf_id = trainerprofile.getTf_id();
+			        List<Center> reviewlist_trainerprofile_centername = boardservice.reviewlist_trainerprofile_centername(tf_loadaddress);
+			        List<FileDto> reviewlist_trainerprofile_Img = boardservice.reviewlist_trainerprofile_Img(tf_id);
+			        
+			        reviewlist_trainerprofile_centername_All.addAll(reviewlist_trainerprofile_centername);
+			        reviewlist_trainerprofile_All.addAll(trainerprofile2);
+			        reviewlist_trainerprofile_Img_All.addAll(reviewlist_trainerprofile_Img);
+			        model.addAttribute("reviewlist_trainerprofile_All", reviewlist_trainerprofile_All);
+			        model.addAttribute("reviewlist_trainerprofile_Img_All", reviewlist_trainerprofile_Img_All);
+			        model.addAttribute("reviewlist_trainerprofile_centername_All", reviewlist_trainerprofile_centername_All);
+				}
+				 List<FileDto> trainerprofile_filelistAll = new ArrayList<>();
+				  List<FileDto> filelistAll = new ArrayList<>();
+					List<FileDto> centerfilelistAll = new ArrayList<>();
+				for (TrainerProfile profile : list) {
+					//트레이너 리뷰 갯수와 리뷰 평점구하기
+					int sum = 0;
+				    int u_key = profile.getU_key();
+					List<Review> reviewlist0 = boardservice.gettf_reviewlist( String.valueOf(u_key));
+					profile.setTf_reviewsize(reviewlist0.size());
+					for (Review review : reviewlist0) {
+					    sum += review.getR_starR();
+					}
+					double review0_average = (double) sum / reviewlist0.size();
+					if(Double.isNaN(review0_average)) {
+						profile.setTf_staravarage(0); // review0_average 값을 TrainerProfile 요소에 할당
+					} else {
+					profile.setTf_staravarage(review0_average); // review0_average 값을 TrainerProfile 요소에 할당
+					}	
+				}
+				System.out.println("Collections호출");
+				Collections.sort(list, Comparator.comparingDouble(TrainerProfile::getTf_lessonprice));
+				for (TrainerProfile profile : list) {
+					int Tf_id = profile.getTf_id();
+					    List<FileDto> filelist0 = boardservice.getprofileFileList2(Tf_id);
+					    trainerprofile_filelistAll.addAll(filelist0);
+					    
+					    List<FileDto> filelist  = boardservice.getprofileFileList2(profile.getTf_id());
+						  List<FileDto> centerfilelist  = boardservice.getcenterFileList2(profile.getTf_loadaddress());
+						  filelistAll.addAll(filelist);
+						  centerfilelistAll.addAll(centerfilelist);
+				}
+				  List<Review> trainerprofile_reviewlist = new ArrayList<>();
+				  //trainerprofile_filelistAll.addAll(filelist0);
+				  //trainerprofile_filelistAll.addAll(filelist1);
+				  //trainerprofile_filelistAll.addAll(filelist2);
+				  model.addAttribute("trainerprofile_filelistAll", trainerprofile_filelistAll);
+				for (int i = 0; i < list.size(); i++) {
+				    TrainerProfile trainerProfile = list.get(i);
+				    String loadaddress =  trainerProfile.getTf_loadaddress();
+				    Center center = boardservice.getcenterDetail2(loadaddress);
+				    String centername = center.getC_name();
+				    centernameList.add(centername);
+				    // trainerProfile 변수를 이용해 해당 요소의 필드에 접근하고 작업을 수행합니다.
+				}
+				  model.addAttribute("filelistAll", filelistAll);
+				  model.addAttribute("centerfilelistAll", centerfilelistAll);
+				  model.addAttribute("centernameList", centernameList);
+				 model.addAttribute("list", list);
+				model.addAttribute("reviewlist_homepage", reviewlist_homepage);
+				  model.addAttribute("keyword", keyword);
+				  model.addAttribute("selectedValue", "가격낮은순");
+				return "/member/searchList2";
 			}
 	    }
 		

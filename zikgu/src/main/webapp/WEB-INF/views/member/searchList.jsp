@@ -6,7 +6,8 @@
 
 <!doctype html>
 <html lang="Ko">
-  
+  <!--구글폰트  -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     
     <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" >  -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.2.2/cerulean/bootstrap.min.css" rel="stylesheet" >
@@ -295,8 +296,13 @@ li{
    
 
 <div class="d-flex align-items-center">
-  <h4 class="fw-light mb-0" style="color:black;"><strong>Health Catch 트레이너.</strong></h4>
-  <h4 class="lead text-muted mb-0" style="color:black;">언제든, 당신에게 맞는 방식으로.</h4>
+<span class="material-symbols-outlined" style="font-size:100px; color:#F2BE22">
+exercise
+</span>
+<div>
+  <h4  style="color:black; font-weight:bold; font-size:30px;"><strong>Health Catch 트레이너</strong></h4>
+  <h4  style="color:grey;font-weight:bold;">언제든, 당신에게 맞는 방식으로</h4>
+  </div>
 </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
        
@@ -312,7 +318,7 @@ li{
 			<c:if test="${status.index == status1.index && status.index == status2.index && status.index == status3.index}">
 		
         <div class="col">
-          <div class="card shadow-sm">
+          <div class="card shadow-sm" style="border:none; padding:15px;">
          
           <sec:authorize access="hasRole('ROLE_USER')">
           <sec:authentication property="principal" var="principal"/>
