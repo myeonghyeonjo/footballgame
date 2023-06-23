@@ -47,7 +47,7 @@
 										   	<c:forEach var="reviewfilelist" items="${reviewfilelist}" varStatus="status2">
 										   				<c:if test="${reviewfilelist.memberprofile_u_key == reviewlist.memberprofile_u_key}">
 										   				<c:if test="${reviewfilelist.r_date == reviewlist.r_date}">
-											<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
+											<a  href="http://15.164.62.221:8080/static/img/health/img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="http://15.164.62.221:8080/static/img/health/img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
 											</c:if>
 											</c:if>
 											

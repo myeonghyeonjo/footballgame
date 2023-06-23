@@ -276,7 +276,7 @@ p {
 								style="padding: 10px; background-color: white; width:930px; margin-bottom:10px">
 						
 						<c:forEach var="filelist" items="${filelist}">
-							<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><img src="../../../Img/${filelist.file_name}" width="175" height="175"   alt=""
+							<a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" width="175" height="175"   alt=""
 							 ></a>
 						</c:forEach>
 						</div>
@@ -331,7 +331,7 @@ p {
 
 									<div class="col-md-10">
 										<c:forEach var="filelist" items="${filelist_2}">
-											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set2"><input type="text" class="form-control" style="flex: 0.5; " name="tf_certificatetitle"
+											<a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set2"><input type="text" class="form-control" style="flex: 0.5; " name="tf_certificatetitle"
 												id="address2" placeholder="내용을 입력해주세요" value="${filelist.tf_certificatetitle }"readonly></a>
 									</div>
 									</div>
@@ -371,7 +371,7 @@ p {
 								<p style="text-align:left; margin-top:10px;"><strong>참고 사진</strong></p>
 									<div>
 									<c:forEach var="filelist" items="${filelist_3}">
-							<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set3"><img src="../../../Img/${filelist.file_name}" width="160" height="160"   alt=""
+							<a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set3"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" width="160" height="160"   alt=""
 							 ></a>
 							
 						</c:forEach>

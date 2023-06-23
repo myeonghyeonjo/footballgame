@@ -3986,7 +3986,7 @@ input, select, textarea {
 											<div class="slider2" style="margin-left:25px;">
 		<c:forEach var="filelist" items="${filelist}">
 		
-		  <div style="margin-left:-50px;"><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set4"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
+		  <div style="margin-left:-50px;"><a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set4"><span class="image"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a>
 </div>
 		  
 		  </c:forEach> 
@@ -4002,7 +4002,7 @@ input, select, textarea {
 									<h2><Strong  style="color:black">센터 사진</Strong></h2>
 									
 									<c:forEach var="filelist" items="${filelist}">
-											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set5"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
+											<a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set5"><span class="image"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a>
 									</c:forEach>
 									
 									

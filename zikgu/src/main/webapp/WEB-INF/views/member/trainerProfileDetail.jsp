@@ -10,7 +10,7 @@
 
 <html>
 	<head>
-		<title>트레이너 프로필</title>
+		<title>트레이너 프로필 - Health Catch</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -79,7 +79,7 @@
       } );
     </script>
     <style>
-.error, .error2, .error3, .error4, .error5 {
+.error, .error2, .error3, .error4, .error5, .error6 {
     width: 250px;
     height: 20px;
     height:auto;
@@ -4046,14 +4046,14 @@ input, select, textarea {
 									</div>
 										<div class="slider1" style="margin-left:25px;">
 											<c:forEach var="filelist" items="${filelist}">
-											  <div style="margin-left:-50px;"><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a></div>
+											  <div style="margin-left:-50px;"><a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a></div>
 											  </c:forEach> 
 		   								 </div>		
 								</div>
 								
 								<h4><Strong style="color:black">자격사항</Strong></h4>
 								<c:forEach var="filelist" items="${filelist_2}">
-											<a class="aa" style="text-decoration-color : white;"   href="../../../Img/${filelist.file_name}"  data-lightbox="example-set2"><input type="text" class="form-control" style="flex: 0.5; color:white; background-color:black; " name="tf_certificatetitle"
+											<a class="aa" style="text-decoration-color : white;"   href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set2"><input type="text" class="form-control" style="flex: 0.5; color:white; background-color:black; " name="tf_certificatetitle"
 												id="address2" placeholder="내용을 입력해주세요" value="${filelist.tf_certificatetitle }"readonly></a>
 								
 								</c:forEach>
@@ -4066,7 +4066,7 @@ input, select, textarea {
 									<h2><Strong  style="color:black">${trainerprofile.tf_programtitle }</Strong></h2>
 									
 									<c:forEach var="filelist" items="${filelist_3}">
-											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set3"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
+											<a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set3"><span class="image"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a>
 									</c:forEach>
 									
 								
@@ -4120,7 +4120,7 @@ input, select, textarea {
 									<c:forEach var="filelist" items="${PT_filelist}" varStatus="status2">
 									
 										<c:if test="${PT_List.pt_id == filelist.pt_id }">
-											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set${filelist.pt_id }"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
+											<a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set${filelist.pt_id }"><span class="image"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a>
 										</c:if>
 									</c:forEach>
 									</div>
@@ -4257,28 +4257,32 @@ input, select, textarea {
 	<c:if test="${(principal.u_trainercheck=='0')}">
 		<sec:authorize access="hasRole('ROLE_USER')">
 		<c:if test="${fn:contains(trainerprofile.tf_consulting, principal.u_key)}">
-			<button type="button" class="btn btn-success" disabled >
+			<button type="button" style="margin-right:15px;"class="btn btn-success" disabled >
 	  			상담신청완료
-			</button>
+			</button> 
 			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelconsultingModal">
 	  			상담신청취소
 			</button>
 		</c:if>
-		
+
 		<c:if test="${!(fn:contains(trainerprofile.tf_consulting, principal.u_key))}">
-			<c:if test="${memberprofilecountcheck ==0 }">
-			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#consulting_memberprofilezero_Modal">
-	  			상담신청
-			</button>
-			</c:if>
-			<c:if test="${memberprofilecountcheck ==1 }">
-			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#consultingModal">
-	  			상담신청	
-			</button>
-			</c:if>
+			<c:choose>
+			    <c:when test="${memberprofilecountcheck ==1}">
+			       <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#consultingModal">
+	  					상담신청	
+					</button>
+			    </c:when>
+			    <c:otherwise>
+			        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#consulting_memberprofilezero_Modal">
+	  					상담신청
+					</button>
+			    </c:otherwise>
+			</c:choose>
 		</c:if>
 		
 	</sec:authorize>
+	
+	
 	</c:if>		
 	</sec:authorize>
 	
@@ -4375,6 +4379,7 @@ input, select, textarea {
 <div class='error3' style='display:none'>수정완료</div>
 <div class='error4' style='display:none'>취소완료</div>
 <div class='error5' style='display:none'>반려완료</div>
+<div class='error6' style='display:none'>상담신청완료</div>
 	</body>
 	</div>
 	
@@ -4696,6 +4701,7 @@ function clickConfirmlogin(formName) {
 	function clickConfirmconsulting(formName) {
 		formName.action = "/profileconsultingcheck";
 		formName.method = "post";
+		sessionStorage.setItem('postconsultingconfirm', 'true');
 		formName.submit();
 	}
 </script>
@@ -4713,6 +4719,7 @@ function clickConfirmlogin(formName) {
 <!-- 상담요청 취소하기 누르면 발생 -->
 function clickConfirmCancelconsulting(formName) {
 		formName.action = "/profileconsultingcancel";
+		sessionStorage.setItem('postcancel', 'true');
 		formName.method = "post";
 		formName.submit();
 	}
@@ -4754,11 +4761,18 @@ window.addEventListener('load', function() {
 	  var postconfirm = sessionStorage.getItem('postconfirm');
 	  var postcancel = sessionStorage.getItem('postcancel');
 	  var postreject = sessionStorage.getItem('postreject');
+	  var postconsultingconfirm = sessionStorage.getItem('postconsultingconfirm');
+	  
 	  	  if (postDeleted) {
 		  $('.error').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
 	    // 삭제 상태 제거
 	    sessionStorage.removeItem('postDeleted');
 	  }
+	  	if (postconsultingconfirm) {
+			  $('.error6').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+		    // 삭제 상태 제거
+		    sessionStorage.removeItem('postconsultingconfirm');
+		  }
 	  	 if (postInserted) {
 			  $('.error2').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
 		    // 작성 상태 제거
@@ -4822,6 +4836,7 @@ function test(test) {
 		
 }
 
-
+let tf_loadaddress = 0;
+let c_name = 0;
 </script>
 </html>

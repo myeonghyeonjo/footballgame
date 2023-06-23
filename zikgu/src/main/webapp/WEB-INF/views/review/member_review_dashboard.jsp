@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Dashboard Template · Bootstrap v5.2</title>
+    <title>리뷰목록 - Health Catch</title>
 
     <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/dashboard/">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -157,7 +157,7 @@
 		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  col-lg-3 " href="/memberconsulting?u_key=${principal.u_key }">상담신청목록	 
 		</a>
 	
-		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " id="nav_link_memberprofile2" href="/member_review_dashboard?u_key=${principal.u_key }"> 리뷰 관리
+		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " id="nav_link_memberprofile2" href="/member_review_dashboard?u_key=${principal.u_key }"> 리뷰 목록
 		</a>
 		 <a  style="visibility: hidden;"class="navbar-brand headermenu2 col-md-3 col-xs-3 "  href="/centerconfirmlist?u_key=${principal.u_key }">센터목록	 
 		</a>
@@ -184,26 +184,56 @@
           <li class="nav-item">
             <a class="nav-link sidemenu"id="nav_link_memberprofile2" href="/member_review_dashboard?u_key=${principal.u_key }"> 
               <span data-feather="shopping-cart" class="align-text-bottom"></span>
-              리뷰관리
+              리뷰목록
             </a>
           </li>
          
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="bar-chart-2" class="align-text-bottom"></span>
-              Reports
+             
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="layers" class="align-text-bottom"></span>
-              Integrations
+             
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="layers" class="align-text-bottom"></span>
+              
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="layers" class="align-text-bottom"></span>
+              
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="layers" class="align-text-bottom"></span>
+              
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="layers" class="align-text-bottom"></span>
+              
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="layers" class="align-text-bottom"></span>
+              
             </a>
           </li>
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-          <span>Saved reports</span>
+          <span></span>
           <a class="link-secondary" href="#" aria-label="Add a new report">
             <span data-feather="plus-circle" class="align-text-bottom"></span>
           </a>
@@ -212,25 +242,49 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Current month
+              
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Last quarter
+            
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Social engagement
+            
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Year-end sale
+              
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="layers" class="align-text-bottom"></span>
+              
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="layers" class="align-text-bottom"></span>
+              
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="layers" class="align-text-bottom"></span>
+              
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="layers" class="align-text-bottom"></span>
+              
             </a>
           </li>
         </ul>
@@ -476,7 +530,7 @@ function search_allbutton_click() {
 	console.log("전체버튼을 누르셨습니다.");
 	var keyword = $('#keyword').val();
 	var u_key = $('#u_key').val();
-	var path = '/trainer_review_dashboard_search_All';
+	var path = '/member_review_dashboard_search_All';
 	var url = path + '?keyword=' + encodeURIComponent(keyword)+'&u_key='+encodeURIComponent(u_key);
 	location.href = url;
 }
@@ -484,7 +538,7 @@ function search_completebutton_click() {
 	console.log("완료버튼을 누르셨습니다.");
 	var keyword = $('#keyword').val();
 	var u_key = $('#u_key').val();
-	var path = '/trainer_review_dashboard_search_complete';
+	var path = '/member_review_dashboard_search_complete';
 	var url = path + '?keyword=' + encodeURIComponent(keyword)+'&u_key='+encodeURIComponent(u_key);
 	location.href = url;
 }
@@ -492,15 +546,16 @@ function search_waitebutton_click() {
 	console.log("대기버튼을 누르셨습니다.");
 	var keyword = $('#keyword').val();
 	var u_key = $('#u_key').val();
-	var path = '/trainer_review_dashboard_search_waite';
+	var path = '/member_review_dashboard_search_waite';
 	var url = path + '?keyword=' + encodeURIComponent(keyword)+'&u_key='+encodeURIComponent(u_key);
 	location.href = url;
 }
 function search_rejectbutton_click() {
 	console.log("반려버튼을 누르셨습니다.");
 	var keyword = $('#keyword').val();
-	var path = '/review_search_reject';
-	var url = path + '?keyword=' + encodeURIComponent(keyword);
+	var u_key = $('#u_key').val();
+	var path = '/member_review_dashboard_search_reject';
+	var url = path + '?keyword=' + encodeURIComponent(keyword)+'&u_key='+encodeURIComponent(u_key);
 	location.href = url;
 }
 

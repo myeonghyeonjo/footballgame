@@ -27,7 +27,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.DelegatePerTargetObjectIntroductionInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -46,7 +47,9 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.resource.PathResourceResolver;
 
 import com.zikgu.example.domain.Center;
 import com.zikgu.example.domain.FileDto;
@@ -100,6 +103,55 @@ public class Controller {
 	int insertageYear=0;
 	int randomageYear=0;
 	List<Player> answerAll = new ArrayList<Player>();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Configuration
+	public class WebConfig implements WebMvcConfigurer {
+
+	  private final String uploadImagesPath="/home/ec2-user/health/";
+
+	
+
+	  @Override
+	  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	    registry.addResourceHandler("swagger-ui.html")
+	      .addResourceLocations("classpath:/META-INF/resources/");
+
+	    List<String> imageFolders = Arrays.asList("email", "img");
+	    for(String imageFolder : imageFolders) {
+	      registry.addResourceHandler("/static/img/health/" +imageFolder +"/**")
+	        .addResourceLocations("file:///" + uploadImagesPath + imageFolder +"/")
+	        .setCachePeriod(3600)
+	        .resourceChain(true)
+	        .addResolver(new PathResourceResolver());
+	    }
+	  }
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping("/")
 	public String home(Model model,TrainerProfile trainerprofile) {
@@ -202,7 +254,6 @@ public class Controller {
 		  model.addAttribute("review0_average", review0_average);
 		  model.addAttribute("review1_average", review1_average);
 		  model.addAttribute("review2_average", review2_average);
-		  System.out.println("review2_average:"+review2_average);
 		  model.addAttribute("review0_size", reviewlist0.size());
 		  model.addAttribute("review1_size", reviewlist1.size());
 		  model.addAttribute("review2_size", reviewlist2.size());
@@ -220,7 +271,6 @@ public class Controller {
 		    centernameList.add(centername);
 		    // trainerProfile 변수를 이용해 해당 요소의 필드에 접근하고 작업을 수행합니다.
 		}
-		System.out.println("list:"+list);
 		List<FileDto> filelistAll = new ArrayList<>();
 		List<FileDto> centerfilelistAll = new ArrayList<>();
 		 model.addAttribute("list", list);
@@ -265,9 +315,21 @@ public class Controller {
 	@RequestMapping("/signin")
 	public String signin(@RequestParam(value = "error", required = false)String error,
 @RequestParam(value = "exception", required = false)String exception,
-Model model) {
+Model model, HttpServletRequest request) {
 model.addAttribute("error", error);
 model.addAttribute("exception", exception);
+
+// 이전페이지 URL 추출 ,로그인 성공시 이전페이지 이동
+String referrer = request.getHeader("Referer");
+request.getSession().setAttribute("prevPage", referrer);
+
+System.out.println("referrer:"+referrer);
+if(referrer.equals("http://localhost:8080/signin")) {
+	referrer = "http://localhost:8080";
+	request.getSession().setAttribute("prevPage", referrer);
+} else {
+request.getSession().setAttribute("prevPage", referrer);
+}
 		return "/member/signin";
 	}
 
@@ -320,6 +382,7 @@ model.addAttribute("exception", exception);
 
 	@RequestMapping(value = "/login")
 	public String beforeLogin(Model model) {
+
 		return "/login";
 	}
 
@@ -331,8 +394,15 @@ model.addAttribute("exception", exception);
 
 	@Secured({ "ROLE_USER" })
 	@RequestMapping(value = "/user/info")
-	public String userInfo(Model model,User user,@RequestParam("u_key") String u_key,MemberProfile memberprofile) {
-		
+	public String userInfo(Model model,User user,TrainerProfile trainerprofile,@RequestParam("u_key") String u_key,MemberProfile memberprofile) {
+		trainerprofile= boardservice.trainerprofileDetail(Integer.parseInt(u_key));
+		int trainerprofileinsertcheck = 1;
+		if (trainerprofile != null) {
+			if(trainerprofile.getTf_loadaddress() == "주소입니다" && trainerprofile.getTf_name() == "홍길동" && trainerprofile.getTf_check() == "반려" && trainerprofile.getTf_hanjulintro() == "한줄 소개글을 입력해주세요" && trainerprofile.getTf_imginsertcheck() ==1) {
+				trainerprofileinsertcheck =0;
+			}
+		}		
+		model.addAttribute("trainerprofileinsertcheck", trainerprofileinsertcheck);
 		model.addAttribute("u_key", u_key);
 		user = userservice.getUserdetail(u_key);
 		model.addAttribute("user",user);
@@ -673,7 +743,7 @@ model.addAttribute("exception", exception);
 		int tf_id = boardservice.gettf_id(trainerprofile);  
 		
 			
-			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
+			String realFolder = "/home/ec2-user/health/img/";  //파일저장위치
 			 File dir = new File(realFolder);
 			   if (!dir.isDirectory()) {
 				   dir.mkdirs();
@@ -802,7 +872,7 @@ model.addAttribute("exception", exception);
 			String c_loadaddress =center.getC_loadaddress();
 			int c_id = boardservice.getc_id();
 			
-			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
+			String realFolder = "/home/ec2-user/health/img/";  //파일저장위치
 				 File dir = new File(realFolder);
 				   if (!dir.isDirectory()) {
 					   dir.mkdirs();
@@ -1147,6 +1217,66 @@ model.addAttribute("exception", exception);
 			model.addAttribute("trainerlist",trainerlist);
 			return "/review/member_review_dashboard";
 	    }
+		@RequestMapping("/member_review_dashboard_search_complete")
+	    public String member_review_dashboard_search_complete(Center center,Model model,@RequestParam("u_key") int u_key,@RequestParam("keyword") String keyword,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+			   pagination.setU_key(u_key);
+			   pagination.setKeyword(keyword);
+				int listcount = boardservice.getmember_review_search_complete_Count(pagination);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+				List<Review> list = boardservice.getmember_review_search_complete_ListALL(pagination);
+				List<TrainerProfile> trainerlist = boardservice.trainerListAll();
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("sort","완료");
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("list",list);	
+			model.addAttribute("trainerlist",trainerlist);
+			return "/review/member_review_dashboard";
+	    }
+		@RequestMapping("/member_review_dashboard_search_waite")
+	    public String member_review_dashboard_search_waite(Center center,Model model,@RequestParam("u_key") int u_key,@RequestParam("keyword") String keyword,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+			   pagination.setU_key(u_key);
+			   pagination.setKeyword(keyword);
+				int listcount = boardservice.getmember_review_search_waite_Count(pagination);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+				List<Review> list = boardservice.getmember_review_search_waite_ListALL(pagination);
+				List<TrainerProfile> trainerlist = boardservice.trainerListAll();
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("sort","대기");
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("list",list);	
+			model.addAttribute("trainerlist",trainerlist);
+			return "/review/member_review_dashboard";
+	    }
+		@RequestMapping("/member_review_dashboard_search_reject")
+	    public String member_review_dashboard_search_reject(Center center,Model model,@RequestParam("u_key") int u_key,@RequestParam("keyword") String keyword,Pagination pagination,HttpServletRequest request) {
+			String reqPage1 = request.getParameter("page");	  
+			   if(reqPage1 != null)
+					page = Integer.parseInt(reqPage1);
+			   pagination.setU_key(u_key);
+			   pagination.setKeyword(keyword);
+				int listcount = boardservice.getmember_review_search_reject_Count(pagination);
+				pagination.setPage(page);
+				pagination.setCount(listcount);
+				pagination.init();			
+				List<Review> list = boardservice.getmember_review_search_reject_ListALL(pagination);
+				List<TrainerProfile> trainerlist = boardservice.trainerListAll();
+			model.addAttribute("pagination",pagination);
+			model.addAttribute("sort","반려");
+			model.addAttribute("keyword",keyword);
+			model.addAttribute("list",list);	
+			model.addAttribute("trainerlist",trainerlist);
+			return "/review/member_review_dashboard";
+	    }
 		
 		@RequestMapping("/trainer_review_dashboard_search_complete")
 	    public String trainer_review_dashboard_search_complete(Center center,Model model,@RequestParam("u_key") int u_key,@RequestParam("keyword") String keyword,Pagination pagination,HttpServletRequest request) {
@@ -1446,14 +1576,14 @@ model.addAttribute("exception", exception);
 	    }
 		
 		@RequestMapping("/trainerProfileDetail")
-	    public String trainerProfileDetail(Review review,Model model,PT pt,TrainerProfile trainerprofile,@RequestParam("u_key") int u_key,@RequestParam("memberprofile_u_key") int memberprofile_u_key) {
+	    public String trainerProfileDetail(Review review,User user,Model model,PT pt,TrainerProfile trainerprofile,@RequestParam("u_key") int u_key,@RequestParam("memberprofile_u_key") int memberprofile_u_key) {
 				System.out.println("u_key:"+u_key);
 				trainerprofile = boardservice.trainerprofileDetail(u_key);
 				String u_name = boardservice.getU_name2(u_key);
 				
 				String programsub = trainerprofile.getTf_programsub();
 				String[] programsub2 = programsub.split(",");
-				
+				//user = userservice.getUserdetail( String.valueOf(memberprofile_u_key));
 				
 				int tf_id = trainerprofile.getTf_id();
 				List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
@@ -1693,6 +1823,11 @@ model.addAttribute("exception", exception);
 			} else {
 				
 				List<TrainerProfile> list = boardservice.search_All(keyword);
+				if (list.isEmpty()) {
+			        model.addAttribute("listempty", "검색된 트레이너가 없습니다.");
+					} else {
+					// list에 값이 있는 경우 처리할 내용
+					}
 				List<String> centernameList = new ArrayList<>();
 				
 				
@@ -1951,10 +2086,14 @@ model.addAttribute("exception", exception);
 			model.addAttribute("selectedValue", "정렬");
 			return "/member/homepage2";
 			} else if(selectedValue.equals("starhigh")){
-			
+				
 				List<TrainerProfile> list = boardservice.search_All(keyword);
 				List<String> centernameList = new ArrayList<>();
-				
+				if (list.isEmpty()) {
+			        model.addAttribute("listempty", "검색된 트레이너가 없습니다.");
+					} else {
+					// list에 값이 있는 경우 처리할 내용
+					}
 				
 				List<Review> reviewlist_homepage = boardservice.getreviewlist_homepage();
 				
@@ -2064,6 +2203,11 @@ model.addAttribute("exception", exception);
 				return "/member/searchList2";
 			} else if(selectedValue.equals("reviewhigh")){
 				List<TrainerProfile> list = boardservice.search_All(keyword);
+				if (list.isEmpty()) {
+			        model.addAttribute("listempty", "검색된 트레이너가 없습니다.");
+					} else {
+					// list에 값이 있는 경우 처리할 내용
+					}
 				List<String> centernameList = new ArrayList<>();
 				List<Review> reviewlist_homepage = boardservice.getreviewlist_homepage();
 				List<TrainerProfile> reviewlist_trainerprofile_All = new ArrayList<>();
@@ -2176,6 +2320,11 @@ model.addAttribute("exception", exception);
 			} else{
 			
 				List<TrainerProfile> list = boardservice.search_All(keyword);
+				if (list.isEmpty()) {
+			        model.addAttribute("listempty", "검색된 트레이너가 없습니다.");
+					} else {
+					// list에 값이 있는 경우 처리할 내용
+					}
 				List<String> centernameList = new ArrayList<>();
 				
 				
@@ -2648,17 +2797,29 @@ model.addAttribute("exception", exception);
 			String reqPage1 = request.getParameter("page");	 
 			pagination.setKeyword(keyword);
 			pagination.setU_key(u_key);
+			
 			   if(reqPage1 != null)
 				   page = Integer.parseInt(reqPage1);
 				int listcount = boardservice.getconsultingSearchCount(pagination);
 				pagination.setPage(page);
 				pagination.setCount(listcount);
-				pagination.init();			
-			
+				pagination.init();	
+				List<TrainerProfile> list = boardservice.gettconsultingsearchList(pagination);
+				//센터이름구하기
+				List<String> tfLoadAddressList = new ArrayList<>();
+
+				for (int i = 0; i < list.size(); i++) {
+				    TrainerProfile trainerProfile = list.get(i);
+				    List<Center> center2 = boardservice.reviewlist_trainerprofile_centername(trainerProfile.getTf_loadaddress());
+				    String c_name = center2.get(0).getC_name();
+				    System.out.println("c_name:"+c_name);
+				    tfLoadAddressList.add(c_name);
+				}
+			model.addAttribute("tfLoadAddressList",tfLoadAddressList);
 			model.addAttribute("pagination",pagination);
 			model.addAttribute("keyword",keyword);
 			model.addAttribute("sort","전체");
-			List<TrainerProfile> list = boardservice.gettconsultingsearchList(pagination);
+			
 			model.addAttribute("list",list);
 			model.addAttribute("u_key",u_key);	
 
@@ -2678,10 +2839,22 @@ model.addAttribute("exception", exception);
 				pagination.setCount(listcount);
 				pagination.init();			
 			System.out.println("listcount:"+listcount);
+			List<TrainerProfile> list = boardservice.gettconsultingcompletesearchList(pagination);
+			//센터이름구하기
+			List<String> tfLoadAddressList = new ArrayList<>();
+
+			for (int i = 0; i < list.size(); i++) {
+			    TrainerProfile trainerProfile = list.get(i);
+			    List<Center> center2 = boardservice.reviewlist_trainerprofile_centername(trainerProfile.getTf_loadaddress());
+			    String c_name = center2.get(0).getC_name();
+			    System.out.println("c_name:"+c_name);
+			    tfLoadAddressList.add(c_name);
+			}
+		model.addAttribute("tfLoadAddressList",tfLoadAddressList);
+		
 			model.addAttribute("pagination",pagination);
 			model.addAttribute("keyword",keyword);
 			model.addAttribute("sort","완료");
-			List<TrainerProfile> list = boardservice.gettconsultingcompletesearchList(pagination);
 			model.addAttribute("list",list);
 			model.addAttribute("u_key",u_key);	
 			return "/member/memberconsultinglist";
@@ -2700,10 +2873,21 @@ model.addAttribute("exception", exception);
 				pagination.setCount(listcount);
 				pagination.init();			
 			System.out.println("listcount:"+listcount);
+			List<TrainerProfile> list = boardservice.gettconsultingwaitesearchList(pagination);
+			//센터이름구하기
+			List<String> tfLoadAddressList = new ArrayList<>();
+
+			for (int i = 0; i < list.size(); i++) {
+			    TrainerProfile trainerProfile = list.get(i);
+			    List<Center> center2 = boardservice.reviewlist_trainerprofile_centername(trainerProfile.getTf_loadaddress());
+			    String c_name = center2.get(0).getC_name();
+			    System.out.println("c_name:"+c_name);
+			    tfLoadAddressList.add(c_name);
+			}
+		model.addAttribute("tfLoadAddressList",tfLoadAddressList);
 			model.addAttribute("pagination",pagination);
 			model.addAttribute("keyword",keyword);
 			model.addAttribute("sort","대기");
-			List<TrainerProfile> list = boardservice.gettconsultingwaitesearchList(pagination);
 			model.addAttribute("list",list);
 			model.addAttribute("u_key",u_key);	
 			return "/member/memberconsultinglist";
@@ -3290,7 +3474,8 @@ model.addAttribute("exception", exception);
 			model.addAttribute("PT_filelist",PT_filelist);
 			model.addAttribute("PT_List",PT_List);
 			
-			
+			int memberprofilecountcheck= boardservice.getmemberprofilecountcheck(member_u_key);
+
 			memberprofile.setM_consulting(delete_m_consulting);
 			memberprofile.setM_consultingconfirm(delete_m_consultingconfirm);
 			boardservice.updateM_consulting(memberprofile);   
@@ -3313,7 +3498,7 @@ model.addAttribute("exception", exception);
 			
 			
 			model.addAttribute("trainerprofile",trainerprofile);
-			
+			model.addAttribute("memberprofilecountcheck",memberprofilecountcheck);
 			model.addAttribute("filelist",filelist);
 			model.addAttribute("filelist_2",filelist_2);
 			model.addAttribute("filelist_3",filelist_3);
@@ -3386,7 +3571,7 @@ model.addAttribute("exception", exception);
 		
 		
 		@RequestMapping("/memberconsulting")
-	    public String memberconsulting(Pagination pagination,HttpServletRequest request,User user, Model model,@RequestParam("u_key") int u_key,MemberProfile memberprofile,TrainerProfile trainerprofile) {		
+	    public String memberconsulting(Center center,Pagination pagination,HttpServletRequest request,User user, Model model,@RequestParam("u_key") int u_key,MemberProfile memberprofile,TrainerProfile trainerprofile) {		
 			String reqPage1 = request.getParameter("page");	  
 			   if(reqPage1 != null)
 					page = Integer.parseInt(reqPage1);
@@ -3395,6 +3580,17 @@ model.addAttribute("exception", exception);
 				pagination.setCount(listcount);
 				pagination.init();			
 				List<TrainerProfile> list = boardservice.trainerprofileconsulting(u_key);
+				//센터이름구하기
+				List<String> tfLoadAddressList = new ArrayList<>();
+
+				for (int i = 0; i < list.size(); i++) {
+				    TrainerProfile trainerProfile = list.get(i);
+				    List<Center> center2 = boardservice.reviewlist_trainerprofile_centername(trainerProfile.getTf_loadaddress());
+				    String c_name = center2.get(0).getC_name();
+				    System.out.println("c_name:"+c_name);
+				    tfLoadAddressList.add(c_name);
+				}
+			model.addAttribute("tfLoadAddressList",tfLoadAddressList);	
 			model.addAttribute("pagination",pagination);
 			model.addAttribute("list",list);
 			model.addAttribute("sort","전체");
@@ -3413,6 +3609,18 @@ model.addAttribute("exception", exception);
 				pagination.setCount(listcount);
 				pagination.init();			
 				List<TrainerProfile> list = boardservice.trainerprofileconsultingcomplete(u_key);
+				
+				//센터이름구하기
+				List<String> tfLoadAddressList = new ArrayList<>();
+
+				for (int i = 0; i < list.size(); i++) {
+				    TrainerProfile trainerProfile = list.get(i);
+				    List<Center> center2 = boardservice.reviewlist_trainerprofile_centername(trainerProfile.getTf_loadaddress());
+				    String c_name = center2.get(0).getC_name();
+				    System.out.println("c_name:"+c_name);
+				    tfLoadAddressList.add(c_name);
+				}
+			model.addAttribute("tfLoadAddressList",tfLoadAddressList);	
 			model.addAttribute("pagination",pagination);
 			model.addAttribute("list",list);
 			model.addAttribute("sort","완료");
@@ -3430,6 +3638,18 @@ model.addAttribute("exception", exception);
 				pagination.setCount(listcount);
 				pagination.init();			
 				List<TrainerProfile> list = boardservice.trainerprofileconsultingwaite(u_key);
+				
+				//센터이름구하기
+				List<String> tfLoadAddressList = new ArrayList<>();
+
+				for (int i = 0; i < list.size(); i++) {
+				    TrainerProfile trainerProfile = list.get(i);
+				    List<Center> center2 = boardservice.reviewlist_trainerprofile_centername(trainerProfile.getTf_loadaddress());
+				    String c_name = center2.get(0).getC_name();
+				    System.out.println("c_name:"+c_name);
+				    tfLoadAddressList.add(c_name);
+				}
+			model.addAttribute("tfLoadAddressList",tfLoadAddressList);	
 			model.addAttribute("pagination",pagination);
 			model.addAttribute("list",list);
 			model.addAttribute("sort","대기");
@@ -3588,7 +3808,7 @@ model.addAttribute("exception", exception);
 		
 		
 		@RequestMapping("/PTinseretProcess")
-	    public String PTinseretProcess(MultipartHttpServletRequest mhsq, Model model,PT pt,@RequestParam("trainer_u_key") int trainer_u_key)throws IllegalStateException, IOException {
+	    public String PTinseretProcess(MultipartHttpServletRequest mhsq,TrainerProfile trainerprofile, Model model,PT pt,@RequestParam("trainer_u_key") int trainer_u_key)throws IllegalStateException, IOException {
 			PT ptfile = pt;
 			pt.setU_key(trainer_u_key);
 			String pt_programsubAll = pt.getPT_programsub();
@@ -3600,7 +3820,7 @@ model.addAttribute("exception", exception);
 			int pt_id = boardservice.getpt_id();
 			System.out.println("pt_id:"+pt_id);
 			
-			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
+			String realFolder = "/home/ec2-user/health/img/";  //파일저장위치
 			 File dir = new File(realFolder);
 			   if (!dir.isDirectory()) {
 				   dir.mkdirs();
@@ -3626,7 +3846,48 @@ model.addAttribute("exception", exception);
 					   boardservice.PTfileUpload(originalfileName, saveFileName, fileSize,savePath,trainer_u_key,pt_id);
 				   		}
 			   	}
-			return "/member/trainerPT";
+			 //트레이너 프로필 수정 페이지 로드 시작
+			   trainerprofile = boardservice.trainerprofileDetail(trainer_u_key);
+				//int tf_lessonprice = trainerprofile.getTf_lessonprice();
+					String u_name = boardservice.getU_name2(trainer_u_key);
+					String programsub = trainerprofile.getTf_programsub();
+					String[] programsub2 = programsub.split(",");
+					int tf_id = trainerprofile.getTf_id();
+					List<FileDto> filelist = boardservice.gettf_FileList(tf_id,1);
+					//System.out.println(filelist.get(0).file_name);
+					List<FileDto> filelist_2 = boardservice.gettf_FileList(tf_id,2);
+					List<FileDto> filelist_3 = boardservice.gettf_FileList(tf_id,3);
+					String tf_loadaddress = trainerprofile.getTf_loadaddress();
+					//System.out.println("u_key:"+u_key);
+					
+					List<PT> PT_List= boardservice.getPTdetail(trainer_u_key);
+					//System.out.println("PT_List:"+PT_List);
+					List<FileDto> PT_filelist = boardservice.getPT_FileList(trainer_u_key);
+					model.addAttribute("programsub",programsub2);
+					model.addAttribute("PT_List",PT_List);
+					model.addAttribute("PT_filelist",PT_filelist);
+					model.addAttribute("tf_loadaddress",tf_loadaddress);
+					model.addAttribute("u_key",trainer_u_key);
+					model.addAttribute("trainerprofile",trainerprofile);
+					model.addAttribute("u_name",u_name);
+					if(filelist==null) {
+						model.addAttribute("filelist","");
+					} else if(filelist!=null){
+					model.addAttribute("filelist",filelist);
+					}
+					if(filelist_2==null) {
+						model.addAttribute("filelist_2","");
+					} else if(filelist_2!=null){
+					model.addAttribute("filelist_2",filelist_2);
+					}
+					if(filelist_3==null) {
+						model.addAttribute("filelist_3","");
+					} else if(filelist_3!=null){
+					model.addAttribute("filelist_3",filelist_3);
+					}
+			//트레이너 프로필 수정 페이지 로드 끝
+					
+			return "/member/trainerProfileDetailModify";
 	    }
 		
 		@RequestMapping("/aj-updatetf_name")
@@ -3881,8 +4142,9 @@ model.addAttribute("exception", exception);
 		@RequestMapping("/trainerProfileFileInsert")
 	    public String trainerProfileFileInsert( Model model,MultipartHttpServletRequest mhsq,@RequestParam("u_key") int u_key, FileDto filedto,@RequestParam("tf_id") int tf_id,@RequestParam("file_group") int file_group,TrainerProfile trainerprofile) throws IllegalStateException, IOException {
 		
-			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
-			//String realFolder = "C:/healthcatchfile/Img/";  //파일저장위치
+			//String realFolder = "/home/ec2-user/health/img/";  //파일저장위치
+			
+			String realFolder = "/home/ec2-user/health/img/";  //파일저장위치
 			 File dir = new File(realFolder);
 			   if (!dir.isDirectory()) {
 				   dir.mkdirs();
@@ -3906,6 +4168,7 @@ model.addAttribute("exception", exception);
 					   // 파일 사이즈                
 					   mf.get(i).transferTo(new File(savePath)); 	// 파일 저장                 
 					   boardservice.filemodifyUpload(originalfileName, saveFileName, fileSize,savePath,tf_id,file_group);
+					   boardservice.trainerprofileimginsertcheck(tf_id);
 				   		}
 			   	}
 			//리로드시작
@@ -3944,7 +4207,7 @@ model.addAttribute("exception", exception);
 		@RequestMapping("/trainerProfileFileInsert3")
 	    public String trainerProfileFileInsert3( Model model,MultipartHttpServletRequest mhsq,@RequestParam("u_key") int u_key, FileDto filedto,@RequestParam("pt_id") int pt_id,@RequestParam("tf_id") int tf_id,@RequestParam("file_group") int file_group,TrainerProfile trainerprofile) throws IllegalStateException, IOException {
 		
-			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
+			String realFolder = "/home/ec2-user/health/img/";  //파일저장위치
 			 File dir = new File(realFolder);
 			   if (!dir.isDirectory()) {
 				   dir.mkdirs();
@@ -4011,7 +4274,7 @@ model.addAttribute("exception", exception);
 			System.out.println("u_key:"+u_key);
 			System.out.println("tf_certificatetitle:"+tf_certificatetitle);
 			System.out.println("tf_certificateoption:"+tf_certificateoption);
-			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
+			String realFolder = "/home/ec2-user/health/img/";  //파일저장위치
 			 File dir = new File(realFolder);
 			   if (!dir.isDirectory()) {
 				   dir.mkdirs();
@@ -4274,9 +4537,10 @@ model.addAttribute("exception", exception);
 		@RequestMapping("/reviewInsert")
 		 public String reviewInsert( Model model,Review review,  @RequestPart(value = "test") Map<String, Object> test,MultipartHttpServletRequest mhsq, FileDto filedto,TrainerProfile trainerprofile) throws IllegalStateException, IOException {
 			
-			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
-			//String realFolder = "home/ec2-user/health/Img";  //파일저장위치
-			//String realFolder = "";  //파일저장위치
+			//String realFolder = "/home/ec2-user/health/img/";  //파일저장위치
+		
+			String realFolder = "/home/ec2-user/health/img/";  //파일저장위치
+		
 			
 			 File dir = new File(realFolder);
 			   if (!dir.isDirectory()) {
@@ -4489,7 +4753,7 @@ model.addAttribute("exception", exception);
 		@RequestMapping("/reviewmodifyInsert")
 			public String reviewmodifyInsert( Center center,Model model,Review review,  @RequestPart(value = "test") Map<String, Object> test,MultipartHttpServletRequest mhsq, FileDto filedto,TrainerProfile trainerprofile) throws IllegalStateException, IOException {
 			
-			String realFolder = "c:/Users/조명현/zikgu2/zikgu/src/main/webapp/Img/";  //파일저장위치
+			String realFolder = "/home/ec2-user/health/img/";  //파일저장위치
 			 File dir = new File(realFolder);
 			   if (!dir.isDirectory()) {
 				   dir.mkdirs();

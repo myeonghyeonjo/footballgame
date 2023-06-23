@@ -109,7 +109,7 @@ li{
 <body>
    <nav class="navbar">
         <div class="navbar__logo">
-            <i class="fa"><a href="/"><img id="logo" src="../../../Img/덤벨.JPG"></a></i>
+            <i class="fa"><a href="/"><img id="logo" src="http://15.164.62.221:8080/static/img/health/img/덤벨.JPG"></a></i>
             <a id="bannertitle" href="/">Health Catch</a>
         </div>
         <div class="navbar__menu">

@@ -54,6 +54,7 @@ public class TrainerProfile {
 	private String tf_rejectreason;
 	private double tf_staravarage;
 	private int tf_reviewsize;
+	private int tf_imginsertcheck;
 	
 	public String getTf_lessonpotion() {
 		return tf_lessonpotion;
@@ -349,6 +350,12 @@ public class TrainerProfile {
 	}
 	public void setTf_reviewsize(int tf_reviewsize) {
 		this.tf_reviewsize = tf_reviewsize;
+	}
+	public int getTf_imginsertcheck() {
+		return tf_imginsertcheck;
+	}
+	public void setTf_imginsertcheck(int tf_imginsertcheck) {
+		this.tf_imginsertcheck = tf_imginsertcheck;
 	}
 	
 	

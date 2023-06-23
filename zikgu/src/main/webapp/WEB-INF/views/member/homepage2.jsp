@@ -21,7 +21,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Album example · Bootstrap v5.2</title>
+    <title>Health Catch</title>
 
     <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/album/">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -341,7 +341,7 @@ li{
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <h1 class="fw-light" style="color:black;"><Strong>당신의 운동 시작을 응원해요!</Strong></h1>
-        <p class="lead text-muted"  style="color:black;">내가 신뢰할 수 있는 선생님을 Health Catch에서 찾아보세요</p>
+        <p class="lead text-muted"  style="color:black;"><Strong>내가 신뢰할 수 있는 선생님을 Health Catch에서 찾아보세요</Strong></p>
        
       </div>
     </div>
@@ -355,9 +355,9 @@ li{
       <div class="d-flex justify-content-center h-100" style=" ">
         <div class="searchbar" style="">
         	<form action="search_All" method="post">
-		          <input class="search_input" type="text" name="keyword" placeholder="지역,선생님 검색" value="${keyword }">
-		          <a href="search_All?keyword=${keyword}" class="search_icon" ><i class="fas fa-search"></i></a>
-          	</form>
+		     <input id="searchInput" class="search_input" type="text" name="keyword" placeholder="지역,선생님 검색" value="${keyword}" oninput="updateSearchLink()">
+<a id="searchLink" href="" class="search_icon"><i class="fas fa-search"></i></a>
+</form>
         </div>
       </div>
     </div>
@@ -411,7 +411,7 @@ exercise
 			 		
 			 		<c:if test="${trainerprofile_filelistAll.tf_id == list.tf_id }">	
 			 		 
-						<img style=""src="../../../Img/${trainerprofile_filelistAll.file_name}" width="49%" height="190px"   alt="">
+						<img style=""src="http://15.164.62.221:8080/static/img/health/img/${trainerprofile_filelistAll.file_name}" width="49%" height="190px"   alt="">
 						
 						 </c:if>
 			</c:forEach></a>		
@@ -421,7 +421,7 @@ exercise
           	 	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=${principal.u_key}"  data-lightbox="example-set">
 			 <c:forEach var="trainerprofile_filelistAll" items="${trainerprofile_filelistAll}" varStatus="status4">     
 			 		<c:if test="${trainerprofile_filelistAll.tf_id == list.tf_id }">  				 
-						<img style="border-radius: 3%;"src="../../../Img/${trainerprofile_filelistAll.file_name}" width="49%" height="200px"   alt="">
+						<img style="border-radius: 3%;"src="http://15.164.62.221:8080/static/img/health/img/${trainerprofile_filelistAll.file_name}" width="49%" height="200px"   alt="">
 						 </c:if>
 			</c:forEach></a>			 
 			</sec:authorize>
@@ -430,7 +430,7 @@ exercise
 			 <c:forEach var="trainerprofile_filelistAll" items="${trainerprofile_filelistAll}" varStatus="status4">     
 			 		<c:if test="${trainerprofile_filelistAll.tf_id == list.tf_id }">  	
 			 					 
-						<img style="border-radius: 3%;"src="../../../Img/${trainerprofile_filelistAll.file_name}" width="49%" height="200px"   alt="">
+						<img style="border-radius: 3%;"src="http://15.164.62.221:8080/static/img/health/img/${trainerprofile_filelistAll.file_name}" width="49%" height="200px"   alt="">
 						 </c:if>
 			</c:forEach></a>	
 			</sec:authorize>
@@ -545,7 +545,7 @@ exercise
 			</p>
 			<p style="">${reviewlist_homepage.r_content }<p>
 			<div  class="trainer_sumnail" onclick="location.href='/trainerProfileDetail?u_key=${reviewlist_trainerprofile_All.u_key}&memberprofile_u_key=1';"  style="border:none; box-shadow:0 0 5px #ccc inset; border-radius: 50px; height:70px; position: relative; cursor:pointer">
-  <img style="border:none; border-radius: 100px; width:70px; height:70px;" src="../../../Img/${reviewlist_trainerprofile_Img_All.file_name}">
+  <img style="border:none; border-radius: 100px; width:70px; height:70px;" src="http://15.164.62.221:8080/static/img/health/img/${reviewlist_trainerprofile_Img_All.file_name}">
   <strong style="color:black;">${reviewlist_trainerprofile_All.tf_name}</strong> <strong style="color:#F2BE22; font-size:13px;">트레이너</strong>
   <strong style="color:grey; font-size:13px;">${reviewlist_trainerprofile_centername_All.c_name}</strong>
 <!-- <span class="rightarrow arrowhover" style="font-size:14px; font-weight:bold;color:#F2BE22; margin-right:25px;">트레이너 보기</span>
@@ -688,5 +688,14 @@ window.addEventListener('load', function() {
 window.addEventListener('resize', function() {
     setSwiperOptions();
 });
+
+
+function updateSearchLink() {
+    var searchInput = document.getElementById('searchInput');
+    var searchLink = document.getElementById('searchLink');
+    var keyword = searchInput.value;
+    searchLink.href = "search_All?keyword=" + encodeURIComponent(keyword);
+}
+
 </script>
 </html>

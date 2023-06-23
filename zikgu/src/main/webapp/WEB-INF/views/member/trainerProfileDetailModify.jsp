@@ -12,7 +12,7 @@
 <html>
 	<head>
 
-		<title>트레이너 프로필</title>
+		<title>트레이너 프로필 수정 - Health Catch</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -134,7 +134,26 @@
         margin-left:10px;
         
       }
-      
+      .error {
+    width: 250px;
+    height: 20px;
+    height:auto;
+    position: fixed;
+    left: 50%;
+    margin-left:-125px;
+    bottom: 100px;
+    z-index: 9999;
+    background-color: #383838;
+    color: #F0F0F0;
+    font-family: Calibri;
+    font-size: 15px;
+    padding: 10px;
+    text-align:center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+    box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+} 
    
       
      
@@ -4010,7 +4029,7 @@ input, select, textarea {
 					<header id="header" class="alt">
 						<span class="logo"><img src="images/logo.svg" alt="" /></span>
 						
-						
+						<strong style="color:red;">※모든정보를 입력해주세요. 모든정보가 입력되어야 프로필이 노출됩니다.※</strong>
 						<h1 id="tf_nameUpdateOk" style="color:white;" >${trainerprofile.tf_name} 트레이너</h1>
 						<textarea 	style="display: none; color:white;" rows="2" cols="120" name="" >${trainerprofile.tf_name}</textarea>
 				  		<button	style="display: none; color:white;"  id="tf_nameBtnOK" tf_id="${trainerprofile.tf_id}" class="btn btn-outline-dark">등록</button>
@@ -4070,7 +4089,7 @@ input, select, textarea {
 										<div class="slider1" style="margin-left:25px;">
 											<c:forEach var="filelist" items="${filelist}">
 											
-											  <div style="margin-left:-50px;"><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a></div>
+											  <div style="margin-left:-50px;"><a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a></div>
 				
 											  </c:forEach> 
 											  
@@ -4101,7 +4120,7 @@ input, select, textarea {
             </div>
             <div style="display: flex; justify-content: left;  flex-wrap: wrap;"  >
               <c:forEach var="filelist" items="${filelist}">
-											 <div style="position:relative;"><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img style="width:80px; height:80px;"src="../../../Img/${filelist.file_name}" ></span></a>
+											 <div style="position:relative;"><a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img style="width:80px; height:80px;"src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a>
 											<sec:authentication property="principal" var="principal"/>  
 											<div style="position:absolute; left:58px; top:1px;"><button class="my-button" style="height:20px; width:20px;"class="btn btn-outline-dark"  data-bs-toggle="modal" data-bs-target="#deleteFile1Modal" id="removefileBtn"  data-filepath="${filelist.file_path}" data-ukey="${principal.u_key}" >
 											  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px; " alt="Button Icon">
@@ -4123,7 +4142,7 @@ input, select, textarea {
 								
 								<c:forEach var="filelist" items="${filelist_2}">
 											<div style="position:relative;">
-											<a  class="aa" style="text-decoration-color : white;"   href="../../../Img/${filelist.file_name}"  data-lightbox="example-set2"><input type="text" class="form-control" style=" color:white; background-color:black; " name="tf_certificatetitle"
+											<a  class="aa" style="text-decoration-color : white;"   href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set2"><input type="text" class="form-control" style=" color:white; background-color:black; " name="tf_certificatetitle"
 												id="address2"  value="${filelist.tf_certificatetitle }"readonly ></a>
 											
 											<div style="position:absolute; right:4px; top:4px;"><button style="height:35px; width:60px; background-color:white;" class="btn btn-outline-dark"  data-bs-toggle="modal" data-bs-target="#deleteFile1Modal" id="removefileBtn"  data-filepath="${filelist.file_path}" data-ukey="${principal.u_key}">삭제</button></div>
@@ -4177,7 +4196,7 @@ input, select, textarea {
 									<h2><Strong  style="color:black">${trainerprofile.tf_programtitle }</Strong></h2>
 									
 									<c:forEach var="filelist" items="${filelist_3}">
-											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set3"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
+											<a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set3"><span class="image"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a>
 									</c:forEach>
 									
 								
@@ -4235,7 +4254,7 @@ input, select, textarea {
 									<c:forEach var="filelist" items="${PT_filelist}" varStatus="status2">
 									
 										<c:if test="${PT_List.pt_id == filelist.pt_id }">
-											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set${filelist.pt_id }"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
+											<a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set${filelist.pt_id }"><span class="image"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a>
 											
 										</c:if>
 									</c:forEach>
@@ -4263,7 +4282,7 @@ input, select, textarea {
             <div style="display: flex; justify-content: left;  flex-wrap: wrap;"  >
               <c:forEach var="filelist" items="${PT_filelist}">
               								<c:if test="${PT_List.pt_id == filelist.pt_id }">
-											 <div style="position:relative;"><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img style="width:80px; height:80px;"src="../../../Img/${filelist.file_name}" ></span></a>
+											 <div style="position:relative;"><a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img style="width:80px; height:80px;"src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a>
 											<sec:authentication property="principal" var="principal"/>  
 											<div style="position:absolute; left:58px; top:1px;"><button class="my-button" style="height:20px; width:20px;"class="btn btn-outline-dark"  data-bs-toggle="modal" data-bs-target="#deleteFile2Modal" id="removefileBtn"  data-filepath="${filelist.file_path}" data-ukey="${principal.u_key}" >
 											  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px; " alt="Button Icon">
@@ -4817,6 +4836,10 @@ input, select, textarea {
     </div>
   </div>
 </div>		
+
+<input type="hidden" value="${toast}" id="toastcheck">		
+<div class='error' style='display:none'>PT등록완료</div>
+
 <!-- 트레이너 프로필 사진 1 삭제 Modal Modal -->
 <div class="modal fade" id="deleteFile1Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -5705,5 +5728,19 @@ function setThumbnail2(event) {
       reader.readAsDataURL(image);
     }
   }
+  
+  
+window.addEventListener('load', function() {
+	  var postptinsert = sessionStorage.getItem('postptinsert');
+	  
+	  
+	  	  if (postptinsert) {
+		  $('.error').fadeIn(400).delay(1000).fadeOut(400); //fade out after 3 seconds
+	    // 삭제 상태 제거
+	    sessionStorage.removeItem('postptinsert');
+	  }
+	});
+
+
 </script>
 </html>

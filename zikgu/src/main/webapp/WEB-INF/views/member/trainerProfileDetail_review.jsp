@@ -4046,14 +4046,14 @@ input, select, textarea {
 									</div>
 										<div class="slider1" style="margin-left:25px;">
 											<c:forEach var="filelist" items="${filelist}">
-											  <div style="margin-left:-50px;"><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a></div>
+											  <div style="margin-left:-50px;"><a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a></div>
 											  </c:forEach> 
 		   								 </div>		
 								</div>
 								
 								<h4><Strong style="color:black">자격사항</Strong></h4>
 								<c:forEach var="filelist" items="${filelist_2}">
-											<a class="aa" style="text-decoration-color : white;"   href="../../../Img/${filelist.file_name}"  data-lightbox="example-set2"><input type="text" class="form-control" style="flex: 0.5; color:white; background-color:black; " name="tf_certificatetitle"
+											<a class="aa" style="text-decoration-color : white;"   href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set2"><input type="text" class="form-control" style="flex: 0.5; color:white; background-color:black; " name="tf_certificatetitle"
 												id="address2" placeholder="내용을 입력해주세요" value="${filelist.tf_certificatetitle }"readonly></a>
 								
 								</c:forEach>
@@ -4066,7 +4066,7 @@ input, select, textarea {
 									<h2><Strong  style="color:black">${trainerprofile.tf_programtitle }</Strong></h2>
 									
 									<c:forEach var="filelist" items="${filelist_3}">
-											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set3"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
+											<a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set3"><span class="image"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a>
 									</c:forEach>
 									
 								
@@ -4120,7 +4120,7 @@ input, select, textarea {
 									<c:forEach var="filelist" items="${PT_filelist}" varStatus="status2">
 									
 										<c:if test="${PT_List.pt_id == filelist.pt_id }">
-											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set${filelist.pt_id }"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
+											<a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set${filelist.pt_id }"><span class="image"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a>
 										</c:if>
 									</c:forEach>
 									</div>

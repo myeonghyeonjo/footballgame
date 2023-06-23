@@ -537,7 +537,7 @@
 		tf_loadaddress as tf_loadaddress,
 		tf_name as tf_name
 		from trainerprofile 
-			WHERE tf_loadaddress != '샘플 주소입니다' AND tf_name != '홍길동' AND tf_check != '반려' AND tf_hanjulintro != '한줄 소개글을 입력해주세요'
+			WHERE tf_loadaddress != '샘플 주소입니다' AND tf_name != '홍길동' AND tf_check != '반려' AND tf_hanjulintro != '한줄 소개글을 입력해주세요' AND tf_imginsertcheck = 1
 			ORDER BY tf_id DESC 
 		LIMIT 3
 	</select>
@@ -792,7 +792,8 @@
 		m_sundayafter,
 		m_schedureintro,
 		m_consulting,
-		m_consultingconfirm
+		m_consultingconfirm,
+		m_selectedPT
 
 		from memberprofile
 		where m_id = #{m_id}
@@ -1495,8 +1496,9 @@
 
 		FROM trainerprofile
 
-		WHERE tf_loadaddress like concat('%',#{keyword},'%') OR tf_option like
-		concat('%',#{keyword},'%') OR tf_name like concat('%',#{keyword},'%')
+		WHERE  tf_loadaddress != '샘플 주소입니다' AND tf_name != '홍길동' AND tf_check != '반려' AND tf_hanjulintro != '한줄 소개글을 입력해주세요'
+		AND (tf_loadaddress like concat('%',#{keyword},'%') OR tf_option like
+		concat('%',#{keyword},'%') OR tf_name like concat('%',#{keyword},'%') )
 
 	</select>
 	
@@ -2134,7 +2136,13 @@
 
 		WHERE tf_id = #{tf_id}
 	</update>
-	
+		<!-- 트레이너 프로필 이미지 등록체크 수정 -->
+	<update id="trainerprofileimginsertcheck" parameterType="trainerprofile">
+		UPDATE trainerprofile SET
+		tf_imginsertcheck = 1
+
+		WHERE tf_id = #{tf_id}
+	</update>
 	
 	<!-- 트레이너 주소 수정 -->
 	<update id="trainerprofileaddressupdate" parameterType="trainerprofile">
@@ -2732,6 +2740,60 @@
 		WHERE memberprofile_u_key = #{u_key} AND trainerprofile_name like concat('%',#{keyword},'%')   OR r_content like concat('%',#{keyword},'%') 
 		LIMIT 			#{pageNum}, 10 
 	</select>
+		<!-- 회원이 작성한 리뷰 검색+완료 리스트 -->
+	<select id="getmember_review_search_complete_ListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date,
+				r_reply as r_reply,
+				r_replydate as r_replydate,
+				trainerprofile_name as trainerprofile_name
+		from review	
+		WHERE memberprofile_u_key = #{u_key} AND r_check = 1 AND (trainerprofile_name like concat('%',#{keyword},'%')   OR r_content like concat('%',#{keyword},'%') )
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 회원이 작성한 리뷰 검색+대기 리스트 -->
+	<select id="getmember_review_search_waite_ListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date,
+				r_reply as r_reply,
+				r_replydate as r_replydate,
+				trainerprofile_name as trainerprofile_name
+		from review	
+		WHERE memberprofile_u_key = #{u_key} AND r_check = 0 AND (trainerprofile_name like concat('%',#{keyword},'%')   OR r_content like concat('%',#{keyword},'%') )
+		LIMIT 			#{pageNum}, 10 
+	</select>
+		<!-- 회원이 작성한 리뷰 검색+반려 리스트 -->
+	<select id="getmember_review_search_reject_ListALL" resultType="review">
+		select r_id as r_id,
+				memberprofile_u_key as memberprofile_u_key,
+				trainerprofile_u_key as trainerprofile_u_key,
+				r_opencheck as r_opencheck,
+				r_check as r_check,
+				r_content as r_content,
+				r_starR as r_starR,
+				memberprofile_name as memberprofile_name,
+				r_date as r_date,
+				r_reply as r_reply,
+				r_replydate as r_replydate,
+				trainerprofile_name as trainerprofile_name
+		from review	
+		WHERE memberprofile_u_key = #{u_key} AND r_check = 2 AND (trainerprofile_name like concat('%',#{keyword},'%')   OR r_content like concat('%',#{keyword},'%') )
+		LIMIT 			#{pageNum}, 10 
+	</select>
 	
 		<!-- 트레이너한테 작성된 리뷰 검색+완료 리스트 -->
 	<select id="gettrainer_review_search_complete_ListALL" resultType="review">
@@ -2990,7 +3052,24 @@
 				 FROM            review
 				 WHERE memberprofile_u_key = ${u_key} AND trainerprofile_name like concat('%',#{keyword},'%')  OR r_content like concat('%',#{keyword},'%')    
 	</select>
-
+	<!--회원이 작성한 리뷰 갯수 검색+완료 카운트 -->
+	<select id="getmember_review_search_complete_Count" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE memberprofile_u_key = ${u_key} AND r_check = 1 AND (trainerprofile_name like concat('%',#{keyword},'%')  OR r_content like concat('%',#{keyword},'%') )   
+	</select>
+	<!--회원이 작성한 리뷰 갯수 검색+대기 카운트 -->
+	<select id="getmember_review_search_waite_Count" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE memberprofile_u_key = ${u_key} AND r_check = 0 AND (trainerprofile_name like concat('%',#{keyword},'%')  OR r_content like concat('%',#{keyword},'%') )   
+	</select>
+	<!--회원이 작성한 리뷰 갯수 검색+반려 카운트 -->
+	<select id="getmember_review_search_reject_Count" resultType="int">
+				 SELECT       count(*)                
+				 FROM            review
+				 WHERE memberprofile_u_key = ${u_key} AND r_check = 2 AND (trainerprofile_name like concat('%',#{keyword},'%')  OR r_content like concat('%',#{keyword},'%') )   
+	</select>
 	
 	<!-- 트레이너한테 작성된 리뷰 갯수 검색+완료 카운트 -->
 	<select id="gettrainer_review_search_complete_Count" resultType="int">

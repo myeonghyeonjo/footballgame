@@ -468,6 +468,20 @@ public interface BoardService {
 
 	public List<FileDto> reviewlist_trainerprofile_Img(int tf_id);
 
+	public int getmember_review_search_complete_Count(Pagination pagination);
+
+	public List<Review> getmember_review_search_complete_ListALL(Pagination pagination);
+
+	public int getmember_review_search_waite_Count(Pagination pagination);
+
+	public List<Review> getmember_review_search_waite_ListALL(Pagination pagination);
+
+	public int getmember_review_search_reject_Count(Pagination pagination);
+
+	public List<Review> getmember_review_search_reject_ListALL(Pagination pagination);
+
+	public void trainerprofileimginsertcheck(int tf_id);
+
 	
 
 	

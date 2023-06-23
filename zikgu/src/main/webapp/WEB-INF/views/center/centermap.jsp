@@ -17,7 +17,8 @@
 		
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=272bc96032396df76a8c8d79f886c824&libraries=services"></script>
+<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=272bc96032396df76a8c8d79f886c824&libraries=services"></script> -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30d7fe114e27eb70c8a0bb71e850c6f4&libraries=services"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>		
 
 <!-- 버튼모달 -->		
@@ -2030,7 +2031,7 @@ input, select, textarea {
 	button,
 	.button {
 		background-color: transparent;
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+		box-shadow: 0;
 		color: black;
 	}
 
@@ -3921,6 +3922,9 @@ input, select, textarea {
 		-ms-transform: none;
 		transform: none;
 	}
+	div.dropdown{
+	width:100px;
+	}
 </style>
 
 <jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>
@@ -3984,7 +3988,7 @@ input, select, textarea {
 											<div class="slider2" style="margin-left:25px;">
 		<c:forEach var="filelist" items="${filelist}">
 		
-		  <div style="margin-left:-50px;"><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set4"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
+		  <div style="margin-left:-50px;"><a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set4"><span class="image"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a>
 </div>
 		  
 		  </c:forEach> 
@@ -4000,7 +4004,7 @@ input, select, textarea {
 									<h2><Strong  style="color:black">센터 사진</Strong></h2>
 									
 									<c:forEach var="filelist" items="${filelist}">
-											<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set5"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a>
+											<a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set5"><span class="image"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a>
 									</c:forEach>
 									
 									
@@ -4163,14 +4167,12 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
-
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
-
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
-let tf_loadaddress = $('#tf_loadaddress').val();
-let c_name = $('#c_name').val();
+tf_loadaddress = $('#tf_loadaddress').val();
+c_name = $('#c_name').val();
 // 주소로 좌표를 검색합니다
 geocoder.addressSearch(tf_loadaddress, function(result, status) {
 	console.log("tf_loadaddress:centertest"+tf_loadaddress);
@@ -4217,6 +4219,38 @@ function Centerview(test) {
 			          autoplay: true,
 			          autoplaySpeed: 1000,
 			        } );
+			     
+			   
+		});
+		
+}
+
+function review(test) {
+	  console.log("리뷰호출");
+	  let trainer_u_key = $('#u_key').val();
+	  let memberprofile_u_key =$('#memberprofile_u_key').val();
+	  if (memberprofile_u_key) {
+		  console.log("memberprofile_u_key 변수에 값이 있습니다.");
+		} else {
+			memberprofile_u_key = 0;
+		}
+	 let member_u_key = $('#member_u_key').val();
+		console.log("trainer_u_key:"+trainer_u_key);
+		console.log("memberprofile_u_key:"+memberprofile_u_key);
+		console.log("member_u_key:"+member_u_key);
+	
+		$.ajax({
+			method: "POST",
+			url: "/aj-review",
+			data: {  trainer_u_key: trainer_u_key , memberprofile_u_key: memberprofile_u_key}
+		})
+		.done(function( html ) {
+			
+			$('#centerview').html(html);
+		     $( '.slider2' ).slick( {
+			          autoplay: true,
+			          autoplaySpeed: 1000,
+			        });
 			     
 			   
 		});

@@ -181,7 +181,7 @@ a:hover{color:#1bc1a3;}
                     <h3>Slide #1</h3>
                     <span>Sub-title #1</span>
                 </div>                
-<img src="../../../Img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG">
+<img src="http://15.164.62.221:8080/static/img/health/img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG">
              </li>
              
              <li>
@@ -189,7 +189,7 @@ a:hover{color:#1bc1a3;}
                     <h3>Slide #2</h3>
                     <span>Sub-title #2</span>
                 </div>
-<img src="../../../Img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG">
+<img src="http://15.164.62.221:8080/static/img/health/img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG">
              </li>
              
              <li>
@@ -197,7 +197,7 @@ a:hover{color:#1bc1a3;}
                     <h3>Slide #3</h3>
                     <span>Sub-title #3</span>
                 </div>
-<img src="../../../Img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG">
+<img src="http://15.164.62.221:8080/static/img/health/img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG">
              </li>
              
              <li>
@@ -205,7 +205,7 @@ a:hover{color:#1bc1a3;}
                     <h3>Slide #4</h3>
                     <span>Sub-title #4</span>
                 </div>
-<img src="../../../Img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG">
+<img src="http://15.164.62.221:8080/static/img/health/img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG">
              </li>
              
              <li>
@@ -213,7 +213,7 @@ a:hover{color:#1bc1a3;}
                     <h3>Slide #5</h3>
                     <span>Sub-title #5</span>
                 </div>
-<img src="../../../Img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG">
+<img src="http://15.164.62.221:8080/static/img/health/img/004f21b4-cc53-4e43-bfe6-08b3713c6c79.JPG">
              </li>
              
              

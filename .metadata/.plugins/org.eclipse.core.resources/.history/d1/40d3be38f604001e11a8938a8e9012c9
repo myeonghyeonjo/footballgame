@@ -1,5 +1,0 @@
-package com.zikgu.example.domain;
-
-public class certificate {
-	private int cer_id;
-}

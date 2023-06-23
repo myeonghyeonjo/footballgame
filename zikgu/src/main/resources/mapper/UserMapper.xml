@@ -26,8 +26,22 @@
       AND            u_id   =   #{username}
    </select>
    
- 
-   
+  <!-- 회원이 프로필 입력했는지 여부 체크 -->
+    <select id="getu_memberprofileinsertcheck" parameterType="String" resultType="User">
+      SELECT         u_id                 						    as   username,
+			                 u_password             					as password,
+			                 u_name                						as   uName,
+			                 u_isAccountNonExpired        as isAccountNonExpired,
+			                 u_isAccountNonLocked    	    as isAccountNonLocked,
+			                 u_isCredentialNonExpired    as isCredentialsNonExpired,
+			                 u_isEnabled          				    as isEnabled,
+			                 u_key                                  as u_key,
+			                 u_trainercheck                         as u_trainercheck,
+			                u_memberprofileinsertcheck             as u_memberprofileinsertcheck
+      FROM         lc_user
+      WHERE         1=1
+      AND            u_key   =   #{u_key}
+   </select>
 
    
      <!-- 회원 불러오기 -->

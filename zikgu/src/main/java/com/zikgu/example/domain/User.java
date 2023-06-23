@@ -17,6 +17,7 @@ public class User implements UserDetails {
 	private int u_key;
 	private int u_memberprofileinsertcheck;
 	private int u_trainercheck;
+	private int memberprofile_u_key;
 	//security 관련
 	private Collection<? extends GrantedAuthority> authorities;
 	
@@ -149,6 +150,14 @@ public class User implements UserDetails {
 
 	public void setU_trainercheck(int u_trainercheck) {
 		this.u_trainercheck = u_trainercheck;
+	}
+
+	public int getMemberprofile_u_key() {
+		return memberprofile_u_key;
+	}
+
+	public void setMemberprofile_u_key(int memberprofile_u_key) {
+		this.memberprofile_u_key = memberprofile_u_key;
 	}
 }
 

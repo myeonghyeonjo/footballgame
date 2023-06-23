@@ -159,14 +159,10 @@
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand headermenu1 col-md-3 col-lg-2 me-0 px-3 fs-6" >검색</a>
 
-		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  col-lg-3 " href="/memberprofilelist">회원 프로필 관리	 
+		 
+		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3 "id="nav_link_memberprofile2"  href="/centerlistcomplete2">센터 목록
 		</a>
-		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " href="/trainerprofilelist">트레이너 프로필 관리
-		</a>
-		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3 "id="nav_link_memberprofile2"  href="/centerlist">센터 관리
-		</a>
-		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  " href="/reviewlist">리뷰 관리
-		</a>
+		
        	<form action="center_search_complete2" method="post" style="width:1200px;" >
 		          <input class="form-control form-control-dark  rounded-0 border-0"  aria-label="Search" type="text" name="keyword" id="keyword" placeholder="센터명,센터주소 검색" value="${keyword }">
 		          <a href="center_search_complete2?keyword=${keyword}" class="search_icon" ><i class="fas fa-search"></i></a>
@@ -179,20 +175,9 @@
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link sidemenu active" aria-current="page" href="/memberprofilelist">
-              <span data-feather="home" class="align-text-bottom"></span>
-              회원목록
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link sidemenu" href="/trainerprofilelist">
-              <span data-feather="file" class="align-text-bottom"></span>
-              트레이너목록
-            </a>
-          </li>
+          
           <li class="nav-item ">
-            <a class="nav-link sidemenu" id="nav_link_memberprofile" href="/centerlist">
+            <a class="nav-link sidemenu" id="nav_link_memberprofile" href="/centerlistcomplete2">
               <span data-feather="shopping-cart" class="align-text-bottom"></span>
               센터목록
             </a>
@@ -200,25 +185,25 @@
           <li class="nav-item ">
             <a class="nav-link sidemenu" href="/reviewlist">
               <span data-feather="users" class="align-text-bottom"></span>
-              리뷰관리
+            
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="bar-chart-2" class="align-text-bottom"></span>
-              Reports
+            
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="layers" class="align-text-bottom"></span>
-              Integrations
+            
             </a>
           </li>
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-          <span>Saved reports</span>
+          <span></span>
           <a class="link-secondary" href="#" aria-label="Add a new report">
             <span data-feather="plus-circle" class="align-text-bottom"></span>
           </a>
@@ -227,25 +212,85 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Current month
+            
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Last quarter
+             
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Social engagement
+           
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Year-end sale
+             
+            </a>
+          </li>
+             <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+             
+            </a>
+          </li>
+             <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+             
+            </a>
+          </li>
+             <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+             
+            </a>
+          </li>
+             <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+             
+            </a>
+          </li>
+             <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+             
+            </a>
+          </li>
+             <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+             
+            </a>
+          </li>
+             <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+             
+            </a>
+          </li>
+             <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+             
+            </a>
+          </li>
+             <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+             
+            </a>
+          </li>
+             <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+             
             </a>
           </li>
         </ul>
@@ -258,13 +303,7 @@
         <div class="btn-toolbar mb-2 mb-md-0">
         	<c:set var="keywordLength" value="${fn:length(keyword)}" />
 	        
-	        
-       <select class="form-select" name="tf_certificate" id="reviewselect" style="flex: 0.85;" required>
-										<option selected>정렬</option>
-										<option value="starhigh">평점높은순</option>
-										<option value="starlow">평점낮은순</option>
-		</select>
-          
+	 
         </div>
       </div>
 

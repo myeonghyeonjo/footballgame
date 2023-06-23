@@ -4293,7 +4293,7 @@ input, select, textarea {
 										   				<c:if test="${reviewfilelist.memberprofile_u_key == reviewlist.memberprofile_u_key}">
 										   				<c:if test="${reviewfilelist.review_r_id == reviewlist.r_id}">
 										   				<c:if test="${reviewlist.r_opencheck==1}">
-											<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
+											<a  href="http://15.164.62.221:8080/static/img/health/img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="http://15.164.62.221:8080/static/img/health/img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
 											<input type="hidden" value="${reviewfilelist.file_name }" class="filename${reviewlist.r_id}">
 											<input type="hidden" value="${reviewfilelist.r_id }" class="file_r_id${reviewlist.r_id}">
 											</c:if>
@@ -4348,10 +4348,10 @@ input, select, textarea {
 												<span class="icon fa-gem"></span>
 													<c:forEach var="filelist" items="${filelist}" varStatus="status1">
 														<c:if test="${status1.index==0}">
-													 	 	<div style="margin-left:-50px; "><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a></div>
+													 	 	<div style="margin-left:-50px; "><a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a></div>
 													    </c:if>
 													    <c:if test="${status1.index!=0}">
-													 	 	<a    href="../../../Img/${filelist.file_name}" data-lightbox="example-set"></a>
+													 	 	<a    href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" data-lightbox="example-set"></a>
 													    </c:if>
 												 	 </c:forEach> 
 													<strong style="font-size:25px; ">${trainerprofile.tf_name} 트레이너</strong> 
@@ -4606,9 +4606,9 @@ $('.modifyreviewBtn').each(function(){
 	
 	console.log("filecount:"+filecount);
 	
-	filepath1 = "../../../Img/"+filename1;
-	filepath2 = "../../../Img/"+filename2;
-	filepath3 = "../../../Img/"+filename3;
+	filepath1 = "http://15.164.62.221:8080/static/img/health/img/"+filename1;
+	filepath2 = "http://15.164.62.221:8080/static/img/health/img/"+filename2;
+	filepath3 = "http://15.164.62.221:8080/static/img/health/img/"+filename3;
 	console.log("filepath1:"+filepath1);
 	console.log("filepath2:"+filepath2);
 	console.log("filepath3:"+filepath3);
@@ -4624,14 +4624,14 @@ $('.modifyreviewBtn').each(function(){
 			 htmlData2 += '<div style="display: inline-block;   box-sizing: border-box; padding: 10px; float:left;" id="file' + file_r_id1 + '" class="filebox2'+r_id+'">';
 		        htmlData2 += '<img src="' + filepath1 + '" title="' + filename1 + '" width=100 height=100 />';
 				 htmlData2 += '  <a class="delete2" onclick="deletemodifyFile(' + file_r_id1 + ');">';
-				  htmlData2 += '  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px;  margin-left:-52px; margin-top:-210px;  cursor:pointer;" alt="Button Icon">';
+				  htmlData2 += '  <img src="http://15.164.62.221:8080/static/img/health/img/Xicon.JPG" style="height:20px; width:20px;  margin-left:-52px; margin-top:-210px;  cursor:pointer;" alt="Button Icon">';
 				  htmlData2 += '</div>';  
 		 }
 		    else if(j==2){
 				 htmlData2 += '<div style="display: inline-block;  box-sizing: border-box; padding: 10px; " id="file' + file_r_id2 + '" class="filebox2'+r_id+'">';
 		    	htmlData2 += '<img src="' + filepath2 + '" title="' + filename2 + '" width=100 height=100 />';
 				 htmlData2 += '  <a class="delete2" onclick="deletemodifyFile(' + file_r_id2 + ');">';
-				  htmlData2 += '  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px; margin-left:-52px; margin-top:-210px;   cursor:pointer;" alt="Button Icon">';
+				  htmlData2 += '  <img src="http://15.164.62.221:8080/static/img/health/img/Xicon.JPG" style="height:20px; width:20px; margin-left:-52px; margin-top:-210px;   cursor:pointer;" alt="Button Icon">';
 				  htmlData2 += '</div>';  
 
 		    }
@@ -4639,7 +4639,7 @@ $('.modifyreviewBtn').each(function(){
 				 htmlData2 += '<div style="display: inline-block;  box-sizing: border-box; padding: 10px; " id="file' + file_r_id3 + '" class="filebox2'+r_id+'">';
 		    	htmlData2 += '<img src="' + filepath3 + '" title="' + filename3 + '" width=100 height=100 />';
 				 htmlData2 += '  <a class="delete2" onclick="deletemodifyFile(' + file_r_id3 + ');">';
-				  htmlData2 += '  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px; margin-left:-52px; margin-top:-210px;   cursor:pointer;" alt="Button Icon">';
+				  htmlData2 += '  <img src="http://15.164.62.221:8080/static/img/health/img/Xicon.JPG" style="height:20px; width:20px; margin-left:-52px; margin-top:-210px;   cursor:pointer;" alt="Button Icon">';
 				  htmlData2 += '</div>'; 
 		    }
          }
@@ -4769,7 +4769,7 @@ function addFile(obj){
        		  htmlData +=  '<img src="'+value+'" title="'+file.name+'" width=100 height=100 />';
                 htmlData += '   <p class="name" style="color:black; margin-bottom:-30px;">' + file.name + '</p>';
 				  htmlData += '  <a class="delete" onclick="deleteFile(' + fileNo + ');">';
-				  htmlData += '  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px;  margin-left:0px; margin-top:-197px;  cursor:pointer;" alt="Button Icon">';
+				  htmlData += '  <img src="http://15.164.62.221:8080/static/img/health/img/Xicon.JPG" style="height:20px; width:20px;  margin-left:0px; margin-top:-197px;  cursor:pointer;" alt="Button Icon">';
 				  htmlData += '</div>';
 				 
               
@@ -4837,7 +4837,7 @@ function addFile2(obj){
 				  htmlData += '<div style="display: inline-block;  box-sizing: border-box; padding: 10px; margin-left:25px;" id="file' + fileNo + '" class="filebox2'+r_id+'">';
        			  htmlData +=  '<img src="'+value+'" title="'+file.name+'" width=100 height=100 />';
 				  htmlData += '  <a class="delete" onclick="deleteFile(' + fileNo + ');">';
-				  htmlData += '  <img src="../../../Img/Xicon.JPG" style="height:20px; width:20px; margin-left:-52px; margin-top:-210px;  cursor:pointer;" alt="Button Icon">';
+				  htmlData += '  <img src="http://15.164.62.221:8080/static/img/health/img/Xicon.JPG" style="height:20px; width:20px; margin-left:-52px; margin-top:-210px;  cursor:pointer;" alt="Button Icon">';
 				  htmlData += '</div>';	
 				  $('.file-reviewmodify-list'+r_id).append(htmlData);     
                   fileNo++;

@@ -34,7 +34,7 @@
 <body>
 		<div id="container">
 			<div id="one">
-				<img src="../../../Img/028573da-5859-418b-b210-36cbfa566047.JPG"/>
+				<img src="http://15.164.62.221:8080/static/img/health/img/028573da-5859-418b-b210-36cbfa566047.JPG"/>
 				<img src="images/11.jpg" />
 				<img src="images/21.jpg" />
 			</div>

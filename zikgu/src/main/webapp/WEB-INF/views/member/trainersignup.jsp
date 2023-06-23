@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Checkout example · Bootstrap v5.2</title>
+    <title>트레이너 회원가입 - Health Catch</title>
 
     <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/checkout/">
 

@@ -169,7 +169,7 @@ style>.image-container2 {
 					<div id="sectionbox" class="form-control" style="width:930px;">
 					<c:forEach var="filelist" items="${filelist}">
 						
-						<a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><img src="../../../Img/${filelist.file_name}" width="175" height="175"   alt=""
+						<a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" width="175" height="175"   alt=""
 						 ></a>
 						
 					</c:forEach>

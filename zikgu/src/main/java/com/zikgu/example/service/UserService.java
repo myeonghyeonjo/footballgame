@@ -38,6 +38,7 @@ public interface UserService extends UserDetailsService{
 
 	public void memberprofileinsertcheckdelete(int u_key);
 
+
 	
 
 	

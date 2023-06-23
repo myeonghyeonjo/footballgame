@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>내 정보 - Health Catch</title>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -43,9 +43,16 @@
 	height: 210px; /* 높이 지정 */
 	background-color: #f0f0f0; /* 배경색 지정 */
 	width: 47%;
-	
 }
-#user_rounded-rectangle1, #rounded-rectangle1, #rounded-rectangle2{
+#rounded-rectangle1_1{
+	border: 3px solid red;
+	border-radius: 20px; /* 모서리 둥글기 값 지정 */
+	width: 470px; /* 너비 지정 */
+	height: 210px; /* 높이 지정 */
+	background-color: f0f0f0; /* 배경색 지정 */
+	width: 47%;
+}
+#user_rounded-rectangle1, #rounded-rectangle1, #rounded-rectangle2, #rounded-rectangle1_1{
 	  transform: scale(1);
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
@@ -54,7 +61,7 @@
   transition: all 0.3s ease-in-out; /* 부드러운 모션을 위해 추가*/
 }
 
-    #user_rounded-rectangle1:hover, #rounded-rectangle1:hover, #rounded-rectangle2:hover {
+    #user_rounded-rectangle1:hover, #rounded-rectangle1:hover, #rounded-rectangle2:hover ,#rounded-rectangle1_1:hover{
   transform: scale(1.05);
   -webkit-transform: scale(1.05);
   -moz-transform: scale(1.05);
@@ -89,7 +96,7 @@
    .wrapper {
 	display: block;
 }
-	#rounded-rectangle1, #rounded-rectangle2{
+	#rounded-rectangle1, #rounded-rectangle2, #rounded-rectangle1_1{
 		width:100%;
 		height:150px;
 	}
@@ -213,7 +220,27 @@ button:hover {
 			<c:if test="${(principal.u_trainercheck=='1')}">
 				<div class="container">
 					<div class="wrapper">
-						<div id="rounded-rectangle1" class="bg-light"
+					<c:choose>
+					    <c:when test="${trainerprofileinsertcheck == 0}">
+					        <div id="rounded-rectangle1_1" class="bg-light"
+							style="margin-top: 30px;">
+							<Strong style="color: red; padding: 30px; ">※프로필이 정상등록되지않았습니다.※</Strong>
+							<h3 style="color: black; padding: 30px;margin-top:-25px;">
+								<Strong>트레이너 프로필 관리</Strong>
+							</h3>
+							<p id="trainer_p1"
+								style="margin-left: 30px; ">프로필을
+								등록하고, 조회하거나 수정하세요.</p>
+							<!-- <a href="/trainerProfile?u_key=${u_key}" class="aa" id="trainer_a1"
+								style="color: #4169e1; margin-left: 30px; margin-top: -10px;">프로필
+								등록 ></a>  -->
+								<a href="/trainerProfileDetailModify?u_key=${u_key}" class="aa"
+								style="color: #4169e1; margin-left: 30px; margin-top: -10px; ">프로필
+								조회 ></a>
+							</div>
+					    </c:when>
+					    <c:otherwise>
+					        <div id="rounded-rectangle1" class="bg-light"
 							style="margin-top: 30px;">
 							<h3 style="color: black; padding: 30px;">
 								<Strong>트레이너 프로필 관리</Strong>
@@ -228,6 +255,8 @@ button:hover {
 								style="color: #4169e1; margin-left: 30px; margin-top: -10px; ">프로필
 								조회 ></a>
 						</div>
+					    </c:otherwise>
+					</c:choose>
 
 						<div id="rounded-rectangle2" class="bg-light"
 							style="margin-top: 30px;">
@@ -270,7 +299,7 @@ button:hover {
 							<a href="/trainerPT?u_key=${u_key}" class="aa" id="trainer_a3"
 								style="color: #4169e1; margin-left: 30px; margin-top: -20px; ">PT 등록 ></a> 
 							<a href="/trainerconsultinglist?u_key=${u_key}" class="aa"
-								style="color: #4169e1; margin-left: 20px; margin-top: -10px; ">PT 요청
+								style="color: #4169e1; margin-left: 20px; margin-top: -10px; ">PT 상담요청
 								조회 ></a>
 						</div>
 						

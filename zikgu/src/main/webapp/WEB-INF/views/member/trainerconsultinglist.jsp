@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Dashboard Template · Bootstrap v5.2</title>
+    <title>PT상담신청목록 - Health Catch</title>
 
     <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/dashboard/">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -217,19 +217,19 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="bar-chart-2" class="align-text-bottom"></span>
-              Reports
+        
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="layers" class="align-text-bottom"></span>
-              Integrations
+             
             </a>
           </li>
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-          <span>Saved reports</span>
+          <span></span>
           <a class="link-secondary" href="#" aria-label="Add a new report">
             <span data-feather="plus-circle" class="align-text-bottom"></span>
           </a>
@@ -238,27 +238,89 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Current month
+          
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Last quarter
+            
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Social engagement
+           
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Year-end sale
+             
             </a>
           </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+             
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+             
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+             
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+             
+            </a>
+             <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+         
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+         
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+         
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+         
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+         
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+         
+            </a>
+          </li>
+          
+          </li>
+          	
         </ul>
       </div>
     </nav>
@@ -332,9 +394,9 @@
           <input type="hidden" id="u_key" value="${principal.u_key }">
           <tbody>
 		        <c:forEach var="list" items="${list }">
-           		<tr>
+           		<tr onclick="location.href='memberDetail?memberprofile_u_key=${list.u_key }&trainerprofile_u_key=${u_key}'"  style="cursor:pointer">
 		              <td>${list.m_id }</td>
-		              <td><a href="memberDetail?memberprofile_u_key=${list.u_key }&trainerprofile_u_key=${u_key}">${list.m_name }</a></td>
+		              <td>${list.m_name }</td>
 		              <td>${list.m_loadaddress }</td>
 		              <td>${list.m_postcode }</td>
 		              <td>${list.m_gender }</td>

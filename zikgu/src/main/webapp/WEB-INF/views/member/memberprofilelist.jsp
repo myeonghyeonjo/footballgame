@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Dashboard Template · Bootstrap v5.2</title>
+    <title>회원목록 - Health Catch</title>
 
     <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/dashboard/">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -198,19 +198,19 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="bar-chart-2" class="align-text-bottom"></span>
-              Reports
+          
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="layers" class="align-text-bottom"></span>
-              Integrations
+            
             </a>
           </li>
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-          <span>Saved reports</span>
+          <span></span>
           <a class="link-secondary" href="#" aria-label="Add a new report">
             <span data-feather="plus-circle" class="align-text-bottom"></span>
           </a>
@@ -219,27 +219,83 @@
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Current month
+           
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Last quarter
+             
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Social engagement
+            
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <span data-feather="file-text" class="align-text-bottom"></span>
-              Year-end sale
+            
             </a>
           </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+         
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+         
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+         
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+         
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+         
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+         
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+         
+            </a>
+          </li>
+          
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+         
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text" class="align-text-bottom"></span>
+         
+            </a>
+          </li>
+          
         </ul>
       </div>
     </nav>
@@ -249,11 +305,11 @@
         <h1 class="h2" style="color:black;">회원목록</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
        
-       <select class="form-select" name="tf_certificate" id="reviewselect" style="flex: 0.85;" required>
+      <!--  <select class="form-select" name="tf_certificate" id="reviewselect" style="flex: 0.85;" required>
 										<option selected>정렬</option>
 										<option value="starhigh">평점높은순</option>
 										<option value="starlow">평점낮은순</option>
-		</select>
+		</select> -->
           
         </div>
       </div>

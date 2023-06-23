@@ -18,6 +18,7 @@ repositories {
 	}
 }
 dependencies {
+
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -43,7 +44,6 @@ dependencies {
 	
 	//문자메세지 
 	implementation group: 'net.nurigo', name: 'javaSDK', version: '2.2'
-    
     //이메일연동설정
     implementation group: 'javax.mail', name: 'javax.mail-api', version: '1.5.5'
     implementation group: 'javax.mail', name: 'mail', version: '1.4.7'
@@ -52,8 +52,6 @@ dependencies {
     implementation group: 'org.apache.commons', name: 'commons-email', version: '1.5'
     implementation 'org.springframework.boot:spring-boot-starter-mail:2.7.1'
 
+	
 }
 
-test {
-	useJUnitPlatform()
-}

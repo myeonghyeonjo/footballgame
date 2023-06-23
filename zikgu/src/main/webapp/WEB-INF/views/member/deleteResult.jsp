@@ -299,7 +299,7 @@ body {
 <nav>          
        <div class="container-fluid px-0">
     <nav class="navbar navbar-expand-sm navbar-dark bg-black py-0 px-0">
-        <a class="navbar-brand" href="/"><img id="logo" src="../../../Img/덤벨.JPG"> &nbsp;&nbsp;&nbsp;Health Catch</a>
+        <a class="navbar-brand" href="/"><img id="logo" src="http://15.164.62.221:8080/static/img/health/img/덤벨.JPG"> &nbsp;&nbsp;&nbsp;Health Catch</a>
         <span class="v-line"></span>
         <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

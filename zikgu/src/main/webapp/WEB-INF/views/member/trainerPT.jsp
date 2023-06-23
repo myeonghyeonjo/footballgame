@@ -10,7 +10,7 @@
 
 <html>
 	<head>
-		<title>Stellar by HTML5 UP</title>
+		<title>PT 프로그램 등록 - Health Catch</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -4053,15 +4053,9 @@ input, select, textarea {
 										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
 											class="btn-check" id="btn-check-outlined8" autocomplete="off" value="근력향상">
 										<label class="btn btn-outline-dark" for="btn-check-outlined8">근력향상</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
-											class="btn-check" id="btn-check-outlined9" autocomplete="off" value="대회준비">
-										<label class="btn btn-outline-dark" for="btn-check-outlined9">대회준비</label><br>
-										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
-											class="btn-check" id="btn-check-outlined10" value="산전산후케어"
-											autocomplete="off"> <label
-											class="btn btn-outline-dark" for="btn-check-outlined10">산전산후케어</label><br>
+										
 									</div >
-									<div style="display: ;" class="dynamic_programsub2">
+									<!-- <div style="display: ;" class="dynamic_programsub2">
 									<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
 											class="btn-check" id="btn-check-outlined11" value="바디프로필"
 											autocomplete="off"> <label
@@ -4073,7 +4067,7 @@ input, select, textarea {
 											class="btn-check" id="btn-check-outlined7" autocomplete="off" value="기초체력">
 										<label class="btn btn-outline-dark" for="btn-check-outlined7">기초체력</label><br>
 										
-									</div >
+									</div > -->
 									<div style="display: ;"  class="dynamic_programsub1">
 										<input type="checkbox" style="flex: 0.3;" name="PT_programsub"
 											class="btn-check" id="btn-check-outlined9" autocomplete="off" value="대회준비">
@@ -4523,6 +4517,7 @@ function checkInput() {
 		pt_title_messageSpan.innerText = ""; // 문구를 비웁니다.
 		 PT_photo_messageSpan.innerText = "";  // 문구를 비웁니다.
 		  PT_programsub_messageSpan.innerText = "";  // 문구를 비웁니다.
+		  sessionStorage.setItem('postptinsert', 'true');
 	    return true; // form 제출을 허용하기 위해 true를 반환합니다.
 	  }
 	}  

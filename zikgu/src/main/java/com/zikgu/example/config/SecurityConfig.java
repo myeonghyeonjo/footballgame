@@ -59,9 +59,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //      폼 로그인 설정
       .formLogin()
             .loginPage("/signin")
-            .loginProcessingUrl("/loginPro")
             .failureHandler(customFailureHandler) // 로그인 실패 핸들러
-            .defaultSuccessUrl("/", true)
+            .loginProcessingUrl("/loginPro") 
+            //.successHandler(new LoginSuccessHandler("/")) 	 // 로그인 성공시 이전페이지 이동
+            //.defaultSuccessUrl("/", true)
             .permitAll()
             .and()
           

@@ -14,7 +14,7 @@
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
 <meta name="generator" content="Hugo 0.104.2">
-<title>Checkout example · Bootstrap v5.2</title>
+<title>회원 프로필 - Health Catch</title>
 
 <link rel="canonical"
 	href="https://getbootstrap.kr/docs/5.2/examples/checkout/">
@@ -293,11 +293,13 @@ style>.image-container2 {
 						
 								
 
-
-							
 								<h5 style="color:black;"><Strong>프로그램 관심분야 </Strong>${memberprofile.m_programsub} </h5>
 								<h5 style="color:black;"><Strong>성별 </Strong>${memberprofile.m_gender} </h5>
-								<h5 style="color:black;"><Strong>거주지 </Strong>${memberprofile.m_loadaddress} </h5>
+								<h5 style="color:black;"><Strong>선호하시는 트레이너 성별 </Strong>${memberprofile.m_likegender} </h5>
+								<sec:authentication property="principal" var="principal"/> 
+								<c:if test="${principal.u_trainercheck==0 }">
+								<h5 style="color:black;"><Strong>거주지 </Strong>${memberprofile.m_loadaddress} ${memberprofile.m_detailaddress} ${memberprofile.m_optionaddress} / 우편번호: ${memberprofile.m_postcode}  </h5>
+								</c:if>
 								<h5 style="color:black;"><Strong>연락처 </Strong>${phone} </h5>
 								<h5 style="color:black;"><Strong>연락참고사항 </Strong>${memberprofile.m_intro} </h5>
 								
@@ -308,7 +310,6 @@ style>.image-container2 {
 								<h5 style="color:black;"><Strong>스케줄 참고 사항 </Strong>${memberprofile.m_schedureintro	} </h5>
 										
 							
-
 								
 							</div>
 
@@ -343,17 +344,17 @@ style>.image-container2 {
 	<c:if test="${!((fn:contains(trainerprofile.tf_consultingconfirm,memberprofile.u_key)))}">
 		<sec:authorize access="hasRole('ROLE_USER')">
 		
-			<button type="button" class="btn btn-success" disabled >
+			<button type="button" style="width:130px; margin-right:15px;"  class="btn btn-success" disabled >
 	  			상담완료
 			</button>
-			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelconsultingModal">
+			<button type="button" style="width:130px;"  class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#cancelconsultingModal">
 	  			상담완료취소
 			</button>
 				</sec:authorize>
 		</c:if>
 	</c:if>
 		<c:if test="${(fn:contains(trainerprofile.tf_consultingconfirm,memberprofile.u_key))}">
-			<button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#consultingcheckModal">
+			<button type="button" style="width:130px;" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#consultingcheckModal">
 	  			상담완료
 			</button>
 		</c:if>
@@ -382,7 +383,7 @@ style>.image-container2 {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">상담완료</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -400,7 +401,7 @@ style>.image-container2 {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel" style="color:black;">상담완료취소</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

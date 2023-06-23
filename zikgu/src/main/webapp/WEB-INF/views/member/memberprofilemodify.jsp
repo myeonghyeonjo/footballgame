@@ -153,14 +153,12 @@
 	<div class="container">
 		<main>
 		<div class="py-5 text-center">
-				<h2 style="color:black; text-align:left;"><strong>회원 정보 수정</strong></h2>
+				<h2 style="color:black; text-align:left;"><strong>회원 정보 등록</strong></h2>
 			</div>
-
-	<sec:authentication property="principal" var="principal"/>
+<form  action="/memberProfileinsert" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
 	
-	<input type="hidden" id="u_key" value="${principal.u_key }">
-   <input type="hidden" id="m_id" value="${memberprofile.m_id }">
-	
+   
+	<p><input type="hidden" name="u_key" value="${u_key }"></p>
 			<div class="row g-5">
 				<div class="col-md-7 col-lg-8">
 					
@@ -174,7 +172,7 @@
 
 									<div class="col-md-10">
 										<input type="text" class="form-control" style="flex: 0.5; margin-left:-10px;" name="m_name"
-											id="username" placeholder="회원명을 입력해주세요"  maxlength="10" value="${memberprofile.m_name }">
+											id="username" placeholder="회원명을 입력해주세요"  maxlength="10"  value="${memberprofile.m_name }">
 									</div>
 								</div>
 								<span class="point successNameChk">이름은 2자 이상 10자 이하로 설정해주시기 바랍니다.</span>
@@ -347,7 +345,7 @@
 										    <label class="btn btn-outline-dark" for="btn-check-outlined13">여성</label><br>
 											</c:if>
 										</div>
-										
+									
 									<label for="username2" class="form-label"
 										style="font-size: 15px;">선호하시는 트레이너분의 성별을 선택해주세요</label><br>
 										<div style="display: flex;">
@@ -375,12 +373,12 @@
 										</select>
 										<label  for="myTextarea" class="form-label"
 										style="font-size: 20px; margin-top:20px;">상담요청 인사말 설정 (연락 시 참고사항)</label>
-										<span class="point successIntroChk">이름은 2자 이상 10자 이하로 설정해주시기 바랍니다.</span>
+										<span class="point successIntroChk"></span>
     							<input type="hidden" id="introDoubleChk"/>
 									<div class="input-group has-validation">
 										<div class="col-md-10">			
-											<textarea cols="50" rows="10" class="form-control" id="m_intro" name="m_intro"  
-											placeholder="상담요청 인사말을 입력해주세요" maxlength="100" style="height:100px;" >${memberprofile.m_intro }</textarea>
+											<textarea cols="50" rows="10" class="form-control" id="m_intro" name="m_intro"
+											placeholder="상담요청 인사말을 입력해주세요" maxlength="100" style="height:100px;">${memberprofile.m_intro }</textarea>
 									</div>
 									</div>
 								
@@ -412,7 +410,7 @@
 									<input type="text"   name="m_daymorning" value="${memberprofile.m_daymorning }"
 										id="timeInput" style="width: 140px; flex: 0.2; height: 40px;"
 										class="form-control numberOnly" oninput="formatTime(this)" maxlength="4" placeholder="00:00" >~
-									<input type="text" id="timeInput" name="m_dayafter" value="${memberprofile.m_dayafter }"
+									<input type="text" id="timeInput" name="m_dayafter"  value="${memberprofile.m_dayafter }"
 										style="width: 140px; flex: 0.2; height: 40px;"
 										class="form-control numberOnly" oninput="formatTime(this)" maxlength="4"placeholder="00:00">
 												<span class="point successmorningChk"></span>
@@ -453,6 +451,9 @@
 									placeholder="스케줄 참고 사항을 입력해주세요." maxlength="20"  value="${memberprofile.m_schedureintro}">
 									<span class="point successschedureintroChk"></span>
 	    							<input type="hidden" id="schedureintroDoubleChk"/>
+	    							<sec:authentication property="principal" var="principal"/>
+									  <input type="hidden" id="u_key" value="${principal.u_key }">	
+	    							  <input type="hidden" id="m_id" value="${memberprofile.m_id }">
 							</div>
 							
 							
@@ -477,7 +478,7 @@
 							<label for="email" style="font-size: 20px; margin-top:10px; padding:10px; form-labelmt-4" ><strong>거주지</label>
 								<span class="point successpostcodeChk"></span>
 	    							<input type="hidden" id="postcodeDoubleChk"/>
-							<div id="sectionbox" class="form-control"   
+								<div id="sectionbox" class="form-control"   
 								style="padding: 10px; background-color: white;">
 									<div style="display: flex;">
 										<input type="text" style= "flex: 0.5; margin:2px;" class="form-control"value="${memberprofile.m_postcode}"  name="m_postcode" id="sample4_postcode" placeholder="우편번호" readonly>
@@ -496,7 +497,7 @@
 								</div>
 								</div>
 				
-					
+					</form>
 		</main>
 
 		<footer class="my-5 pt-5 text-muted text-center text-small">
@@ -765,21 +766,19 @@
     function handleCheckboxChange(checkbox) {
         var checkboxes = document.getElementsByName("m_gender");
         for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i] !== checkbox) {
-                checkboxes[i].checked = false;
-            }
-        }
+            checkboxes[i].checked = false;
+          }
+          checkbox.checked = true;
     }
     
     //체크박스 성별선호도 중복선택불가
     
     function handleCheckboxChange2(checkbox) {
-        var checkboxes2 = document.getElementsByName("m_likegender");
-        for (var i = 0; i < checkboxes2.length; i++) {
-            if (checkboxes2[i] !== checkbox) {
-                checkboxes2[i].checked = false;
-            }
-        }
+        var checkboxes = document.getElementsByName("m_likegender");
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = false;
+          }
+          checkbox.checked = true;
     }
   //input 숫자만 입력
     $(".numberOnly").on("keyup", function(event) {
@@ -998,7 +997,7 @@
 	    		  window.location.href = url;
 	    	});
    
-	    }else{	alert("회원가입을 완료할 수 없습니다. 다시한번 확인해주십시오.");
+	    }else{	alert("회원프로필을 등록할 수 없습니다. 다시한번 확인해주십시오.");
 	    	
 		    if(isChecked!="true"){
 		    	$(".successprogramChk").text("(최소 1개이상의 프로그램을 선택해주세요.) :)");
@@ -1045,14 +1044,10 @@
 	    		$(".successpostcodeChk").text("주소를 입력해주세요. :)");
 				$(".successpostcodeChk").css("color", "red");	
 	    	}
-	    	
-	    	
-	    	
-	    	
 	    	return false
 	    }    	    	
     });
-    
+ 
     window.addEventListener('load', function() {
         // 커서를 위치시킬 요소 선택
         var m_name = document.getElementById('username');

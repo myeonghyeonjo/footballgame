@@ -14,7 +14,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Dashboard Template · Bootstrap v5.2</title>
+    <title>상담신청목록 - Health Catch</title>
 
     <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/dashboard/">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -155,7 +155,7 @@
 		<input type="hidden" id="keyword" value="${keyword}">
 		  <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  col-lg-3 " id="nav_link_memberprofile2" href="/memberconsulting?u_key=${principal.u_key}">상담신청목록	 
 		</a>
-		   <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  "href="/member_review_dashboard?u_key=${principal.u_key }"> 리뷰 관리
+		   <a  class="navbar-brand headermenu2 col-md-3 col-xs-3  "href="/member_review_dashboard?u_key=${principal.u_key }"> 리뷰 목록
 		</a>
 		   <a  style="visibility:hidden;"class="navbar-brand headermenu2 col-md-3 col-xs-3  "href="/member_review_dashboard?u_key=${principal.u_key }"> 리뷰 관리
 		</a>
@@ -184,7 +184,7 @@
            <li class="nav-item">
             <a class="nav-link sidemenu" href="/member_review_dashboard?u_key=${principal.u_key }"> 
               <span data-feather="shopping-cart" class="align-text-bottom"></span>
-              리뷰관리
+              리뷰목록
             </a>
           </li>
           <li class="nav-item">
@@ -342,7 +342,7 @@
           <tr>
               <th scope="col">번호</th>
               <th scope="col">트레이너명</th>
-              <th scope="col">센터위치</th>
+              <th scope="col">센터명</th>
               <th scope="col">우편번호</th>
               <th scope="col">성별</th>
               <th scope="col">상담여부</th>
@@ -350,11 +350,13 @@
           </thead>
           <sec:authentication property="principal" var="principal" />
           <tbody>
-		        <c:forEach var="list" items="${list }">
-		           		<tr onclick="location.href='trainerProfileDetail?u_key=${list.u_key }'" style="cursor:pointer">
+		        <c:forEach var="list" items="${list }" varStatus="status1">
+		        <c:forEach var="tfLoadAddressList" items="${tfLoadAddressList }" varStatus="status2">
+		        		<c:if test="${status1.index == status2.index}">
+		           		<tr onclick="location.href='trainerProfileDetail?u_key=${list.u_key }&memberprofile_u_key=${principal.u_key }'" style="cursor:pointer">
 				               <td>${list.tf_id }</td>
 		              <td>${list.tf_name }</td>
-		               <td>${list.tf_loadaddress }</td>
+		               <td>${tfLoadAddressList }</td>
 		              <td>${list.tf_postcode }</td>
 		              <td>${list.tf_gender }</td>
 		              	<c:if test="${(fn:contains(list.tf_consultingconfirm,u_key))}">
@@ -364,6 +366,8 @@
 		              <td style="color:green;">완료</td>
 		              </c:if>
 		              </tr>
+		              </c:if>
+					</c:forEach>
 					</c:forEach>
           </tbody>
         </table>

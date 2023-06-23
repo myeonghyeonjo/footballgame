@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="/aj-centerview2"/>
+		<item key="selection" value=""/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="/aj-centerview2"/>
-			<item value="Centerview"/>
+			<item value="오에 오신"/>
+			<item value="webapp/Img"/>
+			<item value="webapp"/>
+			<item value="/reviewinsert"/>
+			<item value="src"/>
+			<item value="/reviewin"/>
+			<item value="트레이너 프로필"/>
+			<item value="trainer_sumnail"/>
 			<item value="트레이너"/>
-			<item value="center"/>
-			<item value="starR2"/>
-			<item value="선생님"/>
-			<item value="starR"/>
-			<item value="trainerprofiledetail_re"/>
-			<item value="trainerprofilede"/>
-			<item value="gettf_reviewlist"/>
-			<item value="getprofileFileList2"/>
-			<item value="trainerprofile_reviewlist"/>
-			<item value="reviewlist"/>
-			<item value="home"/>
-			<item value="homa"/>
+			<item value="언제든,"/>
+			<item value="average=="/>
+			<item value="average==6"/>
+			<item value="profile.setTf_staravarage(6"/>
+			<item value="리뷰순"/>
+			<item value="starhigh"/>
 		</list>
 		<list key="replacehistory">
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="136"/>
-		<item key="DIALOG_Y_ORIGIN" value="330"/>
+		<item key="DIALOG_X_ORIGIN" value="529"/>
+		<item key="DIALOG_Y_ORIGIN" value="323"/>
 		<item key="DIALOG_WIDTH" value="418"/>
 		<item key="DIALOG_HEIGHT" value="523"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>

@@ -18,7 +18,8 @@
 		
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=272bc96032396df76a8c8d79f886c824&libraries=services"></script>
+<!--<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=272bc96032396df76a8c8d79f886c824&libraries=services"></script> -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30d7fe114e27eb70c8a0bb71e850c6f4&libraries=services"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>		
 
 <!-- 버튼모달 -->		
@@ -2237,7 +2238,7 @@ input, select, textarea {
 	button,
 	.button {
 		background-color: transparent;
-		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+		box-shadow: 0;
 		color: black;
 	}
 
@@ -4019,6 +4020,9 @@ input, select, textarea {
 		-ms-transform: none;
 		transform: none;
 	}
+	div.dropdown{
+	width:100px;
+	}
 </style>
 
 <jsp:include page="/WEB-INF/views/template/banner.jsp"></jsp:include>
@@ -4312,13 +4316,14 @@ input, select, textarea {
 										   				<c:if test="${reviewfilelist.memberprofile_u_key == reviewlist.memberprofile_u_key}">
 										   				<c:if test="${reviewfilelist.review_r_id == reviewlist.r_id}">
 										   				<c:if test="${reviewlist.r_opencheck==1}">
-															<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
+															<a  href="http://15.164.62.221:8080/static/img/health/img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="http://15.164.62.221:8080/static/img/health/img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
+												            <!--<a  href="http://15.164.62.221:8080/static/img/health/img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="http://15.164.62.221:8080/static/img/health/img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp; -->
 															<input type="hidden" value="${reviewfilelist.file_name }" class="filename${reviewlist.r_id}">
 															<input type="hidden" value="${reviewfilelist.r_id }" class="file_r_id${reviewlist.r_id}">
 												     	</c:if>
 												     	<c:if test="${reviewlist.r_opencheck==0}">
 												     		<div style="display:none;">															
-												     		<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
+												     		<a  href="http://15.164.62.221:8080/static/img/health/img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="http://15.164.62.221:8080/static/img/health/img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
 															<input type="hidden" value="${reviewfilelist.file_name }" class="filename${reviewlist.r_id}">
 															<input type="hidden" value="${reviewfilelist.r_id }" class="file_r_id${reviewlist.r_id}">
 												   		  	</div>
@@ -4407,13 +4412,13 @@ input, select, textarea {
 										   				<c:if test="${reviewfilelist.memberprofile_u_key == reviewlist.memberprofile_u_key}">
 										   				<c:if test="${reviewfilelist.review_r_id == reviewlist.r_id}">
 										   				<c:if test="${reviewlist.r_opencheck==1}">
-															<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
+															<a  href="http://15.164.62.221:8080/static/img/health/img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="http://15.164.62.221:8080/static/img/health/img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
 															<input type="hidden" value="${reviewfilelist.file_name }" class="filename${reviewlist.r_id}">
 															<input type="hidden" value="${reviewfilelist.r_id }" class="file_r_id${reviewlist.r_id}">
 												     	</c:if>
 												     	<c:if test="${reviewlist.r_opencheck==0}">
 												     		<div style="display:none;">															
-												     		<a  href="../../../Img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="../../../Img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
+												     		<a  href="http://15.164.62.221:8080/static/img/health/img/${reviewfilelist.file_name}"  data-lightbox="example-set5${reviewlist.memberprofile_u_key }${reviewlist.r_date }"><span class="reviewimage"><img style="width:90px; height:90px;" src="http://15.164.62.221:8080/static/img/health/img/${reviewfilelist.file_name}" ></span></a>&nbsp;&nbsp;
 															<input type="hidden" value="${reviewfilelist.file_name }" class="filename${reviewlist.r_id}">
 															<input type="hidden" value="${reviewfilelist.r_id }" class="file_r_id${reviewlist.r_id}">
 												   		  	</div>
@@ -4485,10 +4490,10 @@ input, select, textarea {
 												<span class="icon fa-gem"></span>
 													<c:forEach var="filelist" items="${filelist}" varStatus="status1">
 														<c:if test="${status1.index==0}">
-													 	 	<div style="margin-left:-50px; "><a  href="../../../Img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="../../../Img/${filelist.file_name}" ></span></a></div>
+													 	 	<div style="margin-left:-50px; "><a  href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}"  data-lightbox="example-set"><span class="image"><img src="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" ></span></a></div>
 													    </c:if>
 													    <c:if test="${status1.index!=0}">
-													 	 	<a    href="../../../Img/${filelist.file_name}" data-lightbox="example-set"></a>
+													 	 	<a    href="http://15.164.62.221:8080/static/img/health/img/${filelist.file_name}" data-lightbox="example-set"></a>
 													    </c:if>
 												 	 </c:forEach> 
 													<strong style="font-size:25px; ">${trainerprofile.tf_name} 트레이너</strong> 
@@ -4743,9 +4748,9 @@ $('.modifyreviewBtn').each(function(){
 	
 	console.log("filecount:"+filecount);
 	
-	filepath1 = "../../../Img/"+filename1;
-	filepath2 = "../../../Img/"+filename2;
-	filepath3 = "../../../Img/"+filename3;
+	filepath1 = "http://15.164.62.221:8080/static/img/health/img/"+filename1;
+	filepath2 = "http://15.164.62.221:8080/static/img/health/img/"+filename2;
+	filepath3 = "http://15.164.62.221:8080/static/img/health/img/"+filename3;
 	console.log("filepath1:"+filepath1);
 	console.log("filepath2:"+filepath2);
 	console.log("filepath3:"+filepath3);
@@ -5112,11 +5117,10 @@ function submitForm2(r_id) {
 
 
 function Centerview(test) {
-	
 	  let tf_loadaddress = $('#tf_loadaddress').val();
 	  let u_key = $('#u_key').val();
 	  
-		console.log('tf_loadaddress:test'+tf_loadaddress);
+		console.log('tf_loadaddress:'+tf_loadaddress);
 		console.log('u_key:'+u_key);
 		$.ajax({
 			method: "POST",
@@ -5124,16 +5128,12 @@ function Centerview(test) {
 			data: { tf_loadaddress: tf_loadaddress , u_key : u_key}
 		})
 		.done(function( html ) {
-			console.log(html);
 			$('#centerview').html(html);
 		     $( '.slider2' ).slick( {
 			          autoplay: true,
 			          autoplaySpeed: 1000,
-			        } );
-			     
-			   
-		});
-		
+			        } );	   
+		});	
 }
 
 

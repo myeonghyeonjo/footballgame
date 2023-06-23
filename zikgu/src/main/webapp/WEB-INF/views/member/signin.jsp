@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Signin Template · Bootstrap v5.2</title>
+    <title>로그인 - Health Catch</title>
 
     <link rel="canonical" href="https://getbootstrap.kr/docs/5.2/examples/sign-in/">
 
@@ -136,8 +136,9 @@ body {
 <main class="form-signin w-100 m-auto" >
   <form  action="/loginPro" method="post">
    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+   	<a href="/" style="text-decoration:none; color:black;"><h1 class="h3 mb-3 fw-normal"><strong style="font-size:45px;">Health Catch</strong></h1></a> 
     <a href="/"><img class="mb-4" src="../../../Img/덤벨.JPG" alt="" width="170" height="140" style="border-radius:20%;"></a>
-    <h1 class="h3 mb-3 fw-normal"><strong>Please sign in</strong></h1>
+   
 
     <div class="form-floating">
              <input type="text"  class="form-control"  name="username" placeholder="id">
@@ -151,9 +152,7 @@ body {
     </div>
 
     <div class="checkbox mb-3">
-      <label>
-       <input id = "remember_me" name ="remember-me" type = "checkbox"/>Remember me
-      </label>
+
     <span>
    				
                <c:if test="${error}">
@@ -161,7 +160,7 @@ body {
 				</c:if>
                 
             </span>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <button class="w-100 btn btn-lg btn-primary" style="font-weight:bold;"type="submit">로그인</button>
     <p><Strong style="font-size:14px;">아직 회원이 아니신가요? </Strong></p>
     <p><a href="/beforeSignup" class="aa" style="color: #4169e1; font-size:14px; margin-left: 40px; margin-top: -5px; margin-right: 50px">일반 회원가입 하기></a><p>
 	<p><a href="/beforeSignuptrainer" class="aa"style="color: #4169e1; font-size:14px; margin-left: 40px; margin-top: -5px; margin-right: 50px">트레이너 회원가입 하기></a></p>

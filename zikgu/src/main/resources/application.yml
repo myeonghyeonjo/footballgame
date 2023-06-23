@@ -2,14 +2,13 @@ spring:
   profiles:
     active:
     - local
-
 ---
 
 
 spring:
   profiles:
   - local
-
+  
   mvc: 
     view:
       prefix: "/WEB-INF/views"

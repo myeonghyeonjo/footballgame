@@ -322,20 +322,20 @@ exercise
          
           <sec:authorize access="hasRole('ROLE_USER')">
           <sec:authentication property="principal" var="principal"/>
-          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=${principal.u_key}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="50%" height="200px"   alt=""
-			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="50%" height="200px"   alt=""
+          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=${principal.u_key}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="http://15.164.62.221:8080/static/img/health/img/${filelistAll.file_name}" width="50%" height="200px"   alt=""
+			 href="http://15.164.62.221:8080/static/img/health/img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="http://15.164.62.221:8080/static/img/health/img/${centerfilelistAll.file_name}" width="50%" height="200px"   alt=""
 						 ></a>			 
 			</sec:authorize>
 			 <sec:authorize access="hasRole('ROLE_ADMIN')">
           <sec:authentication property="principal" var="principal"/>
-          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="50%" height="200px"    alt=""
-			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}" width="50%" height="200px"    alt=""
+          	<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set"><img style="border-radius: 3%;"src="http://15.164.62.221:8080/static/img/health/img/${filelistAll.file_name}" width="50%" height="200px"    alt=""
+			 href="http://15.164.62.221:8080/static/img/health/img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="http://15.164.62.221:8080/static/img/health/img/${centerfilelistAll.file_name}" width="50%" height="200px"    alt=""
 			></a>			 
 			</sec:authorize>
 			 <sec:authorize access="isAnonymous()">
 			<a  href="/trainerProfileDetail?u_key=${list.u_key}&memberprofile_u_key=0"  data-lightbox="example-set">
-			<img style="border-radius: 3%;"src="../../../Img/${filelistAll.file_name}" width="50%" height="200px"    alt=""
-			 href="../../../Img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="../../../Img/${centerfilelistAll.file_name}"width="50%" height="200px"   alt=""
+			<img style="border-radius: 3%;"src="http://15.164.62.221:8080/static/img/health/img/${filelistAll.file_name}" width="50%" height="200px"    alt=""
+			 href="http://15.164.62.221:8080/static/img/health/img/${centerfilelistAll.file_name}"  data-lightbox="example-set"><img style="border-radius: 3%;"src="http://15.164.62.221:8080/static/img/health/img/${centerfilelistAll.file_name}"width="50%" height="200px"   alt=""
 			 ></a>	
 			</sec:authorize>
 			

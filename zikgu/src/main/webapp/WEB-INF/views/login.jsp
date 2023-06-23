@@ -137,8 +137,8 @@ body {
 <main class="form-signin w-100 m-auto" >
   <form  action="/loginPro" method="post">
    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+       <h1 class="h3 mb-3 fw-normal"><strong>Health Catch</strong></h1>
     <a href="/"><img class="mb-4" src="../../../Img/덤벨.JPG" alt="" width="170" height="140" style="border-radius:20%;"></a>
-    <h1 class="h3 mb-3 fw-normal"><strong>Please sign in</strong></h1>
 
     <div class="form-floating">
              <input type="text"  class="form-control"  name="username" placeholder="id">
@@ -153,7 +153,6 @@ body {
 
     <div class="checkbox mb-3">
       <label>
-       <input id = "remember_me" name ="remember-me" type = "checkbox"/>Remember me
       </label>
     <span>
    				
@@ -162,7 +161,7 @@ body {
 				</c:if>
                 
             </span>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
     <p><Strong style="font-size:14px;">아직 회원이 아니신가요? </Strong></p>
     <p><a href="/beforeSignup" class="aa" style="color: #4169e1; font-size:14px; margin-left: 40px; margin-top: -5px; margin-right: 50px">일반 회원가입 하기></a><p>
 	<p><a href="/beforeSignuptrainer" class="aa"style="color: #4169e1; font-size:14px; margin-left: 40px; margin-top: -5px; margin-right: 50px">트레이너 회원가입 하기></a></p>
