@@ -27,7 +27,7 @@
 - 카카오맵을 통해 센터위치 지도로 표시.
 
 ### 4. 리뷰 페이지
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/1b3ede09-d0ef-4dec-ac66-8a1356fbb1fe)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/f109e02a-0959-4b4e-bbe5-67790c1da1be)
 - 트레이너에게 작성 된 리뷰를 확인 할 수 있음.
 - 리뷰 작성자는 작성된 리뷰를 수정, 삭제 할 수 있음.
 - 왼쪽 고정프로필을 통해 페이지 어느곳에서나 트레이너의 프로필을 확인 할 수 있음.
