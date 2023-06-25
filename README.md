@@ -33,3 +33,21 @@
 - 왼쪽 고정프로필을 통해 페이지 어느곳에서나 트레이너의 프로필을 확인 할 수 있음.
 - 리뷰를 정해진 조건에 따라 정렬가능.
 
+### 5. 내정보 (트레이너)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/b4dd44c3-f379-4fc9-87a3-998fa1b80b7a)
+- 트레이너로 로그인 하였을 때 보이는 내정보 페이지.
+- 프로필, 센터, PT, 리뷰 관리페이지로 이동 할 수 있음.
+
+### 6. 트레이너 프로필 수정 
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/fe42279b-2c2d-4a89-bd44-39d763f81152)
+- 트레이너는 자신의 프로필을 수정 할 수 있음.
+- 모든 데이터들이 입력되어야 트레이너 프로필이 노출됨.
+
+### 7. 센터 등록 요청
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/7cc66903-3124-405a-a2a1-3c536143fd31)
+- 트레이너는 자신의 근무지 정보를 등록 요청할 수 있음.
+
+### 8. 등록 센터 목록
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/4a1b4fa3-d68f-41c5-8f73-e9c53266b051)
+- 트레이너는 자신이 등록 한 센터의 목록을 확인 할 수 있음.
+- 승인여부상태가 승인일 경우에만 해당센터를 트레이너 프로필 센터로 지정할 수 있음.
