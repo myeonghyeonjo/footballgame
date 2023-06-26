@@ -12,122 +12,122 @@
 - 센터명 클릭 시 해당 센터프로필로 이동.
 
 ### 2. 트레이너 프로필
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/631ebb12-7836-4f78-883c-9d4870e9365a)
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/d6a5cb4d-61d3-41e8-8561-8990ef35a9cd)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/a42e7191-1353-4203-b3aa-ff9d46ea9a6b)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/8476addf-9f36-4588-99df-cb4f2a32dc38)
 - 트레이너의 사진, 소개글, 자격사항, PT프로그램, 레슨 스케쥴, 레슨 이용 가격등 트레이너 관련 정보들을 확인 할 수 있음.
 - 사진을 클릭시 새 페이지에서 원본확인 가능.
 - 비로그인이거나 일반회원 로그인 상태일 경우 트레이너 프로필 하단에 상담신청 버튼 노출.
 - 상당의 메뉴바를 통해 트레이너의 근무센터, 리뷰 페이지로 이동 가능.
 
 ### 3. 센터 프로필
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/39135621-4c40-4e47-becb-b7682eccd19e)
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/57303a17-5c9d-4839-9e11-c94e32f7d6e3)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/1b044088-516d-4b27-8514-34bdb5239e6a)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/ac7e78a6-99db-4b43-aab8-9e98bee252ef)
 - 센터 사진, 소개글, 운영시간, 센터위치를 확인 할 수 있음.
 - 사진을 클릭시 새 페이지에서 원본확인 가능.
 - 카카오맵을 통해 센터위치 지도로 표시.
 
 ### 4. 리뷰 페이지
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/f109e02a-0959-4b4e-bbe5-67790c1da1be)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/f7d4c04c-ef9c-48eb-a788-ece0cd93fcf4)
 - 트레이너에게 작성 된 리뷰를 확인 할 수 있음.
 - 리뷰 작성자는 작성된 리뷰를 수정, 삭제 할 수 있음.
 - 왼쪽 고정프로필을 통해 페이지 어느곳에서나 트레이너의 프로필을 확인 할 수 있음.
 - 리뷰를 정해진 조건에 따라 정렬가능.
 
 ### 5. 내정보 (트레이너)
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/b4dd44c3-f379-4fc9-87a3-998fa1b80b7a)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/f3955bca-0752-4227-8501-e80c0f7a400a)
 - 트레이너로 로그인 하였을 때 보이는 내정보 페이지.
 - 프로필, 센터, PT, 리뷰 관리페이지로 이동 할 수 있음.
 
 ### 6. 트레이너 프로필 수정 
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/fe42279b-2c2d-4a89-bd44-39d763f81152)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/628e1984-38e1-4557-9f04-3a3f2a2fcdb7)
 - 트레이너는 자신의 프로필을 수정 할 수 있음.
 - 모든 데이터들이 입력되어야 트레이너 프로필이 노출됨.
 
 ### 7. 센터 등록 요청
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/7cc66903-3124-405a-a2a1-3c536143fd31)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/1fc9400f-7356-4af3-890c-c53eed70bccf)
 - 트레이너는 자신의 근무지 정보를 등록 요청할 수 있음.
 
 ### 8. 등록 센터 목록
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/4a1b4fa3-d68f-41c5-8f73-e9c53266b051)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/b798c863-7b78-4b53-bbe1-837b60ba0f49)
 - 트레이너는 자신이 등록 한 센터의 목록을 확인 할 수 있음.
 - 승인여부상태가 승인일 경우에만 해당센터를 트레이너 프로필 센터로 지정할 수 있음.
 - 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
 - 검색을 통해 원하는 목록 찾기 가능.
 
 ### 9. PT 등록
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/e50dc8c4-2063-46dc-82ac-57b3ef7274e9)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/f78901f9-81b4-4585-afbd-1f6d45578a7b)
 - 트레이너는 자신의 PT프로그램을 추가등록할 수 있음.
 
 ### 10. 트레이너 리뷰 목록
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/5c3742ec-859a-4792-8fef-6170000b879f)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/b428125a-2dd8-4109-80b2-5b09ea887d1a)
 - 트레이너는 자신에게 작성된 리뷰목록을 볼 수 있음.
 - 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
 - 검색을 통해 원하는 목록 찾기 가능.
 
 ### 11. 내 정보(일반회원)
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/3bdabbb7-0077-40b5-a1dd-594f60ddbb8a)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/9fd55d17-d1f4-4ee0-98eb-01f739db19d0)
 - 일반회원으로 로그인 하였을 때 보이는 내정보 페이지.
 - 프로필, 상담, 리뷰 관리페이지로 이동 할 수 있음.
 
 ### 12. 일반회원 프로필 등록
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/5bf2ceb6-af79-4a72-97d0-f3db98d2c8f3)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/277299fd-e556-4e52-b821-00cca8528fac)
 - 일반회원은 상담신청을 위한 프로필을 등록 할 수 있음.
 
 ### 13. 상담신청 목록
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/fb11a2c5-a6cd-4ba2-9890-ce36089550c8)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/cd2a203e-9546-4939-92ab-45d8ba51c264)
 - 일반회원은 자신이 신청한 상담목록을 볼 수 있음.
 - 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
 - 검색을 통해 원하는 목록 찾기 가능.
 
 ### 14. 일반회원 리뷰 목록
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/45282ce7-a1f5-4ffc-bcd1-6a058ae51be4)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/559b5035-26d0-4f91-a763-45e42ade6ef7)
 - 일반회원은 자신이 작성한 리뷰 목록을 볼 수 있음.
 - 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
 - 검색을 통해 원하는 목록 찾기 가능.
 
   
 ### 15. 내 정보(관리자)
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/d7786c94-7936-4f85-93ae-fc591529ddd4)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/2707c205-f3c7-489e-b479-e6d062a708de)
 - 관리자로 로그인 하였을 때 보이는 내정보 페이지.
 - 회원 프로필, 트레이너 프로필, 센터, 리뷰 관리페이지로 이동 할 수 있음.
 
 ### 16. 회원목록
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/cb470468-1605-4976-96b0-62d65167f6dd)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/01611ee1-1320-4e69-9a6e-e07fe135aedf)
 - 관리자는 가입된 일반회원들의 목록을 볼 수 있음.
 - 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
 - 검색을 통해 원하는 목록 찾기 가능.
 
 ### 17. 트레이너목록
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/9cbaa467-0cff-414b-8c39-836108a26c98)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/828962ba-eb2e-4298-ae35-388248a2d564)
 - 관리자는 가입된 트레이너들의 목록을 볼 수 있음.
 - 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
 - 검색을 통해 원하는 목록 찾기 가능.
 
 ### 18. 센터목록
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/6937c71e-edb2-4c3e-9828-263fb978a85f)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/2f6a27a9-82ae-4016-bcaf-658ddc64cf2c)
 - 관리자는 등록신청된 센터들의 목록을 볼 수 있음.
 - 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
 - 검색을 통해 원하는 목록 찾기 가능.
 
 ### 19. 리뷰목록
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/1ca871d9-70e5-4a35-976d-0d5a526e3939)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/4ac1641d-db05-4d33-8945-9afbfb2c833b)
 - 관리자는 등록 된 리뷰들의 목록을 볼 수 있음.
 - 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
 - 검색을 통해 원하는 목록 찾기 가능.
 
 ### 20. 리뷰디테일
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/04dc887c-f0bb-43d5-9866-c1becfdb2e7d)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/6363c971-dbcd-4425-812d-73dd43a771d3)
 - 관리자는 등록 된 리뷰의 검토를 통해 승인 혹은 반려를 할 수 있음.
 
 ### 21. 센터디테일
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/af58ca3f-7d9e-49f3-a86a-f7af55dd19d3)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/c78e45a3-abd0-4975-81f3-b1de919bfa5c)
 - 관리자는 등록 신청 된 센터의 검토를 통해 승인 혹은 반려를 할 수 있음.
 
 ### 22. 트레이너프로필 디테일
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/8dc995e0-dc47-4f4c-ae7e-ac1619ad6ea0)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/deff6097-4e7e-47bd-8125-ddd1d86393f6)
 - 관리자는 등록 된 트레이너 프로필의 검토를 통해 승인 혹은 반려를 할 수 있음.
 
 ### 23. 회원가입
-![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/99fb02fd-268f-4fc0-a796-b87afce97c4a)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/379c62f1-6466-4fcf-90c0-f3f704792188)
 - 일반회원, 트레이너 두 가지로 회원가입을 할 수 있다.
 - 휴대폰 번호 인증을 통해 중복가입 방지.
