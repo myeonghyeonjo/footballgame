@@ -51,3 +51,15 @@
 ![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/4a1b4fa3-d68f-41c5-8f73-e9c53266b051)
 - 트레이너는 자신이 등록 한 센터의 목록을 확인 할 수 있음.
 - 승인여부상태가 승인일 경우에만 해당센터를 트레이너 프로필 센터로 지정할 수 있음.
+- 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
+- 검색을 통해 원하는 목록 찾기 가능.
+
+### 9. PT 등록
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/e50dc8c4-2063-46dc-82ac-57b3ef7274e9)
+- 트레이너는 자신의 PT프로그램을 추가등록할 수 있음.
+
+### 10. 트레이너 리뷰 목록
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/5c3742ec-859a-4792-8fef-6170000b879f)
+- 트레이너는 자신에게 작성된 리뷰목록을 볼 수 있음.
+- 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
+- 검색을 통해 원하는 목록 찾기 가능.
