@@ -90,3 +90,35 @@
 ![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/d7786c94-7936-4f85-93ae-fc591529ddd4)
 - 관리자로 로그인 하였을 때 보이는 내정보 페이지.
 - 회원 프로필, 트레이너 프로필, 센터, 리뷰 관리페이지로 이동 할 수 있음.
+
+### 16. 회원목록
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/cb470468-1605-4976-96b0-62d65167f6dd)
+- 관리자는 가입된 일반회원들의 목록을 볼 수 있음.
+- 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
+- 검색을 통해 원하는 목록 찾기 가능.
+
+### 17. 트레이너목록
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/9cbaa467-0cff-414b-8c39-836108a26c98)
+- 관리자는 가입된 트레이너들의 목록을 볼 수 있음.
+- 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
+- 검색을 통해 원하는 목록 찾기 가능.
+
+### 18. 센터목록
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/6937c71e-edb2-4c3e-9828-263fb978a85f)
+- 관리자는 등록신청된 센터들의 목록을 볼 수 있음.
+- 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
+- 검색을 통해 원하는 목록 찾기 가능.
+
+### 19. 리뷰목록
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/1ca871d9-70e5-4a35-976d-0d5a526e3939)
+- 관리자는 등록 된 리뷰들의 목록을 볼 수 있음.
+- 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
+- 검색을 통해 원하는 목록 찾기 가능.
+
+### 20. 리뷰디테일
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/04dc887c-f0bb-43d5-9866-c1becfdb2e7d)
+- 관리자는 등록 된 리뷰의 검토를 통해 승인 혹은 반려를 할 수 있음.
+
+### 21. 센터디테일
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/af58ca3f-7d9e-49f3-a86a-f7af55dd19d3)
+- 관리자는 등록 신청 된 센터의 검토를 통해 승인 혹은 반려를 할 수 있음.
