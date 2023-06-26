@@ -63,3 +63,30 @@
 - 트레이너는 자신에게 작성된 리뷰목록을 볼 수 있음.
 - 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
 - 검색을 통해 원하는 목록 찾기 가능.
+
+### 11. 내 정보(일반회원)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/3bdabbb7-0077-40b5-a1dd-594f60ddbb8a)
+- 일반회원으로 로그인 하였을 때 보이는 내정보 페이지.
+- 프로필, 상담, 리뷰 관리페이지로 이동 할 수 있음.
+
+### 12. 일반회원 프로필 등록
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/5bf2ceb6-af79-4a72-97d0-f3db98d2c8f3)
+- 일반회원은 상담신청을 위한 프로필을 등록 할 수 있음.
+
+### 13. 상담신청 목록
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/fb11a2c5-a6cd-4ba2-9890-ce36089550c8)
+- 일반회원은 자신이 신청한 상담목록을 볼 수 있음.
+- 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
+- 검색을 통해 원하는 목록 찾기 가능.
+
+### 14. 일반회원 리뷰 목록
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/45282ce7-a1f5-4ffc-bcd1-6a058ae51be4)
+- 일반회원은 자신이 작성한 리뷰 목록을 볼 수 있음.
+- 목록 상단의 버튼을 통해 조건에 맞는 목록만 노출.
+- 검색을 통해 원하는 목록 찾기 가능.
+
+  
+### 15. 내 정보(관리자)
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/d7786c94-7936-4f85-93ae-fc591529ddd4)
+- 관리자로 로그인 하였을 때 보이는 내정보 페이지.
+- 회원 프로필, 트레이너 프로필, 센터, 리뷰 관리페이지로 이동 할 수 있음.
