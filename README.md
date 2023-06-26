@@ -122,3 +122,7 @@
 ### 21. 센터디테일
 ![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/af58ca3f-7d9e-49f3-a86a-f7af55dd19d3)
 - 관리자는 등록 신청 된 센터의 검토를 통해 승인 혹은 반려를 할 수 있음.
+
+### 22. 트레이너프로필 디테일
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/8dc995e0-dc47-4f4c-ae7e-ac1619ad6ea0)
+- 관리자는 등록 된 트레이너 프로필의 검토를 통해 승인 혹은 반려를 할 수 있음.
