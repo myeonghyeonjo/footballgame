@@ -126,3 +126,8 @@
 ### 22. 트레이너프로필 디테일
 ![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/8dc995e0-dc47-4f4c-ae7e-ac1619ad6ea0)
 - 관리자는 등록 된 트레이너 프로필의 검토를 통해 승인 혹은 반려를 할 수 있음.
+
+### 23. 회원가입
+![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/99fb02fd-268f-4fc0-a796-b87afce97c4a)
+- 일반회원, 트레이너 두 가지로 회원가입을 할 수 있다.
+- 휴대폰 번호 인증을 통해 중복가입 방지.
