@@ -389,10 +389,10 @@
 				              <td>${list.r_id }</td>
 				              <td>${list.memberprofile_name }</td>
 				              <td>${list.r_date }</td>
-				              <c:if test="${(list.r_reply!='')}">
+				              <c:if test="${(list.r_reply!=null)}">
 						 			  <td style="color:green;">작성완료</td>
 						  		</c:if>
-						  		 <c:if test="${(list.r_reply=='')}">
+						  		 <c:if test="${(list.r_reply==null)}">
 						 			  <td style="color:blue;">작성대기</td>
 						  		</c:if>
 						  		 

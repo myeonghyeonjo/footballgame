@@ -672,7 +672,7 @@ window.addEventListener('resize', function() {
 <script>
 function handleSelectChange() {
 	  var selectBox = document.getElementById("reviewselect");
-	  var keyword = document.getElementById("keyword").value;
+	  var keyword = document.getElementById("searchInput").value;
 	  var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 	  // 선택한 값에 따라 필요한 동작을 수행하도록 구현
 	  if (selectedValue === "starhigh") {

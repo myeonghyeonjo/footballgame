@@ -31,7 +31,7 @@
 										   		  
 										   	</c:if>
 										   		<c:if test="${reviewlist.r_starR==4}">
-										   	<span class="starR2 on" >⭐⭐⭐⭐⭐</span>
+										   	<span class="starR2 on" >⭐⭐⭐⭐</span>
 										   		  
 										   	</c:if>
 										   	<c:if test="${reviewlist.r_starR==5}">
