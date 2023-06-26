@@ -3,6 +3,8 @@
 
 # 사이트
 http://healthcatch.net:8080/
+테스트용 계정 ( 관리자 / ID: user1 , 비밀번호 : 1234 ) ,  ( 일반회원 / ID: user10 , 비밀번호 : 1234 ) ,  ( 트레이너 / ID: trainer20 , 비밀번호 : 1234 ) 
+비밀번호는 변경하지 말아주세요.
 ## 최종결과물
 ### 1. 홈페이지
 ![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/7238c19b-61f6-4443-beb8-848bd00fadf4)
