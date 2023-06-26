@@ -138,3 +138,9 @@ http://healthcatch.net:8080/
 ![사진](https://github.com/myeonghyeonjo/footballgame/assets/82160709/379c62f1-6466-4fcf-90c0-f3f704792188)
 - 일반회원, 트레이너 두 가지로 회원가입을 할 수 있다.
 - 휴대폰 번호 인증을 통해 중복가입 방지.
+
+
+
+### 추후 개선 방향
+- 반응형 웹
+- 일부 디자인 수정
