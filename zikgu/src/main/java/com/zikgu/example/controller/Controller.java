@@ -147,8 +147,10 @@ public class Controller {
 	
 	
 	
-	
-	
+	@RequestMapping("/portfolio")
+	public String portfolio(Model model,TrainerProfile trainerprofile) {
+		return "/member/portfolio";
+	}
 	
 	
 	

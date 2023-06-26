@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value=""/>
+		<item key="selection" value="demo"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="오에 오신"/>
-			<item value="webapp/Img"/>
-			<item value="webapp"/>
-			<item value="/reviewinsert"/>
-			<item value="src"/>
-			<item value="/reviewin"/>
-			<item value="트레이너 프로필"/>
-			<item value="trainer_sumnail"/>
-			<item value="트레이너"/>
-			<item value="언제든,"/>
-			<item value="average=="/>
-			<item value="average==6"/>
-			<item value="profile.setTf_staravarage(6"/>
-			<item value="리뷰순"/>
+			<item value="demo"/>
+			<item value="slide"/>
+			<item value="sl"/>
+			<item value="slider"/>
+			<item value="stel"/>
+			<item value="boot"/>
+			<item value=""/>
+			<item value="확인"/>
+			<item value="확인하세"/>
+			<item value="확인하세요"/>
+			<item value="/aj-reviewselect"/>
+			<item value="reviewselect"/>
 			<item value="starhigh"/>
+			<item value="평점낮"/>
+			<item value="평점"/>
 		</list>
 		<list key="replacehistory">
+			<item value="/home/ec2-user/health/img/"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="529"/>
-		<item key="DIALOG_Y_ORIGIN" value="323"/>
+		<item key="DIALOG_X_ORIGIN" value="331"/>
+		<item key="DIALOG_Y_ORIGIN" value="462"/>
 		<item key="DIALOG_WIDTH" value="418"/>
 		<item key="DIALOG_HEIGHT" value="523"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-18|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
